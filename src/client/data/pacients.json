@@ -1,0 +1,29 @@
+[
+      {
+            "id": 1,
+            "firstName": "Miroslav",
+            "lastName": "Pavkovic",
+            "middleName": "Gradimir",
+            "gender": "male",
+            "address": "1234 Anywhere St.",
+            "place": " Phoenix ",           
+            "birthDate": "1980-04-14T22:00:00.000Z",
+            "email": "mira.pavk@gmail.com",
+            "phone":"0216748322", 
+            "mobilePhone": "+38123979242"
+      },
+          
+      {
+            "id": 2,
+            "firstName": "Miodrag",
+            "lastName": "Pavkovic",
+            "middleName": "Gradimir",
+            "gender": "male",
+            "address": "1234 Anywhere St.",
+            "place": " Phoenix ",           
+            "birthDate": "1980-04-14T22:00:00.000Z",
+            "email": "mira.pavk@gmail.com",
+            "phone":"0216748322", 
+            "mobilePhone": "+38123979242"
+      }
+]

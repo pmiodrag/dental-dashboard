@@ -1,0 +1,19 @@
+<md-toolbar class="green md-hue-3">
+    <div class="md-toolbar-tools"> 
+        <h2>
+            <span>Smiletime Dashboard</span>
+        </h2>
+        <span flex></span>        
+        <button md-raised-button class="md-raised" *ngIf="!loggedIn()" (click)="login()">Login</button>
+        <button md-raised-button class="md-raised" *ngIf="loggedIn()" (click)="logout()">Logout</button>
+        <h2>
+            <span>{{name}}</span>
+        </h2>
+        <div class="user"> 
+            <a href="javascript:void(0)" class="item" data-toggle="dropdown">             
+                <img [src]="picture"/>
+            </a>
+        </div>
+    </div>
+</md-toolbar>
+

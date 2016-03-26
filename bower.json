@@ -1,0 +1,29 @@
+{
+    "name": "smiletime-dashboard",
+    "version": "0.0.1",
+    "description": "An AngularJS2 implementation of the responsive dashboard",
+    "homepage": "https://github.com/pmiodrag/smiletime-dashboard",
+    "authors": [
+        "Ziya SARIKAYA @ziyasal <sarikayaziya@gmail.com>"
+    ],
+    "contributors": [
+    ],
+    "main": "index.html",
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "rdash-ui": "1.0.*",
+        "bootstrap": "~3.2.0",
+        "font-awesome": "~4.5.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ziyasal/rdash-angular2"
+    }
+}
