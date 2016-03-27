@@ -1,0 +1,35 @@
+ <div layout="column" class="md-inline-form">
+  <md-toolbar layout="row" layout-align="center center" layout-align-gt-md="end end">
+    <i class="fa fa-user-plus">person</i>
+  </md-toolbar>
+  <md-content layout-padding>
+    <div><!--
+-->      <form name="userForm">
+        <div layout-gt-sm="row">
+<!--          <md-input-container class="md-block" flex-gt-sm>
+            <label>Title</label>
+            <input md-input [(value)]="pacient.fir">
+          </md-input-container>
+-->          <md-input-container class="md-block" flex-gt-sm>
+            <label>Email</label>
+            <input md-input [(ngModel)]="pacient.email" type="email">
+          </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>First name</label>
+            <input md-input [(ngModel)]="pacient.firstName">
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Last Name</label>
+            <input md-input [(ngModel)]="pacient.lastName">
+          </md-input-container>
+        </div>
+        <md-input-container class="md-block">
+          <label>Address</label>
+          <input md-input [(ngModel)]="pacient.address">
+        </md-input-container>
+     </form>
+    </div>
+  </md-content>
+</div>
