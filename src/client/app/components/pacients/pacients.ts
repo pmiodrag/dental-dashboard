@@ -95,34 +95,14 @@ export class PacientsComponent {
 
 }
 
-// TypeScript
-interface ICar{
-     id: number; 
-    engine: string;
-    color: string;
-}
-
-class Car implements ICar {
-    constructor (public id: number, public engine: string, public color: string) {
-    }
-} 
-
 export interface IPacient {
     id: number; 
-    id: number; 
-    firstName: string;
-    lastName: string;
-    middleName: string,
+    firstname: string;
+    lastname: string;
+    middlename: string,
     gender: string,
-    firstName: string;
-    lastName: string;
-    middleName: string;
-    gender: string;
     address: string;
     place: string;    
-    birthDate: string;
-    email : string;
-    phone: number;
     birthdate: string;
     email : string;
     phone: number;
@@ -130,9 +110,9 @@ export interface IPacient {
 }
 
 export class Pacient implements IPacient {
-    constructor (public id: number, public firstName: string, public lastName: string, public middleName: string,
-                public gender: string, public address: string, public place: string,  public birthDate: string, public email : string,
-                public phone: number,  public mobilePhone: number) {
+    constructor (public id: number, public firstname: string, public lastname: string, public middlename: string,
+                public gender: string, public address: string, public place: string,  public birthdate: string, public email : string,
+                public phone: number,  public mobilephone: number) {
     }
 //    id: number; 
 //    firstName: string;
