@@ -52,7 +52,7 @@ export class DataService {
     let options = new RequestOptions({ headers: headers });
 
     return this.http.post(this.baseUrl + 'addPacient', body, options)
-        .map((res: Response) => res.json())
+       // .map((res: Response) => res.json())
                   //  .map(res =>  <Hero> res.json().data)
                     .catch(this.handleError)
   }
