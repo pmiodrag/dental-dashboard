@@ -3,17 +3,17 @@
             "firstname": "Gradimir",
             "lastname": "Pavkovic",
             "middlename": "Grado",
-            "gender": "male",
+            "gender": "M",
             "address": "1234 Anywhere St.",
             "place": " Phoenix ",           
-            "birthdate": "1980-04-14T22:00:00.000Z",
+            "birthdate": "1980-04-14",
             "email": "mira.pavk@gmail.com",
             "phone":"0216748322", 
             "mobilephone": "+38123979242"
       },
           
       {
-            "id": 3,
+            
             "firstName": "Miodrag",
             "lastName": "Pavkovic",
             "middleName": "Gradimir",
