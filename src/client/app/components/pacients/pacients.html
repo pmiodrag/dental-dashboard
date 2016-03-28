@@ -39,7 +39,7 @@
                     <div class="card">
                         <!--<button class="btn close card-close" title="Delete Customer" (click)="deleteCustomer(customer.id)">&times;</button>-->
                         <div class="card-header green">
-                            <a [routerLink]="['Treatments',{id:pacient.id}]" class="white">{{pacient.firstName | capitalize }}{{pacient.middleName | capitalize }} {{ pacient.lastName | capitalize }}</a>
+                            <a [routerLink]="['Treatments',{id:pacient.id}]" class="white">{{pacient.firstname | capitalize }}{{pacient.middlename | capitalize }} {{ pacient.lastname | capitalize }}</a>
                               <button md-fab class="md-mini orange" (click)="editPacient()"  aria-label="Edit pacient">
                                      <i class="fa fa-pencil-square-o"></i>
                                 </button>
@@ -73,8 +73,8 @@
                             <thead>
                                 <tr>
                                     <th>&nbsp;</th>
-                                    <th sort-by="firstName" (sorted)="sort($event)">First Name</th>
-                                    <th sort-by="lastName" (sorted)="sort($event)">Last Name</th>
+                                    <th sort-by="firstname" (sorted)="sort($event)">First Name</th>
+                                    <th sort-by="lastname" (sorted)="sort($event)">Last Name</th>
                                     <th sort-by="address" (sorted)="sort($event)">Address</th>
                                     <th sort-by="city" (sorted)="sort($event)">City</th>
                                     <th sort-by="country.name" (sorted)="sort($event)">Country</th>
@@ -86,7 +86,7 @@
                                 <tr *ngFor="#pacient of filteredPacients">
                                     <td><img src="assets/images/{{ pacient.gender | lowercase }}.png" 
                                              class="card-image" alt="Pacient Image" /></td>
-                                    <td><a [routerLink]="['Treatments',{id:pacient.id}]">{{ pacient.firstName | capitalize }}</a></td>
+                                    <td><a [routerLink]="['Treatments',{id:pacient.id}]">{{ pacient.firstname | capitalize }}</a></td>
                                     <td>{{ pacient.middleName | capitalize }}</td>
                                      <td>{{ pacient.lastName | capitalize }}</td>
                                     <td>{{ pacient.address }}</td>

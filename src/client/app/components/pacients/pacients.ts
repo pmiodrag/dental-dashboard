@@ -57,7 +57,7 @@ export class PacientsComponent {
   filterChanged(data: string) {
     if (data && this.pacients) {
         data = data.toUpperCase();
-        let props = ['firstName', 'middleName', 'lastName', 'address', 'place'];
+        let props = ['firstname', 'middlename', 'lastname', 'address', 'place'];
         let filtered = this.pacients.filter(item => {
             let match = false;
             for (let prop of props) {
@@ -109,6 +109,11 @@ class Car implements ICar {
 
 export interface IPacient {
     id: number; 
+    id: number; 
+    firstName: string;
+    lastName: string;
+    middleName: string,
+    gender: string,
     firstName: string;
     lastName: string;
     middleName: string;
@@ -118,7 +123,10 @@ export interface IPacient {
     birthDate: string;
     email : string;
     phone: number;
-    mobilePhone: number;
+    birthdate: string;
+    email : string;
+    phone: number;
+    mobilephone: number;
 }
 
 export class Pacient implements IPacient {
