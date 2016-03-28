@@ -26,16 +26,16 @@ DROP TABLE IF EXISTS `patient`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `patient` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `firstName` varchar(45) NOT NULL,
-  `lastName` varchar(45) NOT NULL,
-  `middleName` varchar(45) DEFAULT NULL,
+  `firstname` varchar(45) NOT NULL,
+  `lastname` varchar(45) NOT NULL,
+  `middlename` varchar(45) DEFAULT NULL,
   `address` varchar(45) NOT NULL,
   `place` varchar(45) NOT NULL,
   `phone` varchar(45) NOT NULL,
-  `mobilePhone` varchar(45) DEFAULT NULL,
+  `mobilephone` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   `gender` char(1) NOT NULL,
-  `birthDate` date NOT NULL,
+  `birthdate` date NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

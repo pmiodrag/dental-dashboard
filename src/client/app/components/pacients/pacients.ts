@@ -57,7 +57,7 @@ export class PacientsComponent {
   filterChanged(data: string) {
     if (data && this.pacients) {
         data = data.toUpperCase();
-        let props = ['firstName', 'middleName', 'lastName', 'address', 'place'];
+        let props = ['firstname', 'middlename', 'lastname', 'address', 'place'];
         let filtered = this.pacients.filter(item => {
             let match = false;
             for (let prop of props) {
@@ -97,14 +97,14 @@ export class PacientsComponent {
 
 export interface Pacient {
     id: number; 
-    firstName: string;
-    lastName: string;
-    middleName: string,
+    firstname: string;
+    lastname: string;
+    middlename: string,
     gender: string,
     address: string;
     place: string;    
-    birthDate: string;
+    birthdate: string;
     email : string;
     phone: number;
-    mobilePhone: number;
+    mobilephone: number;
 }
