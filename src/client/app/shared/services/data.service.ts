@@ -5,7 +5,7 @@ import { Http, Response, Headers, RequestOptions } from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map'; 
 import 'rxjs/add/operator/catch';
-import {Pacient} from '../../components/pacients/pacients'
+import {IPacient} from '../../components/pacients/pacients'
 
 @Injectable()
 //@BaseUrl("http://localhost:3000/")
@@ -44,7 +44,7 @@ export class DataService {
 //           .map((res: Response) => res.json())
 //            .catch(this.handleError);
 //    }
-    addPacient (pacient: Pacient) : Observable<Pacient>  {
+    addPacient (pacient: IPacient) : Observable<IPacient>  {
 
     let body = JSON.stringify( pacient );
      console.log("body", body);
