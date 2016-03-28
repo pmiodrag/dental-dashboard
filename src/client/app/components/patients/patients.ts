@@ -9,42 +9,41 @@ import { SortByDirective } from '../../shared/directives/sortby.directive';
 import { CapitalizePipe } from '../../shared/pipes/capitalize.pipe';
 import { TrimPipe } from '../../shared/pipes/trim.pipe';
 import {MATERIAL_DIRECTIVES, MATERIAL_PROVIDERS} from "ng2-material/all";
-import { PacientFormComponent } from './pacient-form'
+import { PatientFormComponent } from './patient-form'
 @Component({ 
-  selector: 'pacients', 
+  selector: 'patients', 
   providers: [DataService],
-  templateUrl: 'app/components/pacients/pacients.html',
-  directives: [CORE_DIRECTIVES, RouterLink, FilterTextboxComponent, SortByDirective, PacientFormComponent],
+  templateUrl: 'app/components/patients/patients.html',
+  directives: [CORE_DIRECTIVES, RouterLink, FilterTextboxComponent, SortByDirective, PatientFormComponent],
   pipes: [CapitalizePipe, TrimPipe]
 })
 
 
-export class PacientsComponent {
+export class PatientsComponent {
 
   title: string;
   filterText: string;
   listDisplayModeEnabled: boolean;
-  pacients: any[] = [];
-  filteredPacients: any[] = [];
+  patients: any[] = [];
+  filteredPatients: any[] = [];
   sorter: Sorter;
-  pacient : Pacient;
+  patient : Patient;
   constructor(private dataService: DataService) { }
   
   ngOnInit() {
-    this.title = 'Pacients';
-    this.filterText = 'Filter Pacients:';
+    this.title = 'Patients';
+    this.filterText = 'Filter Patients:';
     this.listDisplayModeEnabled = false;
 
-    this.dataService.getPacients()  
-        .subscribe((pacients:any[]) => {
-          console.log("getPacients", pacients);
-          this.pacients = this.filteredPacients = pacients;
+    this.dataService.getPatients()  
+        .subscribe((patients:any[]) => {
+          console.log("getPatients", patients);
+          this.patients = this.filteredPatients = patients;
         });
-    this.dataService.getPacient()
-        .subscribe((pacients:Pacient[]) => {
-          this.pacient = pacients[0];
-          console.log("data service init get pacient from json  ", this.pacient);
-   
+    this.dataService.getPatients()
+        .subscribe((patients:Patient[]) => {
+          this.patient = patients[0];
+          console.log("data service init get pacient from json  ", this.patient);   
     })       
          
     this.sorter = new Sorter();
@@ -55,10 +54,10 @@ export class PacientsComponent {
   }
 
   filterChanged(data: string) {
-    if (data && this.pacients) {
+    if (data && this.patients) {
         data = data.toUpperCase();
         let props = ['firstname', 'middlename', 'lastname', 'address', 'place'];
-        let filtered = this.pacients.filter(item => {
+        let filtered = this.patients.filter(item => {
             let match = false;
             for (let prop of props) {
                 if (item[prop]!= null && item[prop].toString().toUpperCase().indexOf(data) > -1) {
@@ -68,20 +67,20 @@ export class PacientsComponent {
             };
             return match;
         });
-        this.filteredPacients = filtered;
+        this.filteredPatients = filtered;
     }
     else {
-      this.filteredPacients = this.pacients;
+      this.filteredPatients = this.patients;
     }
   }
   
-    addPacient () {   
-        this.dataService.addPacient(this.pacient).subscribe((res:any) => {         
+    addPatient () {   
+        this.dataService.addPatient(this.patient).subscribe((res:any) => {         
            console.log("make service call for rest post pacient  "+res);         
     });
   }
   
-  deletePacient(id: number) {
+  deletePatient(id: number) {
     console.log("make service call for rest delete with id::: ", id);
   }
 
@@ -90,12 +89,12 @@ export class PacientsComponent {
       if (prop && prop.indexOf('.')) {
         
       }
-      this.sorter.sort(this.filteredPacients, prop);
+      this.sorter.sort(this.filteredPatients, prop);
   }
 
 }
 
-export interface IPacient {
+export interface IPatient {
     id: number; 
     firstname: string;
     lastname: string;
@@ -109,7 +108,7 @@ export interface IPacient {
     mobilephone: number;
 }
 
-export class Pacient implements IPacient {
+export class Patient implements IPatient {
     constructor (public id: number, public firstname: string, public lastname: string, public middlename: string,
                 public gender: string, public address: string, public place: string,  public birthdate: string, public email : string,
                 public phone: number,  public mobilephone: number) {

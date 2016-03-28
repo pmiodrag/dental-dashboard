@@ -4,8 +4,8 @@ import path = require('path');
 import * as db from "../connection/db";
 var bodyParser = require('body-parser');
 
-export function getPacients (req: express.Request, res: express.Response)  {
-   console.log("getPacients")
+export function getPatients (req: express.Request, res: express.Response)  {
+   console.log("getPatients")
    db.db_connection.ready(function(){ 
      var patientTable = db.db_connection.table("patient");
      patientTable.findAll().then(function(patients){ 
@@ -14,12 +14,12 @@ export function getPacients (req: express.Request, res: express.Response)  {
      });
    });
 }
-export function getPacientData (req: express.Request, res: express.Response)  {
-   console.log("getPacientData server side ", __dirname)   
-    res.sendFile(path.resolve(__dirname, 'pacients.json'));   
+export function getPatientData (req: express.Request, res: express.Response)  {
+   console.log("getPatientData server side ", __dirname)   
+    res.sendFile(path.resolve(__dirname, 'patients.json'));   
 };
-export function addPacient (req: express.Request, res: express.Response)  {
-    console.log("addPacient controller req.bodyyyy", req.body);
+export function addPatient (req: express.Request, res: express.Response)  {
+    console.log("addPatient controller req.bodyyyy", req.body);
     var newPatient = req.body;
     db.db_connection.ready(function(){ 
      var patientTable = db.db_connection.table("patient");

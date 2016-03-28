@@ -7,7 +7,7 @@
                     <img src="assets/images/people.png" alt="logo">
                     <span>{{ title }}</span>
                 </h2>
-                 <button md-fab class="md-mini blue-lighten-3" (click)="addPacient()"   aria-label="Add pacient">
+                 <button md-fab class="md-mini blue-lighten-3" (click)="addPatient()"   aria-label="Add patient">
                    <i class="fa fa-user-plus"></i>
                 </button>
             </div>       
@@ -35,15 +35,15 @@
         </div>
         <div class="row">
             <div class="row card-container" [hidden]="listDisplayModeEnabled">
-                <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="#pacient of filteredPacients">
+                <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="#patient of filteredPatients">
                     <div class="card">
                         <!--<button class="btn close card-close" title="Delete Customer" (click)="deleteCustomer(customer.id)">&times;</button>-->
                         <div class="card-header green">
-                            <a [routerLink]="['Treatments',{id:pacient.id}]" class="white">{{pacient.firstname | capitalize }}{{pacient.middlename | capitalize }} {{ pacient.lastname | capitalize }}</a>
-                              <button md-fab class="md-mini orange" (click)="editPacient()"  aria-label="Edit pacient">
+                            <a [routerLink]="['Treatments',{id:patient.id}]" class="white">{{patient.firstname | capitalize }}{{patient.middlename | capitalize }} {{ patient.lastname | capitalize }}</a>
+                              <button md-fab class="md-mini orange" (click)="editPatient()"  aria-label="Edit patient">
                                      <i class="fa fa-pencil-square-o"></i>
                                 </button>
-                                <button md-fab class="md-mini red" (click)="deletePacient(pacient.id)"  aria-label="Remove pacient">
+                                <button md-fab class="md-mini red" (click)="deletePatient(patient.id)"  aria-label="Remove patient">
                                     <i class="fa fa-recycle"></i>
                                 </button>
                             
@@ -52,17 +52,17 @@
                             <div class="clearfix">
                                 <div class="pull-left card-body-left">
                                     <a href="#" class="white">
-                                        <img src="assets/images/{{pacient.gender | lowercase}}.png" class="card-image" />
+                                        <img src="assets/images/{{patient.gender | lowercase}}.png" class="card-image" />
                                     </a>
                                 </div>
                                 <div class="pull-left card-body-right">
-                                    <div class="card-body-content">{{pacient.place | trim }}</div>
+                                    <div class="card-body-content">{{patient.place | trim }}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div [hidden]="filteredPacients.length">
+                <div [hidden]="filteredPatients.length">
                     No Records Found
                 </div>
             </div>
@@ -83,17 +83,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="#pacient of filteredPacients">
-                                    <td><img src="assets/images/{{ pacient.gender | lowercase }}.png" 
-                                             class="card-image" alt="Pacient Image" /></td>
-                                    <td><a [routerLink]="['Treatments',{id:pacient.id}]">{{ pacient.firstname | capitalize }}</a></td>
-                                    <td>{{ pacient.middleName | capitalize }}</td>
-                                     <td>{{ pacient.lastName | capitalize }}</td>
-                                    <td>{{ pacient.address }}</td>
-                                    <td>{{ pacient.place | trim }}</td>
+                                <tr *ngFor="#patient of filteredPatients">
+                                    <td><img src="assets/images/{{ patient.gender | lowercase }}.png" 
+                                             class="card-image" alt="Patient Image" /></td>
+                                    <td><a [routerLink]="['Treatments',{id:patient.id}]">{{ patient.firstname | capitalize }}</a></td>
+                                    <td>{{ patient.middleName | capitalize }}</td>
+                                     <td>{{ patient.lastName | capitalize }}</td>
+                                    <td>{{ patient.address }}</td>
+                                    <td>{{ patient.place | trim }}</td>
 <!--                                    <td>{{ customer.orderTotal | currency:'USD':true }}</td>-->
                                 </tr>
-                                <tr [hidden]="filteredPacients.length">
+                                <tr [hidden]="filteredPatients.length">
                                     <td>&nbsp;</td>
                                     <td colspan="6">No Records Found</td>
                                 </tr>
@@ -105,5 +105,5 @@
         </div>
          </div>
     </md-content>
-    <pacient-form></pacient-form>
+    <patient-form></patient-form>
 </div>
