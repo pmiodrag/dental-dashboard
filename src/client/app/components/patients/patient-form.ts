@@ -1,7 +1,7 @@
 import { Component } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 import { RouterLink } from 'angular2/router';
-import { IPatient } from './patients';
+import { Patient } from './patients';
 import {MATERIAL_DIRECTIVES, MATERIAL_PROVIDERS} from "ng2-material/all";
 @Component({ 
   selector: 'patient-form', 
@@ -12,7 +12,7 @@ import {MATERIAL_DIRECTIVES, MATERIAL_PROVIDERS} from "ng2-material/all";
 
 export class PatientFormComponent {
 
-  patient : IPatient;
+  patient = new Patient(0, '', '', '', '', '', '', '', '', '', '');
   submitted = false;
   onSubmit() { this.submitted = true; }
   

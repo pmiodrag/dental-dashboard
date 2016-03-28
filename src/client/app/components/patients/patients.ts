@@ -24,6 +24,7 @@ export class PatientsComponent {
   title: string;
   filterText: string;
   listDisplayModeEnabled: boolean;
+  showPatientForm: boolean;
   patients: any[] = [];
   filteredPatients: any[] = [];
   sorter: Sorter;
@@ -34,7 +35,7 @@ export class PatientsComponent {
     this.title = 'Patients';
     this.filterText = 'Filter Patients:';
     this.listDisplayModeEnabled = false;
-
+    this.showPatientForm = false;
     this.dataService.getPatients()  
         .subscribe((patients:any[]) => {
           console.log("getPatients", patients);
@@ -73,7 +74,9 @@ export class PatientsComponent {
       this.filteredPatients = this.patients;
     }
   }
-  
+  openPatientForm () {
+      this.showPatientForm = true;
+  }
     addPatient () {   
         this.dataService.addPatient(this.patient).subscribe((res:any) => {         
            console.log("make service call for rest post pacient  "+res);         
@@ -104,15 +107,17 @@ export interface IPatient {
     place: string;    
     birthdate: string;
     email : string;
-    phone: number;
-    mobilephone: number;
+    phone: string;
+    mobilephone: string;
 }
 
 export class Patient implements IPatient {
     constructor (public id: number, public firstname: string, public lastname: string, public middlename: string,
                 public gender: string, public address: string, public place: string,  public birthdate: string, public email : string,
-                public phone: number,  public mobilephone: number) {
+                public phone: string,  public mobilephone: string) {
     }
+    
+    
 //    id: number; 
 //    firstName: string;
 //    lastName: string;
