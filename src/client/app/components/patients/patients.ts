@@ -14,7 +14,7 @@ import { PatientFormComponent } from './patient-form'
   selector: 'patients', 
   providers: [DataService],
   templateUrl: 'app/components/patients/patients.html',
-  directives: [CORE_DIRECTIVES, RouterLink, FilterTextboxComponent, SortByDirective, PatientFormComponent],
+  directives: [CORE_DIRECTIVES, RouterLink, FilterTextboxComponent, SortByDirective, PatientFormComponent, MATERIAL_DIRECTIVES],
   pipes: [CapitalizePipe, TrimPipe]
 })
 

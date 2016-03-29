@@ -59,8 +59,13 @@ gulp.task('build:styles', function() {
 });
 
 gulp.task("buld:resources", function() {
-    return gulp.src(["src/client/app/**", "!**/*.ts"])
+      var copyMaterialComponentLib = gulp.src(["node_modules/ng2-material/components/**", "!**/*.ts"])
+        .pipe(gulp.dest("dist/libs/ng2-material/components"));
+     var copyMaterialCoreLib = gulp.src(["node_modules/ng2-material/core/**", "!**/*.ts"])
+        .pipe(gulp.dest("dist/libs/ng2-material/core"));
+    var copyApp = gulp.src(["src/client/app/**", "!**/*.ts"])
         .pipe(gulp.dest("dist/app"))
+ return[copyMaterialComponentLib, copyMaterialCoreLib, copyApp];
 });
 
 gulp.task('buld:assets', function() {

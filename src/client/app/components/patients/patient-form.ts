@@ -6,7 +6,7 @@ import {MATERIAL_DIRECTIVES, MATERIAL_PROVIDERS} from "ng2-material/all";
 @Component({ 
   selector: 'patient-form', 
   templateUrl: 'app/components/patients/patient-form.html',
-  directives: [CORE_DIRECTIVES, RouterLink]
+  directives: [CORE_DIRECTIVES, RouterLink, MATERIAL_DIRECTIVES]
 })
 
 

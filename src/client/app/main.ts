@@ -15,7 +15,7 @@ bootstrap(AppComponent, [
     FORM_PROVIDERS,
     HTTP_PROVIDERS,
     ELEMENT_PROBE_PROVIDERS,
-//    MATERIAL_PROVIDERS,
+    MATERIAL_PROVIDERS,
     provide(AuthHttp, {
       useFactory: (http) => {
         return new AuthHttp(new AuthConfig(), http);
