@@ -22,8 +22,9 @@
     <link type="text/css" rel="stylesheet" href="styles/materialize/css/materialize.min.css"  media="screen,projection"/>-->
     <link rel="stylesheet" type="text/css" href="styles/rdash.css">
     <link rel="stylesheet" type="text/css" href="styles/app.css">
-    <link rel="stylesheet" href="styles/ng2-material.css">
-    <link rel="stylesheet" href="styles/font.css">
+    <link rel="stylesheet" href="styles/ng2-material/ng2-material.css">
+    <link rel="stylesheet" href="styles/ng2-material/font.css">
+   
 </head>
 <body>
   <app-container>
@@ -68,12 +69,15 @@
         },
         "ng2-material": {
           "defaultExtension": "js"
+        }, "ng2-datepicker" :{
+          "defaultExtension": "js"
         }
         },
      
       map: {
         "angular2-jwt": "libs/angular2-jwt",
-         "ng2-material": "libs/ng2-material"
+        "ng2-material": "libs/ng2-material",
+        "ng2-datepicker": "libs/ng2-datepicker"
       }
       });
       System.import('app/main')

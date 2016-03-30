@@ -36,6 +36,7 @@ var jsNPMDependencies = [
     'angular2-jwt/angular2-jwt.js',
      'angular2-jwt/angular2-jwt.js.map',
     'angular2/bundles/angular2.min.js',
+    "ng2-datepicker/ng2-datepicker.js",
             'ng2-material/all.js',
              'ng2-material/all.js.map'
 ] 
@@ -43,7 +44,9 @@ var jsNPMDependencies = [
 gulp.task('build:styles', function() {
     var copyNgStyles= gulp.src('node_modules/ng2-material/dist/*.css')
      .pipe(minifyCSS())
-        .pipe(gulp.dest('dist/styles'));
+      .pipe(gulp.dest('dist/styles/ng2-material'));
+     var copyNgCoreStyles= gulp.src('node_modules/ng2-material/source/*.scss')     
+        .pipe(gulp.dest('dist/styles/ng2-material'));
     var copyFontAwesome= gulp.src('src/client/styles/font-awesome/**')     
      .pipe(gulp.dest('dist/styles/font-awesome'));
 //    var copyMaterialize= gulp.src('src/client/styles/materialize/**')     
