@@ -3,11 +3,14 @@ export class ValidationService {
     static getValidatorErrorMessage(code: string) {
         let config = {
             'required': 'Required',
+            'minlength': 'Name should contain at least 3 characters',
+            'maxlength': 'Name should be less than 30 characters',
             'invalidNameLength': 'Name should  contains minimum 2 characters and not more than 30. ',
             'invalidCreditCard': 'Is invalid credit card number',
             'invalidEmailAddress': 'Invalid email address',
             'invalidPassword': 'Invalid password. Password must be at least 6 characters long, and contain a number.'
         };
+          console.log("getValidatorErrorMessage", code, "config[code] : ", config[code]);
         return config[code];
     }
 

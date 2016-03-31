@@ -2,6 +2,7 @@ import { Component } from 'angular2/core';
 import { FORM_DIRECTIVES, Validators, FormBuilder, ControlGroup, CORE_DIRECTIVES } from 'angular2/common';
 import { RouterLink } from 'angular2/router';
 import { Patient } from './patients';
+import { DataService } from '../../shared/services/data.service';
 import {ControlMessages} from '../handlers/control-messages';
 import {ValidationService} from '../../shared/services/validation.service';
 import {MdPatternValidator,
@@ -12,13 +13,14 @@ import {MdPatternValidator,
 @Component({ 
   selector: 'patient-form', 
   templateUrl: 'app/components/patients/patient-form.html',
+  providers: [DataService],
   directives: [CORE_DIRECTIVES, FORM_DIRECTIVES,RouterLink, MATERIAL_DIRECTIVES, ControlMessages]
 })
 
 
 export class PatientFormComponent {
     patientForm: ControlGroup;
-    patient = new Patient(0, 'test', 'test', '', '', '', '', 'test@gmail.com', 'test', '', '');
+    patient = new Patient(0, '', '', '', 'M', '', '1980-04-14', '', '', '', '');
     submitted = false;
     data: any = {
         group1: 'Banana',
@@ -36,18 +38,30 @@ export class PatientFormComponent {
         value: 'F',
          color:'md-warn'
     }];
-  constructor(fb: FormBuilder) {
+  constructor(fb: FormBuilder, private dataService: DataService) {
     this.patientForm = fb.group({
-      'firstname': ['',  ValidationService.nameValidator],
+      'firstname': ['',  Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(30)])],
       'lastname': ['', Validators.compose([
         Validators.required,
-        Validators.minLength(1),
+        Validators.minLength(3),
         Validators.maxLength(30)
       ])],
       'email': ['', ValidationService.emailValidator]
     });
   }
-  
-  onSubmit() { this.submitted = true; }
-  
+    addPatient (patient) {   
+        console.log("Add patient", patient);
+        this.dataService.addPatient(patient).subscribe((res:any) => {         
+           console.log("make service call for rest post pacient  "+res);         
+        });
+    }
+    onSubmit(patient) { 
+        this.addPatient (patient);
+        this.submitted = true; 
+        //showPatientForm = true;
+    }
+    
 }

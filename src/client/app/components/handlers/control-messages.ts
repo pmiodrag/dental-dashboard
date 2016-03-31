@@ -5,9 +5,10 @@ import {ValidationService} from '../../shared/services/validation.service';
 @Component({
     selector: 'control-messages',
     inputs: ['controlName: control'],
-    template: `<div *ngIf="errorMessage !== null" role="alert"> 
-    <div md-message>{{errorMessage}}</div>        
-</div>`
+    template: `<div *ngIf="errorMessage !== null">{{errorMessage}}</div>`
+//    template: `<div *ngIf="errorMessage !== null" role="alert"> 
+//    <div md-message>{{errorMessage}}</div>        
+//</div>`
 })
 export class ControlMessages {
     controlName: string;

@@ -8,7 +8,7 @@
             <div layout-gt-sm="row">
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>First name</label>
-                    <input md-input [(ngModel)]="patient.firstname">
+                    <input md-input [(ngModel)]="patient.firstname"  ngControl="firstname" id="firstname">
                     <control-messages control="firstname"></control-messages>
                 </md-input-container>
                 <md-input-container class="md-block" flex-gt-sm>
@@ -17,7 +17,7 @@
                 </md-input-container>
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>Last Name</label>
-                    <input md-input [(ngModel)]="patient.lastname">
+                    <input md-input [(ngModel)]="patient.lastname" ngControl="lastname" id="lastname">
                     <control-messages control="lastname"></control-messages>
                 </md-input-container>
             </div>
@@ -37,15 +37,6 @@
                 </md-input-container>
                 <!--            <datepicker [(ngModel)]="patient.birthdate" md-placeholder="Enter date"></datepicker>-->
             </div>
-
-<!--            <div layout-gt-sm="row">
-                
-                                <md-radio-group [(value)]="data.gender1">
-                    <md-radio-button value="M" class="md-primary">Male</md-radio-button>
-                    <md-radio-button value="F" checked="true"> Female</md-radio-button>
-                  </md-radio-group>
-
-            </div>-->
             <div layout-gt-sm="row">
                 <md-radio-group layout="row">
                     <md-radio-button *ngFor="#it of avatarData"
@@ -67,7 +58,7 @@
             <!-- Submit button -->
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-8">
-                    <md-button md-raised-button class="md-primary" type="submit" [disabled]="!patientForm.valid">ADD USER</md-button>
+                    <button md-raised-button class="md-primary" type="submit" (click)="onSubmit(patient)" [disabled]="!patientForm.valid">ADD USER</button>
                 </div>
             </div>
 

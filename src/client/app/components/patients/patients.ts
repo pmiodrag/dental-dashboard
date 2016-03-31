@@ -77,11 +77,11 @@ export class PatientsComponent {
   openPatientForm () {
       this.showPatientForm = true;
   }
-    addPatient () {   
-        this.dataService.addPatient(this.patient).subscribe((res:any) => {         
-           console.log("make service call for rest post pacient  "+res);         
-    });
-  }
+//  addPatient () {   
+//        this.dataService.addPatient(this.patient).subscribe((res:any) => {         
+//           console.log("make service call for rest post pacient  "+res);         
+//    });
+//  }
   
   deletePatient(id: number) {
     console.log("make service call for rest delete with id::: ", id);
