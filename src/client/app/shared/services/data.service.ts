@@ -33,7 +33,7 @@ export class DataService {
     
     getPatients() {       
     
-        return this.http.get(this.baseUrl + 'patients')
+        return this.http.get(this.baseUrl + 'patient')
                        .map((res: Response) => res.json())
                         .catch(this.handleError);
     }

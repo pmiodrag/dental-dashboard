@@ -25,7 +25,7 @@ var server = app.listen(port, function() {
     console.log('This express app is listening on port:' + port);
 });
 
-app.get('/patients', patients.index);
+app.get('/patient', patients.index);
 app.post('/patient', patients.create);
 app.put('/patient/:id', patients.update);
 app.get('/patient/:id', patients.show);
