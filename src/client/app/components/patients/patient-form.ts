@@ -2,6 +2,8 @@ import { Component } from 'angular2/core';
 import { FORM_DIRECTIVES, Validators, FormBuilder, ControlGroup, CORE_DIRECTIVES } from 'angular2/common';
 import { RouterLink } from 'angular2/router';
 import { Patient } from './patients';
+import {ControlMessages} from '../handlers/control-messages';
+import {ValidationService} from '../../shared/services/validation.service';
 import {MdPatternValidator,
   MdMinValueValidator,
   MdNumberRequiredValidator,
@@ -10,7 +12,7 @@ import {MdPatternValidator,
 @Component({ 
   selector: 'patient-form', 
   templateUrl: 'app/components/patients/patient-form.html',
-  directives: [CORE_DIRECTIVES, FORM_DIRECTIVES,RouterLink, MATERIAL_DIRECTIVES]
+  directives: [CORE_DIRECTIVES, FORM_DIRECTIVES,RouterLink, MATERIAL_DIRECTIVES, ControlMessages]
 })
 
 
@@ -36,17 +38,13 @@ export class PatientFormComponent {
     }];
   constructor(fb: FormBuilder) {
     this.patientForm = fb.group({
-      'firstname': ['', Validators.required],
+      'firstname': ['',  ValidationService.nameValidator],
       'lastname': ['', Validators.compose([
         Validators.required,
+        Validators.minLength(1),
         Validators.maxLength(30)
       ])],
-      'email': ['', Validators.compose([
-        MdPatternValidator.inline('^.+@.+\..+$'),
-        Validators.required,
-        Validators.minLength(10),
-        Validators.maxLength(100)
-      ])]
+      'email': ['', ValidationService.emailValidator]
     });
   }
   
