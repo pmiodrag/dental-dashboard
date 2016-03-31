@@ -25,10 +25,13 @@ var server = app.listen(port, function() {
     console.log('This express app is listening on port:' + port);
 });
 
-app.get('/getPatients', patients.getPatients);
-app.post('/addPatient', patients.addPatient);
-app.get('/getPatientData', patients.getPatientData);
+app.get('/patients', patients.index);
+app.post('/patient', patients.create);
+app.put('/patient/:id', patients.update);
+app.get('/patient/:id', patients.show);
+app.delete('/patient/:id', patients.destroy);
 app.get('/selectTreatments', treatments.selectTreatments);
+
 
 
 var renderIndex = (req: express.Request, res: express.Response) => {

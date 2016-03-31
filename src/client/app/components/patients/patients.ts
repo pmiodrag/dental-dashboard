@@ -85,6 +85,9 @@ export class PatientsComponent {
   
   deletePatient(id: number) {
     console.log("make service call for rest delete with id::: ", id);
+    this.dataService.deletePatient(id).subscribe((res:any) => {         
+       console.log("make service call for rest post pacient  "+res);         
+    });
   }
 
   sort(prop: string) {

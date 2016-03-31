@@ -33,36 +33,45 @@ export class DataService {
     
     getPatients() {       
     
-        return this.http.get(this.baseUrl + 'getPatients')
+        return this.http.get(this.baseUrl + 'patients')
                        .map((res: Response) => res.json())
                         .catch(this.handleError);
     }
     
-//    addPacient(pacient: Pacient) {       
-//         console.log("addPacient", pacient);
-//         return this.http.post(this.baseUrl + 'addPacient', pacient.firstName)
-//           .map((res: Response) => res.json())
-//            .catch(this.handleError);
-//    }
     addPatient (patient: IPatient) : Observable<IPatient>  {
 
         let body = JSON.stringify( patient )
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.post(this.baseUrl + 'addPatient', body, options)
+        return this.http.post(this.baseUrl + 'patient', body, options)
            // .map((res: Response) => res.json())
-                      //  .map(res =>  <Hero> res.json().data)
                         .catch(this.handleError)
-      }
+    }
+    
+    updatePatient (patient: IPatient) : Observable<IPatient>  {
+
+        let body = JSON.stringify( patient )
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.put((this.baseUrl + 'patient' + patient.id), body, options)
+                         .catch(this.handleError)
+    }
+    
     getTreatments(){
       return this.http.get(this.baseUrl + 'selectTreatments')
                       .map((res: Response) => res.json())
                       .catch(this.handleError);               
     }
-    getPacient() {
-        return this.http.get(this.baseUrl + 'getPacientData')
+    getPacient(id: number) {
+        return this.http.get(this.baseUrl + 'patient/' + id)
                         .map((res: Response) => res.json())
+                        .catch(this.handleError);
+    }
+    deletePatient(id:number){
+        return this.http.delete(this.baseUrl + 'patient/' + id)
+                       // .map((res: Response) => res.json())
                         .catch(this.handleError);
     }
     handleError(error: any) {

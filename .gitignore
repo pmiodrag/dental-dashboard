@@ -3,10 +3,10 @@ node_modules
 src/app/**/*.js
 src/app/**/*.js.map
 
-
-
 /nbproject/private/
 /bower_components/
 dist
 bower_components
 dist
+typings
+
