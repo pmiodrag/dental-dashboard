@@ -30,7 +30,7 @@ app.post('/patient', patients.create);
 app.put('/patient/:id', patients.update);
 app.get('/patient/:id', patients.show);
 app.delete('/patient/:id', patients.destroy);
-app.get('/selectTreatments', treatments.selectTreatments);
+app.get('/patient/:id/patienttreatments', treatments.index);
 
 
 

@@ -33,6 +33,7 @@ export class DataService {
     
     getPatients() {       
     
+        
         return this.http.get(this.baseUrl + 'patient')
                        .map((res: Response) => res.json())
                         .catch(this.handleError);
@@ -60,10 +61,17 @@ export class DataService {
     }
     
     getTreatments(){
-      return this.http.get(this.baseUrl + 'selectTreatments')
+        return this.http.get(this.baseUrl + 'selectTreatments')
                       .map((res: Response) => res.json())
                       .catch(this.handleError);               
     }
+    
+    getPatientTreatments(patientId:number){        
+        return this.http.get(this.baseUrl + 'patient/'+patientId+'/patienttreatments')
+                    .map((res: Response) => res.json())
+                    .catch(this.handleError);    
+    }
+    
     getPacient(id: number) {
         return this.http.get(this.baseUrl + 'patient/' + id)
                         .map((res: Response) => res.json())

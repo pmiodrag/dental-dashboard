@@ -20,7 +20,7 @@ export class TreatmentsComponent {
     
     ngOnInit() {
       let patientId = parseInt(this._routeParams.get('id'), 10);
-      this.dataService.getTreatments().subscribe((treatments: any[]) => {
+      this.dataService.getPatientTreatments(patientId).subscribe((treatments: any[]) => {
           
         this.filteredTreatments = treatments.filter(treatment => treatment.patientId === patientId);
       });
