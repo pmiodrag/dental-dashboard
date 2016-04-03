@@ -1,4 +1,4 @@
-<div layout="column" class="scroll-shrink">
+<!--<div layout="column" class="scroll-shrink">
   <md-toolbar mdScrollShrink>
     <div class="md-toolbar-tools">
      <h3><span class="fa fa-list-ol"></span>&nbsp;&nbsp;Treatments</h3>
@@ -7,7 +7,7 @@
   <md-content class="row">
     <md-list>
       <md-list-item class="md-3-line" *ngFor="#treatment of filteredTreatments">
-<!--        <img [src]="item.face" [alt]="item.who" class="md-avatar">-->
+        <img [src]="item.face" [alt]="item.who" class="md-avatar">
         <div class="md-list-item-text">
           <h3>{{ treatment.patientId }}</h3>
           <h4>{{ treatment.therapy }}</h4>
@@ -19,8 +19,37 @@
     </md-list>
       <a href="#" [routerLink]="['Patients']" router-params="">View all Pacients</a>
   </md-content>
-</div>
-<tables></tables>
+</div>-->
+
+<!--<md-toolbar>
+  <div class="md-toolbar-tools" *ngIf="!selection">
+    <span>Treatments</span>
+  </div>
+  <div class="md-toolbar-tools selection" *ngIf="selection">
+    <span>{{count}} item{{count > 1 ? 's' : ''}} selected</span>
+    <span flex hide show-gt-md></span>
+    <span class="md-caption" hide show-gt-md>{{selection}}</span>
+  </div>
+</md-toolbar>
+<md-data-table layout-fill [selectable]="true" (onSelectableChange)="change($event)">
+  <thead>
+  <tr>
+    <th class="md-text-cell">Patient</th>
+      <th>Therapy</th>
+    <th>Diagnose</th>
+    <th>Treatment price</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="#treatment of filteredTreatments" [selectableValue]="treatment.id">
+        <td class="md-text-cell">{{ treatment.patientId }}</td>        
+        <td>{{ treatment.therapy }}</td>
+        <td>{{ treatment.diagnose }}</td>
+        <td>{{ treatment.price }}</td>
+  </tr>
+  </tbody>
+</md-data-table>-->
+<!--<tables></tables>-->
 <!--<h3><span class="fa fa-list-ol"></span>&nbsp;&nbsp;Treatments</h3>
 
 <br />
@@ -36,3 +65,4 @@
 <br />-->
 
 
+<data-table-selectable-usage></data-table-selectable-usage>

@@ -45,16 +45,20 @@ gulp.task('build:styles', function() {
     var copyNgStyles= gulp.src('node_modules/ng2-material/dist/*.css')
      .pipe(minifyCSS())
       .pipe(gulp.dest('dist/styles/ng2-material'));
-     var copyNgCoreStyles= gulp.src('node_modules/ng2-material/source/*.scss')     
-        .pipe(gulp.dest('dist/styles/ng2-material'));
+     var copyNgCoreStyles= gulp.src('node_modules/ng2-material/source/core/style/*.scss')     
+        .pipe(gulp.dest('dist/styles/ng2-material/source/core/style'));
+    var copyNgFont= gulp.src('node_modules/ng2-material/font/**')     
+        .pipe(gulp.dest('dist/styles/ng2-material/font'));
     var copyFontAwesome= gulp.src('src/client/styles/font-awesome/**')     
      .pipe(gulp.dest('dist/styles/font-awesome'));
 //    var copyMaterialize= gulp.src('src/client/styles/materialize/**')     
 //     .pipe(gulp.dest('dist/styles/materialize'));
+ var copySCSS= gulp.src('src/client/styles/*.scss')
+  .pipe(gulp.dest('dist/styles'))
     var copyStyles= gulp.src('src/client/styles/*.css')
      .pipe(minifyCSS())
             .pipe(gulp.dest('dist/styles'))
-        return[copyStyles, copyFontAwesome, copyNgStyles];
+        return[copyStyles,copySCSS, copyNgCoreStyles, copyFontAwesome, copyNgStyles];
         //.pipe(less())
        // .on('error', console.log)
         
