@@ -16,24 +16,8 @@ import {IPatient} from '../../components/patients/patients'
 export class DataService {
     baseUrl: string = '/';
     constructor(private http: Http) { }
-//    protected requestInterceptor(req: Request) {
-//        if (SessionFactory.getInstance().isAuthenticated) {
-//            req.headers.append('jwt', SessionFactory.getInstance().credentials.jwt);
-//        }
-//    }
-//
-//    protected requestInterceptor(req: Response) {
-//        // do sg with responses
-//    }
-
-//    @POST("addPacient")
-//    public postTodo( @Body todo: Todo): Observable { return null; };
-  
-   
     
-    getPatients() {       
-    
-        
+    getPatients() { 
         return this.http.get(this.baseUrl + 'patient')
                        .map((res: Response) => res.json())
                         .catch(this.handleError);

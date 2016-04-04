@@ -3,7 +3,7 @@ import {MATERIAL_DIRECTIVES, ITableSelectionChange} from "ng2-material/all";
 
 @Component({
   selector: 'data-table-selectable-usage',
-  templateUrl: './selectable_usage.html',
+  templateUrl: 'app/components/treatments/selectable_usage.html',
   styleUrls: ['styles/selectable_usage.css'],
   directives: [MATERIAL_DIRECTIVES]
 })
