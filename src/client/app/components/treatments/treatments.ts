@@ -9,7 +9,7 @@ import {DataTableSelectableUsage} from "./selectable_usage"
   providers: [DataService],
   templateUrl: 'app/components/treatments/treatments.html',
   styleUrls : ['styles/selectable_usage.css'],
-  directives: [CORE_DIRECTIVES, RouterLink, DataTableSelectableUsage, MATERIAL_DIRECTIVES]
+  directives: [CORE_DIRECTIVES, RouterLink, DataTableSelectableUsage,MATERIAL_DIRECTIVES ]
 })
 export class TreatmentsComponent {
 	
