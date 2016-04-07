@@ -43,11 +43,12 @@
                 <!--            <datepicker [(ngModel)]="patient.birthdate" md-placeholder="Enter date"></datepicker>-->
             </div>
             <div layout-gt-sm="row">
-                <md-radio-group layout="row">
+                <md-radio-group layout="row" [(model)]="patient.gender">
                     <md-radio-button *ngFor="#it of avatarData"
                         [value]="it.value"
                         [ngClass]="it.color"
-                        [aria-label]="it.title">
+                        [aria-label]="it.title"
+                        [checked]="it.value === patient.gender">
                         <img [src]="it.id" class="card-image">
                     </md-radio-button>
                 </md-radio-group>

@@ -54,9 +54,10 @@ export class PatientFormComponent {
       'email': ['', ValidationService.emailValidator]
     });
   }
+  
   ngOnInit() {
       if (this.patient == null) {
-          this.patient = new Patient(0, '', '', '', 'M', '', '1980-04-14', '', '', '', '');
+          this.patient = new Patient(0, '', '', '', 'M', '', '', '', '', '', '');
       }
       console.log("Patient", this.patient);
   }
