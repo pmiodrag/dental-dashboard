@@ -7,7 +7,7 @@ import {MATERIAL_DIRECTIVES, ITableSelectionChange} from "ng2-material/all";
 //import {DataTableSelectableUsage} from "./selectable_usage"
 @Component({ 
   selector: 'treatments',
-  providers: [DataService],
+  providers: [DataService, PatientService],
   templateUrl: 'app/components/treatments/treatments.html',
   styleUrls : ['styles/selectable_usage.css'],
   directives: [CORE_DIRECTIVES, RouterLink, MATERIAL_DIRECTIVES ]

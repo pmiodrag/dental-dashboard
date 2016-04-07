@@ -13,6 +13,6 @@
             </div>       
        </md-toolbar>       
     </md-content>
-    <patient-list  [patients]="patients" [(selected)]="selectedPatient" ></patient-list>
+    <patient-list *ngIf="!showPatientForm && !selectedPatient"  [patients]="patients" [(selected)]="selectedPatient" ></patient-list>
     <patient-form *ngIf="showPatientForm || selectedPatient" [patient]="selectedPatient"></patient-form>
 </div>
