@@ -14,7 +14,7 @@ import {MATERIAL_DIRECTIVES} from "ng2-material/all";
 })
 @RouteConfig([
  { path: '/patients', name: 'Patients', component: PatientsComponent },
- { path: '/patient/:id/treatmants', name: 'Treatments', component: TreatmentsComponent },
+ { path: '/patient/:id/:firstname/:lastname/treatments', name: 'Treatments', component: TreatmentsComponent },
     { path: '/login', name: 'Auth', component: AuthComponent },
      {path: '/dashboard',  component: Dashboard, name: 'Dashboard', useAsDefault: true },
 //  {path: '/tables', component: Tables, name: 'Tables'},

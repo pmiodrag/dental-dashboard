@@ -1,8 +1,7 @@
-import { Component } from 'angular2/core';
+import { Component, Input } from 'angular2/core';
 import { FORM_DIRECTIVES, Validators, FormBuilder, ControlGroup, CORE_DIRECTIVES } from 'angular2/common';
 import { RouterLink } from 'angular2/router';
-import { Patient } from './patients';
-import { DataService } from '../../shared/services/data.service';
+import { Patient, PatientService } from '../../services/patientService';
 import {ControlMessages} from '../handlers/control-messages';
 import {ValidationService} from '../../shared/services/validation.service';
 import {MdPatternValidator,
@@ -13,14 +12,16 @@ import {MdPatternValidator,
 @Component({ 
   selector: 'patient-form', 
   templateUrl: 'app/components/patients/patient-form.html',
-  providers: [DataService],
+  providers: [PatientService],
   directives: [CORE_DIRECTIVES, FORM_DIRECTIVES,RouterLink, MATERIAL_DIRECTIVES, ControlMessages]
 })
 
 
 export class PatientFormComponent {
     patientForm: ControlGroup;
-    patient = new Patient(0, '', '', '', 'M', '', '1980-04-14', '', '', '', '');
+    @Input() patient: Patient;
+    
+   // patient = new Patient(0, '', '', '', 'M', '', '1980-04-14', '', '', '', '');
     submitted = false;
     data: any = {
         group1: 'Banana',
@@ -38,7 +39,8 @@ export class PatientFormComponent {
         value: 'F',
          color:'md-warn'
     }];
-  constructor(fb: FormBuilder, private dataService: DataService) {
+  constructor(fb: FormBuilder, private patientService: PatientService) {
+     
     this.patientForm = fb.group({
       'firstname': ['',  Validators.compose([
         Validators.required,
@@ -52,9 +54,15 @@ export class PatientFormComponent {
       'email': ['', ValidationService.emailValidator]
     });
   }
+  ngOnInit() {
+      if (this.patient == null) {
+          this.patient = new Patient(0, '', '', '', 'M', '', '1980-04-14', '', '', '', '');
+      }
+      console.log("Patient", this.patient);
+  }
     addPatient (patient) {   
         console.log("Add patient", patient);
-        this.dataService.addPatient(patient).subscribe((res:any) => {         
+        this.patientService.addPatient(patient).subscribe((res:any) => {         
            console.log("make service call for rest post pacient  "+res);         
         });
     }

@@ -13,32 +13,32 @@
             <div layout-gt-sm="row">
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>First name</label>
-                    <input md-input [(ngModel)]="patient.firstname"  ngControl="firstname" id="firstname">
+                    <input md-input [(ngModel)]="patient.firstname" [value]="patient.firstname" ngControl="firstname" id="firstname">
                     <control-messages control="firstname"></control-messages>
                 </md-input-container>
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>Middle name</label>
-                    <input md-input [(ngModel)]="patient.middlename">
+                    <input md-input [(ngModel)]="patient.middlename" [value]="patient.middlename">
                 </md-input-container>
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>Last Name</label>
-                    <input md-input [(ngModel)]="patient.lastname" ngControl="lastname" id="lastname">
+                    <input md-input [(ngModel)]="patient.lastname" [value]="patient.lastname" ngControl="lastname" id="lastname">
                     <control-messages control="lastname"></control-messages>
                 </md-input-container>
             </div>
             <div layout-gt-sm="row">
                 <md-input-container class="md-block" flex-gt-sm>
                     <label for="email">Email</label>
-                    <input md-input class="form-control" [(ngModel)]="patient.email" type="email" required  ngControl="email" id="email">
+                    <input md-input class="form-control" [(ngModel)]="patient.email" [value]="patient.email" type="email" required  ngControl="email" id="email">
                     <control-messages control="email"></control-messages>
                 </md-input-container>
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>Place</label>
-                    <input md-input [(ngModel)]="patient.place">
+                    <input md-input [(ngModel)]="patient.place" [value]="patient.place">
                 </md-input-container>
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>Address</label>
-                    <input md-input [(ngModel)]="patient.address">
+                    <input md-input [(ngModel)]="patient.address" [value]="patient.address">
                 </md-input-container>
                 <!--            <datepicker [(ngModel)]="patient.birthdate" md-placeholder="Enter date"></datepicker>-->
             </div>
@@ -53,11 +53,11 @@
                 </md-radio-group>
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>Phone Number</label>
-                    <input md-input [(ngModel)]="patient.phone"/>
+                    <input md-input [(ngModel)]="patient.phone" [value]="patient.phone"/>
                 </md-input-container>
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>Mobile Phone Number</label>
-                    <input md-input [(ngModel)]="patient.mobilephone" />
+                    <input md-input [(ngModel)]="patient.mobilephone" [value]="patient.mobilephone" />
                 </md-input-container>
             </div>
             <!-- Submit button -->

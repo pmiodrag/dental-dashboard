@@ -2,14 +2,15 @@ import { Component } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 import { RouterLink, RouteParams } from 'angular2/router';
 import { DataService } from '../../shared/services/data.service';
+import { PatientService } from '../../services/patientService';
 import {MATERIAL_DIRECTIVES, ITableSelectionChange} from "ng2-material/all";
-import {DataTableSelectableUsage} from "./selectable_usage"
+//import {DataTableSelectableUsage} from "./selectable_usage"
 @Component({ 
   selector: 'treatments',
   providers: [DataService],
   templateUrl: 'app/components/treatments/treatments.html',
   styleUrls : ['styles/selectable_usage.css'],
-  directives: [CORE_DIRECTIVES, RouterLink, DataTableSelectableUsage,MATERIAL_DIRECTIVES ]
+  directives: [CORE_DIRECTIVES, RouterLink, MATERIAL_DIRECTIVES ]
 })
 export class TreatmentsComponent {
 	
@@ -18,12 +19,14 @@ export class TreatmentsComponent {
     selection: string ;
     count: number;
     
-    constructor(private dataService: DataService, private _routeParams: RouteParams) {}   
+    constructor(private dataService: DataService, private patientService: PatientService, private _routeParams: RouteParams) {}   
     
     ngOnInit() {
         console.log("ngOnInit");
-      let patientId = parseInt(this._routeParams.get('id'), 10);
-      this.dataService.getPatientTreatments(patientId).subscribe((treatments: any[]) => {
+       let patientId = parseInt(this._routeParams.get('id'), 10);
+       let firstname = this._routeParams.get('firstname');
+       let lastname = this._routeParams.get('lastname');
+       this.patientService.getPatientTreatments(patientId,  firstname, lastname).subscribe((treatments: any[]) => {
           
         this.filteredTreatments = treatments.filter(treatment => treatment.patientId === patientId);
       });
