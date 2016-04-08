@@ -14,6 +14,7 @@ import { PatientFormComponent } from './patient-form'
   selector: 'patient-list', 
   providers: [PatientService],
   templateUrl: 'app/components/patients/patient-list.html',
+  host: {'[hidden]': 'hidden'},
   directives: [CORE_DIRECTIVES, RouterLink, FilterTextboxComponent, SortByDirective, PatientFormComponent, MATERIAL_DIRECTIVES],
   pipes: [CapitalizePipe, TrimPipe]
 })
@@ -28,9 +29,11 @@ export class PatientList {
   sorter: Sorter;
   patient : Patient;
   selectedPatient: Patient;
-  
+  @Input() hidden:boolean = false;
   @Input() patients: Patient[];
-  @Input() selected: Patient
+  @Input() selected: Patient;
+  @Input() patientheader: any;
+  @Input() patientform: any;
   @Output() selectedChange: EventEmitter<Patient> = new EventEmitter();
   
   constructor(private patientService: PatientService) { }
@@ -39,6 +42,7 @@ export class PatientList {
     this.title = 'Patients';
     this.filterText = 'Filter Patients:';
     this.listDisplayModeEnabled = false;
+    console.log("patientform.hidden", this.patientform.hidden);
     
     this.patientService.getPatients()  
         .subscribe((patients:any[]) => {
@@ -53,7 +57,12 @@ export class PatientList {
          
     this.sorter = new Sorter();
   }
-    
+  editPatient (patient: Patient) {
+      this.selectedChange.next(patient);
+      this.hidden = true;
+      this.patientheader.hidden = true;
+      this.patientform.hidden = false;
+  }
   changeDisplayMode(mode: string) {
       this.listDisplayModeEnabled = (mode === 'List');
   }

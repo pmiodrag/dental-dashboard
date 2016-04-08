@@ -13,17 +13,18 @@ import {MdPatternValidator,
   selector: 'patient-form', 
   templateUrl: 'app/components/patients/patient-form.html',
   providers: [PatientService],
+  host: {'[hidden]': 'hidden'},
   directives: [CORE_DIRECTIVES, FORM_DIRECTIVES,RouterLink, MATERIAL_DIRECTIVES, ControlMessages]
 })
 
 
 export class PatientFormComponent {
     patientForm: ControlGroup;
+    formTitle: string;
     @Input() patient: Patient;
-    @Input() showForm: boolean;
-     @Input() aList;
-//    @Output() showPatientFormChange: EventEmitter<Patient> = new EventEmitter();
-   // patient = new Patient(0, '', '', '', 'M', '', '1980-04-14', '', '', '', '');
+    @Input() hidden:boolean = true;
+    @Input () patientheader: any;
+    @Input () patientlist: any;
     submitted = false;
     data: any = {
         group1: 'Banana',
@@ -57,15 +58,15 @@ export class PatientFormComponent {
     });
   }
   
-   updateList() {
-    this.aList.push('child');
-  }
+   
   ngOnInit() {
       if (this.patient == null) {
           this.patient = new Patient(0, '', '', '', 'M', '', '1980-04-14', '', '', '', '');
+          this.formTitle = "Add Patient";
+      } else {
+          this.formTitle = "Edit Patient";
       }
-       this.aList.push('child1')
-      console.log("Patient", this.patient, this.showForm);
+  
   }
    
     addPatient (patient) {   
@@ -74,11 +75,10 @@ export class PatientFormComponent {
            console.log("make service call for rest post pacient  "+res);         
         });
     }
-    goBack() {
-        this.aList.push('child');
-         console.log("goBack before",  this.showForm);
-        this.showForm = false;
-         console.log("goBack after",  this.showForm);
+    goBack() {     
+        this.hidden = true;
+        this.patientheader.hidden = false;
+        this.patientlist.hidden = false;
     }
     onSubmit(patient) { 
         this.addPatient (patient);

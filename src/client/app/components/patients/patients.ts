@@ -11,17 +11,18 @@ import { TrimPipe } from '../../shared/pipes/trim.pipe';
 import {MATERIAL_DIRECTIVES, MATERIAL_PROVIDERS} from "ng2-material/all";
 import { PatientFormComponent } from './patient-form'
 import { PatientList } from './patient-list'
+import { PatientHeaderComponent } from './patient-header'
 import { Patient } from '../../services/patientService';
 @Component({ 
   selector: 'patients', 
   templateUrl: 'app/components/patients/patients.html',
-  directives: [CORE_DIRECTIVES, RouterLink, FilterTextboxComponent, SortByDirective, PatientList, PatientFormComponent, MATERIAL_DIRECTIVES],
+   host: {'[hidden]': 'hidden'},
+  directives: [CORE_DIRECTIVES, RouterLink, FilterTextboxComponent, SortByDirective, PatientList, PatientHeaderComponent, PatientFormComponent, MATERIAL_DIRECTIVES],
   pipes: [CapitalizePipe, TrimPipe]
 })
 
 
 export class PatientsComponent {
-    sharedList = ['one','two'];
   selectedPatient: Patient;
   @Input() patients: Patient[];
   showPatientForm: boolean;
@@ -35,3 +36,4 @@ export class PatientsComponent {
   }
   
 }
+

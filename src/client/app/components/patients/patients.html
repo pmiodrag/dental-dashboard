@@ -1,18 +1,6 @@
 
 <div class="customers view indent">
-    <md-content layout="column" class="scroll-shrink" *ngIf="!showPatientForm && !selectedPatient">
-       <md-toolbar class="md-hue-3">
-            <div class="md-toolbar-tools green"> 
-                <h2>
-                    <img src="assets/images/people.png" alt="logo">
-                    <span>{{ title }}</span>
-                </h2>
-                 <button md-fab class="md-mini blue-lighten-3" (click)="openPatientForm()"   aria-label="Add patient">
-                   <i class="fa fa-user-plus"></i>
-                </button>
-            </div>       
-       </md-toolbar>       
-    </md-content>showPatientForm {{showPatientForm}}sharedList {{sharedList}}
-    <patient-list *ngIf="!showPatientForm && !selectedPatient" [patients]="patients" [(selected)]="selectedPatient" ></patient-list>
-    <patient-form *ngIf="showPatientForm || selectedPatient" [aList]="sharedList" [showForm]="showPatientForm" [patient]="selectedPatient"></patient-form>
+    <patient-header #patientheader [patientform]="patientform" [patientlist]="patientlist"></patient-header>
+    <patient-list #patientlist [patientform]="patientform" [patientheader] = "patientheader" [patients]="patients" [(selected)]="selectedPatient" ></patient-list>
+    <patient-form  #patientform [patientlist]="patientlist" [patientheader] = "patientheader" [patient]="selectedPatient"></patient-form>
 </div>
