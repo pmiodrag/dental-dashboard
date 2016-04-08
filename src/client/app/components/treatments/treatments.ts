@@ -1,25 +1,28 @@
 import { Component } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 import { RouterLink, RouteParams } from 'angular2/router';
-import { DataService } from '../../shared/services/data.service';
+import { TreatmentService } from '../../services/treatmentService';
 import { PatientService } from '../../services/patientService';
+import { Sorter } from '../../shared/sorter';
+import { SortByDirective } from '../../shared/directives/sortby.directive';
 import {MATERIAL_DIRECTIVES, ITableSelectionChange} from "ng2-material/all";
 //import {DataTableSelectableUsage} from "./selectable_usage"
 @Component({ 
   selector: 'treatments',
-  providers: [DataService, PatientService],
+  providers: [TreatmentService, PatientService],
   templateUrl: 'app/components/treatments/treatments.html',
   styleUrls : ['styles/selectable_usage.css'],
   directives: [CORE_DIRECTIVES, RouterLink, MATERIAL_DIRECTIVES ]
 })
 export class TreatmentsComponent {
 	
-    title: string = 'Pacients';
-    filteredTreatments: any[] = [];
+    title: string = 'Treatments';
+    treatments : Treatment[] = [];
+    filteredTreatments: Treatment[] = [];
     selection: string ;
     count: number;
     
-    constructor(private dataService: DataService, private patientService: PatientService, private _routeParams: RouteParams) {}   
+    constructor(private treatmentService: TreatmentService, private patientService: PatientService, private _routeParams: RouteParams) {}   
     
     ngOnInit() {
         console.log("ngOnInit");
@@ -44,7 +47,14 @@ export class TreatmentsComponent {
     this.selection = treatments.join(', ');
     this.count = treatments.length;
   }
-
+  
+  getTreatments(){
+    this.treatmentService.getTreatments()  
+        .subscribe((treatments:any[]) => {
+          this.treatments = this.filteredTreatments = treatments;
+        });
+  }
+  
 }
 
 export interface ITreatment {

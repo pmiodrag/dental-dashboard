@@ -6,13 +6,13 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
-export class DataService {
+export class TreatmentService {
     baseUrl: string = '/';
     constructor(private http: Http) { }
     
     
     getTreatments(){
-        return this.http.get(this.baseUrl + 'selectTreatments')
+        return this.http.get(this.baseUrl + '/treatments')
                       .map((res: Response) => res.json())
                       .catch(this.handleError);               
     }

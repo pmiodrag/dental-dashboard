@@ -18,3 +18,15 @@ export function index (req: express.Request, res: express.Response) {
      });
    });
 }
+
+export function list (req: express.Request, res: express.Response) {
+    console.log("List treatments", req.params);
+    db.db_connection.ready(function(){ 
+     var treatmentTable = db.db_connection.table("treatment");
+     
+     treatmentTable.findAll().then(function(treatments){
+	console.log("treatments = "+treatments);
+        res.send(JSON.stringify(treatments));
+     });
+   });
+}

@@ -31,6 +31,7 @@ app.put('/patient/:id', patients.update);
 app.get('/patient/:id', patients.show);
 app.delete('/patient/:id', patients.destroy);
 app.get('/patient/:id/:firstname/:lastname/treatments', treatments.index);
+app.get('/treatments', treatments.list);
 
 
 
