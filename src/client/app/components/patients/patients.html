@@ -1,6 +1,6 @@
 
 <div class="customers view indent">
-    <md-content layout="column" class="scroll-shrink" *ngIf="!showPatientForm">
+    <md-content layout="column" class="scroll-shrink" *ngIf="!showPatientForm && !selectedPatient">
        <md-toolbar class="md-hue-3">
             <div class="md-toolbar-tools green"> 
                 <h2>
@@ -12,7 +12,7 @@
                 </button>
             </div>       
        </md-toolbar>       
-    </md-content>
-    <patient-list *ngIf="!showPatientForm && !selectedPatient"  [patients]="patients" [(selected)]="selectedPatient" ></patient-list>
-    <patient-form *ngIf="showPatientForm || selectedPatient" [patient]="selectedPatient"></patient-form>
+    </md-content>showPatientForm {{showPatientForm}}sharedList {{sharedList}}
+    <patient-list *ngIf="!showPatientForm && !selectedPatient" [patients]="patients" [(selected)]="selectedPatient" ></patient-list>
+    <patient-form *ngIf="showPatientForm || selectedPatient" [aList]="sharedList" [showForm]="showPatientForm" [patient]="selectedPatient"></patient-form>
 </div>

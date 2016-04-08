@@ -20,7 +20,9 @@ import {MdPatternValidator,
 export class PatientFormComponent {
     patientForm: ControlGroup;
     @Input() patient: Patient;
-    
+    @Input() showForm: boolean;
+     @Input() aList;
+//    @Output() showPatientFormChange: EventEmitter<Patient> = new EventEmitter();
    // patient = new Patient(0, '', '', '', 'M', '', '1980-04-14', '', '', '', '');
     submitted = false;
     data: any = {
@@ -54,17 +56,29 @@ export class PatientFormComponent {
       'email': ['', ValidationService.emailValidator]
     });
   }
+  
+   updateList() {
+    this.aList.push('child');
+  }
   ngOnInit() {
       if (this.patient == null) {
           this.patient = new Patient(0, '', '', '', 'M', '', '1980-04-14', '', '', '', '');
       }
-      console.log("Patient", this.patient);
+       this.aList.push('child1')
+      console.log("Patient", this.patient, this.showForm);
   }
+   
     addPatient (patient) {   
         console.log("Add patient", patient);
         this.patientService.addPatient(patient).subscribe((res:any) => {         
            console.log("make service call for rest post pacient  "+res);         
         });
+    }
+    goBack() {
+        this.aList.push('child');
+         console.log("goBack before",  this.showForm);
+        this.showForm = false;
+         console.log("goBack after",  this.showForm);
     }
     onSubmit(patient) { 
         this.addPatient (patient);

@@ -1,8 +1,9 @@
 <div layout="column" class="md-inline-form">
-    <md-toolbar layout="row"  class="green" layout-align-gt-md="end end">
-        <button md-button aria-label="Go Back">
+    <md-toolbar layout="row"  class="green">
+        <button md-button aria-label="Go Back" (click)="goBack()" >
             Go Back
         </button>
+        <button (click)="updateList()">update list</button>
         <h2>
           <span>Add Patient</span>
         </h2>

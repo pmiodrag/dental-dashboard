@@ -21,15 +21,17 @@ import { Patient } from '../../services/patientService';
 
 
 export class PatientsComponent {
-
+    sharedList = ['one','two'];
   selectedPatient: Patient;
   @Input() patients: Patient[];
   showPatientForm: boolean;
    
    ngOnInit() {
+       console.log("this.showPatientForm before", this.showPatientForm);
        this.showPatientForm = false;
    }
    openPatientForm () {
       this.showPatientForm = true;
   }
+  
 }
