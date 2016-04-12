@@ -1,4 +1,4 @@
-import { Component, Input } from 'angular2/core';
+import { Component, Input, Output, EventEmitter } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 import { RouterLink } from 'angular2/router';
 import { Observable } from 'rxjs/Observable';
@@ -12,28 +12,33 @@ import {MATERIAL_DIRECTIVES, MATERIAL_PROVIDERS} from "ng2-material/all";
 import { PatientFormComponent } from './patient-form'
 import { PatientList } from './patient-list'
 import { PatientHeaderComponent } from './patient-header'
-import { Patient } from '../../services/patientService';
+import { Patient, PatientService} from '../../services/patientService';
+import { NotificationService  } from '../../services/notificationService';
 @Component({ 
   selector: 'patients', 
   templateUrl: 'app/components/patients/patients.html',
-   host: {'[hidden]': 'hidden'},
+  host: {'[hidden]': 'hidden'},
   directives: [CORE_DIRECTIVES, RouterLink, FilterTextboxComponent, SortByDirective, PatientList, PatientHeaderComponent, PatientFormComponent, MATERIAL_DIRECTIVES],
   pipes: [CapitalizePipe, TrimPipe]
 })
 
 
 export class PatientsComponent {
-  selectedPatient: Patient;
-  @Input() patients: Patient[];
-  showPatientForm: boolean;
-   
-   ngOnInit() {
-       console.log("this.showPatientForm before", this.showPatientForm);
-       this.showPatientForm = false;
-   }
-   openPatientForm () {
-      this.showPatientForm = true;
-  }
-  
+    selectedPatient: Patient;
+    subscription: any;
+    @Input() patients: Patient[];
+   // @Output() openForm = new EventEmitter<string>();
+   // formAction : string;
+    constructor( private notificationService: NotificationService ) { }
+    ngOnInit() {
+        this.subscription = this.notificationService.getFormActionChangeEmitter()
+          .subscribe(formAction => this.onFormActionChange(formAction));
+    }
+    onFormActionChange(item: string) {
+        console.log("selectedNavItem patient component item = ", item);
+    }
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
 }
 

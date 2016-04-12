@@ -3,6 +3,7 @@ import { CORE_DIRECTIVES } from 'angular2/common';
 import { RouterLink } from 'angular2/router';
 import { Observable } from 'rxjs/Observable';
 import { Patient, PatientService } from '../../services/patientService';
+import { NotificationService  } from '../../services/notificationService';
 import { Sorter } from '../../shared/sorter';
 import { FilterTextboxComponent } from './filterTextbox.component';
 import { SortByDirective } from '../../shared/directives/sortby.directive';
@@ -15,7 +16,7 @@ import { PatientFormComponent } from './patient-form'
   providers: [PatientService],
   templateUrl: 'app/components/patients/patient-list.html',
   host: {'[hidden]': 'hidden'},
-  directives: [CORE_DIRECTIVES, RouterLink, FilterTextboxComponent, SortByDirective, PatientFormComponent, MATERIAL_DIRECTIVES],
+  directives: [CORE_DIRECTIVES, RouterLink, FilterTextboxComponent, SortByDirective, MATERIAL_DIRECTIVES],
   pipes: [CapitalizePipe, TrimPipe]
 })
 
@@ -28,21 +29,21 @@ export class PatientList {
   filteredPatients: Patient[] = [];
   sorter: Sorter;
   patient : Patient;
-  selectedPatient: Patient;
   @Input() hidden:boolean = false;
   @Input() patients: Patient[];
   @Input() selected: Patient;
   @Input() patientheader: any;
   @Input() patientform: any;
+ // @Input() action: string;
   @Output() selectedChange: EventEmitter<Patient> = new EventEmitter();
   
-  constructor(private patientService: PatientService) { }
+  
+  constructor(private patientService: PatientService, private notificationService: NotificationService) { }
   
   ngOnInit() {
     this.title = 'Patients';
     this.filterText = 'Filter Patients:';
     this.listDisplayModeEnabled = false;
-    console.log("patientform.hidden", this.patientform.hidden);
     
     this.patientService.getPatients()  
         .subscribe((patients:any[]) => {
@@ -62,6 +63,11 @@ export class PatientList {
       this.hidden = true;
       this.patientheader.hidden = true;
       this.patientform.hidden = false;
+      this.formAction("edit");
+  }
+  formAction(action: string) {
+    console.log('formAction ' + action);
+    this.notificationService.emitFormActionChangeEvent(action);
   }
   changeDisplayMode(mode: string) {
       this.listDisplayModeEnabled = (mode === 'List');

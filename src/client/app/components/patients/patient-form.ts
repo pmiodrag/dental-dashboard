@@ -1,7 +1,8 @@
-import { Component, Input } from 'angular2/core';
+import { Component, Input, EventEmitter } from 'angular2/core';
 import { FORM_DIRECTIVES, Validators, FormBuilder, ControlGroup, CORE_DIRECTIVES } from 'angular2/common';
 import { RouterLink } from 'angular2/router';
 import { Patient, PatientService } from '../../services/patientService';
+import { NotificationService  } from '../../services/notificationService';
 import {ControlMessages} from '../handlers/control-messages';
 import {ValidationService} from '../../shared/services/validation.service';
 import {MdPatternValidator,
@@ -20,11 +21,12 @@ import {MdPatternValidator,
 
 export class PatientFormComponent {
     patientForm: ControlGroup;
-    formTitle: string;
     @Input() patient: Patient;
     @Input() hidden:boolean = true;
     @Input () patientheader: any;
     @Input () patientlist: any;
+    formTitle: string;
+    subscription: any;
     submitted = false;
     data: any = {
         group1: 'Banana',
@@ -42,8 +44,8 @@ export class PatientFormComponent {
         value: 'F',
          color:'md-warn'
     }];
-  constructor(fb: FormBuilder, private patientService: PatientService) {
-     
+  constructor(fb: FormBuilder, private patientService: PatientService, private notificationService: NotificationService ) {
+    
     this.patientForm = fb.group({
       'firstname': ['',  Validators.compose([
         Validators.required,
@@ -59,22 +61,36 @@ export class PatientFormComponent {
   }
   
    
-  ngOnInit() {
-      if (this.patient == null) {
+    ngOnInit() {
+        console.log("ngOnInit patient", this.patient);
+         this.patient = new Patient(0, '', '', '', 'M', '', '1980-04-14', '', '', '', '');
+        this.subscription = this.notificationService.getFormActionChangeEmitter()
+          .subscribe(formAction => this.onFormActionChange(formAction));
+           console.log("ngOnInit patient", this.patient);
+    }
+    onFormActionChange(formAction: string) {
+         console.log("onFormActionChange patient", this.patient);
+        if (formAction == 'add') {
           this.patient = new Patient(0, '', '', '', 'M', '', '1980-04-14', '', '', '', '');
           this.formTitle = "Add Patient";
       } else {
           this.formTitle = "Edit Patient";
       }
+        console.log("selectedNavItem patient component item = ", formAction);
+    }
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
   
-  }
-   
-    addPatient (patient) {   
-        console.log("Add patient", patient);
+    addPatient (patient) {  
+       
         this.patientService.addPatient(patient).subscribe((res:any) => {         
            console.log("make service call for rest post pacient  "+res);         
         });
     }
+    
+    
+  
     goBack() {     
         this.hidden = true;
         this.patientheader.hidden = false;

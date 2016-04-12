@@ -1,4 +1,4 @@
-import { Injectable } from 'angular2/core';
+import { Injectable, EventEmitter } from 'angular2/core';
 import { Http, Response, Headers, RequestOptions } from 'angular2/http';
 //Grab everything with import 'rxjs/Rx';
 import {Observable} from 'rxjs/Observable';
@@ -33,7 +33,20 @@ export class Patient implements IPatient {
 @Injectable()
 export class PatientService {
     baseUrl: string = '/';
-    constructor(private http: Http) { }
+    formAction$: EventEmitter<string>  = new EventEmitter();
+   
+    constructor(private http: Http) { 
+//        this.formAction$ = new EventEmitter();
+    }
+   
+    getFormActionEmitter() {
+        return this.formAction$;
+    }
+    action(agreed: string): void {
+        console.log("action in service", agreed);
+        this.formAction$.emit(agreed);
+        this.formAction$.next(agreed);
+    }
     
     getPacient(id: number) {
         return this.http.get(this.baseUrl + 'patient/' + id)
