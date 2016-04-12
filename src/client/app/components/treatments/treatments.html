@@ -1,32 +1,6 @@
-<md-toolbar>
-  <div class="md-toolbar-tools" *ngIf="!selection">
-    <span>Treatments</span>
-  </div>
-  <div class="md-toolbar-tools selection" *ngIf="selection">
-    <span>{{count}} item{{count > 1 ? 's' : ''}} selected</span>
-    <span flex hide show-gt-md></span>
-    <span class="md-caption" hide show-gt-md>{{selection}}</span>
-  </div>
-</md-toolbar>
-<md-data-table layout-fill [selectable]="true" (onSelectableChange)="change($event)">
-  <thead>
-  <tr>
-    <th class="md-text-cell">Patient ID</th>
-    <th>Therapy</th>
-    <th>Diagnose</th>
-    <th>Price</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="#treatment of filteredTreatments" [selectableValue]="treatment.id">
-    <td class="md-text-cell">{{treatment.patientId }}</td>      
-        <td>{{treatment.therapy}}</td>
-        <td>{{treatment.diagnose}}</td>   
-        <td>{{treatment.price}}</td>  
-  </tr>
-  </tbody>
-</md-data-table><!--
 
--->
-<a href="#" [routerLink]="['Patients']" router-params="">View all Pacients</a>
-<!--<data-table-selectable-usage></data-table-selectable-usage>-->
+<div class="customers view indent">
+    <!--<treatment-header #treatmentheader [treatmentform]="treatmentform" [treatmentlist]="treatmentlist"></treatment-header>-->
+    <treatment-list #treatmentlist [treatmentform]="treatmentform" [treatmentheader] = "treatmentheader" [treatments]="treatments" [(selected)]="selectedTreatment" ></treatment-list>
+    <!--<treatment-form  #treatmentform [treatmentlist]="treatmentlist" [treatmentheader] = "treatmentheader" [treatment]="selectedTreatment"></treatment-form>-->
+</div>

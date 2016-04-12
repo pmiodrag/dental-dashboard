@@ -1,73 +1,39 @@
-import { Component } from 'angular2/core';
+import { Component, Input } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
-import { RouterLink, RouteParams } from 'angular2/router';
-import { TreatmentService } from '../../services/treatmentService';
-import { PatientService } from '../../services/patientService';
+import { RouterLink } from 'angular2/router';
+import { Observable } from 'rxjs/Observable';
 import { Sorter } from '../../shared/sorter';
+import { FilterTextboxComponent } from './filterTextbox.component';
 import { SortByDirective } from '../../shared/directives/sortby.directive';
-import {MATERIAL_DIRECTIVES, ITableSelectionChange} from "ng2-material/all";
-//import {DataTableSelectableUsage} from "./selectable_usage"
+import { CapitalizePipe } from '../../shared/pipes/capitalize.pipe';
+import { TrimPipe } from '../../shared/pipes/trim.pipe';
+import {MATERIAL_DIRECTIVES, MATERIAL_PROVIDERS} from "ng2-material/all";
+import { TreatmentFormComponent } from './treatment-form'
+import { TreatmentList } from './treatment-list'
+import { TreatmentHeaderComponent } from './treatment-header'
+import { Treatment, TreatmentService } from '../../services/treatmentService';
 @Component({ 
-  selector: 'treatments',
-  providers: [TreatmentService, PatientService],
+  selector: 'treatments', 
   templateUrl: 'app/components/treatments/treatments.html',
-  styleUrls : ['styles/selectable_usage.css'],
-  directives: [CORE_DIRECTIVES, RouterLink, MATERIAL_DIRECTIVES ]
+   host: {'[hidden]': 'hidden'},
+   providers: [TreatmentService],
+  directives: [CORE_DIRECTIVES, RouterLink, FilterTextboxComponent, SortByDirective, TreatmentList, MATERIAL_DIRECTIVES],
+  pipes: [CapitalizePipe, TrimPipe]
 })
+
+
 export class TreatmentsComponent {
-	
-    title: string = 'Treatments';
-    treatments : Treatment[] = [];
-    filteredTreatments: Treatment[] = [];
-    selection: string ;
-    count: number;
-    
-    constructor(private treatmentService: TreatmentService, private patientService: PatientService, private _routeParams: RouteParams) {}   
-    
-    ngOnInit() {
-        console.log("ngOnInit");
-       let patientId = parseInt(this._routeParams.get('id'), 10);
-       let firstname = this._routeParams.get('firstname');
-       let lastname = this._routeParams.get('lastname');
-       this.patientService.getPatientTreatments(patientId,  firstname, lastname).subscribe((treatments: any[]) => {
-          
-        this.filteredTreatments = treatments.filter(treatment => treatment.patientId === patientId);
-      });
-    }
-    
-   change(data: ITableSelectionChange) {
-    let treatments = [];
-    console.log("data", data);
-    this.filteredTreatments.forEach((treatment: Treatment) => {
-        console.log("treatment", treatment);
-      if (data.values.indexOf(treatment.id) !== -1) {
-        treatments.push(treatment.id);
-      }
-    });
-    this.selection = treatments.join(', ');
-    this.count = treatments.length;
-  }
-  
-  getTreatments(){
-    this.treatmentService.getTreatments()  
-        .subscribe((treatments:any[]) => {
-          this.treatments = this.filteredTreatments = treatments;
-        });
+  selectedTreatment: Treatment;
+  @Input() treatments: Treatment[];
+  showTreatmentForm: boolean;
+   
+   ngOnInit() {
+       console.log("this.showTreatmentForm before", this.showTreatmentForm);
+       this.showTreatmentForm = false;
+   }
+   openTreatmentForm () {
+      this.showTreatmentForm = true;
   }
   
 }
 
-export interface ITreatment {
-    id: number; 
-    patientId : number; 
-    date: string;
-    therapy: string;
-    diagnose: string;
-    price: string;
-}
-
-export class Treatment implements ITreatment {
-    constructor (public id: number, public patientId : number, public date: string, public therapy: string, 
-        public diagnose: string, public price: string) {
-    }
-}

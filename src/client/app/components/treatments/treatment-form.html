@@ -1,0 +1,46 @@
+<div layout="column" class="md-inline-form">
+    <md-toolbar layout="row"  class="green">
+        <button md-button aria-label="Go Back" (click)="goBack()" >
+            Go Back
+        </button>
+        <h2>
+          <span>{{formTitle}}</span>
+        </h2>
+    </md-toolbar>
+    <md-content layout-padding>
+
+        <form [ngFormModel]="treatmentForm">
+            <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Diagnose</label>
+                    <input md-input [(ngModel)]="treatment.diagnose" [value]="treatment.diagnose" ngControl="diagnose" id="diagnose">
+                    <control-messages control="diagnose"></control-messages>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Therapy</label>
+                    <textarea md-input md-maxlength="150" [(ngModel)]="treatment.therapy" [value]="treatment.therapy"  ngControl="therapy" id="therapy">
+                           <control-messages control="therapy"></control-messages>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Price</label>
+                    <input md-input [(ngModel)]="treatment.price" [value]="treatment.price" ngControl="price" id="price">
+                    <control-messages control="price"></control-messages>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Date</label>
+                    <input md-input [(ngModel)]="treatment.date" [value]="treatment.date" ngControl="date" id="date">
+                    <control-messages control="date"></control-messages>
+                </md-input-container>
+            </div>
+            
+            <!-- Submit button -->
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-8">
+                    <button md-raised-button class="md-primary" type="submit" (click)="onSubmit(treatment)" [disabled]="!treatmentForm.valid">ADD TREATMENT</button>
+                </div>
+            </div>
+
+        </form>
+
+</md-content>
+</div>
