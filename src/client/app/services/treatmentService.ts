@@ -5,6 +5,26 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map'; 
 import 'rxjs/add/operator/catch';
 
+export interface ITreatment {
+    id: number; 
+    treatmentid: number;
+    therapy: string;
+    date: string,
+    diagnose: string,
+    price: string;
+   
+}
+
+export class Treatment implements ITreatment {
+//    static create(data){
+//        return new Treatment(data);
+//    }
+//    
+    constructor (public id: number, public treatmentid: number, public therapy: string, public date: string,
+                public diagnose: string, public price: string) {
+    }
+}
+
 @Injectable()
 export class TreatmentService {
     baseUrl: string = '/';
@@ -15,6 +35,17 @@ export class TreatmentService {
         return this.http.get(this.baseUrl + '/treatments')
                       .map((res: Response) => res.json())
                       .catch(this.handleError);               
+    }
+    
+    addTreatment (treatment: ITreatment) : Observable<ITreatment>  {
+
+        let body = JSON.stringify( treatment )
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(this.baseUrl + 'treatment', body, options)
+           // .map((res: Response) => res.json())
+                        .catch(this.handleError)
     }
     
     handleError(error: any) {
