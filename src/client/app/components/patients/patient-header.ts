@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
 import { NotificationService  } from '../../services/notificationService';
+import { Patient } from '../../services/patientService';
 import {MATERIAL_DIRECTIVES} from "ng2-material/all";
 @Component({
   selector: 'patient-header',
@@ -12,6 +13,7 @@ export class PatientHeaderComponent {
     @Input() hidden:boolean = false;
     @Input () patientform: any;
     @Input () patientlist: any;  
+    patient: Patient;
     
     constructor( private notificationService: NotificationService) {}
 
@@ -19,10 +21,11 @@ export class PatientHeaderComponent {
         this.hidden = true;
         this.patientlist.hidden = true;
         this.patientform.hidden = false;
-        this.formAction('add');
+        this.patient = new Patient(0, '', '', '', 'M', '', '1980-04-14', '', '', '', '');
+        this.formAction(this.patient);
     }
-    formAction(action: string) {
-        console.log('formAction ' + action);
-        this.notificationService.emitFormActionChangeEvent(action);
+    formAction(patient: Patient) {
+        console.log('PatientHeaderComponent formAction patient', patient);
+        this.notificationService.emitFormActionChangeEvent(patient);
     }
 }

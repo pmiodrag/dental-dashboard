@@ -63,11 +63,11 @@ export class PatientList {
       this.hidden = true;
       this.patientheader.hidden = true;
       this.patientform.hidden = false;
-      this.formAction("edit");
+      this.formAction(patient);
   }
-  formAction(action: string) {
-    console.log('formAction ' + action);
-    this.notificationService.emitFormActionChangeEvent(action);
+  formAction(patient: Patient) {
+   // console.log('formAction ' + action);
+    this.notificationService.emitFormActionChangeEvent(patient);
   }
   changeDisplayMode(mode: string) {
       this.listDisplayModeEnabled = (mode === 'List');

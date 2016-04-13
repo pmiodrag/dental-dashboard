@@ -30,13 +30,13 @@ export class PatientsComponent {
    // @Output() openForm = new EventEmitter<string>();
    // formAction : string;
     constructor( private notificationService: NotificationService ) { }
-    ngOnInit() {
-        this.subscription = this.notificationService.getFormActionChangeEmitter()
-          .subscribe(formAction => this.onFormActionChange(formAction));
-    }
-    onFormActionChange(item: string) {
-        console.log("selectedNavItem patient component item = ", item);
-    }
+//    ngOnInit() {
+//        this.subscription = this.notificationService.getFormActionChangeEmitter()
+//          .subscribe(formAction => this.onFormActionChange(formAction));
+//    }
+//    onFormActionChange(item: string) {
+//        console.log("selectedNavItem patient component item = ", item, "selectedPatient", this.selectedPatient);
+//    }
     ngOnDestroy() {
         this.subscription.unsubscribe();
     }

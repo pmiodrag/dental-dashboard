@@ -10,7 +10,6 @@ import { TrimPipe } from '../../shared/pipes/trim.pipe';
 import {MATERIAL_DIRECTIVES, MATERIAL_PROVIDERS} from "ng2-material/all";
 import { TreatmentFormComponent } from './treatment-form'
 import { TreatmentList } from './treatment-list'
-import { TreatmentHeaderComponent } from './treatment-header'
 import { Treatment, TreatmentService } from '../../services/treatmentService';
 @Component({ 
   selector: 'treatments', 

@@ -1,11 +1,11 @@
 import { EventEmitter} from 'angular2/core';
 
 export class NotificationService {
-  formActionChange$: EventEmitter<number> = new EventEmitter();
+  formActionChange$: EventEmitter<any> = new EventEmitter();
   constructor() {}
-  emitFormActionChangeEvent(action) {
-     console.log("FormActionChange", action);
-     this.formActionChange$.emit(action);
+  emitFormActionChangeEvent(patient) {
+     console.log("emitFormActionChangeEvent", patient);
+     this.formActionChange$.emit(patient);
   }
   getFormActionChangeEmitter() {
     return this.formActionChange$;

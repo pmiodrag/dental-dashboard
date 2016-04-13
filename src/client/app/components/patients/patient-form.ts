@@ -62,21 +62,18 @@ export class PatientFormComponent {
   
    
     ngOnInit() {
-        console.log("ngOnInit patient", this.patient);
-         this.patient = new Patient(0, '', '', '', 'M', '', '1980-04-14', '', '', '', '');
+        this.patient = new Patient(0, '', '', '', 'M', '', '1980-04-14', '', '', '', '');
         this.subscription = this.notificationService.getFormActionChangeEmitter()
-          .subscribe(formAction => this.onFormActionChange(formAction));
-           console.log("ngOnInit patient", this.patient);
+          .subscribe(patient => this.onFormActionChange(patient));           
     }
-    onFormActionChange(formAction: string) {
-         console.log("onFormActionChange patient", this.patient);
-        if (formAction == 'add') {
-          this.patient = new Patient(0, '', '', '', 'M', '', '1980-04-14', '', '', '', '');
+    onFormActionChange(patient: Patient) {
+        console.log("onFormActionChange patient", patient);
+        this.patient = patient;
+        if (patient.id == 0) {          
           this.formTitle = "Add Patient";
-      } else {
-          this.formTitle = "Edit Patient";
-      }
-        console.log("selectedNavItem patient component item = ", formAction);
+        } else {
+            this.formTitle = "Edit Patient";
+        }
     }
     ngOnDestroy() {
         this.subscription.unsubscribe();
