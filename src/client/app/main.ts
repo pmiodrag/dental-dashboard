@@ -8,14 +8,15 @@ import {ELEMENT_PROBE_PROVIDERS} from 'angular2/platform/common_dom';
 import {AuthHttp, AuthConfig} from 'angular2-jwt/angular2-jwt';
 import { AppComponent } from './app';
 import {MATERIAL_PROVIDERS} from "ng2-material/all";
-
+import { NotificationService  } from './services/notificationService';
 bootstrap(AppComponent, [
     ROUTER_PROVIDERS,
     ROUTER_BINDINGS,
     FORM_PROVIDERS,
     HTTP_PROVIDERS,
     ELEMENT_PROBE_PROVIDERS,
-//    MATERIAL_PROVIDERS,
+    MATERIAL_PROVIDERS,
+    NotificationService,
     provide(AuthHttp, {
       useFactory: (http) => {
         return new AuthHttp(new AuthConfig(), http);

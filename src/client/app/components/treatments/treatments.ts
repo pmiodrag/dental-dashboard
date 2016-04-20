@@ -1,28 +1,27 @@
 import { Component } from 'angular2/core';
 import { CORE_DIRECTIVES } from 'angular2/common';
-import { RouterLink, RouteParams } from 'angular2/router';
-import { DataService } from '../../shared/services/data.service';
-import {Tables} from '../tables/tables';
+//import { RouterLink, RouteParams } from 'angular2/router';
+//import { TreatmentService, Treatment } from '../../services/treatmentService';
+//import { PatientService } from '../../services/patientService';
+//import { Sorter } from '../../shared/sorter';
+//import { SortByDirective } from '../../shared/directives/sortby.directive';
+import {MATERIAL_DIRECTIVES} from "ng2-material/all";
+import {TreatmentListComponent} from "./treatment-list"
+import {TreatmentFormComponent} from "./treatment-form"
 @Component({ 
   selector: 'treatments',
-  providers: [DataService],
   templateUrl: 'app/components/treatments/treatments.html',
-  directives: [CORE_DIRECTIVES, RouterLink, Tables]
+  styleUrls : ['styles/selectable_usage.css'],
+  directives: [CORE_DIRECTIVES, MATERIAL_DIRECTIVES, TreatmentListComponent, TreatmentFormComponent]
 })
 export class TreatmentsComponent {
 	
-    title: string = 'Pacients';
-    filteredTreatments: any[] = [];
-  
-    constructor(private dataService: DataService, private _routeParams: RouteParams) {
-      
-    }
+   
+    
+    constructor() {}   
     
     ngOnInit() {
-      let patientId = parseInt(this._routeParams.get('id'), 10);
-      this.dataService.getTreatments().subscribe((treatments: any[]) => {
-          
-        this.filteredTreatments = treatments.filter(treatment => treatment.patientId === patientId);
-      });
+        console.log("ngOnInit TreatmentsComponent");
+     
     }
 }
