@@ -1,0 +1,74 @@
+<div layout="column" class="md-inline-form">
+    <md-toolbar layout="row"  class="green">
+        <button md-button aria-label="Go Back" (click)="goBack()" >
+            Go Back
+        </button>
+        <h2>
+          <span>{{formTitle}}</span>
+        </h2>
+    </md-toolbar>
+    <md-content layout-padding>
+
+        <form [ngFormModel]="patientForm">
+            <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>First name</label>
+                    <input md-input [(ngModel)]="patient.firstname" [value]="patient.firstname" ngControl="firstname" id="firstname">
+                    <control-messages control="firstname"></control-messages>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Middle name</label>
+                    <input md-input [(ngModel)]="patient.middlename" [value]="patient.middlename">
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Last Name</label>
+                    <input md-input [(ngModel)]="patient.lastname" [value]="patient.lastname" ngControl="lastname" id="lastname">
+                    <control-messages control="lastname"></control-messages>
+                </md-input-container>
+            </div>
+            <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label for="email">Email</label>
+                    <input md-input class="form-control" [(ngModel)]="patient.email" [value]="patient.email" type="email" required  ngControl="email" id="email">
+                    <control-messages control="email"></control-messages>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Place</label>
+                    <input md-input [(ngModel)]="patient.place" [value]="patient.place">
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Address</label>
+                    <input md-input [(ngModel)]="patient.address" [value]="patient.address">
+                </md-input-container>
+                <!--            <datepicker [(ngModel)]="patient.birthdate" md-placeholder="Enter date"></datepicker>-->
+            </div>
+            <div layout-gt-sm="row">
+                <md-radio-group layout="row" [(model)]="patient.gender">
+                    <md-radio-button *ngFor="#it of avatarData"
+                        [value]="it.value"
+                        [ngClass]="it.color"
+                        [aria-label]="it.title"
+                        [checked]="it.value === patient.gender">
+                        <img [src]="it.id" class="card-image">
+                    </md-radio-button>
+                </md-radio-group>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Phone Number</label>
+                    <input md-input [(ngModel)]="patient.phone" [value]="patient.phone"/>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Mobile Phone Number</label>
+                    <input md-input [(ngModel)]="patient.mobilephone" [value]="patient.mobilephone" />
+                </md-input-container>
+            </div>
+            <!-- Submit button -->
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-8">
+                    <button md-raised-button class="md-primary" type="submit" (click)="onSubmit(patient)" [disabled]="!patientForm.valid">ADD USER</button>
+                </div>
+            </div>
+
+        </form>
+
+</md-content>
+</div>

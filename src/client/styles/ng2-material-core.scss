@@ -1,0 +1,21 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 30-Mar-2016, 13:07:40
+    Author     : miodrag
+*/
+
+@import 'libs/styles/ng2-material/core/style/variables';
+@import 'libs/styles/ng2-material/core/style/mixins';
+@import 'libs/styles/ng2-material/core/style/default-theme';
+md-toolbar[md-hero] {
+  margin-bottom: 40px;
+}
+.secret-project {
+  width: 256px;
+  height: 256px;
+  fill: white;
+}

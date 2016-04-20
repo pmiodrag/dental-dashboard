@@ -36,6 +36,7 @@ var jsNPMDependencies = [
     'angular2-jwt/angular2-jwt.js',
      'angular2-jwt/angular2-jwt.js.map',
     'angular2/bundles/angular2.min.js',
+    "ng2-datepicker/ng2-datepicker.js",
             'ng2-material/all.js',
              'ng2-material/all.js.map'
 ] 
@@ -43,15 +44,21 @@ var jsNPMDependencies = [
 gulp.task('build:styles', function() {
     var copyNgStyles= gulp.src('node_modules/ng2-material/dist/*.css')
      .pipe(minifyCSS())
-        .pipe(gulp.dest('dist/styles'));
+      .pipe(gulp.dest('dist/styles/ng2-material'));
+     var copyNgCoreStyles= gulp.src('node_modules/ng2-material/source/core/style/*.scss')     
+        .pipe(gulp.dest('dist/styles/ng2-material/source/core/style'));
+    var copyNgFont= gulp.src('node_modules/ng2-material/font/**')     
+        .pipe(gulp.dest('dist/styles/ng2-material/font'));
     var copyFontAwesome= gulp.src('src/client/styles/font-awesome/**')     
      .pipe(gulp.dest('dist/styles/font-awesome'));
 //    var copyMaterialize= gulp.src('src/client/styles/materialize/**')     
 //     .pipe(gulp.dest('dist/styles/materialize'));
+ var copySCSS= gulp.src('src/client/styles/*.scss')
+  .pipe(gulp.dest('dist/styles'))
     var copyStyles= gulp.src('src/client/styles/*.css')
      .pipe(minifyCSS())
             .pipe(gulp.dest('dist/styles'))
-        return[copyStyles, copyFontAwesome, copyNgStyles];
+        return[copyStyles,copySCSS, copyNgCoreStyles, copyFontAwesome, copyNgStyles];
         //.pipe(less())
        // .on('error', console.log)
         
@@ -59,8 +66,13 @@ gulp.task('build:styles', function() {
 });
 
 gulp.task("buld:resources", function() {
-    return gulp.src(["src/client/app/**", "!**/*.ts"])
+      var copyMaterialComponentLib = gulp.src(["node_modules/ng2-material/components/**", "!**/*.ts"])
+        .pipe(gulp.dest("dist/libs/ng2-material/components"));
+     var copyMaterialCoreLib = gulp.src(["node_modules/ng2-material/core/**", "!**/*.ts"])
+        .pipe(gulp.dest("dist/libs/ng2-material/core"));
+    var copyApp = gulp.src(["src/client/app/**", "!**/*.ts"])
         .pipe(gulp.dest("dist/app"))
+ return[copyMaterialComponentLib, copyMaterialCoreLib, copyApp];
 });
 
 gulp.task('buld:assets', function() {

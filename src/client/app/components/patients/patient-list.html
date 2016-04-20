@@ -1,18 +1,4 @@
-
-<div class="customers view indent">
-    <md-content layout="column" class="scroll-shrink">
-       <md-toolbar class="md-hue-3">
-            <div class="md-toolbar-tools green"> 
-                <h2>
-                    <img src="assets/images/people.png" alt="logo">
-                    <span>{{ title }}</span>
-                </h2>
-                 <button md-fab class="md-mini blue-lighten-3" (click)="addPacient()"   aria-label="Add pacient">
-                   <i class="fa fa-user-plus"></i>
-                </button>
-            </div>       
-       </md-toolbar>
-       <div flex>
+<div flex>
         <div class="row voffset4">
             <div class="col-md-10">
                 <div class="navbar">
@@ -35,34 +21,33 @@
         </div>
         <div class="row">
             <div class="row card-container" [hidden]="listDisplayModeEnabled">
-                <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="#pacient of filteredPacients">
+                <div class="col-sm-6 col-md-4 col-lg-4" *ngFor="#patient of filteredPatients">
                     <div class="card">
                         <!--<button class="btn close card-close" title="Delete Customer" (click)="deleteCustomer(customer.id)">&times;</button>-->
                         <div class="card-header green">
-                            <a [routerLink]="['Treatments',{id:pacient.id}]" class="white">{{pacient.firstName | capitalize }}{{pacient.middleName | capitalize }} {{ pacient.lastName | capitalize }}</a>
-                              <button md-fab class="md-mini orange" (click)="editPacient()"  aria-label="Edit pacient">
+                            <a [routerLink]="['Treatments',{id:patient.id, firstname: patient.firstname, lastname: patient.lastname}]" class="white">{{patient.firstname | capitalize }}{{patient.middlename | capitalize }} {{ patient.lastname | capitalize }}</a>
+                              <button md-fab class="md-mini orange" (click)="editPatient(patient);"  aria-label="Edit patient">
                                      <i class="fa fa-pencil-square-o"></i>
                                 </button>
-                                <button md-fab class="md-mini red" (click)="deletePacient(pacient.id)"  aria-label="Remove pacient">
+                                <button md-fab class="md-mini red" (click)="deletePatient(patient.id)"  aria-label="Remove patient">
                                     <i class="fa fa-recycle"></i>
-                                </button>
-                            
+                                </button>                            
                         </div>
                         <div class="card-body">
                             <div class="clearfix">
                                 <div class="pull-left card-body-left">
-                                    <a href="#" class="white">
-                                        <img src="assets/images/{{pacient.gender | lowercase}}.png" class="card-image" />
+                                    <a href="#" class="card-image">
+                                        <img src="assets/images/{{patient.gender | lowercase}}.png" class="card-image" />
                                     </a>
                                 </div>
                                 <div class="pull-left card-body-right">
-                                    <div class="card-body-content">{{pacient.place | trim }}</div>
+                                    <div class="card-body-content">{{patient.place | trim }}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div [hidden]="filteredPacients.length">
+                <div [hidden]="filteredPatients.length">
                     No Records Found
                 </div>
             </div>
@@ -73,8 +58,8 @@
                             <thead>
                                 <tr>
                                     <th>&nbsp;</th>
-                                    <th sort-by="firstName" (sorted)="sort($event)">First Name</th>
-                                    <th sort-by="lastName" (sorted)="sort($event)">Last Name</th>
+                                    <th sort-by="firstname" (sorted)="sort($event)">First Name</th>
+                                    <th sort-by="lastname" (sorted)="sort($event)">Last Name</th>
                                     <th sort-by="address" (sorted)="sort($event)">Address</th>
                                     <th sort-by="city" (sorted)="sort($event)">City</th>
                                     <th sort-by="country.name" (sorted)="sort($event)">Country</th>
@@ -83,17 +68,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="#pacient of filteredPacients">
-                                    <td><img src="assets/images/{{ pacient.gender | lowercase }}.png" 
-                                             class="card-image" alt="Pacient Image" /></td>
-                                    <td><a [routerLink]="['Treatments',{id:pacient.id}]">{{ pacient.firstName | capitalize }}</a></td>
-                                    <td>{{ pacient.middleName | capitalize }}</td>
-                                     <td>{{ pacient.lastName | capitalize }}</td>
-                                    <td>{{ pacient.address }}</td>
-                                    <td>{{ pacient.place | trim }}</td>
+                                <tr *ngFor="#patient of filteredPatients">
+                                    <td><img src="assets/images/{{ patient.gender | lowercase }}.png" 
+                                             class="card-image" alt="Patient Image" /></td>
+                                    <td><a [routerLink]="['Treatments',{id:patient.id, firstname: patient.firstname, lastname: patient.lastname}]">{{ patient.firstname | capitalize }}</a></td>
+                                    <td>{{ patient.middleName | capitalize }}</td>
+                                     <td>{{ patient.lastName | capitalize }}</td>
+                                    <td>{{ patient.address }}</td>
+                                    <td>{{ patient.place | trim }}</td>
 <!--                                    <td>{{ customer.orderTotal | currency:'USD':true }}</td>-->
                                 </tr>
-                                <tr [hidden]="filteredPacients.length">
+                                <tr [hidden]="filteredPatients.length">
                                     <td>&nbsp;</td>
                                     <td colspan="6">No Records Found</td>
                                 </tr>
@@ -104,5 +89,3 @@
             </div>
         </div>
          </div>
-    </md-content>
-</div>

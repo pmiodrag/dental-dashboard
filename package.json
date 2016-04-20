@@ -13,11 +13,11 @@
   },
   "license": "ISC",
   "dependencies": {
-    "angular2": "2.0.0-beta.12",
+    "angular2": "2.0.0-beta.14",
     "angular2-jwt": "0.1.9",
     "css": "2.2.1",   
     "express": "^4.13.3",
-    "ng2-material": "^0.2.12",
+    "ng2-material": "^0.3.6",
     "parse5": "^1.5.0",
     "preboot": "~1.1.0",
     "systemjs": "^0.19.24",

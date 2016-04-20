@@ -1,0 +1,7 @@
+
+<div class="customers view indent">
+    <patient-header #patientheader [patientform]="patientform" [patientlist]="patientlist"></patient-header>
+    <patient-list #patientlist [patientform]="patientform" [patientheader] = "patientheader" [patients]="patients" [(selected)]="selectedPatient" ></patient-list>
+    <patient-form  #patientform [patientlist]="patientlist" [patientheader] = "patientheader" [patient]="selectedPatient" ></patient-form>
+</div>
+

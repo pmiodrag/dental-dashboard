@@ -2,7 +2,7 @@
 import express = require('express');
 import path = require('path');
 import bodyParser = require('body-parser');
-import * as pacients from "./api/pacient/controller";
+import * as patients from "./api/patient/controller";
 import * as treatments from "./api/treatment/controller";
 var port: number = process.env.PORT || 3000;
 var app = express();
@@ -25,10 +25,14 @@ var server = app.listen(port, function() {
     console.log('This express app is listening on port:' + port);
 });
 
-app.get('/getPacients', pacients.getPacients);
-app.post('/addPacient', pacients.addPacient);
-app.get('/getPacientData', pacients.getPacientData);
-app.get('/selectTreatments', treatments.selectTreatments);
+app.get('/patient', patients.index);
+app.post('/patient', patients.create);
+app.put('/patient/:id', patients.update);
+app.get('/patient/:id', patients.show);
+app.delete('/patient/:id', patients.destroy);
+app.get('/patient/:id/:firstname/:lastname/treatments', treatments.index);
+app.get('/treatments', treatments.list);
+
 
 
 var renderIndex = (req: express.Request, res: express.Response) => {
