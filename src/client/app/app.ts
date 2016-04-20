@@ -5,7 +5,6 @@ import { PatientsComponent } from './components/patients/patients';
 import { TreatmentsComponent } from './components/treatments/treatments';
 import { AuthComponent } from './components/auth/auth.component';
 import {Dashboard} from './components/dashboard/dashboard';
-import {Tables} from './components/tables/tables';
 import {MATERIAL_DIRECTIVES} from "ng2-material/all";
 @Component({ 
     selector: 'app-container',
@@ -16,8 +15,7 @@ import {MATERIAL_DIRECTIVES} from "ng2-material/all";
  { path: '/patients', name: 'Patients', component: PatientsComponent },
  { path: '/patient/:id/:firstname/:lastname/treatments', name: 'Treatments', component: TreatmentsComponent },
     { path: '/login', name: 'Auth', component: AuthComponent },
-     {path: '/dashboard',  component: Dashboard, name: 'Dashboard', useAsDefault: true },
-//  {path: '/tables', component: Tables, name: 'Tables'},
+     {path: '/dashboard',  component: Dashboard, name: 'Dashboard', useAsDefault: true }
 ])
 export class AppComponent {
   
