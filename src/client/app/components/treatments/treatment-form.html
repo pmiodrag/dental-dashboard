@@ -1,4 +1,4 @@
-<!--<div layout="column" class="md-inline-form">
+<div layout="column" class="md-inline-form">
     <md-toolbar layout="row"  class="green">
         <button md-button aria-label="Go Back" (click)="goBack()" >
             Go Back
@@ -8,71 +8,37 @@
         </h2>
     </md-toolbar>
     <md-content layout-padding>
-
-        <form [ngFormModel]="patientForm">
+        <form [ngFormModel]="treatmentForm">
+<!--            <timepicker [(ngModel)]="treatment.date"  [hourStep]="hstep" [minuteStep]="mstep" [showMeridian]="ismeridian"></timepicker>-->
             <div layout-gt-sm="row">
                 <md-input-container class="md-block" flex-gt-sm>
-                    <label>First name</label>
-                    <input md-input [(ngModel)]="patient.firstname" [value]="patient.firstname" ngControl="firstname" id="firstname">
-                    <control-messages control="firstname"></control-messages>
-                </md-input-container>
-                <md-input-container class="md-block" flex-gt-sm>
-                    <label>Middle name</label>
-                    <input md-input [(ngModel)]="patient.middlename" [value]="patient.middlename">
-                </md-input-container>
-                <md-input-container class="md-block" flex-gt-sm>
-                    <label>Last Name</label>
-                    <input md-input [(ngModel)]="patient.lastname" [value]="patient.lastname" ngControl="lastname" id="lastname">
-                    <control-messages control="lastname"></control-messages>
+                    <label>Treatment theraphy</label>
+                    <textarea md-input [(ngModel)]="treatment.therapy" columns="1" md-maxlength="150" rows="5"  ngControl="therapy" id="therapy"></textarea>
+                    <control-messages control="therapy"></control-messages>
                 </md-input-container>
             </div>
             <div layout-gt-sm="row">
                 <md-input-container class="md-block" flex-gt-sm>
-                    <label for="email">Email</label>
-                    <input md-input class="form-control" [(ngModel)]="patient.email" [value]="patient.email" type="email" required  ngControl="email" id="email">
-                    <control-messages control="email"></control-messages>
+                    <label>Treatment diagnose</label>
+                    <input md-input [(ngModel)]="treatment.diagnose" [value]="treatment.diagnose">
+                    <control-messages control="diagnose"></control-messages>
                 </md-input-container>
-                <md-input-container class="md-block" flex-gt-sm>
-                    <label>Place</label>
-                    <input md-input [(ngModel)]="patient.place" [value]="patient.place">
-                </md-input-container>
-                <md-input-container class="md-block" flex-gt-sm>
-                    <label>Address</label>
-                    <input md-input [(ngModel)]="patient.address" [value]="patient.address">
-                </md-input-container>
-                            <datepicker [(ngModel)]="patient.birthdate" md-placeholder="Enter date"></datepicker>
             </div>
             <div layout-gt-sm="row">
-                <md-radio-group layout="row" [(model)]="patient.gender">
-                    <md-radio-button *ngFor="#it of avatarData"
-                        [value]="it.value"
-                        [ngClass]="it.color"
-                        [aria-label]="it.title"
-                        [checked]="it.value === patient.gender">
-                        <img [src]="it.id" class="card-image">
-                    </md-radio-button>
-                </md-radio-group>
                 <md-input-container class="md-block" flex-gt-sm>
-                    <label>Phone Number</label>
-                    <input md-input [(ngModel)]="patient.phone" [value]="patient.phone"/>
-                </md-input-container>
-                <md-input-container class="md-block" flex-gt-sm>
-                    <label>Mobile Phone Number</label>
-                    <input md-input [(ngModel)]="patient.mobilephone" [value]="patient.mobilephone" />
+                    <label>Treatment price</label>
+                    <input md-input [(ngModel)]="treatment.price" [value]="treatment.price" ngControl="price" id="price">
+                    <control-messages control="price"></control-messages>
                 </md-input-container>
             </div>
-             Submit button 
+          
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-8">
-                    <button md-raised-button class="md-primary" type="submit" (click)="onSubmit(patient)" [disabled]="!patientForm.valid">ADD USER</button>
+                    <button md-raised-button class="md-primary" type="submit" (click)="onSubmit(patient)" [disabled]="!treatmentForm.valid">ADD TREATMENT</button>
                 </div>
             </div>
 
         </form>
 
 </md-content>
-</div>-->
-form
-<button md-button aria-label="Go Back" (click)="goBack()" >
-            Go Back
-        </button>
+</div>

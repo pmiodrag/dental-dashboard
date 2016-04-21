@@ -19,6 +19,7 @@ import {MATERIAL_DIRECTIVES, ITableSelectionChange} from "ng2-material/all";
 export class TreatmentListComponent {
 	
     title: string = 'Treatments';
+    treatment: Treatment;
     treatments : Treatment[] = [];
     filteredTreatments: Treatment[] = [];
     selection: string ;
@@ -26,7 +27,7 @@ export class TreatmentListComponent {
     @Input() hidden:boolean = false;
     @Input () treatmentform: any;  
     
-    constructor(private treatmentService: TreatmentService, private patientService: PatientService, private _routeParams: RouteParams) {}   
+    constructor(private notificationService: NotificationService, private treatmentService: TreatmentService, private patientService: PatientService, private _routeParams: RouteParams) {}   
     
     ngOnInit() {
         console.log("ngOnInit");
@@ -62,7 +63,14 @@ export class TreatmentListComponent {
     addTreatment () {
         this.hidden = true;
         this.treatmentform.hidden = false;
+        this.treatment = new Treatment(0, 0, '2016-04-14', '', '', '')
        
+        this.formAction(this.treatment);
+    }
+    
+     formAction(treatment: Treatment) {
+        console.log('TreatmentListComponent formAction treatment', treatment);
+        this.notificationService.emitFormActionChangeEvent(treatment);
     }
   
 }

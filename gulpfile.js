@@ -35,10 +35,10 @@ var jsNPMDependencies = [
     'angular2/bundles/http.dev.js',
     'angular2-jwt/angular2-jwt.js',
      'angular2-jwt/angular2-jwt.js.map',
-    'angular2/bundles/angular2.min.js',
-    "ng2-datepicker/ng2-datepicker.js",
+    'angular2/bundles/angular2.min.js',   
             'ng2-material/all.js',
-             'ng2-material/all.js.map'
+             'ng2-material/all.js.map',
+              'ng2-bootstrap/ng2-bootstrap.js',
 ] 
 
 gulp.task('build:styles', function() {
@@ -66,6 +66,8 @@ gulp.task('build:styles', function() {
 });
 
 gulp.task("buld:resources", function() {
+     var copyNg2BootstrapLib = gulp.src(["node_modules/ng2-bootstrap/bundles/**", "!**/*.ts"])
+        .pipe(gulp.dest("dist/libs/ng2-bootstrap"));
       var copyMaterialComponentLib = gulp.src(["node_modules/ng2-material/components/**", "!**/*.ts"])
         .pipe(gulp.dest("dist/libs/ng2-material/components"));
      var copyMaterialCoreLib = gulp.src(["node_modules/ng2-material/core/**", "!**/*.ts"])
