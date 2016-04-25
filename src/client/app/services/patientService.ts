@@ -58,8 +58,8 @@ export class PatientService {
                        .map((res: Response) => res.json())
                         .catch(this.handleError);
     }
-    getPatientTreatments(patientId:number, firstname: string, lastname: string){        
-        return this.http.get(this.baseUrl + 'patient/'+ patientId + '/'+ firstname + '/'+ lastname +  '/treatments')
+    getPatientTreatments(patientid:number, firstname: string, lastname: string){        
+        return this.http.get(this.baseUrl + 'patient/'+ patientid + '/'+ firstname + '/'+ lastname +  '/treatments')
                     .map((res: Response) => res.json())
                     .catch(this.handleError);    
     }

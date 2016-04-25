@@ -26,14 +26,14 @@ DROP TABLE IF EXISTS `treatment`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `treatment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `patientId` int(11) NOT NULL,
+  `patientid` int(11) NOT NULL,
   `date` datetime NOT NULL,
   `diagnose` varchar(500) NOT NULL,
   `therapy` varchar(500) NOT NULL,
   `price` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `patientId_idx` (`patientId`),
-  CONSTRAINT `patientId` FOREIGN KEY (`patientId`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `patientId` FOREIGN KEY (`patientid`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

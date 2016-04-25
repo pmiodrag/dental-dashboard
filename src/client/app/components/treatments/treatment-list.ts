@@ -31,12 +31,12 @@ export class TreatmentListComponent {
     
     ngOnInit() {
         console.log("ngOnInit");
-       let patientId = parseInt(this._routeParams.get('id'), 10);
+       let patientid = parseInt(this._routeParams.get('id'), 10);
        let firstname = this._routeParams.get('firstname');
        let lastname = this._routeParams.get('lastname');
-       this.patientService.getPatientTreatments(patientId,  firstname, lastname).subscribe((treatments: any[]) => {
+       this.patientService.getPatientTreatments(patientid,  firstname, lastname).subscribe((treatments: any[]) => {
           
-        this.filteredTreatments = treatments.filter(treatment => treatment.patientId === patientId);
+        this.filteredTreatments = treatments.filter(treatment => treatment.patientid === patientid);
       });
     }
     

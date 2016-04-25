@@ -5,14 +5,14 @@ import * as db from "../connection/db";
 
 export function index (req: express.Request, res: express.Response) {
     console.log("Treatments index req.params", req.params);
-    var patientId = req.params.patientId;
+    var patientid = req.params.id;
     var firstname = req.params.firstname;
     var lastname = req.params.lastname;
-    console.log("selectTreatments for patientId = "+patientId);
+    console.log("selectTreatments for patientId = "+patientid);
     db.db_connection.ready(function(){ 
      var treatmentTable = db.db_connection.table("treatment");
      
-     treatmentTable.findAll({patientId:'='+patientId}).then(function(treatments){
+     treatmentTable.findAll({patientId:'='+patientid}).then(function(treatments){
 	console.log("treatments = "+treatments);
         res.send(JSON.stringify(treatments));
      });
