@@ -9,14 +9,14 @@ import 'rxjs/add/operator/catch';
 export interface ITreatment {
     id: number; 
     patientId : number; 
-    date: string;
+    datetime: Date;
     therapy: string;
     diagnose: string;
     price: string;
 }
 
 export class Treatment implements ITreatment {
-    constructor (public id: number, public patientId : number, public date: string, public therapy: string, 
+    constructor (public id: number, public patientId : number, public datetime: Date, public therapy: string, 
         public diagnose: string, public price: string) {
     }
 }
@@ -32,6 +32,18 @@ export class TreatmentService {
         return this.http.get(this.baseUrl + '/treatments')
                       .map((res: Response) => res.json())
                       .catch(this.handleError);               
+    }
+    
+    
+     addPatient (treatment: ITreatment) : Observable<ITreatment>  {
+
+        let body = JSON.stringify( treatment )
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(this.baseUrl + 'treatment', body, options)
+           // .map((res: Response) => res.json())
+                        .catch(this.handleError)
     }
     
     handleError(error: any) {

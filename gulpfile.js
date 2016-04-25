@@ -38,7 +38,8 @@ var jsNPMDependencies = [
     'angular2/bundles/angular2.min.js',   
             'ng2-material/all.js',
              'ng2-material/all.js.map',
-              'ng2-bootstrap/ng2-bootstrap.js',
+              'moment/moment.js',
+//              'ng2-bootstrap/ng2-bootstrap.js',
 ] 
 
 gulp.task('build:styles', function() {
@@ -65,9 +66,10 @@ gulp.task('build:styles', function() {
 //        .pipe(refresh(lrserver));
 });
 
+
 gulp.task("buld:resources", function() {
      var copyNg2BootstrapLib = gulp.src(["node_modules/ng2-bootstrap/bundles/**", "!**/*.ts"])
-        .pipe(gulp.dest("dist/libs/ng2-bootstrap"));
+        .pipe(gulp.dest("dist/libs/ng2-bootstrap/bundles"));
       var copyMaterialComponentLib = gulp.src(["node_modules/ng2-material/components/**", "!**/*.ts"])
         .pipe(gulp.dest("dist/libs/ng2-material/components"));
      var copyMaterialCoreLib = gulp.src(["node_modules/ng2-material/core/**", "!**/*.ts"])

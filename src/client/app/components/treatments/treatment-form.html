@@ -9,7 +9,26 @@
     </md-toolbar>
     <md-content layout-padding>
         <form [ngFormModel]="treatmentForm">
-<!--            <timepicker [(ngModel)]="treatment.date"  [hourStep]="hstep" [minuteStep]="mstep" [showMeridian]="ismeridian"></timepicker>-->
+            <div layout-gt-sm="row">
+                 
+                 <md-input-container class="md-block" flex-gt-sm>
+                      <div style="display:inline-block; min-height:290px;">
+                        <datepicker [(ngModel)]="date" [minDate]="minDate" [showWeeks]="true"></datepicker>
+                      </div>dt
+                 </md-input-container>
+                <timepicker [(ngModel)]="time" (change)="changed()" [hourStep]="hstep" [minuteStep]="mstep" [showMeridian]="ismeridian"></timepicker>
+                <md-input-container class="md-block" flex-gt-sm>
+                  
+                    <pre class="alert alert-info">Time is: {{treatment.datetime}}
+                    
+                     
+                    </pre> 
+                    <hr>
+
+                    <button type="button" class="btn btn-info" (click)="toggleMode()">12H / 24H</button>
+                    <button type="button" class="btn btn-danger" (click)="clear()">Clear</button>
+                </md-input-container>
+            </div>
             <div layout-gt-sm="row">
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>Treatment theraphy</label>
@@ -20,7 +39,7 @@
             <div layout-gt-sm="row">
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>Treatment diagnose</label>
-                    <input md-input [(ngModel)]="treatment.diagnose" [value]="treatment.diagnose">
+                    <input md-input [(ngModel)]="treatment.diagnose" [value]="treatment.diagnose"  ngControl="diagnose" >
                     <control-messages control="diagnose"></control-messages>
                 </md-input-container>
             </div>
@@ -34,7 +53,7 @@
           
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-8">
-                    <button md-raised-button class="md-primary" type="submit" (click)="onSubmit(patient)" [disabled]="!treatmentForm.valid">ADD TREATMENT</button>
+                    <button md-raised-button class="md-primary" type="submit" (click)="onSubmit(treatment)" [disabled]="!treatmentForm.valid">ADD TREATMENT</button>
                 </div>
             </div>
 

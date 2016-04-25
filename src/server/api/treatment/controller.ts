@@ -30,3 +30,49 @@ export function list (req: express.Request, res: express.Response) {
      });
    });
 }
+
+export function create (req: express.Request, res: express.Response)  {
+    console.log("Add treatment ", req.body);
+    var newTreatment = req.body;
+    db.db_connection.ready(function(){ 
+     var treatmentTable = db.db_connection.table("treatment");
+     treatmentTable.save(newTreatment).then(function(result){ 
+	console.log("New treatment added: "+result.id); 
+        res.sendStatus(200);        
+     });
+   });
+}
+export function show (req: express.Request, res: express.Response)  {
+   console.log("getPatient")
+   var treatmentId = req.params.id  
+   db.db_connection.ready(function(){ 
+     var treatmentTable = db.db_connection.table("treatment");
+     treatmentTable.find(treatmentId).then(function(treatments){ 
+	console.log("SELECT FROM treatment results: " + treatmentId);
+        res.send(JSON.stringify(treatments));
+     });
+   });
+}
+export function update (req: express.Request, res: express.Response)  {
+    console.log("update Treatment ", req.body);
+    var newTreatment = req.body;
+    db.db_connection.ready(function(){ 
+     var treatmentTable = db.db_connection.table("treatment");
+     treatmentTable.save(newTreatment).then(function(result){ 
+	console.log("Treatment updated: " + result.id); 
+        res.sendStatus(201);        
+     });
+   });
+}
+   
+ export function destroy (req: express.Request, res: express.Response)  {
+    console.log("deletePatientData server side ", req.params.id);
+    var treatmentId = req.params.id   
+     db.db_connection.ready(function(){ 
+        var treatmentTable = db.db_connection.table("treatment");
+        treatmentTable.remove(treatmentId, function(result){ 
+           console.log("Treatment deleted: "+treatmentId); 
+           res.sendStatus(204);       
+        });   
+     }); 
+ }

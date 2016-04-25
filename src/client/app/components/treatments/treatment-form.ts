@@ -9,14 +9,13 @@ import {MdPatternValidator,
   MdMinValueValidator,
   MdNumberRequiredValidator,
   MdMaxValueValidator, MATERIAL_DIRECTIVES} from "ng2-material/all";
-import {Timepicker} from 'ng2-bootstrap/ng2-bootstrap';
-//import {DatePicker} from 'ng2-datepicker';
+import {Timepicker, DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 @Component({ 
   selector: 'treatment-form', 
   templateUrl: 'app/components/treatments/treatment-form.html',
   providers: [TreatmentService],
   host: {'[hidden]': 'hidden'},
-  directives: [ CORE_DIRECTIVES, FORM_DIRECTIVES, RouterLink, MATERIAL_DIRECTIVES, ControlMessages]
+  directives: [Timepicker, DATEPICKER_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES, RouterLink, MATERIAL_DIRECTIVES, ControlMessages]
 })
 
 
@@ -28,59 +27,56 @@ export class TreatmentFormComponent {
     formTitle: string;
     subscription: any;
     submitted = false;
-     public hstep:number = 1;
-  public mstep:number = 15;
-  public ismeridian:boolean = true;
+    date: Date = new Date();
+    public hstep:number = 1;
+    public mstep:number = 15;
+    public ismeridian:boolean = true;
 
-  public mytime:Date = new Date();
-  public options:any = {
-    hstep: [1, 2, 3],
-    mstep: [1, 5, 10, 15, 25, 30]
-  };
+    public time:Date = new Date();
+//   public datetime:Date = new Date();
+    public options:any = {
+        hstep: [1, 2, 3],
+        mstep: [1, 5, 10, 15, 25, 30]
+    };
     
-  constructor(fb: FormBuilder, private treatmentService: TreatmentService, private notificationService: NotificationService ) {
+    constructor(fb: FormBuilder, private treatmentService: TreatmentService, private notificationService: NotificationService ) {
     
-    this.treatmentForm = fb.group({
-      'therapy': ['',  Validators.compose([
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(300)])],
-      'diagnose': ['', Validators.compose([
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(300)
-      ])],
-      'price': ['', Validators.compose([
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(10)
-      ])]
-    });
-  }
+        this.treatmentForm = fb.group({
+          'therapy': ['',  Validators.compose([
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(300)])],
+          'diagnose': ['', Validators.compose([
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(300)
+          ])],
+          'price': ['', Validators.compose([
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(10)
+          ])]
+        });
+    }
   
 
-  public toggleMode():void {
-    this.ismeridian = !this.ismeridian;
-  };
+    public toggleMode():void {
+      this.ismeridian = !this.ismeridian;
+    };
 
-  public update():void {
-    let d = new Date();
-    d.setHours(14);
-    d.setMinutes(0);
-    this.mytime = d;
-  };
+    public changed():void {
+      console.log('Time time changed to: ' + this.time);
+    };
 
-  public changed():void {
-    console.log('Time changed to: ' + this.mytime);
-  };
-
-  public clear():void {
-    this.mytime = void 0;
-  };
+    public clear():void {
+      this.time = void 0;
+    };
+  
    ngOnInit() {
-        this.treatment = new Treatment(0, 0, '2016-04-14', '', '', '')
+        this.treatment = new Treatment(0, 1, new Date(), '', '', '')
         this.subscription = this.notificationService.getFormActionChangeEmitter()
-          .subscribe(treatment => this.onFormActionChange(treatment));           
+          .subscribe(treatment => this.onFormActionChange(treatment)); 
+          
     }
     onFormActionChange(treatment: Treatment) {
         console.log("onFormActionChange patient", treatment);
@@ -94,24 +90,27 @@ export class TreatmentFormComponent {
     ngOnDestroy() {
         this.subscription.unsubscribe();
     }
-//  
-//    addPatient (patient) {  
-//       
-//        this.patientService.addPatient(patient).subscribe((res:any) => {         
-//           console.log("make service call for rest post pacient  "+res);         
-//        });
-//    }
     
-    
-  
     goBack() {     
         this.hidden = true;
         this.treatmentlist.hidden = false;
     }
-//    onSubmit(patient) { 
-//        this.addPatient (patient);
-//        this.submitted = true; 
-//        //showPatientForm = true;
-//    }
+    onSubmit(treatment) { 
+        treatment.datetime = this.date;
+        treatment.datetime.setHours(this.time.getHours());
+        treatment.datetime.setMinutes(this.time.getMinutes());
+        console.log("Submit treatment datetime() ", treatment.datetime);
+        console.log("Submit treatment date() ", this.date );
+        console.log("Submit treatment time() ", this.time, "this.time.getMinutes()", this.time.getMinutes() )   
+        this.addTreatment(treatment);    
+        this.submitted = true; 
+    }
+    
+    addTreatment(treatment) {        
+        this.treatmentService.addPatient(treatment).subscribe((res:any) => {         
+           console.log("make service call for rest post pacient  "+res);         
+        });
+    }
+    ;
     
 }

@@ -63,7 +63,7 @@ export class TreatmentListComponent {
     addTreatment () {
         this.hidden = true;
         this.treatmentform.hidden = false;
-        this.treatment = new Treatment(0, 0, '2016-04-14', '', '', '')
+        this.treatment = new Treatment(0, 1, new Date(), '', '', '')
        
         this.formAction(this.treatment);
     }
