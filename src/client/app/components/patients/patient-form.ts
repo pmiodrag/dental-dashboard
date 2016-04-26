@@ -62,7 +62,7 @@ export class PatientFormComponent {
   
    
     ngOnInit() {
-        this.patient = new Patient(0, '', '', '', 'M', '', '1980-04-14', '', '', '', '');
+        this.patient = new Patient(0, '', '', '', 'M', '', '', '1980-04-14', '', '', '');
         this.subscription = this.notificationService.getFormActionChangeEmitter()
           .subscribe(patient => this.onFormActionChange(patient));           
     }

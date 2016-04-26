@@ -96,10 +96,10 @@ export class TreatmentFormComponent {
         this.treatmentlist.hidden = false;
     }
     onSubmit(treatment) { 
-        treatment.datetime = this.date;
-        treatment.datetime.setHours(this.time.getHours());
-        treatment.datetime.setMinutes(this.time.getMinutes());
-        console.log("Submit treatment datetime() ", treatment.datetime);
+        treatment.treatmentdate = this.date;
+        treatment.treatmentdate.setHours(this.time.getHours());
+        treatment.treatmentdate.setMinutes(this.time.getMinutes());
+        console.log("Submit treatment datetime() ", treatment.treatmentdate);
         console.log("Submit treatment date() ", this.date );
         console.log("Submit treatment time() ", this.time, "this.time.getMinutes()", this.time.getMinutes() )   
         this.addTreatment(treatment);    

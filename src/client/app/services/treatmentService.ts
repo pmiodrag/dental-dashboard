@@ -9,14 +9,14 @@ import 'rxjs/add/operator/catch';
 export interface ITreatment {
     id: number; 
     patientid : number; 
-    datetime: Date;
+    treatmentdate: Date;
     therapy: string;
     diagnose: string;
     price: string;
 }
 
 export class Treatment implements ITreatment {
-    constructor (public id: number, public patientid : number, public datetime: Date, public therapy: string, 
+    constructor (public id: number, public patientid : number, public treatmentdate: Date, public therapy: string, 
         public diagnose: string, public price: string) {
     }
 }

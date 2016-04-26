@@ -35,7 +35,7 @@ CREATE TABLE `patient` (
   `mobilephone` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   `gender` char(1) NOT NULL,
-  `birthdate` date NOT NULL,
+  `birthdate` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
