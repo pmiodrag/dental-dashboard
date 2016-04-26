@@ -26,17 +26,17 @@ export class TreatmentListComponent {
     count: number;
     @Input() hidden:boolean = false;
     @Input () treatmentform: any;  
-    
+    patientID: number;
     constructor(private notificationService: NotificationService, private treatmentService: TreatmentService, private patientService: PatientService, private _routeParams: RouteParams) {}   
     
     ngOnInit() {
         console.log("ngOnInit");
-       let patientid = parseInt(this._routeParams.get('id'), 10);
+       this.patientID = parseInt(this._routeParams.get('id'), 10);
        let firstname = this._routeParams.get('firstname');
        let lastname = this._routeParams.get('lastname');
-       this.patientService.getPatientTreatments(patientid,  firstname, lastname).subscribe((treatments: any[]) => {
+       this.patientService.getPatientTreatments(this.patientID,  firstname, lastname).subscribe((treatments: any[]) => {
           
-        this.filteredTreatments = treatments.filter(treatment => treatment.patientid === patientid);
+        this.filteredTreatments = treatments.filter(treatment => treatment.patientid === this.patientID);
       });
     }
     
@@ -63,8 +63,8 @@ export class TreatmentListComponent {
     addTreatment () {
         this.hidden = true;
         this.treatmentform.hidden = false;
-        this.treatment = new Treatment(0, 1, new Date(), '', '', '')
-       
+        this.treatment = new Treatment(0, this.patientID, new Date(), '', '', '')
+       console.log("this.patientID", this.patientID);
         this.formAction(this.treatment);
     }
     
