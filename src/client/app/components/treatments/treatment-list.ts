@@ -30,11 +30,11 @@ export class TreatmentListComponent {
     constructor(private notificationService: NotificationService, private treatmentService: TreatmentService, private patientService: PatientService, private _routeParams: RouteParams) {}   
     
     ngOnInit() {
-        console.log("ngOnInit");
+       console.log("ngOnInit");
        this.patientID = parseInt(this._routeParams.get('id'), 10);
        let firstname = this._routeParams.get('firstname');
        let lastname = this._routeParams.get('lastname');
-       this.patientService.getPatientTreatments(this.patientID,  firstname, lastname).subscribe((treatments: any[]) => {
+       this.patientService.getPatientTreatmentList(this.patientID).subscribe((treatments: any[]) => {   
           
         this.filteredTreatments = treatments.filter(treatment => treatment.patientid === this.patientID);
       });

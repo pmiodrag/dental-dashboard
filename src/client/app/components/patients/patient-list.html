@@ -25,7 +25,7 @@
                     <div class="card">
                         <!--<button class="btn close card-close" title="Delete Customer" (click)="deleteCustomer(customer.id)">&times;</button>-->
                         <div class="card-header green">
-                            <a [routerLink]="['Treatments',{id:patient.id, firstname: patient.firstname, lastname: patient.lastname}]" class="white">{{patient.firstname | capitalize }}{{patient.middlename | capitalize }} {{ patient.lastname | capitalize }}</a>
+                            <a [routerLink]="['TreatmentList',{id:patient.id}]" class="white">{{patient.firstname | capitalize }}{{patient.middlename | capitalize }} {{ patient.lastname | capitalize }}</a>
                               <button md-fab class="md-mini orange" (click)="editPatient(patient);"  aria-label="Edit patient">
                                      <i class="fa fa-pencil-square-o"></i>
                                 </button>

@@ -31,6 +31,41 @@ export function list (req: express.Request, res: express.Response) {
    });
 }
 
+export function treatmentlist (req: express.Request, res: express.Response) {
+    console.log("Treatments index req.params", req.params);
+    var patientId = req.params.id;
+    console.log("selectTreatments for patientId = ",patientId);
+    var treatmentsJson = '';
+    db.db_connection.ready(function(){ 
+     var treatmentTable = db.db_connection.table("treatment");
+     var patientTable = db.db_connection.table("patient");
+     var criteria = patientTable.criteria
+                                .where("id").eq(patientId)
+                                //.join("treatment","patientId")
+                                //.at("treatment")
+                                //.parent()
+                                .build();
+     console.log('criteria ',criteria);
+     patientTable.findAll(criteria,function(results){
+        console.log('A lot of queries executed here, you can guess them :)');
+        console.log(results);
+        treatmentsJson = JSON.stringify(results);
+        console.log("results = "+results);
+        res.send(results);
+      });
+      console.log('A lot of you can guess them :)');
+//     treatmentTable.findAll({patientId:'='+patientId}).then(function(treatments){
+//    console.log("treatments = "+treatments);
+//        treatmentsJson = JSON.stringify(treatments);
+//        var patientTreatmentsJson = {'patient':{'firstname':'Name'}, 'treatments':treatmentsJson}
+//        console.log("patientTreatmentsJson = "+patientTreatmentsJson);
+//        res.send(patientTreatmentsJson);
+//     });
+   });
+   
+}
+
+
 export function create (req: express.Request, res: express.Response)  {
     console.log("Add treatment ", req.body);
 //    var insert = { id: 1,

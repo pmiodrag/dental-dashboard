@@ -10,3 +10,5 @@ src/app/**/*.js.map
 dist
 bower_components
 dist
+/typings/
+/src/server/typings/

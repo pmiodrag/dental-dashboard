@@ -63,6 +63,11 @@ export class PatientService {
                     .map((res: Response) => res.json())
                     .catch(this.handleError);    
     }
+    getPatientTreatmentList(patientId:number){        
+        return this.http.get(this.baseUrl + 'patient/'+ patientId + '/treatments')
+                    .map((res: Response) => res.json())
+                    .catch(this.handleError);    
+    }
     
     
     addPatient (patient: IPatient) : Observable<IPatient>  {
