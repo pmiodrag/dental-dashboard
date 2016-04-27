@@ -14,6 +14,7 @@
 <md-data-table layout-fill [selectable]="true" (onSelectableChange)="change($event)">
   <thead>
   <tr>
+       <th>Edit Treatment</th>
     <th class="md-text-cell">Patient ID</th>
     <th>Therapy</th>
     <th>Diagnose</th>
@@ -22,6 +23,9 @@
   </thead>
   <tbody>
   <tr *ngFor="#treatment of filteredTreatments" [selectableValue]="treatment.id">
+      <td>  <button md-fab class="md-mini orange" (click)="editTreatment(treatment);"  aria-label="Edit treatment">
+    <i class="fa fa-pencil-square-o"></i>
+</button></td>
     <td class="md-text-cell">{{treatment.patientid }}</td>      
         <td>{{treatment.therapy}}</td>
         <td>{{treatment.diagnose}}</td>   

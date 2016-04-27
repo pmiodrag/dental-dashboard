@@ -105,7 +105,7 @@ export class TreatmentFormComponent {
         this.addTreatment(treatment);    
         this.submitted = true; 
     }
-    
+    // method to call REST to create new treatment
     addTreatment(treatment) {        
         this.treatmentService.addPatient(treatment).subscribe((res:any) => {         
            console.log("make service call for rest post pacient  "+res);         

@@ -59,15 +59,20 @@ export class TreatmentListComponent {
           this.treatments = this.filteredTreatments = treatments;
         });
   }
-  
+   // open treatment form to add new treatment.
     addTreatment () {
         this.hidden = true;
         this.treatmentform.hidden = false;
         this.treatment = new Treatment(0, this.patientID, new Date(), '', '', '')
-       console.log("this.patientID", this.patientID);
         this.formAction(this.treatment);
     }
     
+    
+    editTreatment(treatment: Treatment) {
+        this.hidden = true;
+        this.treatmentform.hidden = false;
+        this.formAction(treatment);
+    }
      formAction(treatment: Treatment) {
         console.log('TreatmentListComponent formAction treatment', treatment);
         this.notificationService.emitFormActionChangeEvent(treatment);
