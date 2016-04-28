@@ -10,7 +10,15 @@
     <md-content layout-padding>
 
         <form [ngFormModel]="patientForm">
-            <div layout-gt-sm="row">
+                  <md-radio-group #group [(value)]="patient.gender">
+                    <md-radio-button *ngFor="#it of avatarData"
+                        [value]="it.value"
+                        [ngClass]="it.color"
+                        [aria-label]="it.title"
+                        [checked]="it.value === patient.gender">
+                        <img [src]="it.id" class="card-image">
+                    </md-radio-button>
+                </md-radio-group>
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>First name</label>
                     <input md-input [(ngModel)]="patient.firstname" [value]="patient.firstname" ngControl="firstname" id="firstname">
@@ -42,23 +50,12 @@
                 </md-input-container>
                 <!--            <datepicker [(ngModel)]="patient.birthdate" md-placeholder="Enter date"></datepicker>-->
             </div>
-            <div layout-gt-sm="row">                 
-                 <md-input-container class="md-block" flex-gt-sm>
+            <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm>
                       <div style="display:inline-block; min-height:290px;">
                         <datepicker [(ngModel)]="patient.birthdate" [showWeeks]="true"></datepicker>
                       </div>
                  </md-input-container>
-            </div>
-            <div layout-gt-sm="row">
-                <md-radio-group layout="row" [(model)]="patient.gender">
-                    <md-radio-button *ngFor="#it of avatarData"
-                        [value]="it.value"
-                        [ngClass]="it.color"
-                        [aria-label]="it.title"
-                        [checked]="it.value === patient.gender">
-                        <img [src]="it.id" class="card-image">
-                    </md-radio-button>
-                </md-radio-group>
                 <md-input-container class="md-block" flex-gt-sm>
                     <label>Phone Number</label>
                     <input md-input [(ngModel)]="patient.phone" [value]="patient.phone"/>

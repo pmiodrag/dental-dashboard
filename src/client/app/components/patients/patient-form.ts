@@ -105,6 +105,7 @@ export class PatientFormComponent {
     }
     onSubmit(patient) { 
         patient.birthdate.setHours(12);
+        console.log()
         if (this.submitAction == 'add') {             
             this.addPatient (patient);
         } else {
