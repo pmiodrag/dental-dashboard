@@ -42,6 +42,13 @@
                 </md-input-container>
                 <!--            <datepicker [(ngModel)]="patient.birthdate" md-placeholder="Enter date"></datepicker>-->
             </div>
+            <div layout-gt-sm="row">                 
+                 <md-input-container class="md-block" flex-gt-sm>
+                      <div style="display:inline-block; min-height:290px;">
+                        <datepicker [(ngModel)]="birthdate" [minDate]="minDate" [showWeeks]="true"></datepicker>
+                      </div>
+                 </md-input-container>
+            </div>
             <div layout-gt-sm="row">
                 <md-radio-group layout="row" [(model)]="patient.gender">
                     <md-radio-button *ngFor="#it of avatarData"

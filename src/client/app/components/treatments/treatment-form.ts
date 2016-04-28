@@ -27,13 +27,12 @@ export class TreatmentFormComponent {
     formTitle: string;
     subscription: any;
     submitted = false;
+    // Date and time properties
     date: Date = new Date();
     public hstep:number = 1;
     public mstep:number = 15;
     public ismeridian:boolean = true;
-
     public time:Date = new Date();
-//   public datetime:Date = new Date();
     public options:any = {
         hstep: [1, 2, 3],
         mstep: [1, 5, 10, 15, 25, 30]

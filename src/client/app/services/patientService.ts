@@ -13,7 +13,7 @@ export interface IPatient {
     gender: string,
     address: string;
     place: string;    
-    birthdate: string;
+    birthdate: Date;
     email : string;
     phone: string;
     mobilephone: string;
@@ -25,7 +25,7 @@ export class Patient implements IPatient {
 //    }
 //    
     constructor (public id: number, public firstname: string, public lastname: string, public middlename: string,
-                public gender: string, public address: string, public place: string,  public birthdate: string, public email : string,
+                public gender: string, public address: string, public place: string,  public birthdate: Date, public email : string,
                 public phone: string,  public mobilephone: string) {
     }
 }

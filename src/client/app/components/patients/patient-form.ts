@@ -5,6 +5,7 @@ import { Patient, PatientService } from '../../services/patientService';
 import { NotificationService  } from '../../services/notificationService';
 import {ControlMessages} from '../handlers/control-messages';
 import {ValidationService} from '../../shared/services/validation.service';
+import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {MdPatternValidator,
   MdMinValueValidator,
   MdNumberRequiredValidator,
@@ -15,7 +16,7 @@ import {MdPatternValidator,
   templateUrl: 'app/components/patients/patient-form.html',
   providers: [PatientService],
   host: {'[hidden]': 'hidden'},
-  directives: [CORE_DIRECTIVES, FORM_DIRECTIVES,RouterLink, MATERIAL_DIRECTIVES, ControlMessages]
+  directives: [CORE_DIRECTIVES, DATEPICKER_DIRECTIVES, FORM_DIRECTIVES,RouterLink, MATERIAL_DIRECTIVES, ControlMessages]
 })
 
 
@@ -25,6 +26,8 @@ export class PatientFormComponent {
     @Input() hidden:boolean = true;
     @Input () patientheader: any;
     @Input () patientlist: any;
+     // Date and time properties
+    birthdate: Date = new Date();
     formTitle: string;
     subscription: any;
     submitted = false;
@@ -62,7 +65,7 @@ export class PatientFormComponent {
   
    
     ngOnInit() {
-        this.patient = new Patient(0, '', '', '', 'M', '', '', '1980-04-14', '', '', '');
+        this.patient = new Patient(0, '', '', '', 'M', '', '', this.birthdate, '', '', '');
         this.subscription = this.notificationService.getFormActionChangeEmitter()
           .subscribe(patient => this.onFormActionChange(patient));           
     }
@@ -94,6 +97,8 @@ export class PatientFormComponent {
         this.patientlist.hidden = false;
     }
     onSubmit(patient) { 
+        patient.birthdate = this.birthdate;
+        patient.birthdate.setHours(12);
         this.addPatient (patient);
         this.submitted = true; 
         //showPatientForm = true;
