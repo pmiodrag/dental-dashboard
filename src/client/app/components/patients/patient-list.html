@@ -22,30 +22,45 @@
         <div class="row">
             <div class="row card-container" [hidden]="listDisplayModeEnabled">
                 <div class="col-sm-6 col-md-4 col-lg-4" *ngFor="#patient of filteredPatients">
-                    <div class="card">
-                        <div class="card-header white">
-                                <a [routerLink]="['Treatments',{id:patient.id, firstname: patient.firstname, lastname: patient.lastname}]">{{ patient.firstname | capitalize }}</a>
-                                <a  md-fab class="md-mini blue-lighten-3"  [routerLink]="['Treatments',{id:patient.id, firstname: patient.firstname, lastname: patient.lastname}]"><i class="fa fa-list-ol" aria-hidden="true"></i></a>
-
+                      <div  layout="column">
+                        <md-card>
+                           <md-card-header class="green">
+                             <md-card-avatar>
+                              <img src="assets/images/{{patient.gender | lowercase}}.png" class="card-image" />
+                             </md-card-avatar>
+                             <md-card-header-text>
+                               <span class="md-title">{{ patient.firstname | capitalize }} {{ patient.lastname | capitalize }}</span>
+                               <span class="md-subhead">{{ patient.place | capitalize }}</span>
+                             </md-card-header-text>
+                               <md-card-actions layout="row" layout-align="start center">
+                                <md-card-icon-actions>
+                                </md-card-icon-actions>
+                                   <a  md-fab class="md-mini blue-lighten-3"  [routerLink]="['Treatments',{id:patient.id, firstname: patient.firstname, lastname: patient.lastname}]"><i class="fa fa-list-ol" aria-hidden="true"></i></a>
                                 <button md-fab class="md-mini orange" (click)="editPatient(patient);"  aria-label="Edit patient">
                                      <i class="fa fa-pencil-square-o"></i>
                                 </button>
                                 <button md-fab class="md-mini red" (click)="deletePatient(patient.id)"  aria-label="Remove patient">
                                     <i class="fa fa-recycle"></i>
-                                </button>                            
-                        </div>
-                        <div class="card-body">
-                            <div class="clearfix">
-                                <div class="pull-left card-body-left">
-                                    <a href="#" class="card-image">
-                                        <img src="assets/images/{{patient.gender | lowercase}}.png" class="card-image" />
-                                    </a>
-                                </div>
-                                <div class="pull-left card-body-right">
-                                    <div class="card-body-content">{{patient.place | trim }}</div>
-                                </div>
-                            </div>
-                        </div>
+                                </button>
+                              </md-card-actions>
+                           </md-card-header>
+<!--                           <img src="public/images/old-board.jpg" class="md-card-image" alt="Old Board">-->
+                           <md-card-title>
+                             <md-card-title-text>
+                               <span class="md-headline">Patient details</span>
+                             </md-card-title-text>
+                           </md-card-title>
+                           <md-card-content>
+                             <md-list>
+                                    <md-list-item class="md-1-line" *ngFor="#item of patient | values">                                    
+                                      <div class="md-list-item-text">
+                                        <h6>{{ item }}</h6>                                      
+                                      </div>
+                                      <md-divider inset></md-divider>
+                                    </md-list-item>
+                                  </md-list>
+                           </md-card-content>
+                         </md-card>
                     </div>
                 </div>
                 <div [hidden]="filteredPatients.length">
@@ -77,7 +92,6 @@
                                      <td>{{ patient.lastName | capitalize }}</td>
                                     <td>{{ patient.address }}</td>
                                     <td>{{ patient.place | trim }}</td>
-<!--                                    <td>{{ customer.orderTotal | currency:'USD':true }}</td>-->
                                 </tr>
                                 <tr [hidden]="filteredPatients.length">
                                     <td>&nbsp;</td>

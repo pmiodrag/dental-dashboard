@@ -9,6 +9,7 @@ import { FilterTextboxComponent } from './filterTextbox.component';
 import { SortByDirective } from '../../shared/directives/sortby.directive';
 import { CapitalizePipe } from '../../shared/pipes/capitalize.pipe';
 import { TrimPipe } from '../../shared/pipes/trim.pipe';
+import { ValuesPipe } from '../../shared/pipes/values.pipe';
 import {MATERIAL_DIRECTIVES, MATERIAL_PROVIDERS} from "ng2-material/all";
 import { PatientFormComponent } from './patient-form'
 @Component({ 
@@ -17,7 +18,7 @@ import { PatientFormComponent } from './patient-form'
   templateUrl: 'app/components/patients/patient-list.html',
   host: {'[hidden]': 'hidden'},
   directives: [CORE_DIRECTIVES, RouterLink, FilterTextboxComponent, SortByDirective, MATERIAL_DIRECTIVES],
-  pipes: [CapitalizePipe, TrimPipe]
+  pipes: [CapitalizePipe, TrimPipe, ValuesPipe]
 })
 
 
