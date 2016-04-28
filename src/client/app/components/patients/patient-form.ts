@@ -27,7 +27,7 @@ export class PatientFormComponent {
     @Input () patientheader: any;
     @Input () patientlist: any;
      // Date and time properties
-    birthdate: Date = new Date();
+ //   birthdate: Date = new Date();
     formTitle: string;
     subscription: any;
     submitted = false;
@@ -65,7 +65,7 @@ export class PatientFormComponent {
   
    
     ngOnInit() {
-        this.patient = new Patient(0, '', '', '', 'M', '', '', this.birthdate, '', '', '');
+        this.patient = new Patient(0, '', '', '', 'M', '', '', new Date(), '', '', '');
         this.subscription = this.notificationService.getFormActionChangeEmitter()
           .subscribe(patient => this.onFormActionChange(patient));           
     }
@@ -97,7 +97,6 @@ export class PatientFormComponent {
         this.patientlist.hidden = false;
     }
     onSubmit(patient) { 
-        patient.birthdate = this.birthdate;
         patient.birthdate.setHours(12);
         this.addPatient (patient);
         this.submitted = true; 
