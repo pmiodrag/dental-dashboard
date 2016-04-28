@@ -6,6 +6,7 @@ import { NotificationService  } from '../../services/notificationService';
 import {ControlMessages} from '../handlers/control-messages';
 import {ValidationService} from '../../shared/services/validation.service';
 import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
+import { CapitalizePipe } from '../../shared/pipes/capitalize.pipe';
 import {MdPatternValidator,
   MdMinValueValidator,
   MdNumberRequiredValidator,
@@ -16,7 +17,8 @@ import {MdPatternValidator,
   templateUrl: 'app/components/patients/patient-form.html',
   providers: [PatientService],
   host: {'[hidden]': 'hidden'},
-  directives: [CORE_DIRECTIVES, DATEPICKER_DIRECTIVES, FORM_DIRECTIVES,RouterLink, MATERIAL_DIRECTIVES, ControlMessages]
+  directives: [CORE_DIRECTIVES, DATEPICKER_DIRECTIVES, FORM_DIRECTIVES,RouterLink, MATERIAL_DIRECTIVES, ControlMessages],
+  pipes: [CapitalizePipe]
 })
 
 
@@ -29,6 +31,7 @@ export class PatientFormComponent {
      // Date and time properties
  //   birthdate: Date = new Date();
     formTitle: string;
+    submitAction: string;
     subscription: any;
     submitted = false;
     data: any = {
@@ -74,23 +77,27 @@ export class PatientFormComponent {
         this.patient = patient;
         if (patient.id == 0) {          
           this.formTitle = "Add Patient";
+          this.submitAction = 'add';
         } else {
             this.formTitle = "Edit Patient";
+            this.submitAction = 'edit';
         }
     }
     ngOnDestroy() {
         this.subscription.unsubscribe();
     }
   
-    addPatient (patient) {  
-       
+    addPatient(patient) {
         this.patientService.addPatient(patient).subscribe((res:any) => {         
            console.log("make service call for rest post pacient  "+res);         
         });
     }
-    
-    
-  
+    updatePatient(patient) {
+        this.patientService.updatePatient(patient).subscribe((res:any) => {         
+           console.log("make service call for rest put pacient  "+res);         
+        });
+    }
+      
     goBack() {     
         this.hidden = true;
         this.patientheader.hidden = false;
@@ -98,9 +105,13 @@ export class PatientFormComponent {
     }
     onSubmit(patient) { 
         patient.birthdate.setHours(12);
+        if (this.submitAction == 'add') {             
+            this.addPatient (patient);
+        } else {
+            this.updatePatient(patient);
+        }        
         this.addPatient (patient);
         this.submitted = true; 
-        //showPatientForm = true;
     }
     
 }

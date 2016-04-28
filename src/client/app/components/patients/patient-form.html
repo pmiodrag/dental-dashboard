@@ -71,7 +71,7 @@
             <!-- Submit button -->
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-8">
-                    <button md-raised-button class="md-primary" type="submit" (click)="onSubmit(patient)" [disabled]="!patientForm.valid">ADD USER</button>
+                    <button md-raised-button class="md-primary" type="submit" (click)="onSubmit(patient)" [disabled]="!patientForm.valid">{{formTitle | capitalize}}</button>
                 </div>
             </div>
 

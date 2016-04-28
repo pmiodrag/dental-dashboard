@@ -87,7 +87,7 @@ export class PatientService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.put((this.baseUrl + 'patient' + patient.id), body, options)
+        return this.http.put((this.baseUrl + 'patient/' + patient.id), body, options)
                          .catch(this.handleError)
     }   
    
