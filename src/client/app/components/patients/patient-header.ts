@@ -21,7 +21,7 @@ export class PatientHeaderComponent {
         this.hidden = true;
         this.patientlist.hidden = true;
         this.patientform.hidden = false;
-        this.patient = new Patient(4, '', '', '', 'M', '', '', new Date(), '', '', '');
+        this.patient = new Patient(0, '', '', '', 'M', '', '', new Date(), '', '', '');
         this.formAction(this.patient);
     }
     formAction(patient: Patient) {
