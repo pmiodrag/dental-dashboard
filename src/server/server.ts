@@ -24,15 +24,22 @@ var server = app.listen(port, function() {
     var port = server.address().port;
     console.log('This express app is listening on port:' + port);
 });
-
+//**** REST ****//
+// Patient
 app.get('/patient', patients.index);
 app.post('/patient', patients.create);
 app.put('/patient/:id', patients.update);
 app.get('/patient/:id', patients.show);
 app.delete('/patient/:id', patients.destroy);
 app.get('/patient/:id/:firstname/:lastname/treatments', treatments.index);
-app.get('/treatments', treatments.list);
+app.get('/patient/:id/treatments', treatments.treatmentlist);
 
+// Treatment
+//app.get('/treatments', treatments.list);
+app.post('/treatment', treatments.create);
+//app.put('/treatment/:id', treatments.update);
+app.get('/treatment/:id', treatments.show);
+app.delete('/treatment/:id', treatments.destroy);
 
 
 var renderIndex = (req: express.Request, res: express.Response) => {

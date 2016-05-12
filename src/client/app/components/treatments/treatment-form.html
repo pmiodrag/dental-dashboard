@@ -8,32 +8,44 @@
         </h2>
     </md-toolbar>
     <md-content layout-padding>
-
         <form [ngFormModel]="treatmentForm">
             <div layout-gt-sm="row">
+                 
+                 <md-input-container class="md-block" flex-gt-sm>
+                      <div style="display:inline-block; min-height:290px;">
+                        <datepicker [(ngModel)]="date" [minDate]="minDate" [showWeeks]="true"></datepicker>
+                      </div>
+                 </md-input-container>
+                <timepicker [(ngModel)]="time" (change)="changed()" [hourStep]="hstep" [minuteStep]="mstep" [showMeridian]="ismeridian"></timepicker>
+                <md-input-container class="md-block" flex-gt-sm>                  
+                    <pre class="alert alert-info">Time is: {{treatment.datetime}} </pre> 
+                    <hr>
+                    <button type="button" class="btn btn-info" (click)="toggleMode()">12H / 24H</button>
+                    <button type="button" class="btn btn-danger" (click)="clear()">Clear</button>
+                </md-input-container>
+            </div>
+            <div layout-gt-sm="row">
                 <md-input-container class="md-block" flex-gt-sm>
-                    <label>Diagnose</label>
-                    <input md-input [(ngModel)]="treatment.diagnose" [value]="treatment.diagnose" ngControl="diagnose" id="diagnose">
+                    <label>Treatment theraphy</label>
+                    <textarea md-input [(ngModel)]="treatment.therapy" columns="1" md-maxlength="150" rows="5"  ngControl="therapy" id="therapy"></textarea>
+                    <control-messages control="therapy"></control-messages>
+                </md-input-container>
+            </div>
+            <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Treatment diagnose</label>
+                    <input md-input [(ngModel)]="treatment.diagnose" [value]="treatment.diagnose"  ngControl="diagnose" >
                     <control-messages control="diagnose"></control-messages>
                 </md-input-container>
+            </div>
+            <div layout-gt-sm="row">
                 <md-input-container class="md-block" flex-gt-sm>
-                    <label>Therapy</label>
-                    <textarea md-input md-maxlength="150" [(ngModel)]="treatment.therapy" [value]="treatment.therapy"  ngControl="therapy" id="therapy">
-                           <control-messages control="therapy"></control-messages>
-                </md-input-container>
-                <md-input-container class="md-block" flex-gt-sm>
-                    <label>Price</label>
+                    <label>Treatment price</label>
                     <input md-input [(ngModel)]="treatment.price" [value]="treatment.price" ngControl="price" id="price">
                     <control-messages control="price"></control-messages>
                 </md-input-container>
-                <md-input-container class="md-block" flex-gt-sm>
-                    <label>Date</label>
-                    <input md-input [(ngModel)]="treatment.date" [value]="treatment.date" ngControl="date" id="date">
-                    <control-messages control="date"></control-messages>
-                </md-input-container>
             </div>
-            
-            <!-- Submit button -->
+          
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-8">
                     <button md-raised-button class="md-primary" type="submit" (click)="onSubmit(treatment)" [disabled]="!treatmentForm.valid">ADD TREATMENT</button>

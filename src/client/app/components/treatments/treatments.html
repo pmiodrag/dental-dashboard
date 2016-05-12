@@ -1,6 +1,2 @@
-
-<div class="customers view indent">
-    <!--<treatment-header #treatmentheader [treatmentform]="treatmentform" [treatmentlist]="treatmentlist"></treatment-header>-->
-    <treatment-list #treatmentlist [treatmentform]="treatmentform" [treatmentheader] = "treatmentheader" [treatments]="treatments" [(selected)]="selectedTreatment" ></treatment-list>
-    <!--<treatment-form  #treatmentform [treatmentlist]="treatmentlist" [treatmentheader] = "treatmentheader" [treatment]="selectedTreatment"></treatment-form>-->
-</div>
+ <treatment-list #treatmentlist [treatmentform]="treatmentform" ></treatment-list>
+  <treatment-form #treatmentform [treatmentlist]="treatmentlist" ></treatment-form>

@@ -1,12 +1,12 @@
-import { Component } from 'angular2/core';
-import { CORE_DIRECTIVES} from 'angular2/common';
-import { ROUTER_DIRECTIVES, RouteConfig , RouterLink} from 'angular2/router';
+import { Component } from '@angular/core';
+import { CORE_DIRECTIVES} from '@angular/common';
+import { ROUTER_DIRECTIVES} from '@angular/router';
+import { RouteConfig , RouterLink} from '@angular/router-deprecated';
 import { PatientsComponent } from './components/patients/patients';
 import { TreatmentsComponent } from './components/treatments/treatments';
 import { AuthComponent } from './components/auth/auth.component';
 import {Dashboard} from './components/dashboard/dashboard';
-import {Tables} from './components/tables/tables';
-import {MATERIAL_DIRECTIVES} from "ng2-material/all";
+//import {MATERIAL_DIRECTIVES} from "ng2-material/all";
 @Component({ 
     selector: 'app-container',
     directives: [ROUTER_DIRECTIVES, RouterLink, CORE_DIRECTIVES, AuthComponent, PatientsComponent, Dashboard],
@@ -15,9 +15,9 @@ import {MATERIAL_DIRECTIVES} from "ng2-material/all";
 @RouteConfig([
  { path: '/patients', name: 'Patients', component: PatientsComponent },
  { path: '/patient/:id/:firstname/:lastname/treatments', name: 'Treatments', component: TreatmentsComponent },
+ { path: '/patient/:id/treatments', name: 'TreatmentList', component: TreatmentsComponent },
     { path: '/login', name: 'Auth', component: AuthComponent },
-     {path: '/dashboard',  component: Dashboard, name: 'Dashboard', useAsDefault: true },
-//  {path: '/tables', component: Tables, name: 'Tables'},
+     {path: '/dashboard',  component: Dashboard, name: 'Dashboard', useAsDefault: true }
 ])
 export class AppComponent {
   

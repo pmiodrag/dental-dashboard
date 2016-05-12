@@ -27,19 +27,39 @@ var jsNPMDependencies = [
     'es6-shim/es6-shim.min.js',
      'es6-shim/es6-shim.map',
     'systemjs/dist/system-polyfills.js',
-    'angular2/bundles/angular2-polyfills.js',
+    'zone.js/dist/zone.js',
+    'reflect-metadata/Reflect.js',
+     'reflect-metadata/Reflect.js.map',
+   // 'angular2/bundles/angular2-polyfills.js',
     'systemjs/dist/system.src.js',
-    'rxjs/bundles/Rx.js',
-    'angular2/bundles/angular2.dev.js',
-    'angular2/bundles/router.dev.js',
-    'angular2/bundles/http.dev.js',
+    //'rxjs/bundles/Rx.js',
+//    '@angular/common/index.js',
+//    '@angular/compiler/index.js',
+//    '@angular/core/index.js',
+//    '@angular/http/index.js',
+//    '@angular/platform-browser/index.js',
+//    '@angular/platform-browser-dynamic/index.js',
+//    '@angular/platform-browser-dynamic/index.js.map',
+//    '@angular/router/index.js',
+//    '@angular/router-deprecated/index.js',
+            'rxjs/**',
+            'zone.js/dist/**',
+            '@angular/**',
+       
+//    'angular2/bundles/angular2.dev.js',
+//    'angular2/bundles/router.dev.js',
+//    'angular2/bundles/http.dev.js',
     'angular2-jwt/angular2-jwt.js',
      'angular2-jwt/angular2-jwt.js.map',
-    'angular2/bundles/angular2.min.js',
-    "ng2-datepicker/ng2-datepicker.js",
+    //'angular2/bundles/angular2.min.js',   
             'ng2-material/all.js',
-             'ng2-material/all.js.map'
+             'ng2-material/all.js.map',
+              'moment/moment.js',
+              'immutable/dist/immutable.js'
+//              'ng2-bootstrap/ng2-bootstrap.js',
 ] 
+
+
 
 gulp.task('build:styles', function() {
     var copyNgStyles= gulp.src('node_modules/ng2-material/dist/*.css')
@@ -65,7 +85,10 @@ gulp.task('build:styles', function() {
 //        .pipe(refresh(lrserver));
 });
 
+
 gulp.task("buld:resources", function() {
+     var copyNg2BootstrapLib = gulp.src(["node_modules/ng2-bootstrap/bundles/**", "!**/*.ts"])
+        .pipe(gulp.dest("dist/libs/ng2-bootstrap/bundles"));
       var copyMaterialComponentLib = gulp.src(["node_modules/ng2-material/components/**", "!**/*.ts"])
         .pipe(gulp.dest("dist/libs/ng2-material/components"));
      var copyMaterialCoreLib = gulp.src(["node_modules/ng2-material/core/**", "!**/*.ts"])
@@ -77,7 +100,7 @@ gulp.task("buld:resources", function() {
 
 gulp.task('buld:assets', function() {
     return gulp.src("src/client/assets/**")
-        .pipe(imagemin({optimizationLevel: 5}))
+        //.pipe(imagemin({optimizationLevel: 5}))
         .pipe(gulp.dest('dist/assets'))
         //.pipe(refresh(lrserver));
 });

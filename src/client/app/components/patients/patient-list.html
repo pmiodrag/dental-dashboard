@@ -1,91 +1,172 @@
 <div flex>
-        <div class="row voffset4">
-            <div class="col-md-10">
-                <div class="navbar">
-                    <ul class="nav navbar-nav">
-                        <li class="toolbar-item">
-                            <a (click)="changeDisplayMode('Card')" [class.active]="!listDisplayModeEnabled">
-                                <span class="glyphicon glyphicon-th-large"></span> Card View
-                            </a>
-                        </li>
-                        <li class="toolbar-item">
-                            <a (click)="changeDisplayMode('List')" [class.active]="listDisplayModeEnabled">
-                                <span class="glyphicon glyphicon-align-justify"></span> List View
-                            </a>
-                        </li>
-                    </ul>
-                    <filter-textbox class="navbar-right"
-                     (changed)="filterChanged($event)"></filter-textbox>
-                </div>
+    <div class="row voffset4">
+        <div class="col-md-10">
+            <div class="navbar">
+                <ul class="nav navbar-nav">
+                    <li class="toolbar-item">
+                        <a (click)="changeDisplayMode('Card')" [class.active]="!listDisplayModeEnabled">
+                            <span class="glyphicon glyphicon-th-large"></span> Card View
+                        </a>
+                    </li>
+                    <li class="toolbar-item">
+                        <a (click)="changeDisplayMode('List')" [class.active]="listDisplayModeEnabled">
+                            <span class="glyphicon glyphicon-align-justify"></span> List View
+                        </a>
+                    </li>
+                </ul>
+                <filter-textbox class="navbar-right"
+                                (changed)="filterChanged($event)"></filter-textbox>
             </div>
         </div>
-        <div class="row">
-            <div class="row card-container" [hidden]="listDisplayModeEnabled">
-                <div class="col-sm-6 col-md-4 col-lg-4" *ngFor="#patient of filteredPatients">
-                    <div class="card">
-                        <!--<button class="btn close card-close" title="Delete Customer" (click)="deleteCustomer(customer.id)">&times;</button>-->
-                        <div class="card-header green">
-                            <a [routerLink]="['Treatments',{id:patient.id, firstname: patient.firstname, lastname: patient.lastname}]" class="white">{{patient.firstname | capitalize }}{{patient.middlename | capitalize }} {{ patient.lastname | capitalize }}</a>
-                              <button md-fab class="md-mini orange" (click)="editPatient(patient);"  aria-label="Edit patient">
-                                     <i class="fa fa-pencil-square-o"></i>
+    </div>
+    <div class="row">
+        <div class="row card-container" [hidden]="listDisplayModeEnabled">
+            <div class="col-sm-6 col-md-4 col-lg-4" *ngFor="#patient of patientList  | async">
+                 <div  layout="column">
+                    <md-card>
+                        <md-card-header class="green">
+                            <md-card-avatar>
+                                <img src="assets/images/{{patient.gender | lowercase}}.png" class="card-image" />
+                            </md-card-avatar>
+                            <md-card-header-text>
+                                <span class="md-title">{{ patient.firstname | capitalize }} {{ patient.lastname | capitalize }}</span>
+                                <span class="md-subhead">{{ patient.place | capitalize }}</span>
+                            </md-card-header-text>
+                            <md-card-actions layout="row" layout-align="start center">
+                                <md-card-icon-actions>
+                                </md-card-icon-actions>
+                                <a  md-fab class="md-mini blue-lighten-3"  [routerLink]="['Treatments',{id:patient.id, firstname: patient.firstname, lastname: patient.lastname}]"><i class="fa fa-list-ol" aria-hidden="true"></i></a>
+                                <button md-fab class="md-mini orange" (click)="editPatient(patient);"  aria-label="Edit patient">
+                                    <i class="fa fa-pencil-square-o"></i>
                                 </button>
                                 <button md-fab class="md-mini red" (click)="deletePatient(patient.id)"  aria-label="Remove patient">
                                     <i class="fa fa-recycle"></i>
-                                </button>                            
-                        </div>
-                        <div class="card-body">
-                            <div class="clearfix">
-                                <div class="pull-left card-body-left">
-                                    <a href="#" class="card-image">
-                                        <img src="assets/images/{{patient.gender | lowercase}}.png" class="card-image" />
-                                    </a>
-                                </div>
-                                <div class="pull-left card-body-right">
-                                    <div class="card-body-content">{{patient.place | trim }}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div [hidden]="filteredPatients.length">
-                    No Records Found
+                                </button>
+                               <button    (click)="toggleSource(patient.id)" class="md-icon-button active" md-button=""><span class="md-button-wrapper">
+            
+                    <i md-icon="" class="material-icons">code</i>
+                  </span><div class="md-ripple-container"></div></button>
+                            </md-card-actions>
+                        </md-card-header>
+                        <!--                           <img src="public/images/old-board.jpg" class="md-card-image" alt="Old Board">-->
+                        <md-card-title  *ngIf="showSource && toggleID == patient.id">
+                            <md-card-title-text>
+                                <span class="md-headline">Patient details</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-content  *ngIf="showSource  && toggleID == patient.id">
+                            <md-list>
+<!--                                <md-list-item>                                    
+                                    <div class="md-list-item-text">
+                                        <h6>Firstname : {{ patient.firstname}}</h6>                                      
+                                    </div>
+                                    <md-divider inset></md-divider>
+                                </md-list-item>
+                                <md-list-item>                                    
+                                    <div class="md-list-item-text">
+                                        <h6>Middlename : {{ patient.middlename }}</h6>                                      
+                                    </div>
+                                    <md-divider inset></md-divider>
+                                </md-list-item>
+                                <md-list-item>                                    
+                                    <div class="md-list-item-text">
+                                        <h6>Lastname : {{ patient.lastname}}</h6>                                      
+                                    </div>
+                                    <md-divider inset></md-divider>
+                                </md-list-item>
+                                <md-list-item>                                    
+                                    <div class="md-list-item-text">
+                                        <h6>Birthdate {{ patient.birthdate }}</h6>                                      
+                                    </div>
+                                    <md-divider inset></md-divider>
+                                </md-list-item>
+                                <md-list-item>                                    
+                                    <div class="md-list-item-text">
+                                        <h6>Gender {{ patient.gender }}</h6>                                      
+                                    </div>
+                                    <md-divider inset></md-divider>
+                                </md-list-item>
+                                <md-list-item> 
+                                    <div class="md-list-item-text">
+                                        <h6>Address : {{ patient.address }}</h6>                                      
+                                    </div>
+                                    <md-divider inset></md-divider>
+                                </md-list-item>
+                                <md-list-item>                                    
+                                    <div class="md-list-item-text">
+                                        <h6>Place: {{ patient.place }}</h6>                                      
+                                    </div>
+                                    <md-divider inset></md-divider>
+                                </md-list-item>
+                                <md-list-item>                                    
+                                    <div class="md-list-item-text">
+                                        <h6>Phone number: {{ patient.phone }}</h6>                                      
+                                    </div>
+                                    <md-divider inset></md-divider>
+                                </md-list-item>
+                                <md-list-item>                                    
+                                    <div class="md-list-item-text">
+                                        <h6>Mobile phone number: {{ patient.mobilephone }}</h6>                                      
+                                    </div>
+                                    <md-divider inset></md-divider>
+                                </md-list-item>
+
+                                <md-list-item>                                    
+                                    <div class="md-list-item-text">
+                                        <h6>Email address: {{ patient.email }}</h6>                                      
+                                    </div>
+                                    <md-divider inset></md-divider>
+                                </md-list-item>-->
+                                <md-list-item class="md-1-line" *ngFor="#item of patient | values">                                    
+                                  <div class="md-list-item-text">
+                                    <h6>{{ item }}</h6>                                      
+                                  </div>
+                                  <md-divider inset></md-divider>
+                                </md-list-item>
+
+                            </md-list>
+                        </md-card-content>
+                    </md-card>
                 </div>
             </div>
-            <div class="row grid-container" [hidden]="!listDisplayModeEnabled">
-                <div class="col-md-10">
-                    <div class="table">
-                        <table class="table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>&nbsp;</th>
-                                    <th sort-by="firstname" (sorted)="sort($event)">First Name</th>
-                                    <th sort-by="lastname" (sorted)="sort($event)">Last Name</th>
-                                    <th sort-by="address" (sorted)="sort($event)">Address</th>
-                                    <th sort-by="city" (sorted)="sort($event)">City</th>
-                                    <th sort-by="country.name" (sorted)="sort($event)">Country</th>
-                                    <!-- Or you can do this directly rather than using sort-by directive -->
-                                    <th (click)="sort('orderTotal')">Treatments Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="#patient of filteredPatients">
-                                    <td><img src="assets/images/{{ patient.gender | lowercase }}.png" 
-                                             class="card-image" alt="Patient Image" /></td>
-                                    <td><a [routerLink]="['Treatments',{id:patient.id, firstname: patient.firstname, lastname: patient.lastname}]">{{ patient.firstname | capitalize }}</a></td>
-                                    <td>{{ patient.middleName | capitalize }}</td>
-                                     <td>{{ patient.lastName | capitalize }}</td>
-                                    <td>{{ patient.address }}</td>
-                                    <td>{{ patient.place | trim }}</td>
-<!--                                    <td>{{ customer.orderTotal | currency:'USD':true }}</td>-->
-                                </tr>
-                                <tr [hidden]="filteredPatients.length">
-                                    <td>&nbsp;</td>
-                                    <td colspan="6">No Records Found</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+            <div [hidden]="patientList.length">
+                No Records Found
+            </div>
+        </div>
+        <div class="row grid-container" [hidden]="!listDisplayModeEnabled">
+            <div class="col-md-10">
+                <div class="table">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th sort-by="firstname" (sorted)="sort($event)">First Name</th>
+                                <th sort-by="lastname" (sorted)="sort($event)">Last Name</th>
+                                <th sort-by="address" (sorted)="sort($event)">Address</th>
+                                <th sort-by="city" (sorted)="sort($event)">City</th>
+                                <th sort-by="country.name" (sorted)="sort($event)">Country</th>
+                                <!-- Or you can do this directly rather than using sort-by directive -->
+                                <th (click)="sort('orderTotal')">Treatments Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="#patient of patientList | async">
+                                <td><img src="assets/images/{{ patient.gender | lowercase }}.png" 
+                                     class="card-image" alt="Patient Image" /></td>
+                                <td><a [routerLink]="['Treatments',{id:patient.id, firstname: patient.firstname, lastname: patient.lastname}]">{{ patient.firstname | capitalize }}</a></td>
+                                <td>{{ patient.middleName | capitalize }}</td>
+                                <td>{{ patient.lastName | capitalize }}</td>
+                                <td>{{ patient.address }}</td>
+                                <td>{{ patient.place | trim }}</td>
+                            </tr>
+                            <tr [hidden]="patientList.length">
+                                <td>&nbsp;</td>
+                                <td colspan="6">No Records Found</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-         </div>
+    </div>
+</div>

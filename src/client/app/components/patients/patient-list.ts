@@ -1,29 +1,37 @@
-import { Component, Input, Output, EventEmitter } from 'angular2/core';
-import { CORE_DIRECTIVES } from 'angular2/common';
-import { RouterLink } from 'angular2/router';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { CORE_DIRECTIVES } from '@angular/common';
+import { RouterLink} from '@angular/router-deprecated';
 import { Observable } from 'rxjs/Observable';
-import { Patient, PatientService } from '../../services/patientService';
+import { Patient, PatientBackendService } from '../../services/PatientBackendService';
 import { NotificationService  } from '../../services/notificationService';
 import { Sorter } from '../../shared/sorter';
 import { FilterTextboxComponent } from './filterTextbox.component';
 import { SortByDirective } from '../../shared/directives/sortby.directive';
 import { CapitalizePipe } from '../../shared/pipes/capitalize.pipe';
 import { TrimPipe } from '../../shared/pipes/trim.pipe';
+import { ValuesPipe } from '../../shared/pipes/values.pipe';
 import {MATERIAL_DIRECTIVES, MATERIAL_PROVIDERS} from "ng2-material/all";
 import { PatientFormComponent } from './patient-form'
+import {TimerWrapper} from "@angular/common/src/facade/async";
 @Component({ 
   selector: 'patient-list', 
-  providers: [PatientService],
+ // providers: [PatientService],
   templateUrl: 'app/components/patients/patient-list.html',
   host: {'[hidden]': 'hidden'},
   directives: [CORE_DIRECTIVES, RouterLink, FilterTextboxComponent, SortByDirective, MATERIAL_DIRECTIVES],
-  pipes: [CapitalizePipe, TrimPipe]
+  pipes: [CapitalizePipe, TrimPipe, ValuesPipe]
 })
 
 
 export class PatientList {
- 
+   /**
+   * True to show the source code for the example
+   */
+  public showSource: boolean = false;
+  private showTabs: boolean = false;
+  
   title: string;
+  toggleID: number;
   filterText: string;
   listDisplayModeEnabled: boolean; 
   filteredPatients: Patient[] = [];
@@ -35,26 +43,35 @@ export class PatientList {
   @Input() patientheader: any;
   @Input() patientform: any;
  // @Input() action: string;
-  @Output() selectedChange: EventEmitter<Patient> = new EventEmitter();
+  @Output() selectedChange: EventEmitter<any> = new EventEmitter();
+  patientList: Observable<Patient[]>;
   
-  
-  constructor(private patientService: PatientService, private notificationService: NotificationService) { }
+  constructor(private patientService: PatientBackendService, private notificationService: NotificationService) { }
   
   ngOnInit() {
     this.title = 'Patients';
     this.filterText = 'Filter Patients:';
     this.listDisplayModeEnabled = false;
-    
-    this.patientService.getPatients()  
-        .subscribe((patients:any[]) => {
-          console.log("getPatients", patients);
-          this.patients = this.filteredPatients = patients;
-        });
-    this.patientService.getPatients()
-        .subscribe((patients:Patient[]) => {
-          this.patient = patients[0];
-          console.log("data service init get pacient from json  ", this.patient);   
-    })       
+    console.log("ngOnInit this.patientService", this.patientService)
+  //  this.patientList = this.patientService.patients$; // subscribe to entire collection
+     console.log("this.patients$", this.patientList);
+//    this.singleTodo$ = this._todoService.todos$
+//                          .map(todos => todos.find(item => item.id === '1'));  
+//                          // subscribe to only one todo 
+    // this.patientList.subscribe();
+//     this.patients = this.filteredPatients =  this.patientService.loadAll();
+   // this.patientService.getAllPatients();    // load all patients
+   // this._todoService.load('1');    // load only todo with id of '1'
+//    this.patientService.getPatients()  
+//        .subscribe((patients:Patient[]) => {
+//          console.log("getPatients", patients);
+//          this.patients = this.filteredPatients = patients;
+//        });
+//    this.patientService.getPatients()
+//        .subscribe((patients:Patient[]) => {
+//          this.patient = patients[0];
+//          console.log("data service init get pacient from json  ", this.patient);   
+//    })       
          
     this.sorter = new Sorter();
   }
@@ -97,9 +114,9 @@ export class PatientList {
   
   deletePatient(id: number) {
     console.log("make service call for rest delete with id::: ", id);
-    this.patientService.deletePatient(id).subscribe((res:any) => {         
-       console.log("make service call for rest post pacient  "+res);         
-    });
+//    this.patientService.deletePatient(id).subscribe((res:any) => {         
+//       console.log("make service call for rest post pacient  "+res);         
+//    });
   }
 
   sort(prop: string) {
@@ -108,6 +125,22 @@ export class PatientList {
         
       }
       this.sorter.sort(this.filteredPatients, prop);
+  }
+  
+   toggleSource(id) {
+    this.toggleID = id;
+    if (this.showSource) {
+      this.showTabs = false;
+      TimerWrapper.setTimeout(() => {
+        this.showSource = false;
+      }, 500);
+    }
+    else {
+      this.showSource = true;
+      TimerWrapper.setTimeout(() => {
+        this.showTabs = true;
+      }, 25);
+    }
   }
 
 }//    }

@@ -26,14 +26,14 @@ DROP TABLE IF EXISTS `treatment`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `treatment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `patientId` int(11) NOT NULL,
-  `date` datetime NOT NULL,
+  `patientid` int(11) NOT NULL,
+  `treatmentdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `diagnose` varchar(500) NOT NULL,
   `therapy` varchar(500) NOT NULL,
   `price` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `patientId_idx` (`patientId`),
-  CONSTRAINT `patientId` FOREIGN KEY (`patientId`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `patientId` FOREIGN KEY (`patientid`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -43,7 +43,7 @@ CREATE TABLE `treatment` (
 
 LOCK TABLES `treatment` WRITE;
 /*!40000 ALTER TABLE `treatment` DISABLE KEYS */;
-INSERT INTO `treatment` VALUES (1,1,'2016-03-22 11:11:00','test','test2',231),(2,1,'2016-03-20 11:11:00','test11','teraphy2',232),(3,1,'2015-04-20 16:00:00','diagnose1','therapy1',0);
+INSERT INTO `treatment` VALUES (1,1,'2016-04-06T12:23:00.000Z','test','test2',231),(2,1,'2016-03-20 11:11:00','test11','teraphy2',232),(3,1,'2015-04-20 16:00:00','diagnose1','therapy1',0);
 /*!40000 ALTER TABLE `treatment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

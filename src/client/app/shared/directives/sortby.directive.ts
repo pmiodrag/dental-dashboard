@@ -1,14 +1,14 @@
-import { Directive, Output, ElementRef, EventEmitter } from 'angular2/core';
+import { Directive, Output, ElementRef, EventEmitter } from '@angular/core';
 
 @Directive({
   selector: '[sort-by]'
 })
 export class SortByDirective {
 	
-	sortProperty: string;
+    sortProperty: string;
   
   @Output()
-	sorted: EventEmitter<string> = new EventEmitter();
+	sorted: EventEmitter<any> = new EventEmitter();
 	
     constructor(el: ElementRef) {
       this.sortProperty = el.nativeElement.getAttribute('sort-by');

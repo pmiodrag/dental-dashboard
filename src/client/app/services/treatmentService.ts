@@ -1,29 +1,26 @@
-import { Injectable } from 'angular2/core';
-import { Http, Response, Headers, RequestOptions } from 'angular2/http';
+import { Injectable } from '@angular/core';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 //Grab everything with import 'rxjs/Rx';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map'; 
 import 'rxjs/add/operator/catch';
 
+
 export interface ITreatment {
     id: number; 
-    treatmentid: number;
+    patientid : number; 
+    treatmentdate: Date;
     therapy: string;
-    date: string,
-    diagnose: string,
+    diagnose: string;
     price: string;
-   
 }
 
 export class Treatment implements ITreatment {
-//    static create(data){
-//        return new Treatment(data);
-//    }
-//    
-    constructor (public id: number, public treatmentid: number, public therapy: string, public date: string,
-                public diagnose: string, public price: string) {
+    constructor (public id: number, public patientid : number, public treatmentdate: Date, public therapy: string, 
+        public diagnose: string, public price: string) {
     }
 }
+
 
 @Injectable()
 export class TreatmentService {
@@ -37,7 +34,8 @@ export class TreatmentService {
                       .catch(this.handleError);               
     }
     
-    addTreatment (treatment: ITreatment) : Observable<ITreatment>  {
+    
+     addPatient (treatment: ITreatment) : Observable<ITreatment>  {
 
         let body = JSON.stringify( treatment )
         let headers = new Headers({ 'Content-Type': 'application/json' });
