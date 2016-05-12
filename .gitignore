@@ -1,5 +1,5 @@
-node_modules
-
+node_modules/*
+!node_modules/ng2-material/
 src/app/**/*.js
 src/app/**/*.js.map
 
