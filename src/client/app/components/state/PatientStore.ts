@@ -1,4 +1,3 @@
-
 import {Injectable} from "@angular/core";
 import {Response} from "@angular/http";
 import {Patient, PatientBackendService} from "../../services/PatientBackendService";
@@ -17,7 +16,7 @@ export class PatientStore {
         this.loadInitialData();
     }
 
-    get patients() {
+    get patients() {       
         return asObservable(this._patients);
     }
 
@@ -54,6 +53,7 @@ export class PatientStore {
 //                        }));
 
                     this._patients.next(List(patients));
+//                    console.log("Patients", patients)
                 },
                 err => console.log("Error retrieving Patients")
             );
@@ -88,20 +88,20 @@ export class PatientStore {
 //    }
 
 
-//    deleteTodo(deleted:Todo): Observable {
-//        let obs: Observable = this.todoBackendService.deleteTodo(deleted);
-//
-//        obs.subscribe(
-//                res => {
-//                    let todos: List<Todo> = this._todos.getValue();
-//                    let index = todos.findIndex((todo) => todo.id === deleted.id);
-//                    this._todos.next(todos.delete(index));
-//
-//                }
-//            );
-//
-//        return obs;
-//    }
+    deletePatient(deleted:Patient): Observable<Response> {
+        let obs = this.patientBackendService.deletePatient(deleted);
+
+        obs.subscribe(
+                res => {
+                    let patients: List<Patient> = this._patients.getValue();
+                    let index = patients.findIndex((patient) => patient.id === deleted.id);
+                    this._patients.next(patients.delete(index));
+
+                }
+            );
+
+        return obs;
+    }
 
 
 }

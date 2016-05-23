@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
+import {ROUTER_DIRECTIVES} from '@angular/router';
 //import { RouterLink, RouteParams } from 'angular2/router';
 //import { TreatmentService, Treatment } from '../../services/treatmentService';
 //import { PatientService } from '../../services/patientService';
@@ -12,7 +13,7 @@ import {TreatmentFormComponent} from "./treatment-form"
   selector: 'treatments',
   templateUrl: 'app/components/treatments/treatments.html',
   styleUrls : ['styles/selectable_usage.css'],
-  directives: [CORE_DIRECTIVES, MATERIAL_DIRECTIVES, TreatmentListComponent, TreatmentFormComponent]
+  directives: [CORE_DIRECTIVES, MATERIAL_DIRECTIVES, TreatmentListComponent, TreatmentFormComponent, ROUTER_DIRECTIVES]
 })
 export class TreatmentsComponent {
 	

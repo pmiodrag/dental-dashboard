@@ -1,6 +1,5 @@
-
 import {Injectable,Inject} from '@angular/core';
-import  {Http,Headers,URLSearchParams, RequestOptions, Response} from '@angular/http';
+import  {Http,Headers, URLSearchParams, RequestOptions, Response} from '@angular/http';
 import {List} from 'immutable';
 import {Observable} from "rxjs/Observable";
 export interface IPatient {
@@ -18,9 +17,6 @@ export interface IPatient {
 }
 
 export class Patient implements IPatient {
-//    static create(data){
-//        return new Patient(data);
-//    }
 //    
     constructor (public id: number, public firstname: string, public lastname: string, public middlename: string,
                 public gender: string, public address: string, public place: string,  public birthdate: Date, public email : string,
@@ -38,6 +34,7 @@ export class PatientBackendService {
     }
 
     getAllPatients() {
+        
         return this.http.get('/patient');
     }
 
@@ -45,25 +42,11 @@ export class PatientBackendService {
         let body = JSON.stringify( newPatient )
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-//
-//        let headers = new Headers();
-//        headers.append('Content-Type', 'application/json; charset=utf-8');
-
         return this.http.post((this.baseUrl + 'patient'), body, options).share();
     }
 
-    deletePatient(deletePatient: Patient) {
-//        let params = new URLSearchParams();
-//        params.append('id', '' + deletePatient.id );
-//
-//        return this.http.delete('/todo', {search: params}).share();
+    deletePatient(deletePatient: Patient) : Observable<Response> {
+        return this.http.delete('/patient/' + deletePatient.id).share();
     }
-
-
-//    toggleTodo(toggled: Todo) {
-//        var headers = new Headers();
-//        headers.append('Content-Type', 'application/json; charset=utf-8');
-//        return this.http.put('/todo', JSON.stringify(toggled.toJS()),{headers}).share();
-//    }
 
 }

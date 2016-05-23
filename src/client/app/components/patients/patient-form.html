@@ -11,63 +11,58 @@
 
         <form [ngFormModel]="patientForm">
             <div layout-gt-sm="row">
-                <md-radio-group layout="row" #group [(value)]="patient.gender">
-                    <md-radio-button *ngFor="#it of avatarData"
-                        [value]="it.value"
-                        [ngClass]="it.color"
-                        [aria-label]="it.title"
-                        [checked]="it.value === patient.gender">
-                        <img [src]="it.id" class="card-image">
-                    </md-radio-button>
-                </md-radio-group>
-                <md-input-container class="md-block" flex-gt-sm>
-                    <label>First name</label>
-                    <input md-input [(ngModel)]="patient.firstname" [value]="patient.firstname" ngControl="firstname" id="firstname">
+                 <div layout-gt-sm="column" class="col-md-3 md-block">
+                    <md-input placeholder="First name" [(ngModel)]="patient.firstname" [value]="patient.firstname" ngControl="firstname" id="firstname"></md-input>
                     <control-messages control="firstname"></control-messages>
-                </md-input-container>
-                <md-input-container class="md-block" flex-gt-sm>
-                    <label>Middle name</label>
-                    <input md-input [(ngModel)]="patient.middlename" [value]="patient.middlename">
-                </md-input-container>
-                <md-input-container class="md-block" flex-gt-sm>
-                    <label>Last Name</label>
-                    <input md-input [(ngModel)]="patient.lastname" [value]="patient.lastname" ngControl="lastname" id="lastname">
+                  </div>
+                 <div layout-gt-sm="column" class="col-md-3 md-block">
+                     <md-input placeholder="Midlename" align="end"  [(ngModel)]="patient.middlename" [value]="patient.middlename" ></md-input>
+                </div> 
+                <div layout-gt-sm="column" class="col-md-3 md-block">
+                     <md-input  placeholder="Last name" [(ngModel)]="patient.lastname" [value]="patient.lastname" ngControl="lastname" id="lastname">  </md-input>
                     <control-messages control="lastname"></control-messages>
-                </md-input-container>
+                </div>
             </div>
+            <div layout-gt-sm="row" >
+                <div layout-gt-sm="column" class="col-md-3 md-block">
+<!--                    <md-radio-group layout="row"let group [(value)]="patient.gender">-->
+                        <md-radio-button *ngFor="let it of avatarData"
+                            [value]="it.value"
+                            [ngClass]="it.color"
+                            [aria-label]="it.title"
+                            [checked]="it.value === patient.gender">
+                            <img [src]="it.id" class="card-image">
+                        </md-radio-button>
+<!--                    </md-radio-group>-->
+                </div>
+            </div>  
             <div layout-gt-sm="row">
-                <md-input-container class="md-block" flex-gt-sm>
-                    <label for="email">Email</label>
-                    <input md-input class="form-control" [(ngModel)]="patient.email" [value]="patient.email" type="email" required  ngControl="email" id="email">
+                <div layout-gt-sm="column" class="col-md-4 md-block">
+                    <md-input placeholder="Email"  [(ngModel)]="patient.email" [value]="patient.email" type="email" required  ngControl="email" id="email"></md-input>
                     <control-messages control="email"></control-messages>
-                </md-input-container>
-                <md-input-container class="md-block" flex-gt-sm>
-                    <label>Place</label>
-                    <input md-input [(ngModel)]="patient.place" [value]="patient.place">
-                </md-input-container>
-                <md-input-container class="md-block" flex-gt-sm>
-                    <label>Address</label>
-                    <input md-input [(ngModel)]="patient.address" [value]="patient.address">
-                </md-input-container>
-                <!--            <datepicker [(ngModel)]="patient.birthdate" md-placeholder="Enter date"></datepicker>-->
+                </div>
+               <div layout-gt-sm="column" class="col-md-4 md-block">
+                    <md-input placeholder="Place"  [(ngModel)]="patient.place" [value]="patient.place"></md-input>
+                </div>
+               <div layout-gt-sm="column" class="col-md-3 md-block">
+                    <md-input placeholder="Address"  [(ngModel)]="patient.address" [value]="patient.address"></md-input>
+                </div>
             </div>
-            <div layout-gt-sm="row">                 
-                 <md-input-container class="md-block" flex-gt-sm>
+            <div layout-gt-sm="row">   
+                 <datepicker [(ngModel)]="patient.birthdate" md-placeholder="Enter date"></datepicker>
+<!--                 <md-input-container class="md-block" flex-gt-sm>
                       <div style="display:inline-block; min-height:290px;">
                         <datepicker [(ngModel)]="patient.birthdate" [showWeeks]="true"></datepicker>
                       </div>
-                 </md-input-container>
+                 </md-input-container>-->
             </div>
             <div layout-gt-sm="row">
-                
-                <md-input-container class="md-block" flex-gt-sm>
-                    <label>Phone Number</label>
-                    <input md-input [(ngModel)]="patient.phone" [value]="patient.phone"/>
-                </md-input-container>
-                <md-input-container class="md-block" flex-gt-sm>
-                    <label>Mobile Phone Number</label>
-                    <input md-input [(ngModel)]="patient.mobilephone" [value]="patient.mobilephone" />
-                </md-input-container>
+                <div layout-gt-sm="column" class="col-md-4 md-block">
+                    <md-input placeholder="Phone number" [(ngModel)]="patient.phone" [value]="patient.phone"></md-input>
+                </div>
+                <div layout-gt-sm="column" class="col-md-4 md-block">
+                    <md-input placeholder="Mobile Phone number" [(ngModel)]="patient.mobilephone" [value]="patient.mobilephone" ></md-input>
+                </div>
             </div>
             <!-- Submit button -->
             <div class="form-group">

@@ -58,8 +58,7 @@
     
      <script src="//cdn.auth0.com/js/lock-8.2.min.js"></script>
     <script src="libs/rxjs/bundles/Rx.js"></script>
-     <script src="libs/ng2-bootstrap/bundles/ng2-bootstrap.min.js"></script>
-<!--    <script src="libs/ng2-bootstrap/bundles/ng2-bootstrap.js"></script>-->
+     <script src="libs/ng2-bootstrap/bundles/ng2-bootstrap.js"></script>
 <!--     <script src="script.js"></script>-->
 <script>
         (function(global) {
@@ -79,7 +78,8 @@
     'angular2-jwt':               'n:angular2-jwt',
     'ng2-material':               'n:ng2-material',
     'moment':                     'n:moment/moment.js',  
-     'immutable':                     'n:immutable/dist/immutable.js' 
+     'immutable':                     'n:immutable/dist/immutable.js',
+     '@angular2-material': 'n:@angular2-material'
        // 'lodash': 'n:lodash'
     };
 
@@ -100,7 +100,7 @@
         },
         'ng2-material': { 
             defaultExtension: 'js' 
-        },
+        }
     };
 
     var packageNames = [
@@ -113,7 +113,17 @@
         '@angular/router',
         '@angular/router-deprecated',
     ];
-
+    // Angular Material 2 Packages to load.
+    var _materialPackages = [
+      'core', 'toolbar', 'button', 'card', 'checkbox', 'icon', 'input', 'list', 'progress-bar',
+      'progress-circle', 'radio', 'sidenav'
+    ];
+    
+    _materialPackages.forEach(function(item) {
+        // All Material 2 components are prefixed with  @angular2-material and use
+        // the components name as entry point.
+              packages['@angular2-material/' + item] = { main: item };
+      });
     // add package entries for angular packages in the form '@angular/common': { main: 'index.js', defaultExtension: 'js' }
     packageNames.forEach(function(pkgName) {
         packages[pkgName] = { main: 'index.js', defaultExtension: 'js' };

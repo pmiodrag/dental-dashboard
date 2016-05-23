@@ -45,7 +45,7 @@ var jsNPMDependencies = [
             'rxjs/**',
             'zone.js/dist/**',
             '@angular/**',
-       
+       '@angular2-material/**',
 //    'angular2/bundles/angular2.dev.js',
 //    'angular2/bundles/router.dev.js',
 //    'angular2/bundles/http.dev.js',
@@ -55,8 +55,8 @@ var jsNPMDependencies = [
             'ng2-material/all.js',
              'ng2-material/all.js.map',
               'moment/moment.js',
-              'immutable/dist/immutable.js'
-//              'ng2-bootstrap/ng2-bootstrap.js',
+              'immutable/dist/immutable.js',
+              'ng2-bootstrap/ng2-bootstrap.js'
 ] 
 
 
@@ -95,7 +95,7 @@ gulp.task("buld:resources", function() {
         .pipe(gulp.dest("dist/libs/ng2-material/core"));
     var copyApp = gulp.src(["src/client/app/**", "!**/*.ts"])
         .pipe(gulp.dest("dist/app"))
- return[copyMaterialComponentLib, copyMaterialCoreLib, copyApp];
+ return[copyMaterialComponentLib, copyNg2BootstrapLib, copyMaterialCoreLib, copyApp];
 });
 
 gulp.task('buld:assets', function() {

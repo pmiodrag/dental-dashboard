@@ -2,13 +2,14 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
 import { NotificationService  } from '../../services/notificationService';
 import { Patient } from '../../services/PatientBackendService';
-
-import {MATERIAL_DIRECTIVES} from "ng2-material/all";
+import {MdButton} from '@angular2-material/button';
+import {MdToolbar} from '@angular2-material/toolbar';
+//import {MATERIAL_DIRECTIVES} from "ng2-material/all";
 @Component({
   selector: 'patient-header',
   templateUrl: 'app/components/patients/patient-header.html',
   host: {'[hidden]': 'hidden'},
-  directives: [CORE_DIRECTIVES, MATERIAL_DIRECTIVES],
+  directives: [CORE_DIRECTIVES, MdButton, MdToolbar],
 })
 export class PatientHeaderComponent {
     @Input() hidden:boolean = false;

@@ -1,12 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
-import { RouteParams , RouterLink} from '@angular/router-deprecated';
+import { ROUTER_DIRECTIVES, RouteSegment } from '@angular/router';
 import { TreatmentService, Treatment } from '../../services/treatmentService';
 import { PatientBackendService } from '../../services/PatientBackendService';
 import { NotificationService  } from '../../services/notificationService';
 import { Sorter } from '../../shared/sorter';
 import { SortByDirective } from '../../shared/directives/sortby.directive';
-import {MATERIAL_DIRECTIVES, ITableSelectionChange} from "ng2-material/all";
+import {MdToolbar} from '@angular2-material/toolbar';
+import {MdButton} from '@angular2-material/button';
+//import {MATERIAL_DIRECTIVES, ITableSelectionChange} from "ng2-material/all";
 //import {DataTableSelectableUsage} from "./selectable_usage"
 @Component({ 
   selector: 'treatment-list',
@@ -14,7 +16,7 @@ import {MATERIAL_DIRECTIVES, ITableSelectionChange} from "ng2-material/all";
   templateUrl: 'app/components/treatments/treatment-list.html',
   host: {'[hidden]': 'hidden'},
   styleUrls : ['styles/selectable_usage.css'],
-  directives: [CORE_DIRECTIVES, RouterLink, MATERIAL_DIRECTIVES ]
+  directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, MdToolbar, MdButton ]
 })
 export class TreatmentListComponent {
 	
@@ -27,13 +29,19 @@ export class TreatmentListComponent {
     @Input() hidden:boolean = false;
     @Input () treatmentform: any;  
     patientID: number;
-    constructor(private notificationService: NotificationService, private treatmentService: TreatmentService, private patientService: PatientBackendService, private _routeParams: RouteParams) {}   
+    constructor(private notificationService: NotificationService, private treatmentService: TreatmentService, private patientService: PatientBackendService) {}   
     
+    
+    routerOnActivate(curr: RouteSegment) {
+        this.patientID = parseInt(curr.getParam('id'), 10);
+        let firstname = curr.getParam('firstname');
+        let lastname = curr.getParam('lastname');
+      }
     ngOnInit() {
        console.log("ngOnInit");
-       this.patientID = parseInt(this._routeParams.get('id'), 10);
-       let firstname = this._routeParams.get('firstname');
-       let lastname = this._routeParams.get('lastname');
+//       this.patientID = parseInt(this._routeParams.get('id'), 10);
+//       let firstname = this._routeParams.get('firstname');
+//       let lastname = this._routeParams.get('lastname');
 //       this.patientService.getPatientTreatmentList(this.patientID).subscribe((treatments: any[]) => {   
 //          
 //        this.filteredTreatments = treatments.filter(treatment => treatment.patientid === this.patientID);

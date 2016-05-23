@@ -1,4 +1,3 @@
-
 /*
 *
 * taken from https://github.com/Reactive-Extensions/RxJS/blob/8f12f812d497acf639588e90f74d504a9fc801ec/src/core/linq/observable/asobservable.js

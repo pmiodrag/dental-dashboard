@@ -1,7 +1,7 @@
 <div flex>
     <div class="row voffset4">
         <div class="col-md-10">
-            <div class="navbar">
+            <div class="navbar"> 
                 <ul class="nav navbar-nav">
                     <li class="toolbar-item">
                         <a (click)="changeDisplayMode('Card')" [class.active]="!listDisplayModeEnabled">
@@ -21,17 +21,16 @@
     </div>
     <div class="row">
         <div class="row card-container" [hidden]="listDisplayModeEnabled">
-            <div class="col-sm-6 col-md-4 col-lg-4" *ngFor="#patient of patientList  | async">
+            <div class="col-sm-6 col-md-4 col-lg-4" *ngFor="let patient of patientStore.patients  | async">
                  <div  layout="column">
+   
                     <md-card>
-                        <md-card-header class="green">
-                            <md-card-avatar>
-                                <img src="assets/images/{{patient.gender | lowercase}}.png" class="card-image" />
-                            </md-card-avatar>
-                            <md-card-header-text>
-                                <span class="md-title">{{ patient.firstname | capitalize }} {{ patient.lastname | capitalize }}</span>
-                                <span class="md-subhead">{{ patient.place | capitalize }}</span>
-                            </md-card-header-text>
+                        <md-card-header class="">
+                            
+                                                                <img md-card-avatar src="assets/images/{{patient.gender | lowercase}}.png" class="card-image" />
+
+                             <md-card-title>{{ patient.firstname | capitalize }} {{ patient.lastname | capitalize }}</md-card-title>
+      <md-card-subtitle>{{ patient.place | capitalize }}</md-card-subtitle>
                             <md-card-actions layout="row" layout-align="start center">
                                 <md-card-icon-actions>
                                 </md-card-icon-actions>
@@ -39,7 +38,7 @@
                                 <button md-fab class="md-mini orange" (click)="editPatient(patient);"  aria-label="Edit patient">
                                     <i class="fa fa-pencil-square-o"></i>
                                 </button>
-                                <button md-fab class="md-mini red" (click)="deletePatient(patient.id)"  aria-label="Remove patient">
+                                <button md-fab class="md-mini red" (click)="deletePatient(patient)"  aria-label="Remove patient">
                                     <i class="fa fa-recycle"></i>
                                 </button>
                                <button    (click)="toggleSource(patient.id)" class="md-icon-button active" md-button=""><span class="md-button-wrapper">
@@ -117,7 +116,7 @@
                                     </div>
                                     <md-divider inset></md-divider>
                                 </md-list-item>-->
-                                <md-list-item class="md-1-line" *ngFor="#item of patient | values">                                    
+                                <md-list-item class="md-1-line" *ngFor="let item of patient | values">                                    
                                   <div class="md-list-item-text">
                                     <h6>{{ item }}</h6>                                      
                                   </div>
@@ -129,9 +128,8 @@
                     </md-card>
                 </div>
             </div>
-            <div [hidden]="patientList.length">
-                No Records Found
-            </div>
+            <div [hidden]="patientStore.patients._subscribe.length != 0">
+                No Records Found 
         </div>
         <div class="row grid-container" [hidden]="!listDisplayModeEnabled">
             <div class="col-md-10">
@@ -150,7 +148,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="#patient of patientList | async">
+                            <tr *ngFor="let patient of patientStore.patients | async">
                                 <td><img src="assets/images/{{ patient.gender | lowercase }}.png" 
                                      class="card-image" alt="Patient Image" /></td>
                                 <td><a [routerLink]="['Treatments',{id:patient.id, firstname: patient.firstname, lastname: patient.lastname}]">{{ patient.firstname | capitalize }}</a></td>
@@ -159,7 +157,7 @@
                                 <td>{{ patient.address }}</td>
                                 <td>{{ patient.place | trim }}</td>
                             </tr>
-                            <tr [hidden]="patientList.length">
+                            <tr [hidden]="patientStore.patients._subscribe.length != 0">
                                 <td>&nbsp;</td>
                                 <td colspan="6">No Records Found</td>
                             </tr>

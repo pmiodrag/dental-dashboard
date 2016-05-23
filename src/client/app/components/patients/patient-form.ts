@@ -1,6 +1,6 @@
 import { Component, Input, EventEmitter } from '@angular/core';
 import { FORM_DIRECTIVES, Validators, FormBuilder, ControlGroup, CORE_DIRECTIVES } from '@angular/common';
-import { RouterLink} from '@angular/router-deprecated';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 import { Patient, PatientBackendService } from '../../services/PatientBackendService';
 import { NotificationService  } from '../../services/notificationService';
 import {ControlMessages} from '../handlers/control-messages';
@@ -9,17 +9,22 @@ import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import { CapitalizePipe } from '../../shared/pipes/capitalize.pipe';
 import { PatientStore } from '../state/PatientStore';
 import { UiStateStore } from '../state/UiStateStore';
+import {MD_INPUT_DIRECTIVES} from '@angular2-material/input';
+import {MdRadioGroup, MdRadioButton} from '@angular2-material/radio';
+import {MdRadioDispatcher} from '@angular2-material/radio/radio_dispatcher';
+import {MdToolbar} from '@angular2-material/toolbar';
 import {MdPatternValidator,
   MdMinValueValidator,
   MdNumberRequiredValidator,
-  MdMaxValueValidator, MATERIAL_DIRECTIVES} from "ng2-material/all";
+  MdMaxValueValidator} from "ng2-material/all";
 //import {DatePicker} from 'ng2-datepicker';
 @Component({ 
   selector: 'patient-form', 
   templateUrl: 'app/components/patients/patient-form.html',
 //  providers: [PatientBackendService],
+  providers: [MdRadioDispatcher],
   host: {'[hidden]': 'hidden'},
-  directives: [CORE_DIRECTIVES, DATEPICKER_DIRECTIVES, FORM_DIRECTIVES,RouterLink, MATERIAL_DIRECTIVES, ControlMessages],
+  directives: [CORE_DIRECTIVES, DATEPICKER_DIRECTIVES, FORM_DIRECTIVES,ROUTER_DIRECTIVES, ControlMessages, MD_INPUT_DIRECTIVES, MdToolbar, MdRadioGroup, MdRadioButton],
   pipes: [CapitalizePipe]
 })
 
@@ -36,6 +41,7 @@ export class PatientFormComponent {
     submitAction: string;
     subscription: any;
     submitted = false;
+    
     data: any = {
         group1: 'Banana',
         group2: '2',

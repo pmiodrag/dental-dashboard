@@ -1,36 +1,45 @@
 import { Component } from '@angular/core';
 import { CORE_DIRECTIVES} from '@angular/common';
-import { ROUTER_DIRECTIVES} from '@angular/router';
-import { RouteConfig , RouterLink} from '@angular/router-deprecated';
+import { ROUTER_DIRECTIVES, Routes} from '@angular/router';
+//import { RouteConfig, RouteDefinition} from '@angular/router-deprecated';
+import {APP_ROUTES} from './app.routes';
 import { PatientsComponent } from './components/patients/patients';
 import { TreatmentsComponent } from './components/treatments/treatments';
 import { AuthComponent } from './components/auth/auth.component';
 import {Dashboard} from './components/dashboard/dashboard';
-//import {MATERIAL_DIRECTIVES} from "ng2-material/all";
 @Component({ 
     selector: 'app-container',
-    directives: [ROUTER_DIRECTIVES, RouterLink, CORE_DIRECTIVES, AuthComponent, PatientsComponent, Dashboard],
+    directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES, AuthComponent, PatientsComponent, Dashboard],
     templateUrl: 'app/app.html' 
 })
-@RouteConfig([
- { path: '/patients', name: 'Patients', component: PatientsComponent },
- { path: '/patient/:id/:firstname/:lastname/treatments', name: 'Treatments', component: TreatmentsComponent },
- { path: '/patient/:id/treatments', name: 'TreatmentList', component: TreatmentsComponent },
-    { path: '/login', name: 'Auth', component: AuthComponent },
-     {path: '/dashboard',  component: Dashboard, name: 'Dashboard', useAsDefault: true }
+
+//@RouteConfig(APP_ROUTES)
+@Routes([
+//    // these are our two routes
+//    { path: '/', component: HomeComponent }, // , useAsDefault: true}, // coming soon
+//    { path: '/about', component: AboutComponent }
+     { path: '/patients',  component: PatientsComponent },
+//    { path: '/patient/:id/:firstname/:lastname/treatments', component: TreatmentsComponent },
+//    { path: '/patient/:id/treatments', component: TreatmentsComponent },
+    { path: '/login',  component: AuthComponent },
+     {path: '/dashboard',  component: Dashboard },
+      {path: '/*',           component: Dashboard },
+       {path: '/',            component: Dashboard },
 ])
 export class AppComponent {
-  
+//  public appRoutes: RouteDefinition[];
   mobileView:number = 992;
   toggle:boolean = false;
   profile: string;
   pacientDisplayModeEnabled: boolean;
   constructor() {
     this.attachEvents();
+//    this.appRoutes = APP_ROUTES;
   }
 
   ngOnInit() {   
     this.pacientDisplayModeEnabled = true;  
+    console.log('ngOnInit app');
   }
   
   attachEvents() {

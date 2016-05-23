@@ -1,4 +1,3 @@
-
 import {Injectable} from "@angular/core";
 import {UiState, initialUiState} from "./ui-state";
 import {Subject} from "rxjs/Subject";

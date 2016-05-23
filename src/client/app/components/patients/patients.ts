@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
-import { RouterLink} from '@angular/router-deprecated';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { TreatmentService } from '../../services/treatmentService';
 import { Sorter } from '../../shared/sorter';
@@ -18,7 +18,7 @@ import { NotificationService  } from '../../services/notificationService';
   selector: 'patients', 
   templateUrl: 'app/components/patients/patients.html',
   host: {'[hidden]': 'hidden'},
-  directives: [CORE_DIRECTIVES, RouterLink, FilterTextboxComponent, SortByDirective, PatientList, PatientHeaderComponent, PatientFormComponent, MATERIAL_DIRECTIVES],
+  directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, FilterTextboxComponent, SortByDirective, PatientList, PatientHeaderComponent, PatientFormComponent, MATERIAL_DIRECTIVES],
   pipes: [CapitalizePipe, TrimPipe]
 })
 
