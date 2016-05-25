@@ -19,6 +19,13 @@ export class PatientStore {
     get patients() {       
         return asObservable(this._patients);
     }
+     set patients(patients: any) {
+         this._patients.next(patients);
+     }
+    
+    get patients2() {       
+        return (this._patients);
+    }
 
     loadInitialData() {
         this.patientBackendService.getAllPatients()
@@ -38,22 +45,8 @@ export class PatientStore {
                             patient.phone,
                             patient.mobilephone
                         ));
-//                        new Patient({
-//                            id: patient.id,
-//                            firstname: patient.firstname,
-//                            lastname: patient.lastname,
-//                            middlename: patient.middlename,
-//                            gender: patient.gender,
-//                            address: patient.address,
-//                            place: patient.place,
-//                            birthdate: patient.birthdate,
-//                            email: patient.email,
-//                            phone: patient.phone,
-//                            mobilephone: patient.mobilephone
-//                        }));
 
                     this._patients.next(List(patients));
-//                    console.log("Patients", patients)
                 },
                 err => console.log("Error retrieving Patients")
             );

@@ -14,8 +14,8 @@ import {MATERIAL_DIRECTIVES} from "ng2-material/index";
 import { PatientFormComponent } from './patient-form'
 import {TimerWrapper} from "@angular/common/src/facade/async";
 import { PatientStore } from '../state/PatientStore';
-//import {MdIcon} from '@angular2-material/icon';
 import {MdToolbar} from '@angular2-material/toolbar';
+import {List} from 'immutable';
 @Component({ 
   selector: 'patient-list', 
  // providers: [PatientService],
@@ -92,10 +92,10 @@ export class PatientList {
   }
 
   filterChanged(data: string) {
-    if (data && this.patients) {
+    if (data && this.patientStore.patients) {
         data = data.toUpperCase();
         let props = ['firstname', 'middlename', 'lastname', 'address', 'place'];
-        let filtered = this.patients.filter(item => {
+        let filtered = this.patientStore.patients2.getValue().filter(item => {
             let match = false;
             for (let prop of props) {
                 if (item[prop]!= null && item[prop].toString().toUpperCase().indexOf(data) > -1) {
@@ -105,7 +105,8 @@ export class PatientList {
             };
             return match;
         });
-        this.filteredPatients = filtered;
+        this.patientStore.patients = filtered;
+      console.log("filtered patients filtered",  filtered)// this.filteredPatients = filtered;
     }
     else {
       this.filteredPatients = this.patients;
