@@ -23,28 +23,27 @@
         <div class="row card-container" [hidden]="listDisplayModeEnabled">
             <div class="col-sm-6 col-md-4 col-lg-4" *ngFor="let patient of patientStore.patients  | async">
                  <div  layout="column">
-   
                     <md-card>
                         <md-card-header class="">
-                            
-                                                                <img md-card-avatar src="assets/images/{{patient.gender | lowercase}}.png" class="card-image" />
 
-                             <md-card-title>{{ patient.firstname | capitalize }} {{ patient.lastname | capitalize }}</md-card-title>
-      <md-card-subtitle>{{ patient.place | capitalize }}</md-card-subtitle>
+                            <img md-card-avatar src="assets/images/{{patient.gender | lowercase}}.png" class="card-image" />
+
+                            <md-card-title>{{ patient.firstname | capitalize }} {{ patient.lastname | capitalize }}</md-card-title>
+                            <md-card-subtitle>{{ patient.place | capitalize }}</md-card-subtitle>
                             <md-card-actions layout="row" layout-align="start center">
                                 <md-card-icon-actions>
                                 </md-card-icon-actions>
-                                <a  md-fab class="md-mini blue-lighten-3"  [routerLink]="['/patient',patient.id, patient.firstname, patient.lastname, '/treatments']"><i class="fa fa-list-ol" aria-hidden="true"></i></a>
+                                <a  md-fab class="md-mini green"  [routerLink]="['/patient',patient.id, patient.firstname, patient.lastname, '/treatments']"><i class="fa fa-list-ol" aria-hidden="true"></i></a>
                                 <button md-fab class="md-mini orange" (click)="editPatient(patient);"  aria-label="Edit patient">
                                     <i class="fa fa-pencil-square-o"></i>
                                 </button>
                                 <button md-fab class="md-mini red" (click)="deletePatient(patient)"  aria-label="Remove patient">
                                     <i class="fa fa-recycle"></i>
                                 </button>
-                               <button    (click)="toggleSource(patient.id)" class="md-icon-button active" md-button=""><span class="md-button-wrapper">
-            
-                    <i md-icon="" class="material-icons">code</i>
-                  </span><div class="md-ripple-container"></div></button>
+                                <button    (click)="toggleSource(patient.id)" class="md-icon-button active" md-button=""><span class="md-button-wrapper">
+
+                                        <i md-icon="" class="material-icons">code</i>
+                                    </span><div class="md-ripple-container"></div></button>
                             </md-card-actions>
                         </md-card-header>
                         <!--                           <img src="public/images/old-board.jpg" class="md-card-image" alt="Old Board">-->
@@ -55,74 +54,12 @@
                         </md-card-title>
                         <md-card-content  *ngIf="showSource  && toggleID == patient.id">
                             <md-list>
-<!--                                <md-list-item>                                    
-                                    <div class="md-list-item-text">
-                                        <h6>Firstname : {{ patient.firstname}}</h6>                                      
-                                    </div>
-                                    <md-divider inset></md-divider>
-                                </md-list-item>
-                                <md-list-item>                                    
-                                    <div class="md-list-item-text">
-                                        <h6>Middlename : {{ patient.middlename }}</h6>                                      
-                                    </div>
-                                    <md-divider inset></md-divider>
-                                </md-list-item>
-                                <md-list-item>                                    
-                                    <div class="md-list-item-text">
-                                        <h6>Lastname : {{ patient.lastname}}</h6>                                      
-                                    </div>
-                                    <md-divider inset></md-divider>
-                                </md-list-item>
-                                <md-list-item>                                    
-                                    <div class="md-list-item-text">
-                                        <h6>Birthdate {{ patient.birthdate }}</h6>                                      
-                                    </div>
-                                    <md-divider inset></md-divider>
-                                </md-list-item>
-                                <md-list-item>                                    
-                                    <div class="md-list-item-text">
-                                        <h6>Gender {{ patient.gender }}</h6>                                      
-                                    </div>
-                                    <md-divider inset></md-divider>
-                                </md-list-item>
-                                <md-list-item> 
-                                    <div class="md-list-item-text">
-                                        <h6>Address : {{ patient.address }}</h6>                                      
-                                    </div>
-                                    <md-divider inset></md-divider>
-                                </md-list-item>
-                                <md-list-item>                                    
-                                    <div class="md-list-item-text">
-                                        <h6>Place: {{ patient.place }}</h6>                                      
-                                    </div>
-                                    <md-divider inset></md-divider>
-                                </md-list-item>
-                                <md-list-item>                                    
-                                    <div class="md-list-item-text">
-                                        <h6>Phone number: {{ patient.phone }}</h6>                                      
-                                    </div>
-                                    <md-divider inset></md-divider>
-                                </md-list-item>
-                                <md-list-item>                                    
-                                    <div class="md-list-item-text">
-                                        <h6>Mobile phone number: {{ patient.mobilephone }}</h6>                                      
-                                    </div>
-                                    <md-divider inset></md-divider>
-                                </md-list-item>
-
-                                <md-list-item>                                    
-                                    <div class="md-list-item-text">
-                                        <h6>Email address: {{ patient.email }}</h6>                                      
-                                    </div>
-                                    <md-divider inset></md-divider>
-                                </md-list-item>-->
                                 <md-list-item class="md-1-line" *ngFor="let item of patient | values">                                    
-                                  <div class="md-list-item-text">
-                                    <h6>{{ item }}</h6>                                      
-                                  </div>
-                                  <md-divider inset></md-divider>
+                                              <div class="md-list-item-text">
+                                        <h6>{{ item }}</h6>                                      
+                                    </div>
+                                    <md-divider inset></md-divider>
                                 </md-list-item>
-
                             </md-list>
                         </md-card-content>
                     </md-card>
@@ -130,6 +67,7 @@
             </div>
             <div [hidden]="patientStore.patients._subscribe.length != 0">
                 No Records Found 
+            </div>
         </div>
         <div class="row grid-container" [hidden]="!listDisplayModeEnabled">
             <div class="col-md-10">
