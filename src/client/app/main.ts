@@ -4,12 +4,11 @@ import {bootstrap}    from '@angular/platform-browser-dynamic';
 import { bind, provide } from '@angular/core';
 import { FORM_PROVIDERS, APP_BASE_HREF, LocationStrategy, HashLocationStrategy, PathLocationStrategy } from "@angular/common";
 import { ROUTER_PROVIDERS } from '@angular/router';
-//import { ROUTER_BINDINGS} from '@angular/router-deprecated';
 import { HTTP_PROVIDERS, Http } from '@angular/http';
 import {ELEMENT_PROBE_PROVIDERS} from '@angular/platform-browser';
 import {AuthHttp, AuthConfig} from 'angular2-jwt/angular2-jwt';
 import { AppComponent } from './app';
-//import {MATERIAL_PROVIDERS} from "ng2-material/all";
+import {MATERIAL_PROVIDERS} from "ng2-material/index";
 import { NotificationService  } from './services/notificationService';
 //import { PatientService } from './services/patientService';
 import { PatientBackendService } from './services/PatientBackendService';
@@ -23,7 +22,7 @@ bootstrap(AppComponent, [
     FORM_PROVIDERS,
     HTTP_PROVIDERS,
     ELEMENT_PROBE_PROVIDERS,
-//    MATERIAL_PROVIDERS,
+    MATERIAL_PROVIDERS,
     NotificationService,
 //    PatientService,
     PatientBackendService,

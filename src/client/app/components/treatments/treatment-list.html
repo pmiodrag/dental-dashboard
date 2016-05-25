@@ -11,6 +11,7 @@
     <span class="md-caption" hide show-gt-md>{{selection}}</span>
   </div>
 </md-toolbar>
+
 <md-data-table layout-fill [selectable]="true" (onSelectableChange)="change($event)">
   <thead>
   <tr>
@@ -22,7 +23,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="#treatment of filteredTreatments" [selectableValue]="treatment.id">
+  <tr *ngFor="let treatment of filteredTreatments"  md-data-table-selectable-row [selectable-value]="treatment.id">
       <td>  <button md-fab class="md-mini orange" (click)="editTreatment(treatment);"  aria-label="Edit treatment">
     <i class="fa fa-pencil-square-o"></i>
 </button></td>

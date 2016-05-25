@@ -5,20 +5,20 @@ import { TreatmentService, Treatment } from '../../services/treatmentService';
 import { NotificationService  } from '../../services/notificationService';
 import {ControlMessages} from '../handlers/control-messages';
 import {ValidationService} from '../../shared/services/validation.service';
-import {MD_INPUT_DIRECTIVES} from '@angular2-material/input';
-import {MdToolbar} from '@angular2-material/toolbar';
-import {MdButton} from '@angular2-material/button';
-//import {MdPatternValidator,
-//  MdMinValueValidator,
-//  MdNumberRequiredValidator,
-//  MdMaxValueValidator, MATERIAL_DIRECTIVES} from "ng2-material/all";
+//import {MD_INPUT_DIRECTIVES} from '@angular2-material/input';
+//import {MdToolbar} from '@angular2-material/toolbar';
+//import {MdButton} from '@angular2-material/button';
+import {MdPatternValidator,
+  MdMinValueValidator,
+  MdNumberRequiredValidator,
+  MdMaxValueValidator, MATERIAL_DIRECTIVES} from "ng2-material/index";
 import {TimepickerComponent, DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 @Component({ 
   selector: 'treatment-form', 
   templateUrl: 'app/components/treatments/treatment-form.html',
   providers: [TreatmentService],
   host: {'[hidden]': 'hidden'},
-  directives: [TimepickerComponent, DATEPICKER_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES,MD_INPUT_DIRECTIVES, MdButton, MdToolbar, RouterLink, ControlMessages]
+  directives: [TimepickerComponent, DATEPICKER_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES, MATERIAL_DIRECTIVES, RouterLink, ControlMessages]
 })
 
 

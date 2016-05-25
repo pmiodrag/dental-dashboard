@@ -10,7 +10,6 @@ export class ValidationService {
             'invalidEmailAddress': 'Invalid email address',
             'invalidPassword': 'Invalid password. Password must be at least 6 characters long, and contain a number.'
         };
-          console.log("getValidatorErrorMessage", code, "config[code] : ", config[code]);
         return config[code];
     }
 

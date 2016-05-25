@@ -52,8 +52,8 @@ var jsNPMDependencies = [
     'angular2-jwt/angular2-jwt.js',
      'angular2-jwt/angular2-jwt.js.map',
     //'angular2/bundles/angular2.min.js',   
-            'ng2-material/all.js',
-             'ng2-material/all.js.map',
+            'ng2-material/index.js',
+             'ng2-material/index.js.map',
               'moment/moment.js',
               'immutable/dist/immutable.js',
               'ng2-bootstrap/ng2-bootstrap.js'
@@ -62,7 +62,7 @@ var jsNPMDependencies = [
 
 
 gulp.task('build:styles', function() {
-    var copyNgStyles= gulp.src('node_modules/ng2-material/dist/*.css')
+    var copyNgStyles= gulp.src('node_modules/ng2-material/ng2-material.css')
      .pipe(minifyCSS())
       .pipe(gulp.dest('dist/styles/ng2-material'));
      var copyNgCoreStyles= gulp.src('node_modules/ng2-material/source/core/style/*.scss')     

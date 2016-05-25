@@ -7,16 +7,14 @@ import { NotificationService  } from '../../services/notificationService';
 import { Sorter } from '../../shared/sorter';
 import { SortByDirective } from '../../shared/directives/sortby.directive';
 import {MdToolbar} from '@angular2-material/toolbar';
-import {MdButton} from '@angular2-material/button';
-//import {MATERIAL_DIRECTIVES, ITableSelectionChange} from "ng2-material/all";
-//import {DataTableSelectableUsage} from "./selectable_usage"
+import {MATERIAL_DIRECTIVES, ITableSelectionChange} from "ng2-material/index";
 @Component({ 
   selector: 'treatment-list',
   providers: [TreatmentService],
   templateUrl: 'app/components/treatments/treatment-list.html',
   host: {'[hidden]': 'hidden'},
   styleUrls : ['styles/selectable_usage.css'],
-  directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, MdToolbar, MdButton ]
+  directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES,MATERIAL_DIRECTIVES, MdToolbar ]
 })
 export class TreatmentListComponent {
 	
@@ -42,10 +40,10 @@ export class TreatmentListComponent {
 //       this.patientID = parseInt(this._routeParams.get('id'), 10);
 //       let firstname = this._routeParams.get('firstname');
 //       let lastname = this._routeParams.get('lastname');
-//       this.patientService.getPatientTreatmentList(this.patientID).subscribe((treatments: any[]) => {   
-//          
-//        this.filteredTreatments = treatments.filter(treatment => treatment.patientid === this.patientID);
-//      });
+       this.patientService.getPatientTreatmentList(this.patientID).subscribe((treatments: any[]) => {   
+          
+        this.filteredTreatments = treatments.filter(treatment => treatment.patientid === this.patientID);
+      });
     }
     
    change(data: ITableSelectionChange) {

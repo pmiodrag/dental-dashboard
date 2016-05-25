@@ -34,7 +34,7 @@
                             <md-card-actions layout="row" layout-align="start center">
                                 <md-card-icon-actions>
                                 </md-card-icon-actions>
-                                <a  md-fab class="md-mini blue-lighten-3"  [routerLink]="['Treatments',{id:patient.id, firstname: patient.firstname, lastname: patient.lastname}]"><i class="fa fa-list-ol" aria-hidden="true"></i></a>
+                                <a  md-fab class="md-mini blue-lighten-3"  [routerLink]="['/patient',patient.id, patient.firstname, patient.lastname, '/treatments']"><i class="fa fa-list-ol" aria-hidden="true"></i></a>
                                 <button md-fab class="md-mini orange" (click)="editPatient(patient);"  aria-label="Edit patient">
                                     <i class="fa fa-pencil-square-o"></i>
                                 </button>
@@ -151,7 +151,7 @@
                             <tr *ngFor="let patient of patientStore.patients | async">
                                 <td><img src="assets/images/{{ patient.gender | lowercase }}.png" 
                                      class="card-image" alt="Patient Image" /></td>
-                                <td><a [routerLink]="['Treatments',{id:patient.id, firstname: patient.firstname, lastname: patient.lastname}]">{{ patient.firstname | capitalize }}</a></td>
+                                <td><a [routerLink]="['/patient',patient.id, patient.firstname, patient.lastname, '/treatments']">{{ patient.firstname | capitalize }}</a></td>
                                 <td>{{ patient.middleName | capitalize }}</td>
                                 <td>{{ patient.lastName | capitalize }}</td>
                                 <td>{{ patient.address }}</td>

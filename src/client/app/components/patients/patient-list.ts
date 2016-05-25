@@ -10,21 +10,18 @@ import { SortByDirective } from '../../shared/directives/sortby.directive';
 import { CapitalizePipe } from '../../shared/pipes/capitalize.pipe';
 import { TrimPipe } from '../../shared/pipes/trim.pipe';
 import { ValuesPipe } from '../../shared/pipes/values.pipe';
-//import {MATERIAL_DIRECTIVES, MATERIAL_PROVIDERS} from "ng2-material/all";
+import {MATERIAL_DIRECTIVES} from "ng2-material/index";
 import { PatientFormComponent } from './patient-form'
 import {TimerWrapper} from "@angular/common/src/facade/async";
 import { PatientStore } from '../state/PatientStore';
-import {MdButton} from '@angular2-material/button';
-import {MD_CARD_DIRECTIVES} from '@angular2-material/card';
-import {MD_LIST_DIRECTIVES} from '@angular2-material/list';
-import {MdIcon} from '@angular2-material/icon';
+//import {MdIcon} from '@angular2-material/icon';
 import {MdToolbar} from '@angular2-material/toolbar';
 @Component({ 
   selector: 'patient-list', 
  // providers: [PatientService],
   templateUrl: 'app/components/patients/patient-list.html',
   host: {'[hidden]': 'hidden'},
-  directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, MD_LIST_DIRECTIVES, MD_CARD_DIRECTIVES, MdToolbar, MdButton, MdIcon, FilterTextboxComponent, SortByDirective],
+  directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES, MdToolbar, FilterTextboxComponent, SortByDirective],
   pipes: [CapitalizePipe, TrimPipe, ValuesPipe]
 })
 

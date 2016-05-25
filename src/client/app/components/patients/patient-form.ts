@@ -16,7 +16,7 @@ import {MdToolbar} from '@angular2-material/toolbar';
 import {MdPatternValidator,
   MdMinValueValidator,
   MdNumberRequiredValidator,
-  MdMaxValueValidator} from "ng2-material/all";
+  MdMaxValueValidator, MATERIAL_DIRECTIVES} from "ng2-material/index";
 //import {DatePicker} from 'ng2-datepicker';
 @Component({ 
   selector: 'patient-form', 
@@ -24,7 +24,7 @@ import {MdPatternValidator,
 //  providers: [PatientBackendService],
   providers: [MdRadioDispatcher],
   host: {'[hidden]': 'hidden'},
-  directives: [CORE_DIRECTIVES, DATEPICKER_DIRECTIVES, FORM_DIRECTIVES,ROUTER_DIRECTIVES, ControlMessages, MD_INPUT_DIRECTIVES, MdToolbar, MdRadioGroup, MdRadioButton],
+  directives: [CORE_DIRECTIVES, DATEPICKER_DIRECTIVES, FORM_DIRECTIVES,ROUTER_DIRECTIVES, MD_INPUT_DIRECTIVES, MdRadioGroup, MdRadioButton, ControlMessages, MATERIAL_DIRECTIVES],
   pipes: [CapitalizePipe]
 })
 

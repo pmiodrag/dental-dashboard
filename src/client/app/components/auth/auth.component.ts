@@ -1,17 +1,15 @@
 import {Component} from '@angular/core';
 import { Router, ROUTER_DIRECTIVES} from '@angular/router';
-import { RouteConfig , RouterLink, CanActivate} from '@angular/router-deprecated';
 import {Http} from '@angular/http';
-import {FORM_PROVIDERS} from '@angular/common';
 import {AuthHttp, tokenNotExpired, JwtHelper} from 'angular2-jwt/angular2-jwt';
-import {MdButton} from '@angular2-material/button';
+//import {MdButton} from '@angular2-material/button';
 import {MdToolbar} from '@angular2-material/toolbar';
-//import {MATERIAL_DIRECTIVES, MATERIAL_PROVIDERS} from "ng2-material/all";
+import {MATERIAL_DIRECTIVES} from "ng2-material/index";
 declare var Auth0Lock;
 
 
 @Component({
-    directives: [ROUTER_DIRECTIVES, MdButton, MdToolbar],
+    directives: [ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES, MdToolbar],
     selector: 'auth-component',
     templateUrl: 'app/components/auth/auth.component.html'
 })

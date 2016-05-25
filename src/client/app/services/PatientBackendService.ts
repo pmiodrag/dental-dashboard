@@ -33,8 +33,7 @@ export class PatientBackendService {
         this.baseUrl = '/'
     }
 
-    getAllPatients() {
-        
+    getAllPatients() {        
         return this.http.get('/patient');
     }
 
@@ -48,5 +47,17 @@ export class PatientBackendService {
     deletePatient(deletePatient: Patient) : Observable<Response> {
         return this.http.delete('/patient/' + deletePatient.id).share();
     }
+    
+    getPatientTreatmentList(patientId:number){        
+        return this.http.get(this.baseUrl + 'patient/'+ patientId + '/treatments')
+                    .map((res: Response) => res.json())
+                    .catch(this.handleError);    
+    }
+    
+     handleError(error: any) {
+        console.error(error);
+        return Observable.throw(error.json().error || 'Server error');
+    }
+    
 
 }

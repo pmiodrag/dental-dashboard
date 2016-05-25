@@ -8,7 +8,7 @@ import { FilterTextboxComponent } from './filterTextbox.component';
 import { SortByDirective } from '../../shared/directives/sortby.directive';
 import { CapitalizePipe } from '../../shared/pipes/capitalize.pipe';
 import { TrimPipe } from '../../shared/pipes/trim.pipe';
-import {MATERIAL_DIRECTIVES, MATERIAL_PROVIDERS} from "ng2-material/all";
+import {MATERIAL_DIRECTIVES} from "ng2-material/index";
 import { PatientFormComponent } from './patient-form'
 import { PatientList } from './patient-list'
 import { PatientHeaderComponent } from './patient-header'
