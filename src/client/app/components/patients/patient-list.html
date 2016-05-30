@@ -20,7 +20,7 @@
     </div>
     <div class="row">
         <div class="row card-container" [hidden]="listDisplayModeEnabled">
-            <div class="col-sm-6 col-md-4 col-lg-4" *ngFor="let patient of patientStore.patients  | async">
+            <div class="col-sm-6 col-md-4 col-lg-4" *ngFor="let patient of patientStore.patients | async">
                  <div  layout="column">
                     <md-card>
                         <md-card-header class="">
@@ -70,7 +70,42 @@
         </div>
         <div class="row grid-container" [hidden]="!listDisplayModeEnabled">
             <div class="col-md-10">
-                <div class="table">
+                
+                <md-data-table layout-fill [selectable]="true" (onSelectableChange)="change($event)">
+                    <thead>
+                    <tr>
+                          <th>&nbsp;</th>
+                         <th>Edit Patient</th>
+                      <th class="md-text-cell">First Name</th>
+                     <th>Middle Name</th>
+                      <th>Last Name</th>
+                      <th>Address</th>
+                      <th>City</th>
+                      <th>Country</th>
+<!--                      <th>Treatments Total</th>-->
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let patient of patientStore.patients | async"  md-data-table-selectable-row [selectable-value]="patient.firstname">
+                        <td>  <button md-fab class="md-mini orange" (click)= "editPatient(patient);"  aria-label="Edit patient">
+                                <i class="fa fa-pencil-square-o"></i>
+                          </button>
+                        </td>
+                      <td class="md-text-cell"><a [routerLink]="['/patient',patient.id, patient.firstname, patient.lastname, '/treatments']">{{ patient.firstname | capitalize }}</a></td>      
+                          <td>{{ patient.middleName | capitalize }}</td>
+                                <td>{{ patient.lastName | capitalize }}</td>
+                                <td>{{ patient.address }}</td>
+                                <td>{{ patient.place | trim }}</td>
+                                 <td>{{ patient.city | trim }}</td>
+                                <td>{{ patient.country | trim }}</td>
+                    </tr>
+                    <tr [hidden]="patientStore.patients._subscribe.length != 0">
+                                <td>&nbsp;</td>
+                                <td colspan="6">No Records Found</td>
+                            </tr>
+                    </tbody>
+                  </md-data-table>
+<!--                <div class="table">
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
@@ -80,7 +115,7 @@
                                 <th sort-by="address" (sorted)="sort($event)">Address</th>
                                 <th sort-by="city" (sorted)="sort($event)">City</th>
                                 <th sort-by="country.name" (sorted)="sort($event)">Country</th>
-                                <!-- Or you can do this directly rather than using sort-by directive -->
+                                 Or you can do this directly rather than using sort-by directive 
                                 <th (click)="sort('orderTotal')">Treatments Total</th>
                             </tr>
                         </thead>
@@ -100,7 +135,7 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>

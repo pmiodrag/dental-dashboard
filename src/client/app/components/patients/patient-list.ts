@@ -10,12 +10,14 @@ import { SortByDirective } from '../../shared/directives/sortby.directive';
 import { CapitalizePipe } from '../../shared/pipes/capitalize.pipe';
 import { TrimPipe } from '../../shared/pipes/trim.pipe';
 import { ValuesPipe } from '../../shared/pipes/values.pipe';
-import {MATERIAL_DIRECTIVES} from "ng2-material/index";
+import {MATERIAL_DIRECTIVES, ITableSelectionChange} from "ng2-material/index";
 import { PatientFormComponent } from './patient-form'
 import {TimerWrapper} from "@angular/common/src/facade/async";
 import { PatientStore } from '../state/PatientStore';
 import {MdToolbar} from '@angular2-material/toolbar';
 import {List} from 'immutable';
+import {asObservable} from "../state/asObservable";
+import * as Rx from "rxjs/Rx";
 @Component({ 
   selector: 'patient-list', 
  // providers: [PatientService],
@@ -48,32 +50,16 @@ export class PatientList {
  // @Input() action: string;
   @Output() selectedChange: EventEmitter<any> = new EventEmitter();
   patientList: Observable<Patient[]>;
+  filteredPatientsObs : Observable<any>;
   
+  private _patients: Rx.BehaviorSubject<List<Patient>> = new Rx.BehaviorSubject(List([]));
   constructor(private patientService: PatientBackendService, private notificationService: NotificationService, private patientStore: PatientStore) { }
   
   ngOnInit() {
     this.title = 'Patients';
     this.filterText = 'Filter Patients:';
-    this.listDisplayModeEnabled = false;
-  //  this.patientList = this.patientService.patients$; // subscribe to entire collection
-//    this.singleTodo$ = this._todoService.todos$
-//                          .map(todos => todos.find(item => item.id === '1'));  
-//                          // subscribe to only one todo 
-    // this.patientList.subscribe();
-//     this.patients = this.filteredPatients =  this.patientService.loadAll();
-   // this.patientService.getAllPatients();    // load all patients
-   // this._todoService.load('1');    // load only todo with id of '1'
-//    this.patientService.getPatients()  
-//        .subscribe((patients:Patient[]) => {
-//          console.log("getPatients", patients);
-//          this.patients = this.filteredPatients = patients;
-//        });
-//    this.patientService.getPatients()
-//        .subscribe((patients:Patient[]) => {
-//          this.patient = patients[0];
-//          console.log("data service init get pacient from json  ", this.patient);   
-//    })       
-         
+    this.listDisplayModeEnabled = false;    
+    this.filteredPatientsObs = this.patientStore.patients    
     this.sorter = new Sorter();
   }
   editPatient (patient: Patient) {
@@ -94,22 +80,11 @@ export class PatientList {
   filterChanged(data: string) {
     if (data && this.patientStore.patients) {
         data = data.toUpperCase();
-        let props = ['firstname', 'middlename', 'lastname', 'address', 'place'];
-        let filtered = this.patientStore.patients2.getValue().filter(item => {
-            let match = false;
-            for (let prop of props) {
-                if (item[prop]!= null && item[prop].toString().toUpperCase().indexOf(data) > -1) {
-                  match = true;
-                  break;
-                }
-            };
-            return match;
-        });
-        this.patientStore.patients = filtered;
-      console.log("filtered patients filtered",  filtered)// this.filteredPatients = filtered;
+        this.patientStore.filterData(data);
+        this.filteredPatientsObs = asObservable(this._patients);
     }
     else {
-      this.filteredPatients = this.patients;
+      this.filteredPatientsObs = this.patientStore.patients;
     }
   }
  
@@ -144,5 +119,18 @@ export class PatientList {
       }, 25);
     }
   }
+  
+//   change(data: ITableSelectionChange) {
+//    let patients = [];
+//    console.log("data", data);
+//    this.filteredPatients.forEach((treatment: Treatment) => {
+//        console.log("treatment", treatment);
+//      if (data.values.indexOf(treatment.id) !== -1) {
+//        treatments.push(treatment.id);
+//      }
+//    });
+//    this.selection = treatments.join(', ');
+//    this.count = patients.length;
+//  }
 
 }//    }

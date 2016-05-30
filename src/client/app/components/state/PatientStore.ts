@@ -11,87 +11,110 @@ import {BehaviorSubject} from "rxjs/Rx";
 export class PatientStore {
 
     private _patients: BehaviorSubject<List<Patient>> = new BehaviorSubject(List([]));
+    // this method should be supported in RXJS 2
+    //    public patients: Observable<List<Patient>> =  this._patients.asObservable();
 
     constructor(private patientBackendService: PatientBackendService) {
         this.loadInitialData();
     }
 
-    get patients() {       
+    get patients() {
         return asObservable(this._patients);
     }
-     set patients(patients: any) {
-         this._patients.next(patients);
-     }
-    
-    get patients2() {       
+    set patients(patients: any) {
+        this._patients.next(patients);
+    }
+
+    get patients2() {
+        console.log("patients2", this._patients);
         return (this._patients);
     }
 
     loadInitialData() {
         this.patientBackendService.getAllPatients()
             .subscribe(
-                res => {
-                    let patients = (<Patient[]>res.json()).map((patient: any) =>
-                     new Patient(
-                            patient.id,
-                            patient.firstname,
-                            patient.lastname,
-                            patient.middlename,
-                            patient.gender,
-                            patient.address,
-                            patient.place,
-                            patient.birthdate,
-                            patient.email,
-                            patient.phone,
-                            patient.mobilephone
-                        ));
+            res => {
+                let patients = (<Patient[]>res.json()).map((patient: any) =>
+                    new Patient(
+                        patient.id,
+                        patient.firstname,
+                        patient.lastname,
+                        patient.middlename,
+                        patient.gender,
+                        patient.address,
+                        patient.place,
+                        patient.birthdate,
+                        patient.email,
+                        patient.phone,
+                        patient.mobilephone
+                    )) //.filter((person) => person.firstname == "Miodrag")
+       
 
-                    this._patients.next(List(patients));
-                },
-                err => console.log("Error retrieving Patients")
+                this._patients.next(List(patients));
+            },
+            err => console.log("Error retrieving Patients")
             );
 
     }
-
-    addPatient(newPatient:Patient):Observable<Response> {
+    filterData(data) {
+        this.patientBackendService.getAllPatients()
+            .subscribe(
+            res => {
+                let patients = (<Patient[]>res.json()).map((patient: any) =>
+                    new Patient(
+                        patient.id,
+                        patient.firstname,
+                        patient.lastname,
+                        patient.middlename,
+                        patient.gender,
+                        patient.address,
+                        patient.place,
+                        patient.birthdate,
+                        patient.email,
+                        patient.phone,
+                        patient.mobilephone
+                    ))
+                    .filter(item => {
+                        let props = ['firstname', 'middlename', 'lastname', 'address', 'place'];
+                        let match = false;
+                        for (let prop of props) {
+                            if (item[prop] != null && item[prop].toString().toUpperCase().indexOf(data) > -1) {
+                                match = true;
+                                break;
+                            }
+                        };
+                        return match;
+                    })
+                this._patients.next(List(patients));
+            },
+            err => console.log("Error retrieving Patients")
+            );
+    }
+    addPatient(newPatient: Patient): Observable<Response> {
 
         let obs = this.patientBackendService.savePatient(newPatient);
 
         obs.subscribe(
-                res => {
-                    this._patients.next(this._patients.getValue().push(newPatient));
-                });
+            res => {
+                this._patients.next(this._patients.getValue().push(newPatient));
+            });
 
         return obs;
     }
 
-//    toggleTodo(toggled:Todo): Observable {
-//        let obs: Observable = this.todoBackendService.toggleTodo(toggled);
-//
-//        obs.subscribe(
-//            res => {
-//                let todos = this._todos.getValue();
-//                let index = todos.findIndex((todo: Todo) => todo.id === toggled.id);
-//                let todo:Todo = todos.get(index);
-//                this._todos.next(todos.set(index, new Todo({id:toggled.id, description:toggled.description, completed:!toggled.completed}) ));
-//            }
-//        );
-//
-//        return obs;
-//    }
 
 
-    deletePatient(deleted:Patient): Observable<Response> {
+    deletePatient(deleted: Patient): Observable<Response> {
         let obs = this.patientBackendService.deletePatient(deleted);
 
         obs.subscribe(
-                res => {
-                    let patients: List<Patient> = this._patients.getValue();
-                    let index = patients.findIndex((patient) => patient.id === deleted.id);
-                    this._patients.next(patients.delete(index));
+            res => {
+                let patients: List<Patient> = this._patients.getValue();
+                let index = patients.findIndex((patient) => patient.id === deleted.id);
+                this._patients.next(patients.delete(index));
 
-                }
-            );
+            }
+        );
 
         return obs;
     }

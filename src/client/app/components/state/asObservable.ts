@@ -5,9 +5,6 @@
 * not needed if using RxJs beta 2 or higher
 *
 **/
-
-//
-
 import {Subject} from "rxjs/Subject";
 import {Observable} from "rxjs/Observable";
 
