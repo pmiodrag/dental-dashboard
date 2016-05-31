@@ -73,7 +73,7 @@ export class PatientStore {
                         patient.email,
                         patient.phone,
                         patient.mobilephone
-                    ))
+                    ))                    
                     .filter(item => {
                         let props = ['firstname', 'middlename', 'lastname', 'address', 'place'];
                         let match = false;
@@ -102,6 +102,20 @@ export class PatientStore {
         return obs;
     }
 
+    updatePatient(updatedPatient: Patient): Observable<Response> {
+
+        let obs = this.patientBackendService.updatePatient(updatedPatient);
+
+        obs.subscribe(
+            res => {
+                let patients: List<Patient> = this._patients.getValue();
+                let index = patients.findIndex((patient) => patient.id === updatedPatient.id);
+                patients[index] = updatedPatient;
+                this._patients.next(patients);
+            });
+
+        return obs;
+    }
 
 
     deletePatient(deleted: Patient): Observable<Response> {

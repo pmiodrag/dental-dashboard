@@ -78,13 +78,9 @@ export class PatientList {
   }
 
   filterChanged(data: string) {
-    if (data && this.patientStore.patients) {
+    if (data) {
         data = data.toUpperCase();
-        this.patientStore.filterData(data);
-        this.filteredPatientsObs = asObservable(this._patients);
-    }
-    else {
-      this.filteredPatientsObs = this.patientStore.patients;
+        this.patientStore.filterData(data);        
     }
   }
  

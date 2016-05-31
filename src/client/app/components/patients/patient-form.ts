@@ -106,17 +106,18 @@ export class PatientFormComponent {
                     this.uiStateStore.endBackendAction();
                 }
             );
+            this.goBack();
     }
-  
-//    addPatient(patient) {
-//        this.patientService.addPatient(patient).subscribe((res:any) => {         
-//           console.log("make service call for rest post pacient  "+res);         
-//        });
-//    }
+    
     updatePatient(patient) {
-//        this.patientService.updatePatient(patient).subscribe((res:any) => {         
-//           console.log("make service call for rest put pacient  "+res);         
-//        });
+        this.patientStore.updatePatient(patient)
+            .subscribe(
+                res => {},
+                err => {
+                    this.uiStateStore.endBackendAction();
+                }
+            );
+            this.goBack();
     }
       
     goBack() {     
@@ -124,8 +125,10 @@ export class PatientFormComponent {
         this.patientheader.hidden = false;
         this.patientlist.hidden = false;
     }
+    
     onSubmit(patient) { 
-        patient.birthdate.setHours(12);
+        console.log("patient.birthdate", patient.birthdate);
+       // patient.birthdate.setHours(12);
         if (this.submitAction == 'add') {             
             this.addPatient (patient);
         } else {
