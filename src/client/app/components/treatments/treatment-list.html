@@ -23,7 +23,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let treatment of filteredTreatments"  md-data-table-selectable-row [selectable-value]="treatment.id">
+  <tr *ngFor="let treatment of treatmentStore.treatments | async"  md-data-table-selectable-row [selectable-value]="treatment.id">
       <td>  <button md-fab class="md-mini orange" (click)="editTreatment(treatment);"  aria-label="Edit treatment">
     <i class="fa fa-pencil-square-o"></i>
 </button></td>

@@ -2,12 +2,11 @@ import { Component, Input, EventEmitter } from '@angular/core';
 import { FORM_DIRECTIVES, Validators, FormBuilder, ControlGroup, CORE_DIRECTIVES } from '@angular/common';
 import { RouterLink} from '@angular/router-deprecated';
 import { TreatmentService, Treatment } from '../../services/treatmentService';
-import { NotificationService  } from '../../services/notificationService';
-import {ControlMessages} from '../handlers/control-messages';
-import {ValidationService} from '../../shared/services/validation.service';
-//import {MD_INPUT_DIRECTIVES} from '@angular2-material/input';
-//import {MdToolbar} from '@angular2-material/toolbar';
-//import {MdButton} from '@angular2-material/button';
+import { NotificationService } from '../../services/notificationService';
+import { ControlMessages} from '../handlers/control-messages';
+import { ValidationService} from '../../shared/services/validation.service';
+import { UiStateStore } from '../state/UiStateStore';
+import { TreatmentStore } from '../state/TreatmentStore';
 import {MdPatternValidator,
   MdMinValueValidator,
   MdNumberRequiredValidator,
@@ -41,7 +40,7 @@ export class TreatmentFormComponent {
         mstep: [1, 5, 10, 15, 25, 30]
     };
     
-    constructor(fb: FormBuilder, private treatmentService: TreatmentService, private notificationService: NotificationService ) {
+    constructor(fb: FormBuilder, private treatmentStore: TreatmentStore, private treatmentService: TreatmentService, private notificationService: NotificationService, private uiStateStore: UiStateStore ) {
     
         this.treatmentForm = fb.group({
           'therapy': ['',  Validators.compose([
@@ -81,7 +80,7 @@ export class TreatmentFormComponent {
           
     }
     onFormActionChange(treatment: Treatment) {
-        console.log("onFormActionChange patient", treatment);
+        console.log("onFormActionChange treatment", treatment);
         this.treatment = treatment;
         if (treatment.id == 0) {          
           this.formTitle = "Add Treatment";
@@ -98,21 +97,35 @@ export class TreatmentFormComponent {
         this.treatmentlist.hidden = false;
     }
     onSubmit(treatment) { 
-        treatment.treatmentdate = this.date;
-        treatment.treatmentdate.setHours(this.time.getHours());
-        treatment.treatmentdate.setMinutes(this.time.getMinutes());
-        console.log("Submit treatment datetime() ", treatment.treatmentdate);
-        console.log("Submit treatment date() ", this.date );
-        console.log("Submit treatment time() ", this.time, "this.time.getMinutes()", this.time.getMinutes() )   
+//        treatment.treatmentdate = this.date;
+//        treatment.treatmentdate.setHours(this.time.getHours());
+//        treatment.treatmentdate.setMinutes(this.time.getMinutes());
+//        console.log("Submit treatment datetime() ", treatment.treatmentdate);
+//        console.log("Submit treatment date() ", this.date );
+//        console.log("Submit treatment time() ", this.time, "this.time.getMinutes()", this.time.getMinutes() )   
+        console.log("Submit treatment", treatment);
         this.addTreatment(treatment);    
         this.submitted = true; 
     }
     // method to call REST to create new treatment
-    addTreatment(treatment) {        
-        this.treatmentService.addPatient(treatment).subscribe((res:any) => {         
-           console.log("make service call for rest post pacient  "+res);         
-        });
+//    addTreatment(treatment) {        
+//        this.treatmentService.addPatient(treatment).subscribe((res:any) => {         
+//           console.log("make service call for rest post pacient  "+res);         
+//        });
+//    } ;
+    
+    addTreatment(treatment) {
+       
+      //  this.uiStateStore.startBackendAction('Saving Todo...');
+
+        this.treatmentStore.addTreatment(treatment)
+            .subscribe(
+                res => {},
+                err => {
+                    this.uiStateStore.endBackendAction();
+                }
+            );
+            this.goBack();
     }
-    ;
     
 }

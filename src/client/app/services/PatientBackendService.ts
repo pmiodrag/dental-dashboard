@@ -59,11 +59,9 @@ export class PatientBackendService {
         return this.http.delete('/patient/' + deletePatient.id).share();
     }
     
-    getPatientTreatmentList(patientId:number){        
-        return this.http.get(this.baseUrl + 'patient/'+ patientId + '/treatments')
-                    .map((res: Response) => res.json())
-                    .catch(this.handleError);    
-    }
+//    getPatientTreatmentList(patientId:number){        
+//        return this.http.get(this.baseUrl + 'patient/'+ patientId + '/treatments');                  
+//    }
     
      handleError(error: any) {
         console.error(error);

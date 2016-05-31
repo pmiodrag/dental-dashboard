@@ -23,9 +23,9 @@ export class TreatmentsComponent {
     
     constructor(routeSegment: RouteSegment) {
         this.id = routeSegment.getParam('id');
-        this.firstname = routeSegment.getParam('firstname');
-        this.lastname = routeSegment.getParam('lastname');
-        console.log("routerOnActivate", this.firstname);
+//        this.firstname = routeSegment.getParam('firstname');
+//        this.lastname = routeSegment.getParam('lastname');
+        console.log("TreatmentsComponent routerOnActivate id", this.id);
     }   
     
     ngOnInit() {

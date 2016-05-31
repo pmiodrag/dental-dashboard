@@ -47,3 +47,16 @@
 .well {
   min-height: 250px !important;
 }
+
+section {
+  background: #f7f7f7;
+  border-radius: 3px;
+  text-align: center;
+  margin: 1em;
+  position: relative !important;
+  padding-bottom: 10px;
+  [md-button], [md-raised-button], [md-fab] {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+}

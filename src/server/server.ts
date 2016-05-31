@@ -35,7 +35,7 @@ app.get('/patient/:id/:firstname/:lastname/treatments', treatments.index);
 app.get('/patient/:id/treatments', treatments.treatmentlist);
 
 // Treatment
-//app.get('/treatments', treatments.list);
+app.get('/treatments', treatments.list);
 app.post('/treatment', treatments.create);
 //app.put('/treatment/:id', treatments.update);
 app.get('/treatment/:id', treatments.show);

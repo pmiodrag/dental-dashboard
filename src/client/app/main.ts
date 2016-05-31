@@ -13,11 +13,14 @@ import { NotificationService  } from './services/notificationService';
 //import { PatientService } from './services/patientService';
 import { PatientBackendService } from './services/PatientBackendService';
 import { PatientStore } from './components/state/PatientStore';
+import { TreatmentBackendService } from './services/TreatmentBackendService';
+import { TreatmentStore } from './components/state/TreatmentStore';
 import { UiStateStore } from './components/state/UiStateStore';
 bootstrap(AppComponent, [
     ROUTER_PROVIDERS,
 //    ROUTER_BINDINGS,
     PatientStore,
+    TreatmentStore,
     UiStateStore,
     FORM_PROVIDERS,
     HTTP_PROVIDERS,
@@ -26,6 +29,7 @@ bootstrap(AppComponent, [
     NotificationService,
 //    PatientService,
     PatientBackendService,
+    TreatmentBackendService,
     provide(AuthHttp, {
       useFactory: (http) => {
         return new AuthHttp(new AuthConfig(), http);

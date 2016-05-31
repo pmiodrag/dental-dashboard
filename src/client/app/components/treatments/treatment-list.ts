@@ -1,16 +1,19 @@
 import { Component, Input } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
 import { ROUTER_DIRECTIVES, RouteSegment } from '@angular/router';
-import { TreatmentService, Treatment } from '../../services/treatmentService';
-import { PatientBackendService } from '../../services/PatientBackendService';
+import { Treatment, TreatmentBackendService } from '../../services/TreatmentBackendService';
+import { TreatmentStore } from '../state/TreatmentStore';
 import { NotificationService  } from '../../services/notificationService';
 import { Sorter } from '../../shared/sorter';
 import { SortByDirective } from '../../shared/directives/sortby.directive';
 import {MdToolbar} from '@angular2-material/toolbar';
 import {MATERIAL_DIRECTIVES, ITableSelectionChange} from "ng2-material/index";
+import * as Rx from "rxjs/Rx";
+import {List} from 'immutable';
+import {asObservable} from "../state/asObservable";
 @Component({ 
   selector: 'treatment-list',
-  providers: [TreatmentService],
+  providers: [TreatmentBackendService],
   templateUrl: 'app/components/treatments/treatment-list.html',
   host: {'[hidden]': 'hidden'},
   styleUrls : ['styles/selectable_usage.css'],
@@ -26,24 +29,21 @@ export class TreatmentListComponent {
     count: number;
     @Input() hidden:boolean = false;
     @Input () treatmentform: any;  
-    patientID: number;
-    constructor(private notificationService: NotificationService, private treatmentService: TreatmentService, private patientService: PatientBackendService) {}   
+    @Input () patientID: number;
+    private _treatments: Rx.BehaviorSubject<List<Treatment>> = new Rx.BehaviorSubject(List([]));
+    constructor(private notificationService: NotificationService, private treatmentService: TreatmentBackendService, private treatmentStore: TreatmentStore) {}   
     
     
-    routerOnActivate(curr: RouteSegment) {
-        this.patientID = parseInt(curr.getParam('id'), 10);
-        let firstname = curr.getParam('firstname');
-        let lastname = curr.getParam('lastname');
-      }
+    
     ngOnInit() {
-       console.log("ngOnInit");
+       console.log("TreatmentListComponent ngOnInit patientID", this.patientID);
 //       this.patientID = parseInt(this._routeParams.get('id'), 10);
 //       let firstname = this._routeParams.get('firstname');
 //       let lastname = this._routeParams.get('lastname');
-       this.patientService.getPatientTreatmentList(this.patientID).subscribe((treatments: any[]) => {   
+//       this.patientService.getPatientTreatmentList(this.patientID).subscribe((treatments: any[]) => {   
           
-        this.filteredTreatments = treatments.filter(treatment => treatment.patientid === this.patientID);
-      });
+//        this.filteredTreatments = treatments.filter(treatment => treatment.patientid === this.patientID);
+//      });
     }
     
    change(data: ITableSelectionChange) {
@@ -59,12 +59,12 @@ export class TreatmentListComponent {
     this.count = treatments.length;
   }
   
-  getTreatments(){
-    this.treatmentService.getTreatments()  
-        .subscribe((treatments:any[]) => {
-          this.treatments = this.filteredTreatments = treatments;
-        });
-  }
+//  getTreatments(){
+//    this.treatmentService.getTreatments()  
+//        .subscribe((treatments:any[]) => {
+//          this.treatments = this.filteredTreatments = treatments;
+//        });
+//  }
    // open treatment form to add new treatment.
     addTreatment () {
         this.hidden = true;

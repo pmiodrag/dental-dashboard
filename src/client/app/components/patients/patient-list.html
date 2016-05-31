@@ -2,18 +2,14 @@
     <div class="row voffset4">
         <div class="col-md-10">
             <div class="navbar"> 
-                <ul class="nav navbar-nav">
-                    <li class="toolbar-item">
-                        <a (click)="changeDisplayMode('Card')" [class.active]="!listDisplayModeEnabled">
-                            <span class="glyphicon glyphicon-th-large"></span> Card View
-                        </a>
-                    </li>
-                    <li class="toolbar-item">
-                        <a (click)="changeDisplayMode('List')" [class.active]="listDisplayModeEnabled">
-                            <span class="glyphicon glyphicon-align-justify"></span> List View
-                        </a>
-                    </li>
-                </ul>                
+                <section layout="row" layout-sm="column" layout-align="left center" layout-wrap>
+                <button md-button class="md-icon-button md-primary" (click)="changeDisplayMode('Card')" [class.active]="!listDisplayModeEnabled">
+                    <i  md-icon>apps</i>                            
+                </button>
+                <button md-button class="md-icon-button md-primary"   (click)="changeDisplayMode('List')" [class.active]="listDisplayModeEnabled">
+                    <i  md-icon>format_list_numbered</i>
+               </button>
+                </section>
                 <filter-textbox class="navbar-right" (changed)="filterChanged($event)"></filter-textbox>
             </div>
         </div>
@@ -32,7 +28,11 @@
                             <md-card-actions layout="row" layout-align="start center">
                                 <md-card-icon-actions>
                                 </md-card-icon-actions>
-                                <a  md-fab class="md-mini green"  [routerLink]="['/patient',patient.id, patient.firstname, patient.lastname, '/treatments']"><i class="fa fa-list-ol" aria-hidden="true"></i></a>
+                                <a  md-fab class="md-mini green"  [routerLink]="['/patient', patient.id, '/treatments']">
+<!--                                <a  md-fab class="md-mini green"  [routerLink]="['/patient',patient.id, patient.firstname, patient.lastname, '/treatments']">-->
+<!--                                    <i class="fa fa-list-ol" aria-hidden="true"></i>-->
+                                     <i  md-icon>format_list_numbered</i>
+                                </a>
                                 <button md-fab class="md-mini orange" (click)="editPatient(patient);"  aria-label="Edit patient">
                                     <i class="fa fa-pencil-square-o"></i>
                                 </button>
@@ -91,7 +91,8 @@
                                 <i class="fa fa-pencil-square-o"></i>
                           </button>
                         </td>
-                      <td class="md-text-cell"><a [routerLink]="['/patient',patient.id, patient.firstname, patient.lastname, '/treatments']">{{ patient.firstname | capitalize }}</a></td>      
+                      <td class="md-text-cell"><a [routerLink]="['/patient',patient.id, '/treatments']">{{ patient.firstname | capitalize }}</a></td> 
+<!--                       <td class="md-text-cell"><a [routerLink]="['/patient',patient.id, patient.firstname, patient.lastname, '/treatments']">{{ patient.firstname | capitalize }}</a></td>      -->
                           <td>{{ patient.middleName | capitalize }}</td>
                                 <td>{{ patient.lastName | capitalize }}</td>
                                 <td>{{ patient.address }}</td>

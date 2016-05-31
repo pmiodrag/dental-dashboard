@@ -15,6 +15,7 @@ import { PatientFormComponent } from './patient-form'
 import {TimerWrapper} from "@angular/common/src/facade/async";
 import { PatientStore } from '../state/PatientStore';
 import {MdToolbar} from '@angular2-material/toolbar';
+//import {MD_ICON_DIRECTIVES} from '@angular2-material/icon';
 import {List} from 'immutable';
 import {asObservable} from "../state/asObservable";
 import * as Rx from "rxjs/Rx";
@@ -47,10 +48,7 @@ export class PatientList {
   @Input() selected: Patient;
   @Input() patientheader: any;
   @Input() patientform: any;
- // @Input() action: string;
   @Output() selectedChange: EventEmitter<any> = new EventEmitter();
-  patientList: Observable<Patient[]>;
-  filteredPatientsObs : Observable<any>;
   
   private _patients: Rx.BehaviorSubject<List<Patient>> = new Rx.BehaviorSubject(List([]));
   constructor(private patientService: PatientBackendService, private notificationService: NotificationService, private patientStore: PatientStore) { }
@@ -58,8 +56,7 @@ export class PatientList {
   ngOnInit() {
     this.title = 'Patients';
     this.filterText = 'Filter Patients:';
-    this.listDisplayModeEnabled = false;    
-    this.filteredPatientsObs = this.patientStore.patients    
+    this.listDisplayModeEnabled = false;     
     this.sorter = new Sorter();
   }
   editPatient (patient: Patient) {

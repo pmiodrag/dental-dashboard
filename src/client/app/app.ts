@@ -20,7 +20,8 @@ import {MATERIAL_DIRECTIVES} from "ng2-material/index";
 //    { path: '/', component: HomeComponent }, // , useAsDefault: true}, // coming soon
 //    { path: '/about', component: AboutComponent }
      { path: '/patients',  component: PatientsComponent },
-    { path: '/patient/:id/:firstname/:lastname/treatments', component: TreatmentsComponent },
+//    { path: '/patient/:id/:firstname/:lastname/treatments', component: TreatmentsComponent },
+     { path: '/patient/:id/treatments', component: TreatmentsComponent },
 //    { path: '/patient/:id/treatments', component: TreatmentsComponent },
 //     { path: '/treatments', component: TreatmentsComponent },
     { path: '/login',  component: AuthComponent },
