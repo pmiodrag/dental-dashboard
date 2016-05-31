@@ -13,14 +13,14 @@ export class TreatmentStore {
     private _treatments: BehaviorSubject<List<Treatment>> = new BehaviorSubject(List([]));
 
     constructor(private treatmentBackendService: TreatmentBackendService) {
-        this.loadInitialData();
+       // this.loadInitialData();
     }
 
     get treatments() {
         return asObservable(this._treatments);
     }
 
-    loadInitialData() {
+    loadInitialData(patientId) {
         this.treatmentBackendService.getAllTreatments()
             .subscribe(
             res => {
@@ -32,7 +32,7 @@ export class TreatmentStore {
                         treatment.therapy,
                         treatment.diagnose,
                         treatment.price
-                    ))
+                    )).filter(treatment => treatment.patientid == patientId)
                 this._treatments.next(List(treatments));
             },
             err => console.log("Error retrieving Treatments")

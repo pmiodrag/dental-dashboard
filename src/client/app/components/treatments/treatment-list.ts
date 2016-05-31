@@ -37,6 +37,7 @@ export class TreatmentListComponent {
     
     ngOnInit() {
        console.log("TreatmentListComponent ngOnInit patientID", this.patientID);
+       this.treatmentStore.loadInitialData(this.patientID);
 //       this.patientID = parseInt(this._routeParams.get('id'), 10);
 //       let firstname = this._routeParams.get('firstname');
 //       let lastname = this._routeParams.get('lastname');
