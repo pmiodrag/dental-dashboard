@@ -12,12 +12,14 @@ import {MdPatternValidator,
   MdNumberRequiredValidator,
   MdMaxValueValidator, MATERIAL_DIRECTIVES} from "ng2-material/index";
 import {TimepickerComponent, DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
+import {MdToolbar} from '@angular2-material/toolbar';
+import {MD_INPUT_DIRECTIVES} from '@angular2-material/input';
 @Component({ 
   selector: 'treatment-form', 
   templateUrl: 'app/components/treatments/treatment-form.html',
   providers: [TreatmentService],
   host: {'[hidden]': 'hidden'},
-  directives: [TimepickerComponent, DATEPICKER_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES, MATERIAL_DIRECTIVES, RouterLink, ControlMessages]
+  directives: [TimepickerComponent, DATEPICKER_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES, MATERIAL_DIRECTIVES, MdToolbar, MD_INPUT_DIRECTIVES, RouterLink, ControlMessages]
 })
 
 
@@ -29,6 +31,7 @@ export class TreatmentFormComponent {
     formTitle: string;
     subscription: any;
     submitted = false;
+    submitAction: string;
     // Date and time propertiesTimepicker
     date: Date = new Date();
     public hstep:number = 1;
@@ -82,10 +85,12 @@ export class TreatmentFormComponent {
     onFormActionChange(treatment: Treatment) {
         console.log("onFormActionChange treatment", treatment);
         this.treatment = treatment;
-        if (treatment.id == 0) {          
+        if (treatment.id == -1) {          
           this.formTitle = "Add Treatment";
+           this.submitAction = 'add';
         } else {
             this.formTitle = "Edit Treatment";
+            this.submitAction = 'edit';
         }
     }
     ngOnDestroy() {
@@ -104,21 +109,34 @@ export class TreatmentFormComponent {
 //        console.log("Submit treatment date() ", this.date );
 //        console.log("Submit treatment time() ", this.time, "this.time.getMinutes()", this.time.getMinutes() )   
         console.log("Submit treatment", treatment);
-        this.addTreatment(treatment);    
+           
+        if (this.submitAction == 'add') {             
+           this.addTreatment(treatment); 
+        } else {
+           this.updateTreatment(treatment); 
+        }             
+        this.submitted = true; 
+        this.goBack();
         this.submitted = true; 
     }
-    // method to call REST to create new treatment
-//    addTreatment(treatment) {        
-//        this.treatmentService.addPatient(treatment).subscribe((res:any) => {         
-//           console.log("make service call for rest post pacient  "+res);         
-//        });
-//    } ;
+    // method to call Store action to create new treatment
     
     addTreatment(treatment) {
        
       //  this.uiStateStore.startBackendAction('Saving Todo...');
 
         this.treatmentStore.addTreatment(treatment)
+            .subscribe(
+                res => {},
+                err => {
+                    this.uiStateStore.endBackendAction();
+                }
+            );
+            this.goBack();
+    }
+    
+     updateTreatment(treatment) {
+        this.treatmentStore.updateTreatment(treatment)
             .subscribe(
                 res => {},
                 err => {

@@ -70,35 +70,47 @@
         </div>
         <div class="row grid-container" [hidden]="!listDisplayModeEnabled">
             <div class="col-md-10">
-                
-                <md-data-table layout-fill [selectable]="true" (onSelectableChange)="change($event)">
+                <md-toolbar *ngIf="!selection">Patients</md-toolbar>
+                <md-toolbar color="accent" *ngIf="selection">
+                  <span>{{count}} item{{count > 1 ? 's' : ''}} selected</span>
+                  <span flex hide show-gt-md></span>
+                  <span class="md-caption" hide show-gt-md>{{selection}}</span>
+                </md-toolbar>
+                <md-data-table [selectable]="true" (onSelectableChange)="change($event)">
                     <thead>
-                    <tr>
-                          <th>&nbsp;</th>
-                         <th>Edit Patient</th>
-                      <th class="md-text-cell">First Name</th>
-                     <th>Middle Name</th>
-                      <th>Last Name</th>
-                      <th>Address</th>
-                      <th>City</th>
-                      <th>Country</th>
+                    <tr  md-data-table-header-selectable-row>
+                         
+                        <th class="md-text-cell">First Name</th>
+                        <th>Middle Name</th>
+                        <th>Last Name</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>Country</th>
 <!--                      <th>Treatments Total</th>-->
+                        <th>Edit Patient</th>
+                        <th>Delete Patient</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let patient of patientStore.patients | async"  md-data-table-selectable-row [selectable-value]="patient.firstname">
-                        <td>  <button md-fab class="md-mini orange" (click)= "editPatient(patient);"  aria-label="Edit patient">
-                                <i class="fa fa-pencil-square-o"></i>
-                          </button>
-                        </td>
-                      <td class="md-text-cell"><a [routerLink]="['/patient',patient.id, '/treatments']">{{ patient.firstname | capitalize }}</a></td> 
+                    <tr *ngFor="let patient of patientStore.patients | async"  md-data-table-selectable-row [selectable-value]="patient.id">
+                      
+                        <td class="md-text-cell"><a [routerLink]="['/patient',patient.id, '/treatments']">{{ patient.firstname | capitalize }}</a></td> 
 <!--                       <td class="md-text-cell"><a [routerLink]="['/patient',patient.id, patient.firstname, patient.lastname, '/treatments']">{{ patient.firstname | capitalize }}</a></td>      -->
-                          <td>{{ patient.middleName | capitalize }}</td>
-                                <td>{{ patient.lastName | capitalize }}</td>
-                                <td>{{ patient.address }}</td>
-                                <td>{{ patient.place | trim }}</td>
-                                 <td>{{ patient.city | trim }}</td>
-                                <td>{{ patient.country | trim }}</td>
+                        <td>{{ patient.middleName | capitalize }}</td>
+                        <td>{{ patient.lastName | capitalize }}</td>
+                        <td>{{ patient.address }}</td>
+                        <td>{{ patient.place | trim }}</td>
+                        <td>{{ patient.country | trim }}</td>
+                        <td> 
+                            <button md-fab class="md-mini orange" (click)= "editPatient(patient);"  aria-label="Edit patient">
+                                <i class="fa fa-pencil-square-o"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button md-fab class="md-mini red" (click)="deletePatient(patient)"  aria-label="Remove patient">
+                                <i class="fa fa-recycle"></i>
+                            </button>
+                        </td>
                     </tr>
                     <tr [hidden]="patientStore.patients._subscribe.length != 0">
                                 <td>&nbsp;</td>

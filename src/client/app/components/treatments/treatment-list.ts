@@ -33,18 +33,9 @@ export class TreatmentListComponent {
     private _treatments: Rx.BehaviorSubject<List<Treatment>> = new Rx.BehaviorSubject(List([]));
     constructor(private notificationService: NotificationService, private treatmentService: TreatmentBackendService, private treatmentStore: TreatmentStore) {}   
     
-    
-    
     ngOnInit() {
        console.log("TreatmentListComponent ngOnInit patientID", this.patientID);
        this.treatmentStore.loadInitialData(this.patientID);
-//       this.patientID = parseInt(this._routeParams.get('id'), 10);
-//       let firstname = this._routeParams.get('firstname');
-//       let lastname = this._routeParams.get('lastname');
-//       this.patientService.getPatientTreatmentList(this.patientID).subscribe((treatments: any[]) => {   
-          
-//        this.filteredTreatments = treatments.filter(treatment => treatment.patientid === this.patientID);
-//      });
     }
     
    change(data: ITableSelectionChange) {
@@ -60,21 +51,17 @@ export class TreatmentListComponent {
     this.count = treatments.length;
   }
   
-//  getTreatments(){
-//    this.treatmentService.getTreatments()  
-//        .subscribe((treatments:any[]) => {
-//          this.treatments = this.filteredTreatments = treatments;
-//        });
-//  }
    // open treatment form to add new treatment.
     addTreatment () {
         this.hidden = true;
         this.treatmentform.hidden = false;
-        this.treatment = new Treatment(0, this.patientID, new Date(), '', '', '')
+        this.treatment = new Treatment(-1, this.patientID, new Date(), '', '', '')
         this.formAction(this.treatment);
     }
     
-    
+    deleteTreatment(treatment: Treatment) {
+        this.treatmentStore.deleteTreatment(treatment);
+    }
     editTreatment(treatment: Treatment) {
         this.hidden = true;
         this.treatmentform.hidden = false;

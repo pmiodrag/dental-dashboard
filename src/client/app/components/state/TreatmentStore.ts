@@ -71,7 +71,11 @@ export class TreatmentStore {
     addTreatment(newTreatment: Treatment): Observable<Response> {
 
         let obs = this.treatmentBackendService.saveTreatment(newTreatment);
-
+        // to recognize form action we set id = -1 for new treatment.
+        // After form submiting list of observable items is updated and latest one item is not containing id from database for newly created treatment
+        // for that reason we are changing here to 0, to prevent on edit to recognize action as add.
+        // After refresh list is fully updated from database.
+        newTreatment.id = 0;
         obs.subscribe(
             res => {
                 this._treatments.next(this._treatments.getValue().push(newTreatment));

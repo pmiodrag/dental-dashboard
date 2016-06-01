@@ -25,10 +25,6 @@ export class PatientStore {
         this._patients.next(patients);
     }
 
-    get patients2() {
-        console.log("patients2", this._patients);
-        return (this._patients);
-    }
 
     loadInitialData() {
         this.patientBackendService.getAllPatients()
@@ -93,7 +89,11 @@ export class PatientStore {
     addPatient(newPatient: Patient): Observable<Response> {
 
         let obs = this.patientBackendService.savePatient(newPatient);
-
+        // to recognize form action we set id = -1 for new patient.
+        // After form submiting list of observable items is updated and latest one item is not containing id from database for newly created patient
+        // for that reason we are changing here to 0, to prevent on edit to recognize action as add.
+        // After refresh list is fully updated from database.
+        newPatient.id = 0;
         obs.subscribe(
             res => {
                 this._patients.next(this._patients.getValue().push(newPatient));

@@ -16,7 +16,7 @@ import {TreatmentFormComponent} from "./treatment-form"
   directives: [CORE_DIRECTIVES, MATERIAL_DIRECTIVES, TreatmentListComponent, TreatmentFormComponent, ROUTER_DIRECTIVES]
 })
 export class TreatmentsComponent {
-	 id:string;
+  id:string;
   firstname:string;
   lastname:string;
    

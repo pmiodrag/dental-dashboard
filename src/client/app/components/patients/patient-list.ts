@@ -49,7 +49,8 @@ export class PatientList {
   @Input() patientheader: any;
   @Input() patientform: any;
   @Output() selectedChange: EventEmitter<any> = new EventEmitter();
-  
+  selection: string ;
+  count: number;
   private _patients: Rx.BehaviorSubject<List<Patient>> = new Rx.BehaviorSubject(List([]));
   constructor(private patientService: PatientBackendService, private notificationService: NotificationService, private patientStore: PatientStore) { }
   
@@ -58,6 +59,9 @@ export class PatientList {
     this.filterText = 'Filter Patients:';
     this.listDisplayModeEnabled = false;     
     this.sorter = new Sorter();
+  }
+  deletePatient(patient: Patient) {
+    this.patientStore.deletePatient(patient);
   }
   editPatient (patient: Patient) {
       this.selectedChange.next(patient);
@@ -79,14 +83,6 @@ export class PatientList {
         data = data.toUpperCase();
         this.patientStore.filterData(data);        
     }
-  }
- 
-  
-  deletePatient(patient: Patient) {
-    this.patientStore.deletePatient(patient);
-//    this.patientService.deletePatient(id).subscribe((res:any) => {         
-//       console.log("make service call for rest post pacient  "+res);         
-//    });
   }
 
   sort(prop: string) {
@@ -113,17 +109,22 @@ export class PatientList {
     }
   }
   
-//   change(data: ITableSelectionChange) {
-//    let patients = [];
-//    console.log("data", data);
-//    this.filteredPatients.forEach((treatment: Treatment) => {
-//        console.log("treatment", treatment);
-//      if (data.values.indexOf(treatment.id) !== -1) {
-//        treatments.push(treatment.id);
-//      }
-//    });
-//    this.selection = treatments.join(', ');
-//    this.count = patients.length;
-//  }
+   change(data: ITableSelectionChange) {
+    let patientsSelected = [];
+   // let p = this.patientStore.patients.map(patient => console.log("patient", patient));
+    this.patientStore.patients.forEach((patients: List<Patient>) => {
+        console.log("patients", patients, data);
+        patients.forEach((patient: Patient) => {
+             console.log("patient", patient);
+            if (data.values.indexOf(patient.id) !== -1) {
+                patientsSelected.push(patient.id);
+                console.log("patientsSelected", patientsSelected);
+            }
+        })
+//     
+    });
+    this.selection = patientsSelected.join(', ');
+    this.count = patientsSelected.length;
+  }
 
-}//    }
+}

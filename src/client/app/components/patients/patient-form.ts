@@ -83,7 +83,7 @@ export class PatientFormComponent {
     onFormActionChange(patient: Patient) {
         console.log("onFormActionChange patient", patient);
         this.patient = patient;
-        if (patient.id == 0) {          
+        if (patient.id == -1) {          
           this.formTitle = "Add Patient";
           this.submitAction = 'add';
         } else {
