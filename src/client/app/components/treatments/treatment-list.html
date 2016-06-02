@@ -1,9 +1,11 @@
+ <div class="col-md-10">
 <md-toolbar>
     <div class="md-toolbar-tools" *ngIf="!selection">
         <span>Treatments</span>
         <button md-fab class="md-mini blue-lighten-3" (click)="addTreatment()"   aria-label="Add treatment">
             <i class="fa fa-user-plus"></i>
         </button>
+        <a href="#" [routerLink]="['/patients']" router-params="">View all Pacients</a>
     </div>
     <div class="md-toolbar-tools selection" *ngIf="selection">
         <span>{{count}} item{{count > 1 ? 's' : ''}} selected</span>
@@ -14,8 +16,7 @@
 
 <md-data-table  [selectable]="true" (onSelectableChange)="change($event)">
     <thead>
-        <tr  md-data-table-header-selectable-row><!--          
-            <th class="md-text-cell">Patient ID</th>-->
+        <tr  md-data-table-header-selectable-row>
             <th>Therapy</th>
             <th>Diagnose</th>
             <th>Price</th>
@@ -25,13 +26,12 @@
     </thead>
     <tbody>
         <tr *ngFor="let treatment of treatmentStore.treatments | async"  md-data-table-selectable-row [selectable-value]="treatment.id">
-<!--            <td class="md-text-cell">{{treatment.patientid }}</td>      -->
             <td>{{treatment.therapy}}</td>
             <td>{{treatment.diagnose}}</td>   
             <td>{{treatment.price}}</td> 
             <td>  
                 <button md-fab class="md-mini orange" (click)="editTreatment(treatment);"  aria-label="Edit treatment">
-                    <i class="fa fa-pencil-square-o"></i> {{treatment.id }}
+                    <i class="fa fa-pencil-square-o"></i>
                 </button>
             </td>
             <td>  
@@ -41,8 +41,5 @@
             </td>
         </tr>
     </tbody>
-</md-data-table><!--
-
--->
-<a href="#" [routerLink]="['/patients']" router-params="">View all Pacients</a>
-<!--<data-table-selectable-usage></data-table-selectable-usage>-->
+</md-data-table>
+ </div>

@@ -29,8 +29,6 @@
                                 <md-card-icon-actions>
                                 </md-card-icon-actions>
                                 <a  md-fab class="md-mini green"  [routerLink]="['/patient', patient.id, '/treatments']">
-<!--                                <a  md-fab class="md-mini green"  [routerLink]="['/patient',patient.id, patient.firstname, patient.lastname, '/treatments']">-->
-<!--                                    <i class="fa fa-list-ol" aria-hidden="true"></i>-->
                                      <i  md-icon>format_list_numbered</i>
                                 </a>
                                 <button md-fab class="md-mini orange" (click)="editPatient(patient);"  aria-label="Edit patient">
@@ -86,21 +84,25 @@
                         <th>Address</th>
                         <th>City</th>
                         <th>Country</th>
-<!--                      <th>Treatments Total</th>-->
+                        <th>Treatments</th>
                         <th>Edit Patient</th>
                         <th>Delete Patient</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let patient of patientStore.patients | async"  md-data-table-selectable-row [selectable-value]="patient.id">
-                      
+                    <tr *ngFor="let patient of patientStore.patients | async"  md-data-table-selectable-row [selectable-value]="patient.id">                      
                         <td class="md-text-cell"><a [routerLink]="['/patient',patient.id, '/treatments']">{{ patient.firstname | capitalize }}</a></td> 
 <!--                       <td class="md-text-cell"><a [routerLink]="['/patient',patient.id, patient.firstname, patient.lastname, '/treatments']">{{ patient.firstname | capitalize }}</a></td>      -->
-                        <td>{{ patient.middleName | capitalize }}</td>
-                        <td>{{ patient.lastName | capitalize }}</td>
+                        <td>{{ patient.middlename | capitalize }}</td>
+                        <td>{{ patient.lastname | capitalize }}</td>
                         <td>{{ patient.address }}</td>
                         <td>{{ patient.place | trim }}</td>
                         <td>{{ patient.country | trim }}</td>
+                        <td>
+                            <a  md-fab class="md-mini green"  [routerLink]="['/patient', patient.id, '/treatments']">
+                                <i  md-icon>format_list_numbered</i>
+                            </a>
+                        </td>
                         <td> 
                             <button md-fab class="md-mini orange" (click)= "editPatient(patient);"  aria-label="Edit patient">
                                 <i class="fa fa-pencil-square-o"></i>
