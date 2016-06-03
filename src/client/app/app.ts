@@ -5,6 +5,7 @@ import { ROUTER_DIRECTIVES, Routes, RouteSegment} from '@angular/router';
 import {APP_ROUTES} from './app.routes';
 import { PatientsComponent } from './components/patients/patients';
 import { TreatmentsComponent } from './components/treatments/treatments';
+import { DiagnoseComponent } from './components/diagnose/diagnose';
 import { AuthComponent } from './components/auth/auth.component';
 import {Dashboard} from './components/dashboard/dashboard';
 import {MATERIAL_DIRECTIVES} from "ng2-material/index";
@@ -22,6 +23,7 @@ import {MATERIAL_DIRECTIVES} from "ng2-material/index";
      { path: '/patients',  component: PatientsComponent },
 //    { path: '/patient/:id/:firstname/:lastname/treatments', component: TreatmentsComponent },
      { path: '/patient/:id/treatments', component: TreatmentsComponent },
+     { path: '/diagnoses',  component: DiagnoseComponent },
 //    { path: '/patient/:id/treatments', component: TreatmentsComponent },
 //     { path: '/treatments', component: TreatmentsComponent },
     { path: '/login',  component: AuthComponent },
