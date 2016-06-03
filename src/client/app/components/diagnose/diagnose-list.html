@@ -1,0 +1,44 @@
+ <div class="col-md-10">
+<md-toolbar>
+    <div class="md-toolbar-tools" *ngIf="!selection">
+        <span>Diagnoses</span>
+        <button md-fab class="md-mini blue-lighten-3" (click)="addDiagnose()"   aria-label="Add diagnose">
+            <i class="fa fa-user-plus"></i>
+        </button>
+        <a href="#" [routerLink]="['/diagnoses']" router-params="">View all Diagnoses</a>
+    </div>
+    <div class="md-toolbar-tools selection" *ngIf="selection">
+        <span>{{count}} item{{count > 1 ? 's' : ''}} selected</span>
+        <span flex hide show-gt-md></span>
+        <span class="md-caption" hide show-gt-md>{{selection}}</span>
+    </div>
+</md-toolbar>
+
+<md-data-table  [selectable]="true" (onSelectableChange)="change($event)">
+    <thead>
+        <tr  md-data-table-header-selectable-row>
+            <th>Therapy</th>
+            <th>Diagnose</th>
+            <th>Price</th>
+            <th>Edit Diagnose</th>
+            <th>Delete Diagnose</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let diagnose of diagnoseStore.diagnoses | async"  md-data-table-selectable-row [selectable-value]="diagnose.id">
+            <td>{{diagnose.name}}</td>
+            <td>{{diagnose.description}}</td>   
+            <td>  
+                <button md-fab class="md-mini orange" (click)="editDiagnose(diagnose);"  aria-label="Edit diagnose">
+                    <i class="fa fa-pencil-square-o"></i>
+                </button>
+            </td>
+            <td>  
+                <button md-fab class="md-mini red" (click)="deleteDiagnose(diagnose);"  aria-label="Delete diagnose">
+                   <i class="fa fa-recycle"></i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</md-data-table>
+ </div>
