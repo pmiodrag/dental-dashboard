@@ -36,16 +36,20 @@ export class PatientBackendService {
     getAllPatients() {        
         return this.http.get('/patient');
     }
+    
+    getLatestPatient() {
+        return this.http.get('/patient/latest');
+    }
 
     savePatient(newPatient: Patient) : Observable<Response> {
         let body = JSON.stringify( newPatient )
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        return this.http.post((this.baseUrl + 'patient'), body, options).share();
+        return this.http.post((this.baseUrl + 'patient'), body, options)//.share();
     }
     
     updatePatient (patient: IPatient) : Observable<Response>  {
-//
+
         let body = JSON.stringify( patient )
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
@@ -53,15 +57,11 @@ export class PatientBackendService {
         return this.http.put((this.baseUrl + 'patient/' + patient.id), body, options)
                          .share()
     }   
-//   
-
+    
     deletePatient(deletePatient: Patient) : Observable<Response> {
         return this.http.delete('/patient/' + deletePatient.id).share();
     }
     
-//    getPatientTreatmentList(patientId:number){        
-//        return this.http.get(this.baseUrl + 'patient/'+ patientId + '/treatments');                  
-//    }
     
      handleError(error: any) {
         console.error(error);

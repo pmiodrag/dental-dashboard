@@ -68,20 +68,13 @@ export function treatmentlist (req: express.Request, res: express.Response) {
 
 export function create (req: express.Request, res: express.Response)  {
     console.log("Add treatment ", req.body);
-//    var insert = { id: 1,
-//                    patientid: 2,
-//                    treatmentdate: '2016-04-06T12:20:00.000Z',
-//                    therapy: 'dsada',
-//                    diagnose: 'sada',
-//                    price: 'sadas' }
-// 
 
     var newTreatment = req.body;
     db.db_connection.ready(function(){ 
      var treatmentTable = db.db_connection.table("treatment");
      treatmentTable.save(newTreatment).then(function(result){ 
 	console.log("New treatment added: "+result.id); 
-        res.sendStatus(200);        
+        res.send(JSON.stringify(result));       
      });
      treatmentTable.find(4).then(function(treatments){ 
 	console.log("SELECT FROM treatment results: " + JSON.stringify(treatments));

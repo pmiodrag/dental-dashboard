@@ -122,17 +122,8 @@ export class TreatmentFormComponent {
     // method to call Store action to create new treatment
     
     addTreatment(treatment) {
-       
-      //  this.uiStateStore.startBackendAction('Saving Todo...');
-
-        this.treatmentStore.addTreatment(treatment)
-            .subscribe(
-                res => {},
-                err => {
-                    this.uiStateStore.endBackendAction();
-                }
-            );
-            this.goBack();
+        this.treatmentStore.addTreatment(treatment)           
+        this.goBack();
     }
     
      updateTreatment(treatment) {

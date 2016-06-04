@@ -35,8 +35,6 @@ export class PatientFormComponent {
     @Input() hidden:boolean = true;
     @Input () patientheader: any;
     @Input () patientlist: any;
-     // Date and time properties
- //   birthdate: Date = new Date();
     formTitle: string;
     submitAction: string;
     subscription: any;
@@ -95,18 +93,9 @@ export class PatientFormComponent {
         this.subscription.unsubscribe();
     }
     
-    addPatient(patient) {
-       
-        this.uiStateStore.startBackendAction('Saving Todo...');
-
+    addPatient(patient) {       
         this.patientStore.addPatient(patient)
-            .subscribe(
-                res => {},
-                err => {
-                    this.uiStateStore.endBackendAction();
-                }
-            );
-            this.goBack();
+        this.goBack();
     }
     
     updatePatient(patient) {
@@ -127,7 +116,6 @@ export class PatientFormComponent {
     }
     
     onSubmit(patient) { 
-        console.log("patient.birthdate", patient.birthdate);
        // patient.birthdate.setHours(12);
         if (this.submitAction == 'add') {             
             this.addPatient (patient);

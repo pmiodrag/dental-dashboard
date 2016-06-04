@@ -35,7 +35,7 @@ export class TreatmentBackendService {
         let body = JSON.stringify( newTreatment )
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        return this.http.post((this.baseUrl + 'treatment'), body, options).share();
+        return this.http.post((this.baseUrl + 'treatment'), body, options);
     }
     
     updateTreatment (treatment: ITreatment) : Observable<Response>  {
