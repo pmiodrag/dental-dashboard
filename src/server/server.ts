@@ -4,7 +4,7 @@ import path = require('path');
 import bodyParser = require('body-parser');
 import * as patients from "./api/patient/controller";
 import * as treatments from "./api/treatment/controller";
-var port: number = process.env.PORT || 8000;
+var port: number = process.env.PORT || 3000;
 var app = express();
 //var router = express.Router();
 
