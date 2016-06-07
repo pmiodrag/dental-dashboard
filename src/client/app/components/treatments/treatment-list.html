@@ -6,6 +6,7 @@
             <i class="fa fa-user-plus"></i>
         </button>
         <a href="#" [routerLink]="['/patients']" router-params="">View all Pacients</a>
+        <div class="comment">  <a [routerLink]="['/dashboard']">Dashboard<span class="menu-icon fa fa-tachometer"></span></a></div>   
     </div>
     <div class="md-toolbar-tools selection" *ngIf="selection">
         <span>{{count}} item{{count > 1 ? 's' : ''}} selected</span>

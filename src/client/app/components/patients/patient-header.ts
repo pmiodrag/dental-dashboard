@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 import { NotificationService  } from '../../services/notificationService';
 import { Patient } from '../../services/PatientBackendService';
 import {MdToolbar} from '@angular2-material/toolbar';
@@ -8,7 +9,7 @@ import {MATERIAL_DIRECTIVES} from "ng2-material/index";
   selector: 'patient-header',
   templateUrl: 'app/components/patients/patient-header.html',
   host: {'[hidden]': 'hidden'},
-  directives: [CORE_DIRECTIVES, MATERIAL_DIRECTIVES, MdToolbar],
+  directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES, MdToolbar],
 })
 export class PatientHeaderComponent {
     @Input() hidden:boolean = false;

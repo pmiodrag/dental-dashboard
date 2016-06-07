@@ -7,28 +7,29 @@ import { NotificationService  } from '../../services/notificationService';
 import { Sorter } from '../../shared/sorter';
 import { SortByDirective } from '../../shared/directives/sortby.directive';
 import {MdToolbar} from '@angular2-material/toolbar';
-import {MATERIAL_DIRECTIVES, ITableSelectionChange} from "ng2-material/index";
+import {MATERIAL_DIRECTIVES} from "ng2-material/index";
+import {MdCheckbox} from '@angular2-material/checkbox';
 import * as Rx from "rxjs/Rx";
 import {List} from 'immutable';
 import {asObservable} from "../state/asObservable";
+import {MD_INPUT_DIRECTIVES} from '@angular2-material/input';
 @Component({ 
   selector: 'diagnose-list',
   providers: [DiagnoseBackendService],
-  templateUrl: 'app/components/diagnoses/diagnose-list.html',
-  host: {'[hidden]': 'hidden'},
-  styleUrls : ['styles/selectable_usage.css'],
-  directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES,MATERIAL_DIRECTIVES, MdToolbar ]
+  templateUrl: 'app/components/diagnose/diagnose-list.html',
+  directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES,MATERIAL_DIRECTIVES, MD_INPUT_DIRECTIVES, MdCheckbox, MdToolbar ]
 })
 export class DiagnoseListComponent {
-	
+    name: string;
+    description: string;
     title: string = 'Diagnoses';
     diagnose: Diagnose;
     diagnoses : Diagnose[] = [];
     filteredDiagnoses: Diagnose[] = [];
     selection: string ;
     count: number;
-    @Input() hidden:boolean = false;
-    @Input () diagnoseform: any;  
+//    @Input() hidden:boolean = false;
+//    @Input () diagnoseform: any;  
     private _diagnoses: Rx.BehaviorSubject<List<Diagnose>> = new Rx.BehaviorSubject(List([]));
     constructor(private notificationService: NotificationService, private diagnoseService: DiagnoseBackendService, private diagnoseStore: DiagnoseStore) {}   
     
@@ -36,39 +37,13 @@ export class DiagnoseListComponent {
        console.log("DiagnoseListComponent ngOnInit");
        this.diagnoseStore.loadInitialData();
     }
-    
-   change(data: ITableSelectionChange) {
-    let diagnoses = [];
-    console.log("data", data);
-    this.filteredDiagnoses.forEach((diagnose: Diagnose) => {
-        console.log("diagnose", diagnose);
-      if (data.values.indexOf(diagnose.id) !== -1) {
-        diagnoses.push(diagnose.id);
-      }
-    });
-    this.selection = diagnoses.join(', ');
-    this.count = diagnoses.length;
-  }
-  
-   // open diagnose form to add new diagnose.
-    addDiagnose () {
-        this.hidden = true;
-        this.diagnoseform.hidden = false;
-        this.diagnose = new Diagnose(-1, '', '')
-        this.formAction(this.diagnose);
+   
+    addDiagnose() {     
+        let newDiagnose = new Diagnose(0, this.name, this.description);  
+        this.diagnoseStore.addDiagnose(newDiagnose)
     }
-    
     deleteDiagnose(diagnose: Diagnose) {
         this.diagnoseStore.deleteDiagnose(diagnose);
-    }
-    editDiagnose(diagnose: Diagnose) {
-        this.hidden = true;
-        this.diagnoseform.hidden = false;
-        this.formAction(diagnose);
-    }
-     formAction(diagnose: Diagnose) {
-        console.log('DiagnoseListComponent formAction diagnose', diagnose);
-        this.notificationService.emitFormActionChangeEvent(diagnose);
     }
   
 }

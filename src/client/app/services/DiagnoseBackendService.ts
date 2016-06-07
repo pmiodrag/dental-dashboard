@@ -25,14 +25,14 @@ export class DiagnoseBackendService {
     }
 
     getAllDiagnoses() {        
-        return this.http.get(this.baseUrl + 'diagnoses');
+        return this.http.get(this.baseUrl + 'diagnose');
     }
 
     saveDiagnose(newDiagnose: Diagnose) : Observable<Response> {
         let body = JSON.stringify( newDiagnose )
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        return this.http.post((this.baseUrl + 'diagnose'), body, options).share();
+        return this.http.post((this.baseUrl + 'diagnose'), body, options);
     }
     
     updateDiagnose (diagnose: IDiagnose) : Observable<Response>  {

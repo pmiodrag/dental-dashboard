@@ -4,6 +4,7 @@ import path = require('path');
 import bodyParser = require('body-parser');
 import * as patients from "./api/patient/controller";
 import * as treatments from "./api/treatment/controller";
+import * as diagnoses from "./api/diagnose/controller";
 var port: number = process.env.PORT || 3000;
 var app = express();
 //var router = express.Router();
@@ -41,7 +42,11 @@ app.put('/treatment/:id', treatments.update);
 app.get('/treatment/:id', treatments.show);
 app.delete('/treatment/:id', treatments.destroy);
 
-
+//Diagnose
+app.get('/diagnose', diagnoses.index);
+app.post('/diagnose', diagnoses.create);
+app.put('/diagnose/:id', diagnoses.update);
+app.delete('/diagnose/:id', diagnoses.destroy);
 var renderIndex = (req: express.Request, res: express.Response) => {
     console.log("renderIndex __dirname", __dirname)
     res.sendFile(path.resolve(__dirname, 'index.html'));

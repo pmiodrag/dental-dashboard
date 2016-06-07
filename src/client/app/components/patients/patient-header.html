@@ -2,9 +2,11 @@
     <md-toolbar class="">        
         <img src="assets/images/people.png" alt="logo">        
         <span class="text-primary">List of Patients</span>
-        <span flex></span>
         <button md-fab class="md-mini blue-lighten-3" (click)="addPatient()"   aria-label="Add patient">
             <i class="fa fa-user-plus"></i>
          </button>
+         <a  md-button class="md-icon-button md-primary" [routerLink]="['/dashboard']" >
+            <i  class="fa fa-tachometer fa-2x"></i>                            
+        </a> 
     </md-toolbar>
 </md-content>

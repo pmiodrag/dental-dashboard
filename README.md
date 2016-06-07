@@ -46,3 +46,4 @@ as well as a video course that will be released in 2016!
 To create and init database run following commands:
 mysql -u root < scripts/smiletime_patient.sql
 mysql -u root < scripts/smiletime_treatment.sql
+mysql -u root < scripts/smiletime_diagnose.sql

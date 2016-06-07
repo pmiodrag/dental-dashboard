@@ -1,3 +1,10 @@
- <diagnose-list #diagnoselist [diagnoseform]="diagnoseform" [diagnoses]="diagnoses" [(selected)]="selectedDiagnose"></diagnose-list>
-  <diagnose-form #diagnoseform [diagnoselist]="diagnoselist" [diagnoses]="selectedDiagnose"></diagnose-form>
-  
+ <div>
+    <diagnose-list></diagnose-list>
+
+<!--                <diagnose-footer [hidden]="(size | async) === 0" [count]="size | async"></diagnose-footer>-->
+
+<!--            <footer id="info">
+                <p>{{uiStateMessage | async}}</p>
+                <p>Add, Remove and Complete TODOs</p>
+            </footer>-->
+</div>

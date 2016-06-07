@@ -63,20 +63,14 @@ export class DiagnoseStore {
             err => console.log("Error retrieving Diagnoses")
             );
     }
-    addDiagnose(newDiagnose: Diagnose): Observable<Response> {
-
-        let obs = this.diagnoseBackendService.saveDiagnose(newDiagnose);
-        // to recognize form action we set id = -1 for new diagnose.
-        // After form submiting list of observable items is updated and latest one item is not containing id from database for newly created diagnose
-        // for that reason we are changing here to 0, to prevent on edit to recognize action as add.
-        // After refresh list is fully updated from database.
-        newDiagnose.id = 0;
-        obs.subscribe(
+    addDiagnose(newDiagnose: Diagnose) {
+        this.diagnoseBackendService.saveDiagnose(newDiagnose).subscribe(
             res => {
+                  let newDiagnose = (<Diagnose>res.json()); 
                 this._diagnoses.next(this._diagnoses.getValue().push(newDiagnose));
-            });
-
-        return obs;
+             },
+            err => console.log("Error saving Patients")
+        );
     }
 
     updateDiagnose(updatedDiagnose: Diagnose): Observable<Response> {
@@ -103,7 +97,6 @@ export class DiagnoseStore {
                 let diagnoses: List<Diagnose> = this._diagnoses.getValue();
                 let index = diagnoses.findIndex((diagnose) => diagnose.id === deleted.id);
                 this._diagnoses.next(diagnoses.delete(index));
-
             }
         );
 
