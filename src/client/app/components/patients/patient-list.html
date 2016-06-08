@@ -3,12 +3,13 @@
         <div class="col-md-10">
             <div class="navbar"> 
                 <section layout="row" layout-sm="column" layout-align="left center" layout-wrap>
-                <button md-button class="md-icon-button md-primary" (click)="changeDisplayMode('Card')" [class.active]="!listDisplayModeEnabled">
-                    <i  md-icon>apps</i>                            
-                </button>
-                <button md-button class="md-icon-button md-primary"   (click)="changeDisplayMode('List')" [class.active]="listDisplayModeEnabled">
-                    <i  md-icon>format_list_numbered</i>
-               </button>
+                    <a  md-button class="md-icon-button" (click)="changeDisplayMode('Card')" [class.active]="!listDisplayModeEnabled">
+                        <i class="material-icons">apps</i>                        
+                    </a> 
+
+                    <a  md-button class="md-icon-button" (click)="changeDisplayMode('List')" [class.active]="listDisplayModeEnabled">
+                        <i class="material-icons">format_list_numbered</i>                         
+                    </a> 
                 </section>
                 <filter-textbox class="navbar-right" (changed)="filterChanged($event)"></filter-textbox>
             </div>
@@ -29,7 +30,7 @@
                                 <md-card-icon-actions>
                                 </md-card-icon-actions>
                                 <a  md-fab class="md-mini green"  [routerLink]="['/patient', patient.id, '/treatments']">
-                                     <i  md-icon>format_list_numbered</i>
+                                    <i  md-icon>format_list_numbered</i>
                                 </a>
                                 <button md-fab class="md-mini orange" (click)="editPatient(patient);"  aria-label="Edit patient">
                                     <i class="fa fa-pencil-square-o"></i>
@@ -70,87 +71,56 @@
             <div class="col-md-10">
                 <md-toolbar *ngIf="!selection">Patients</md-toolbar>
                 <md-toolbar color="accent" *ngIf="selection">
-                  <span>{{count}} item{{count > 1 ? 's' : ''}} selected</span>
-                  <span flex hide show-gt-md></span>
-                  <span class="md-caption" hide show-gt-md>{{selection}}</span>
+                    <span>{{count}} item{{count > 1 ? 's' : ''}} selected</span>
+                    <span flex hide show-gt-md></span>
+                    <span class="md-caption" hide show-gt-md>{{selection}}</span>
                 </md-toolbar>
                 <md-data-table [selectable]="true" (onSelectableChange)="change($event)">
                     <thead>
-                    <tr  md-data-table-header-selectable-row>
-                         
-                        <th class="md-text-cell">First Name</th>
-                        <th>Middle Name</th>
-                        <th>Last Name</th>
-                        <th>Address</th>
-                        <th>City</th>
-                        <th>Country</th>
-                        <th>Treatments</th>
-                        <th>Edit Patient</th>
-                        <th>Delete Patient</th>
-                    </tr>
+                        <tr  md-data-table-header-selectable-row>
+
+                            <th class="md-text-cell">First Name</th>
+                            <th>Middle Name</th>
+                            <th>Last Name</th>
+                            <th>Address</th>
+                            <th>City</th>
+                            <th>Country</th>
+                            <th>Treatments</th>
+                            <th>Edit Patient</th>
+                            <th>Delete Patient</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let patient of patientStore.patients | async"  md-data-table-selectable-row [selectable-value]="patient.id">                      
-                        <td class="md-text-cell"><a [routerLink]="['/patient',patient.id, '/treatments']">{{ patient.firstname | capitalize }}</a></td> 
-<!--                       <td class="md-text-cell"><a [routerLink]="['/patient',patient.id, patient.firstname, patient.lastname, '/treatments']">{{ patient.firstname | capitalize }}</a></td>      -->
-                        <td>{{ patient.middlename | capitalize }}</td>
-                        <td>{{ patient.lastname | capitalize }}</td>
-                        <td>{{ patient.address }}</td>
-                        <td>{{ patient.place | trim }}</td>
-                        <td>{{ patient.country | trim }}</td>
-                        <td>
-                            <a  md-fab class="md-mini green"  [routerLink]="['/patient', patient.id, '/treatments']">
-                                <i  md-icon>format_list_numbered</i>
-                            </a>
-                        </td>
-                        <td> 
-                            <button md-fab class="md-mini orange" (click)= "editPatient(patient);"  aria-label="Edit patient">
-                                <i class="fa fa-pencil-square-o"></i>
-                            </button>
-                        </td>
-                        <td>
-                            <button md-fab class="md-mini red" (click)="deletePatient(patient)"  aria-label="Remove patient">
-                                <i class="fa fa-recycle"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr [hidden]="patientStore.patients._subscribe.length != 0">
-                                <td>&nbsp;</td>
-                                <td colspan="6">No Records Found</td>
-                            </tr>
+                        <tr *ngFor="let patient of patientStore.patients | async"  md-data-table-selectable-row [selectable-value]="patient.id">                      
+                            <td class="md-text-cell"><a [routerLink]="['/patient',patient.id, '/treatments']">{{ patient.firstname | capitalize }}</a></td> 
+                            <!--                       <td class="md-text-cell"><a [routerLink]="['/patient',patient.id, patient.firstname, patient.lastname, '/treatments']">{{ patient.firstname | capitalize }}</a></td>      -->
+                            <td>{{ patient.middlename | capitalize }}</td>
+                            <td>{{ patient.lastname | capitalize }}</td>
+                            <td>{{ patient.address }}</td>
+                            <td>{{ patient.place | trim }}</td>
+                            <td>{{ patient.country | trim }}</td>
+                            <td>
+                                <a  md-fab class="md-mini green"  [routerLink]="['/patient', patient.id, '/treatments']">
+                                    <i  md-icon>format_list_numbered</i>
+                                </a>
+                            </td>
+                            <td> 
+                                <button md-fab class="md-mini orange" (click)= "editPatient(patient);"  aria-label="Edit patient">
+                                    <i class="fa fa-pencil-square-o"></i>
+                                </button>
+                            </td>
+                            <td>
+                                <button md-fab class="md-mini red" (click)="deletePatient(patient)"  aria-label="Remove patient">
+                                    <i class="fa fa-recycle"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr [hidden]="patientStore.patients._subscribe.length != 0">
+                            <td>&nbsp;</td>
+                            <td colspan="6">No Records Found</td>
+                        </tr>
                     </tbody>
-                  </md-data-table>
-<!--                <div class="table">
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th>&nbsp;</th>
-                                <th sort-by="firstname" (sorted)="sort($event)">First Name</th>
-                                <th sort-by="lastname" (sorted)="sort($event)">Last Name</th>
-                                <th sort-by="address" (sorted)="sort($event)">Address</th>
-                                <th sort-by="city" (sorted)="sort($event)">City</th>
-                                <th sort-by="country.name" (sorted)="sort($event)">Country</th>
-                                 Or you can do this directly rather than using sort-by directive 
-                                <th (click)="sort('orderTotal')">Treatments Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let patient of patientStore.patients | async">
-                                <td><img src="assets/images/{{ patient.gender | lowercase }}.png" 
-                                     class="card-image" alt="Patient Image" /></td>
-                                <td><a [routerLink]="['/patient',patient.id, patient.firstname, patient.lastname, '/treatments']">{{ patient.firstname | capitalize }}</a></td>
-                                <td>{{ patient.middleName | capitalize }}</td>
-                                <td>{{ patient.lastName | capitalize }}</td>
-                                <td>{{ patient.address }}</td>
-                                <td>{{ patient.place | trim }}</td>
-                            </tr>
-                            <tr [hidden]="patientStore.patients._subscribe.length != 0">
-                                <td>&nbsp;</td>
-                                <td colspan="6">No Records Found</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>-->
+                </md-data-table>
             </div>
         </div>
     </div>

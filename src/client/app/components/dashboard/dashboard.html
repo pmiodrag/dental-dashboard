@@ -1,26 +1,42 @@
-<div class="row">
-  <div class="col-lg-6 col-md-6 col-xs-12">
-    <rd-widget>
-      <rd-widget-body>
-        <div class="widget-icon green pull-left">
-<!--          <i class="fa fa-users"></i>-->
-           <img src="assets/images/people.png" alt="logo">
-        </div>
-        <div class="title">80</div>
-        <div class="comment">  <a [routerLink]="['/patients']">Patients <span class="menu-icon fa fa-users"></span></a></div>        
-      </rd-widget-body>
-    </rd-widget>
-  </div>
-  <div class="col-lg-6 col-md-6 col-xs-12">
-    <rd-widget>
-      <rd-widget-body>
-        <div class="widget-icon orange pull-left">
-          <i class="fa fa-book"></i>
-        </div>
-        <div class="title">225</div>
-        <div class="comment">  <a [routerLink]="['/diagnoses']">Diagnoses <span class="menu-icon fa fa-tachometer"></span></a></div>
-      </rd-widget-body>
-    </rd-widget>
-  </div>
 
+<div layout="row" layout-padding layout-wrap  ng-cloak>
+    <md-whiteframe class="md-whiteframe-10dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25"  layout  layout-align="center center">
+        <div class="title">80</div>
+        <div class="comment"> Patients 
+            <a md-button class="md-icon-button"  [routerLink]="['/patients']">
+                <i class="material-icons">people</i>
+            </a>
+        </div>  
+    </md-whiteframe>
+    <md-whiteframe class="md-whiteframe-10dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25"  layout layout-align="center center">
+        <div class="title">80</div>
+        <div class="comment"> Diagnoses 
+            <a md-button class="md-icon-button"  [routerLink]="['/diagnoses']">
+                <i class="material-icons">note</i>
+            </a>
+        </div>  
+    </md-whiteframe>
+    <md-whiteframe class="md-whiteframe-10dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25"  layout layout-align="center center">
+        <div class="title">3</div>
+        <div class="comment"> Doctors
+            <a md-button class="md-icon-button"  [routerLink]="['/patients']">
+                <i class="material-icons">face</i>
+            </a>
+        </div>  
+    </md-whiteframe>
+    <md-whiteframe class="md-whiteframe-10dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25"  layout layout-align="center center">
+        <div class="title">{{diagnosesSize}}</div>
+        <div class="comment"> Documents 
+            <a md-button class="md-icon-button"  [routerLink]="['/patients']">
+                <i class="material-icons">library_books</i>
+            </a>
+        </div>  
+    </md-whiteframe>
+    <md-whiteframe class="md-whiteframe-10dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout layout-align="center center">
+        <div class="comment"> Agenda 
+            <a md-button class="md-icon-button"  [routerLink]="['/diagnoses']">
+                <i class="material-icons">view_agenda</i>
+            </a>
+        </div>  
+    </md-whiteframe>
 </div>

@@ -1,12 +1,10 @@
  <div class="col-md-10">
 <md-toolbar>
     <div class="md-toolbar-tools" *ngIf="!selection">
-        <span>Treatments</span>
-        <button md-fab class="md-mini blue-lighten-3" (click)="addTreatment()"   aria-label="Add treatment">
-            <i class="fa fa-user-plus"></i>
-        </button>
-        <a href="#" [routerLink]="['/patients']" router-params="">View all Pacients</a>
-        <div class="comment">  <a [routerLink]="['/dashboard']">Dashboard<span class="menu-icon fa fa-tachometer"></span></a></div>   
+        <span class="text-primary">Treatments</span>
+        <a  md-button class="md-icon-button" (click)="addTreatment()" >
+            <i class="material-icons">plus_one</i>                           
+        </a>        
     </div>
     <div class="md-toolbar-tools selection" *ngIf="selection">
         <span>{{count}} item{{count > 1 ? 's' : ''}} selected</span>

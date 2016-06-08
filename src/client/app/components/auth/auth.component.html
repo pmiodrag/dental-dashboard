@@ -1,5 +1,17 @@
-<md-toolbar>     
-    <span class="text-primary"> Smiletime Dashboard</span>
+<md-toolbar class="">     
+    <span> Smiletime Dashboard</span>
+        <a  md-button class="md-icon-button" [routerLink]="['/dashboard']" >
+            <i class="material-icons">dashboard</i>                            
+        </a> 
+        <a md-button class="md-icon-button"  [routerLink]="['/patients']">
+            <i class="material-icons">people</i>
+        </a>
+        <a md-button class="md-icon-button"  [routerLink]="['/diagnoses']">
+            <i class="material-icons">note</i>
+        </a>
+        <a md-button class="md-icon-button"  [routerLink]="['/diagnoses']">
+            <i class="material-icons">view_agenda</i>
+        </a>
     <span flex></span>
     <div class="user"> 
         <a href="javascript:void(0)" *ngIf="loggedIn()" class="item" data-toggle="dropdown">             

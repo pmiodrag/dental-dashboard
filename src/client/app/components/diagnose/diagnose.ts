@@ -8,8 +8,7 @@ import {ROUTER_DIRECTIVES, RouteSegment} from '@angular/router';
 //import { SortByDirective } from '../../shared/directives/sortby.directive';
 import {MATERIAL_DIRECTIVES} from "ng2-material/index";
 import {DiagnoseListComponent} from "./diagnose-list"
-//import {DiagnoseListComponent} from "./diagnose-header"
-//import {DiagnoseFormComponent} from "./diagnose-form"
+
 @Component({ 
   selector: 'diagnoses',
   templateUrl: 'app/components/diagnose/diagnose.html',
