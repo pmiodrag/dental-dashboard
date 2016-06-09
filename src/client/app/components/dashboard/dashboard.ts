@@ -13,8 +13,7 @@ export class Dashboard {
     
   constructor(private diagnoseStore: DiagnoseStore) {
        console.log("this._diagnoses", diagnoseStore.diagnosesSubject);
-      let diagnoses = diagnoseStore.diagnosesSubject.getValue();
-      this.diagnosesSize = diagnoses.size;
-      console.log("diagnoses", this.diagnosesSize)
+//      let diagnoses = diagnoseStore.diagnosesSubject.getValue();
+//      console.log("diagnoses", diagnoses.size)
   }
 }

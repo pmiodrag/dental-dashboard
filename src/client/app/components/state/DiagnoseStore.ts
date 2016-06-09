@@ -20,8 +20,12 @@ export class DiagnoseStore {
         return asObservable(this._diagnoses);
     }
     
+  
+    
     get diagnosesSubject() {
-        return this._diagnoses;       
+       return this.diagnoseBackendService.getAllDiagnoses()
+            
+            
     }
 
     loadInitialData() {

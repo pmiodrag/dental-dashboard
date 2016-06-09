@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CORE_DIRECTIVES} from '@angular/common';
 import { ROUTER_DIRECTIVES, Routes, RouteSegment} from '@angular/router';
-//import { RouteConfig, RouteDefinition} from '@angular/router-deprecated';
-import {APP_ROUTES} from './app.routes';
 import { PatientsComponent } from './components/patients/patients';
 import { TreatmentsComponent } from './components/treatments/treatments';
 import { DiagnoseComponent } from './components/diagnose/diagnose';
+import {DoctorsComponent} from './components/doctors/doctors';
+import {DocumentsComponent} from './components/documents/documents';
+import {AgendaComponent} from './components/agenda/agenda';
 import { AuthComponent } from './components/auth/auth.component';
 import {Dashboard} from './components/dashboard/dashboard';
 import {MATERIAL_DIRECTIVES} from "ng2-material/index";
@@ -15,24 +16,19 @@ import {MATERIAL_DIRECTIVES} from "ng2-material/index";
     templateUrl: 'app/app.html' 
 })
 
-//@RouteConfig(APP_ROUTES)
 @Routes([
-//    // these are our two routes
-//    { path: '/', component: HomeComponent }, // , useAsDefault: true}, // coming soon
-//    { path: '/about', component: AboutComponent }
-     { path: '/patients',  component: PatientsComponent },
-//    { path: '/patient/:id/:firstname/:lastname/treatments', component: TreatmentsComponent },
-     { path: '/patient/:id/treatments', component: TreatmentsComponent },
-     { path: '/diagnoses',  component: DiagnoseComponent },
-//    { path: '/patient/:id/treatments', component: TreatmentsComponent },
-//     { path: '/treatments', component: TreatmentsComponent },
+    { path: '/patients',  component: PatientsComponent },
+    { path: '/patient/:id/treatments', component: TreatmentsComponent },
+    { path: '/diagnoses',  component: DiagnoseComponent },
+    { path: '/doctors',  component: DoctorsComponent },
+    { path: '/documents',  component: DocumentsComponent },
+    { path: '/agenda',  component: AgendaComponent },
     { path: '/login',  component: AuthComponent },
-     {path: '/dashboard',  component: Dashboard },
-      {path: '/*',           component: Dashboard },
-       {path: '/',            component: Dashboard },
+    { path: '/dashboard',  component: Dashboard },
+    { path: '/*', component: Dashboard },
+    { path: '/', component: Dashboard },
 ])
 export class AppComponent {
-//  public appRoutes: RouteDefinition[];
   mobileView:number = 992;
   toggle:boolean = false;
   profile: string;
@@ -42,7 +38,6 @@ export class AppComponent {
   lastname:string;
   constructor() {
     this.attachEvents();
-//    this.appRoutes = APP_ROUTES;
   }
 
   ngOnInit() {   
