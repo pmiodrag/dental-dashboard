@@ -1,0 +1,1 @@
+export var ICON_CLASS: string = "md-primary";
