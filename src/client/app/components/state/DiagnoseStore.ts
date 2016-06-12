@@ -24,8 +24,6 @@ export class DiagnoseStore {
     
     get diagnosesSubject() {
        return this.diagnoseBackendService.getAllDiagnoses()
-            
-            
     }
 
     loadInitialData() {

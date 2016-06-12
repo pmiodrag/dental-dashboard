@@ -5,6 +5,7 @@ import {AuthHttp, tokenNotExpired, JwtHelper} from 'angular2-jwt/angular2-jwt';
 //import {MdButton} from '@angular2-material/button';
 import {MdToolbar} from '@angular2-material/toolbar';
 import {MATERIAL_DIRECTIVES} from "ng2-material/index";
+import {ICON_CLASS} from '../../shared/constants/app.constants';
 declare var Auth0Lock;
 
 
@@ -17,6 +18,7 @@ declare var Auth0Lock;
 export class AuthComponent {
     jsonObj: JSON;
     picture: string;
+    iconClass: string = ICON_CLASS;
     lock = new Auth0Lock('9NdeCaZbpddcqM34xZ8BKcZcwMfPqFNl', 'twinsoft.eu.auth0.com');
     //lock = new Auth0Lock('AUTH0_CLIENT_ID', 'AUTH0_DOMAIN');
     jwtHelper: JwtHelper = new JwtHelper();

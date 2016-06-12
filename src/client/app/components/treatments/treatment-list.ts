@@ -8,6 +8,7 @@ import { Sorter } from '../../shared/sorter';
 import { SortByDirective } from '../../shared/directives/sortby.directive';
 import {MdToolbar} from '@angular2-material/toolbar';
 import {MATERIAL_DIRECTIVES, ITableSelectionChange} from "ng2-material/index";
+import {ICON_CLASS} from '../../shared/constants/app.constants';
 import * as Rx from "rxjs/Rx";
 import {List} from 'immutable';
 import {asObservable} from "../state/asObservable";
@@ -20,7 +21,7 @@ import {asObservable} from "../state/asObservable";
   directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES,MATERIAL_DIRECTIVES, MdToolbar ]
 })
 export class TreatmentListComponent {
-	
+    iconClass: string = ICON_CLASS;
     title: string = 'Treatments';
     treatment: Treatment;
     treatments : Treatment[] = [];

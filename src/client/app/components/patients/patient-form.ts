@@ -6,6 +6,7 @@ import { NotificationService  } from '../../services/notificationService';
 import {ControlMessages} from '../handlers/control-messages';
 import {ValidationService} from '../../shared/services/validation.service';
 import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
+import {FILE_UPLOAD_DIRECTIVES, FileUploader} from 'ng2-file-upload/ng2-file-upload';
 import { CapitalizePipe } from '../../shared/pipes/capitalize.pipe';
 import { PatientStore } from '../state/PatientStore';
 import { UiStateStore } from '../state/UiStateStore';
@@ -17,19 +18,25 @@ import {MdPatternValidator,
   MdMinValueValidator,
   MdNumberRequiredValidator,
   MdMaxValueValidator, MATERIAL_DIRECTIVES} from "ng2-material/index";
-//import {DatePicker} from 'ng2-datepicker';
+import {ICON_CLASS} from '../../shared/constants/app.constants';
+
 @Component({ 
   selector: 'patient-form', 
   templateUrl: 'app/components/patients/patient-form.html',
 //  providers: [PatientBackendService],
   providers: [MdRadioDispatcher],
   host: {'[hidden]': 'hidden'},
-  directives: [CORE_DIRECTIVES, DATEPICKER_DIRECTIVES, FORM_DIRECTIVES,ROUTER_DIRECTIVES, MD_INPUT_DIRECTIVES, MdRadioGroup, MdRadioButton, ControlMessages, MATERIAL_DIRECTIVES],
+  directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, DATEPICKER_DIRECTIVES, FORM_DIRECTIVES, MD_INPUT_DIRECTIVES,
+            MdRadioGroup, MdRadioButton, ControlMessages, MATERIAL_DIRECTIVES, FILE_UPLOAD_DIRECTIVES],
   pipes: [CapitalizePipe]
 })
 
 
 export class PatientFormComponent {
+    iconClass: string = ICON_CLASS;
+    public uploader:FileUploader = new FileUploader({url: URL});
+    public hasBaseDropZoneOver:boolean = false;
+    public hasAnotherDropZoneOver:boolean = false;
     patientForm: ControlGroup;
     @Input() patient: Patient;
     @Input() hidden:boolean = true;
@@ -124,6 +131,15 @@ export class PatientFormComponent {
         }             
         this.submitted = true; 
         this.goBack();
+    }
+    
+
+    public fileOverBase(e:any):void {
+      this.hasBaseDropZoneOver = e;
+    }
+
+    public fileOverAnother(e:any):void {
+      this.hasAnotherDropZoneOver = e;
     }
     
 }

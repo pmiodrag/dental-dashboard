@@ -3,11 +3,10 @@
         <div class="col-md-10">
             <div class="navbar"> 
                 <section layout="row" layout-sm="column" layout-align="left center" layout-wrap>
-                    <a  md-button class="md-icon-button" (click)="changeDisplayMode('Card')" [class.active]="!listDisplayModeEnabled">
+                    <a  md-button class="md-icon-button" (click)="changeDisplayMode('Card')" [ngClass]="iconClass"  [class.active]="!listDisplayModeEnabled">
                         <i class="material-icons">apps</i>                        
-                    </a> 
-
-                    <a  md-button class="md-icon-button" (click)="changeDisplayMode('List')" [class.active]="listDisplayModeEnabled">
+                    </a>
+                    <a  md-button class="md-icon-button" (click)="changeDisplayMode('List')" [ngClass]="iconClass" [class.active]="listDisplayModeEnabled">
                         <i class="material-icons">format_list_numbered</i>                         
                     </a> 
                 </section>
@@ -29,19 +28,19 @@
                             <md-card-actions layout="row" layout-align="start center">
                                 <md-card-icon-actions>
                                 </md-card-icon-actions>
-                                <a  md-fab class="md-mini green"  [routerLink]="['/patient', patient.id, '/treatments']">
+                                <a  md-button class="md-icon-button"  [ngClass]="iconClass" [routerLink]="['/patient', patient.id, '/treatments']">
                                     <i  md-icon>format_list_numbered</i>
                                 </a>
-                                <button md-fab class="md-mini orange" (click)="editPatient(patient);"  aria-label="Edit patient">
-                                    <i class="fa fa-pencil-square-o"></i>
-                                </button>
-                                <button md-fab class="md-mini red" (click)="deletePatient(patient)"  aria-label="Remove patient">
-                                    <i class="fa fa-recycle"></i>
-                                </button>
-                                <button    (click)="toggleSource(patient.id)" class="md-icon-button active" md-button=""><span class="md-button-wrapper">
-
-                                        <i md-icon="" class="material-icons">code</i>
-                                    </span><div class="md-ripple-container"></div></button>
+                                <a  md-button class="md-icon-button" [ngClass]="iconClass" (click)="editPatient(patient);"  aria-label="Edit patient">
+                                    <i class="material-icons">mode_edit</i>
+                                </a>
+                                <a  md-button class="md-icon-button" [ngClass]="iconClass" (click)="deletePatient(patient)"  aria-label="Remove patient">
+                                     <i class="material-icons">delete</i>
+                                </a>
+                                <a    (click)="toggleSource(patient.id)" class="md-icon-button active" md-button="" [ngClass]="iconClass">
+                                    <i *ngIf="!showSource" class="material-icons">expand_more</i>
+                                    <i *ngIf="showSource" class="material-icons">expand_less</i>
+                                </a>
                             </md-card-actions>
                         </md-card-header>
                         <!--                           <img src="public/images/old-board.jpg" class="md-card-image" alt="Old Board">-->
@@ -68,8 +67,8 @@
             </div>
         </div>
         <div class="row grid-container" [hidden]="!listDisplayModeEnabled">
-            <div class="col-md-10">
-                <md-toolbar *ngIf="!selection">Patients</md-toolbar>
+            <div class="col-md-12">
+                <md-toolbar class="md-primary" *ngIf="!selection">Patients</md-toolbar>
                 <md-toolbar color="accent" *ngIf="selection">
                     <span>{{count}} item{{count > 1 ? 's' : ''}} selected</span>
                     <span flex hide show-gt-md></span>
@@ -78,42 +77,40 @@
                 <md-data-table [selectable]="true" (onSelectableChange)="change($event)">
                     <thead>
                         <tr  md-data-table-header-selectable-row>
-
                             <th class="md-text-cell">First Name</th>
-                            <th>Middle Name</th>
-                            <th>Last Name</th>
-                            <th>Address</th>
-                            <th>City</th>
-                            <th>Country</th>
-                            <th>Treatments</th>
-                            <th>Edit Patient</th>
-                            <th>Delete Patient</th>
+                            <th class="md-text-cell">Middle Name</th>
+                            <th class="md-text-cell">Last Name</th>
+                            <th class="md-text-cell">Address</th>
+                            <th class="md-text-cell">City</th>
+                            <th class="md-text-cell">Country</th>
+                            <th class="md-text-cell">Treatments</th>
+                            <th class="md-text-cell">Edit Patient</th>
+                            <th class="md-text-cell">Delete Patient</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let patient of patientStore.patients | async"  md-data-table-selectable-row [selectable-value]="patient.id">                      
-                            <td class="md-text-cell"><a [routerLink]="['/patient',patient.id, '/treatments']">{{ patient.firstname | capitalize }}</a></td> 
-                            <!--                       <td class="md-text-cell"><a [routerLink]="['/patient',patient.id, patient.firstname, patient.lastname, '/treatments']">{{ patient.firstname | capitalize }}</a></td>      -->
-                            <td>{{ patient.middlename | capitalize }}</td>
-                            <td>{{ patient.lastname | capitalize }}</td>
-                            <td>{{ patient.address }}</td>
-                            <td>{{ patient.place | trim }}</td>
-                            <td>{{ patient.country | trim }}</td>
-                            <td>
-                                <a  md-fab class="md-mini green"  [routerLink]="['/patient', patient.id, '/treatments']">
-                                    <i  md-icon>format_list_numbered</i>
+                            <td class="md-text-cell"><h6 class="text-teal">{{ patient.firstname | capitalize }}</h6></td>
+                            <td class="md-text-cell"><h6 class="text-teal">{{ patient.middlename | capitalize }}</h6></td>
+                            <td class="md-text-cell"><h6 class="text-teal">{{ patient.lastname | capitalize }}</h6></td>
+                            <td class="md-text-cell"><h6 class="text-teal">{{ patient.address }}</h6></td>
+                            <td class="md-text-cell"><h6 class="text-teal">{{ patient.place | trim }}</h6></td>
+                            <td class="md-text-cell"><h6 class="text-teal">{{ patient.country | trim }}</h6></td>
+                            <td class="md-text-cell"> 
+                                <a  md-button class="md-icon-button" [ngClass]="iconClass"  [routerLink]="['/patient', patient.id, '/treatments']">
+                                   <i class="material-icons">assignment</i>
                                 </a>
                             </td>
-                            <td> 
-                                <button md-fab class="md-mini orange" (click)= "editPatient(patient);"  aria-label="Edit patient">
-                                    <i class="fa fa-pencil-square-o"></i>
-                                </button>
+                            <td class="md-text-cell">                                
+                                <a  md-button class="md-icon-button" [ngClass]="iconClass"  (click)="editPatient(patient);"  aria-label="Edit patient">
+                                    <i class="material-icons">mode_edit</i>
+                                </a>
                             </td>
-                            <td>
-                                <button md-fab class="md-mini red" (click)="deletePatient(patient)"  aria-label="Remove patient">
-                                    <i class="fa fa-recycle"></i>
-                                </button>
-                            </td>
+                            <td class="md-text-cell">                                
+                                <a  md-button class="md-icon-button" [ngClass]="iconClass" (click)="deletePatient(patient)"  aria-label="Remove patient">
+                                     <i class="material-icons">delete</i>
+                                </a>
+                            </td>                            
                         </tr>
                         <tr [hidden]="patientStore.patients._subscribe.length != 0">
                             <td>&nbsp;</td>

@@ -56,7 +56,9 @@ var jsNPMDependencies = [
              'ng2-material/index.js.map',
               'moment/moment.js',
               'immutable/dist/immutable.js',
-              'ng2-bootstrap/ng2-bootstrap.js'
+              'ng2-bootstrap/ng2-bootstrap.js',
+               'ng2-file-upload/ng2-file-upload.js'
+
 ] 
 
 
@@ -87,15 +89,17 @@ gulp.task('build:styles', function() {
 
 
 gulp.task("buld:resources", function() {
-     var copyNg2BootstrapLib = gulp.src(["node_modules/ng2-bootstrap/bundles/**", "!**/*.ts"])
+    var copyNg2BootstrapLib = gulp.src(["node_modules/ng2-bootstrap/bundles/**", "!**/*.ts"])
         .pipe(gulp.dest("dist/libs/ng2-bootstrap/bundles"));
-      var copyMaterialComponentLib = gulp.src(["node_modules/ng2-material/components/**", "!**/*.ts"])
+    var copyNg2FileUploadLib = gulp.src(["node_modules/ng2-file-upload/bundles/**", "!**/*.ts"])
+        .pipe(gulp.dest("dist/libs/ng2-file-upload/bundles"));
+    var copyMaterialComponentLib = gulp.src(["node_modules/ng2-material/components/**", "!**/*.ts"])
         .pipe(gulp.dest("dist/libs/ng2-material/components"));
-     var copyMaterialCoreLib = gulp.src(["node_modules/ng2-material/core/**", "!**/*.ts"])
+    var copyMaterialCoreLib = gulp.src(["node_modules/ng2-material/core/**", "!**/*.ts"])
         .pipe(gulp.dest("dist/libs/ng2-material/core"));
     var copyApp = gulp.src(["src/client/app/**", "!**/*.ts"])
         .pipe(gulp.dest("dist/app"))
- return[copyMaterialComponentLib, copyNg2BootstrapLib, copyMaterialCoreLib, copyApp];
+ return[copyMaterialComponentLib, copyNg2BootstrapLib, copyNg2FileUploadLib, copyMaterialCoreLib, copyApp];
 });
 
 gulp.task('buld:assets', function() {

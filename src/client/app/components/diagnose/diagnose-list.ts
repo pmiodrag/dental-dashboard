@@ -13,6 +13,7 @@ import * as Rx from "rxjs/Rx";
 import {List} from 'immutable';
 import {asObservable} from "../state/asObservable";
 import {MD_INPUT_DIRECTIVES} from '@angular2-material/input';
+import {ICON_CLASS} from '../../shared/constants/app.constants';
 @Component({ 
   selector: 'diagnose-list',
   providers: [DiagnoseBackendService],
@@ -28,8 +29,7 @@ export class DiagnoseListComponent {
     filteredDiagnoses: Diagnose[] = [];
     selection: string ;
     count: number;
-//    @Input() hidden:boolean = false;
-//    @Input () diagnoseform: any;  
+    iconClass: string = ICON_CLASS;
     private _diagnoses: Rx.BehaviorSubject<List<Diagnose>> = new Rx.BehaviorSubject(List([]));
     constructor(private notificationService: NotificationService, private diagnoseService: DiagnoseBackendService, private diagnoseStore: DiagnoseStore) {}   
     

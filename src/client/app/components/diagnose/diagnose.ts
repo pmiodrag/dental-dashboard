@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
 import {ROUTER_DIRECTIVES, RouteSegment} from '@angular/router';
-//import { RouterLink, RouteParams } from 'angular2/router';
-//import { DiagnoseService, Diagnose } from '../../services/diagnoseService';
-//import { PatientService } from '../../services/patientService';
-//import { Sorter } from '../../shared/sorter';
-//import { SortByDirective } from '../../shared/directives/sortby.directive';
 import {MATERIAL_DIRECTIVES} from "ng2-material/index";
 import {DiagnoseListComponent} from "./diagnose-list"
+import {ICON_CLASS} from '../../shared/constants/app.constants';
 
 @Component({ 
   selector: 'diagnoses',
@@ -19,7 +15,7 @@ export class DiagnoseComponent {
     id:string;
     name:string;
     description:string;
-   
+    iconClass: string = ICON_CLASS;
     
     constructor(routeSegment: RouteSegment) {
         

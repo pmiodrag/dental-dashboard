@@ -15,10 +15,10 @@ import { PatientFormComponent } from './patient-form'
 import {TimerWrapper} from "@angular/common/src/facade/async";
 import { PatientStore } from '../state/PatientStore';
 import {MdToolbar} from '@angular2-material/toolbar';
-//import {MD_ICON_DIRECTIVES} from '@angular2-material/icon';
 import {List} from 'immutable';
 import {asObservable} from "../state/asObservable";
 import * as Rx from "rxjs/Rx";
+import {ICON_CLASS} from '../../shared/constants/app.constants';
 @Component({ 
   selector: 'patient-list', 
  // providers: [PatientService],
@@ -35,7 +35,7 @@ export class PatientList {
    */
   public showSource: boolean = false;
   private showTabs: boolean = false;
-  
+    iconClass: string = ICON_CLASS;
   title: string;
   toggleID: number;
   filterText: string;
