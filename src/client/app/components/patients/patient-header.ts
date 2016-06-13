@@ -6,12 +6,13 @@ import { Patient } from '../../services/PatientBackendService';
 import {MdToolbar} from '@angular2-material/toolbar';
 import {MATERIAL_DIRECTIVES} from "ng2-material/index";
 import {ICON_CLASS} from '../../shared/constants/app.constants';
-
+import { PatientStore } from '../state/PatientStore';
+import { FilterTextboxComponent } from './filterTextbox.component';
 @Component({
   selector: 'patient-header',
   templateUrl: 'app/components/patients/patient-header.html',
   host: {'[hidden]': 'hidden'},
-  directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES, MdToolbar],
+  directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES, MdToolbar, FilterTextboxComponent],
 })
 export class PatientHeaderComponent {
     
@@ -20,10 +21,9 @@ export class PatientHeaderComponent {
     @Input () patientform: any;
     @Input () patientlist: any;  
     patient: Patient;
+    listDisplayModeEnabled: boolean;
     
-    constructor( private notificationService: NotificationService) {}
-
-    
+    constructor( private notificationService: NotificationService, private patientStore: PatientStore) {}    
 
     addPatient () {
         this.hidden = true;
@@ -35,5 +35,8 @@ export class PatientHeaderComponent {
     formAction(patient: Patient) {
         console.log('PatientHeaderComponent formAction patient', patient);
         this.notificationService.emitFormActionChangeEvent(patient);
+    }
+    showCardView(show: boolean) {
+      this.patientStore.changeView(show);
     }
 }

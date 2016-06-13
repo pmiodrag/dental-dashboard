@@ -11,13 +11,22 @@ import {BehaviorSubject} from "rxjs/Rx";
 export class PatientStore {
 
     private _patients: BehaviorSubject<List<Patient>> = new BehaviorSubject(List([]));
+    private _showCardView: BehaviorSubject<boolean> = new BehaviorSubject(true);
     // this method should be supported in RXJS 2
     //    public patients: Observable<List<Patient>> =  this._patients.asObservable();
 
     constructor(private patientBackendService: PatientBackendService) {
         this.loadInitialData();
     }
-
+    
+    get showCardView() {
+        return  asObservable(this._showCardView);
+    }
+    
+    changeView(show: boolean){
+        console.log("changeView _showCardView", show);
+        this._showCardView.next(show);
+    }
     get patients() {
         return asObservable(this._patients);
     }

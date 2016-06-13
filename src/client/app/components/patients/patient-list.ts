@@ -39,7 +39,7 @@ export class PatientList {
   title: string;
   toggleID: number;
   filterText: string;
-  listDisplayModeEnabled: boolean; 
+  @Input() listDisplayModeEnabled: boolean; 
   filteredPatients: Patient[] = [];
   sorter: Sorter;
   patient : Patient;
@@ -74,9 +74,9 @@ export class PatientList {
    // console.log('formAction ' + action);
     this.notificationService.emitFormActionChangeEvent(patient);
   }
-  changeDisplayMode(mode: string) {
-      this.listDisplayModeEnabled = (mode === 'List');
-  }
+    showCardView(show: boolean) {
+        this.patientStore.changeView(show);
+    }
 
   filterChanged(data: string) {
     if (data) {
