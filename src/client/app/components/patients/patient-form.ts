@@ -27,7 +27,7 @@ import {ICON_CLASS} from '../../shared/constants/app.constants';
   providers: [MdRadioDispatcher],
   host: {'[hidden]': 'hidden'},
   directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, DATEPICKER_DIRECTIVES, FORM_DIRECTIVES, MD_INPUT_DIRECTIVES,
-            MdRadioGroup, MdRadioButton, ControlMessages, MATERIAL_DIRECTIVES, FILE_UPLOAD_DIRECTIVES],
+            MdRadioGroup, MdRadioButton, MdToolbar, ControlMessages, MATERIAL_DIRECTIVES, FILE_UPLOAD_DIRECTIVES],
   pipes: [CapitalizePipe]
 })
 
