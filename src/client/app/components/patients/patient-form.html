@@ -5,32 +5,26 @@
         </button>
        {{formTitle}}
     </md-toolbar>
-    <md-content layout-padding>
- 
+    <md-content layout-padding> 
         <form [ngFormModel]="patientForm">
             <div layout-gt-sm="row">
                  <div layout-gt-sm="column" class="col-md-3 md-block">
-                    <md-input placeholder="First name" [(ngModel)]="patient.firstname" [value]="patient.firstname" ngControl="firstname" id="firstname"></md-input>
+                    <md-input placeholder="First name" [(ngModel)]="patient.firstname" [value]="patient.firstname" ngControl="firstname" id="firstname"></md-input>                   
                     <control-messages control="firstname"></control-messages>
                   </div>
                  <div layout-gt-sm="column" class="col-md-3 md-block">
                      <md-input placeholder="Midlename" align="end"  [(ngModel)]="patient.middlename" [value]="patient.middlename" ></md-input>
                 </div> 
                 <div layout-gt-sm="column" class="col-md-3 md-block">
-                     <md-input  placeholder="Last name" [(ngModel)]="patient.lastname" [value]="patient.lastname" ngControl="lastname" id="lastname">  </md-input>
+                    <md-input  placeholder="Last name" [(ngModel)]="patient.lastname" [value]="patient.lastname" ngControl="lastname" id="lastname">  </md-input>
                     <control-messages control="lastname"></control-messages>
                 </div>
             </div>
             <div layout-gt-sm="row">
                 <div class="col-md-3">
-
-            <h3>Select files</h3>
-
-           
-
-            Single
-            <input type="file" ng2FileSelect [uploader]="uploader" />
-        </div>
+                    <h3>Select files</h3>
+                <input type="file" ng2FileSelect [uploader]="uploader" />
+            </div>
         <div class="col-md-9" style="margin-bottom: 40px">
 
             <h3>Upload queue</h3>

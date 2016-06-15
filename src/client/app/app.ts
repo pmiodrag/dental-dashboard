@@ -10,6 +10,7 @@ import {AgendaComponent} from './components/agenda/agenda';
 import { AuthComponent } from './components/auth/auth.component';
 import {Dashboard} from './components/dashboard/dashboard';
 import {MATERIAL_DIRECTIVES} from "ng2-material/index";
+import {MD_SIDENAV_DIRECTIVES} from '@angular2-material/sidenav';
 @Component({ 
     selector: 'app-container',
     directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES, AuthComponent, PatientsComponent, Dashboard],

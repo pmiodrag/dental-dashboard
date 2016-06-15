@@ -24,6 +24,6 @@
             <img [src]="picture"/>
         </a>
     </div>
-    <button md-raised-button class="md-raised" *ngIf="!loggedIn()" (click)="login()" aria-label="Login">Login</button>
-    <button md-raised-button class="md-raised" *ngIf="loggedIn()" (click)="logout()" aria-label="Logout">Logout</button> 
+    <button md-raised-button class="md-raised text-primary" *ngIf="!loggedIn()" (click)="login()" aria-label="Login">Login</button>
+    <button md-raised-button class="md-raised text-primary" *ngIf="loggedIn()" (click)="logout()" aria-label="Logout">Logout</button> 
 </md-toolbar>

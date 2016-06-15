@@ -19,112 +19,114 @@ import {List} from 'immutable';
 import {asObservable} from "../state/asObservable";
 import * as Rx from "rxjs/Rx";
 import {ICON_CLASS} from '../../shared/constants/app.constants';
-@Component({ 
-  selector: 'patient-list', 
- // providers: [PatientService],
-  templateUrl: 'app/components/patients/patient-list.html',
-  host: {'[hidden]': 'hidden'},
-  directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES, MdToolbar, FilterTextboxComponent, SortByDirective],
-  pipes: [CapitalizePipe, TrimPipe, ValuesPipe]
+@Component({
+    selector: 'patient-list', 
+    // providers: [PatientService],
+    templateUrl: 'app/components/patients/patient-list.html',
+    host: { '[hidden]': 'hidden' },
+    directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES, MdToolbar, FilterTextboxComponent, SortByDirective],
+    pipes: [CapitalizePipe, TrimPipe, ValuesPipe]
 })
 
 
 export class PatientList {
-   /**
-   * True to show the source code for the example
-   */
-  public showSource: boolean = false;
-  private showTabs: boolean = false;
+    /**
+    * True to show the source code for the example
+    */
+    public showSource: boolean = false;
+    private showTabs: boolean = false;
     iconClass: string = ICON_CLASS;
-  title: string;
-  toggleID: number;
-  filterText: string;
-  @Input() listDisplayModeEnabled: boolean; 
-  filteredPatients: Patient[] = [];
-  sorter: Sorter;
-  patient : Patient;
-  @Input() hidden:boolean = false;
-  @Input() patients: Patient[];
-  @Input() selected: Patient;
-  @Input() patientheader: any;
-  @Input() patientform: any;
-  @Output() selectedChange: EventEmitter<any> = new EventEmitter();
-  selection: string ;
-  count: number;
-  private _patients: Rx.BehaviorSubject<List<Patient>> = new Rx.BehaviorSubject(List([]));
-  constructor(private patientService: PatientBackendService, private notificationService: NotificationService, private patientStore: PatientStore) { }
-  
-  ngOnInit() {
-    this.title = 'Patients';
-    this.filterText = 'Filter Patients:';
-    this.listDisplayModeEnabled = false;     
-    this.sorter = new Sorter();
-  }
-  deletePatient(patient: Patient) {
-    this.patientStore.deletePatient(patient);
-  }
-  editPatient (patient: Patient) {
-      this.selectedChange.next(patient);
-      this.hidden = true;
-      this.patientheader.hidden = true;
-      this.patientform.hidden = false;
-      this.formAction(patient);
-  }
-  formAction(patient: Patient) {
-   // console.log('formAction ' + action);
-    this.notificationService.emitFormActionChangeEvent(patient);
-  }
+    title: string;
+    toggleID: number;
+    filterText: string;
+    @Input() listDisplayModeEnabled: boolean;
+    filteredPatients: Patient[] = [];
+    sorter: Sorter;
+    patient: Patient;
+    @Input() hidden: boolean = false;
+    @Input() patients: Patient[];
+    @Input() selected: Patient;
+    @Input() patientheader: any;
+    @Input() patientform: any;
+    @Output() selectedChange: EventEmitter<any> = new EventEmitter();
+    selection: string;
+    count: number;
+    private _patients: Rx.BehaviorSubject<List<Patient>> = new Rx.BehaviorSubject(List([]));
+    constructor(private patientService: PatientBackendService, private notificationService: NotificationService, private patientStore: PatientStore) { }
+
+    ngOnInit() {
+        this.title = 'Patients';
+        this.filterText = 'Filter Patients:';
+        this.listDisplayModeEnabled = false;
+        this.sorter = new Sorter();
+    }
+    hideElements() {
+        this.hidden = true;
+        this.patientheader.hidden = true;
+        this.patientform.hidden = false;
+    }
+    deletePatient(patient: Patient) {
+        this.patientStore.deletePatient(patient);
+    }
+    addPatient() {
+        this.hideElements();
+        this.patient = new Patient(-1, '', '', '', 'M', '', '', new Date(), '', '', '');
+        this.formAction(this.patient);
+    }
+    editPatient(patient: Patient) {
+        this.selectedChange.next(patient);
+        this.hideElements();
+        this.formAction(patient);
+    }
+    formAction(patient: Patient) {
+        // console.log('formAction ' + action);
+        this.notificationService.emitFormActionChangeEvent(patient);
+    }
+    
     showCardView(show: boolean) {
         this.patientStore.changeView(show);
     }
 
-  filterChanged(data: string) {
-    if (data) {
-        data = data.toUpperCase();
-        this.patientStore.filterData(data);        
-    }
-  }
+    sort(prop: string) {
+        //Check for complex type such as 'state.name'
+        if (prop && prop.indexOf('.')) {
 
-  sort(prop: string) {
-      //Check for complex type such as 'state.name'
-      if (prop && prop.indexOf('.')) {
-        
-      }
-      this.sorter.sort(this.filteredPatients, prop);
-  }
-  
-   toggleSource(id) {
-    this.toggleID = id;
-    if (this.showSource) {
-      this.showTabs = false;
-      TimerWrapper.setTimeout(() => {
-        this.showSource = false;
-      }, 500);
+        }
+        this.sorter.sort(this.filteredPatients, prop);
     }
-    else {
-      this.showSource = true;
-      TimerWrapper.setTimeout(() => {
-        this.showTabs = true;
-      }, 25);
+
+    toggleSource(id) {
+        this.toggleID = id;
+        if (this.showSource) {
+            this.showTabs = false;
+            TimerWrapper.setTimeout(() => {
+                this.showSource = false;
+            }, 500);
+        }
+        else {
+            this.showSource = true;
+            TimerWrapper.setTimeout(() => {
+                this.showTabs = true;
+            }, 25);
+        }
     }
-  }
-  
-   change(data: ITableSelectionChange) {
-    let patientsSelected = [];
-   // let p = this.patientStore.patients.map(patient => console.log("patient", patient));
-    this.patientStore.patients.forEach((patients: List<Patient>) => {
-        console.log("patients", patients, data);
-        patients.forEach((patient: Patient) => {
-             console.log("patient", patient);
-            if (data.values.indexOf(patient.id) !== -1) {
-                patientsSelected.push(patient.id);
-                console.log("patientsSelected", patientsSelected);
-            }
-        })
-//     
-    });
-    this.selection = patientsSelected.join(', ');
-    this.count = patientsSelected.length;
-  }
+
+    change(data: ITableSelectionChange) {
+        let patientsSelected = [];
+        // let p = this.patientStore.patients.map(patient => console.log("patient", patient));
+        this.patientStore.patients.forEach((patients: List<Patient>) => {
+            console.log("patients", patients, data);
+            patients.forEach((patient: Patient) => {
+                console.log("patient", patient);
+                if (data.values.indexOf(patient.id) !== -1) {
+                    patientsSelected.push(patient.id);
+                    console.log("patientsSelected", patientsSelected);
+                }
+            })
+            //     
+        });
+        this.selection = patientsSelected.join(', ');
+        this.count = patientsSelected.length;
+    }
 
 }
