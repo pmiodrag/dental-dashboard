@@ -3,6 +3,7 @@ var mysql = require('mysql'); // node-mysql module
 import path = require('path');
 import * as db from "../connection/db";
 var bodyParser = require('body-parser');
+var  multer = require("multer");
 
 export function index (req: express.Request, res: express.Response)  {
    console.log("getPatients")
@@ -67,3 +68,12 @@ export function update (req: express.Request, res: express.Response)  {
         });   
      }); 
  }
+ 
+ export function uploadFile (req: express.Request, res: express.Response) {
+  // We are able to access req.files.file thanks to
+  // the multiparty middleware
+  //upload.single(req.file);
+    
+     console.log("Patient param: "+req.param); 
+  res.status(204).end("Profile image uploaded");
+}

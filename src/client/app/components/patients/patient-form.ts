@@ -14,6 +14,7 @@ import {MD_INPUT_DIRECTIVES} from '@angular2-material/input';
 import {MdRadioGroup, MdRadioButton} from '@angular2-material/radio';
 import {MdRadioDispatcher} from '@angular2-material/radio/radio_dispatcher';
 import {MdToolbar} from '@angular2-material/toolbar';
+import {MdProgressBar} from '@angular2-material/progress-bar';
 import {MdPatternValidator,
   MdMinValueValidator,
   MdNumberRequiredValidator,
@@ -23,20 +24,18 @@ import {ICON_CLASS} from '../../shared/constants/app.constants';
 @Component({ 
   selector: 'patient-form', 
   templateUrl: 'app/components/patients/patient-form.html',
-//  providers: [PatientBackendService],
   providers: [MdRadioDispatcher],
   host: {'[hidden]': 'hidden'},
   directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, DATEPICKER_DIRECTIVES, FORM_DIRECTIVES, MD_INPUT_DIRECTIVES,
-            MdRadioGroup, MdRadioButton, MdToolbar, ControlMessages, MATERIAL_DIRECTIVES, FILE_UPLOAD_DIRECTIVES],
+            MdRadioGroup, MdRadioButton, MdToolbar, ControlMessages, MATERIAL_DIRECTIVES, FILE_UPLOAD_DIRECTIVES, MdProgressBar],
   pipes: [CapitalizePipe]
 })
 
 
 export class PatientFormComponent {
     iconClass: string = ICON_CLASS;
-    public uploader:FileUploader = new FileUploader({url: URL});
-    public hasBaseDropZoneOver:boolean = false;
-    public hasAnotherDropZoneOver:boolean = false;
+    
+    public uploader:FileUploader = new FileUploader({url: '/patient/upload'});
     patientForm: ControlGroup;
     @Input() patient: Patient;
     @Input() hidden:boolean = true;
@@ -63,8 +62,9 @@ export class PatientFormComponent {
         value: 'F',
          color:'md-warn'
     }];
+   
   constructor(fb: FormBuilder, private patientStore: PatientStore, private uiStateStore: UiStateStore, private patientService: PatientBackendService, private notificationService: NotificationService ) {
-    
+  
     this.patientForm = fb.group({
       'firstname': ['',  Validators.compose([
         Validators.required,
@@ -77,6 +77,7 @@ export class PatientFormComponent {
       ])],
       'email': ['', ValidationService.emailValidator]
     });
+  
   }
   
    
@@ -132,14 +133,7 @@ export class PatientFormComponent {
         this.submitted = true; 
         this.goBack();
     }
-    
-
-    public fileOverBase(e:any):void {
-      this.hasBaseDropZoneOver = e;
-    }
-
-    public fileOverAnother(e:any):void {
-      this.hasAnotherDropZoneOver = e;
-    }
+ 
+ 
     
 }

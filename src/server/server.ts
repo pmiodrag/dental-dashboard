@@ -2,12 +2,16 @@
 import express = require('express');
 import path = require('path');
 import bodyParser = require('body-parser');
+
 import * as patients from "./api/patient/controller";
 import * as treatments from "./api/treatment/controller";
 import * as diagnoses from "./api/diagnose/controller";
 var port: number = process.env.PORT || 3000;
 var app = express();
 //var router = express.Router();
+var  multer = require("multer");
+// upload destination directory
+var DIR = './uploads/';
 
 /* GET users listing. */
 //router.get('/', function(req, res, next) {
@@ -23,6 +27,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 //app.use(require('connect-livereload')({
 //    port: 35729
 //  }));
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 var server = app.listen(port, function() {
     var host = server.address().address;
     var port = server.address().port;
@@ -32,6 +41,17 @@ var server = app.listen(port, function() {
 // Patient
 app.get('/patient', patients.index);
 app.post('/patient', patients.create);
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, DIR)
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+var upload = multer({ storage: storage }).single('file');
+app.post('/patient/upload', upload, patients.uploadFile);
+
 app.put('/patient/:id', patients.update);
 app.get('/patient/:id', patients.show);
 app.delete('/patient/:id', patients.destroy);
@@ -55,5 +75,6 @@ var renderIndex = (req: express.Request, res: express.Response) => {
     res.sendFile(path.resolve(__dirname, 'index.html'));
 }
 app.get('/*', renderIndex);
+
 
 //connection.end();
