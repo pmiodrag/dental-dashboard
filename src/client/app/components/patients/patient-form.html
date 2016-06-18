@@ -1,5 +1,8 @@
 <style>
       #file-input { display: none; }
+      .md-radio-outer { display: none !important; }
+            .md-radio-inner { display: none !important; }
+
 </style>
 <div layout="column" class="md-inline-form">
     <md-toolbar class="md-primary">
@@ -23,8 +26,8 @@
                     <control-messages control="lastname"></control-messages>
                 </div>
             </div>
-            <div layout-gt-sm="row">
-                <div class="col-md-3">
+            <div layout-gt-sm="row" >
+                <div class="col-md-3 md-block">
                     <h3>Chose profile photo</h3>
                       <button md-raised-button class="md-raised  md-primary">
                         <label for="file-input">Select</label>  
@@ -32,7 +35,6 @@
                     <input id="file-input" type="file"  ng2FileSelect [uploader]="uploader" >
 <!--                    <input type="file"  ng2FileSelect [uploader]="uploader" />-->
                         <div *ngFor="let item of uploader.queue">
-                            item {{item}}
                             <a *ngIf="item.isSuccess" md-button class="md-icon-button md-primary">
                                 <i class="material-icons">done</i>
                             </a>
@@ -48,19 +50,33 @@
                             </button>
                     </div>
                 </div>
-            </div>
-            <div layout-gt-sm="row" >
-                <div layout-gt-sm="column" class="col-md-3 md-block">
-<!--                    <md-radio-group layout="row"let group [(value)]="patient.gender">-->
+                <div layout-gt-sm="column" class="col-md-2 md-block">
+
+                <md-radio-group #group [(ngModel)]="patient.gender">
                         <md-radio-button *ngFor="let it of avatarData"
                             [value]="it.value"
                             [ngClass]="it.color"
-                            [aria-label]="it.title"
-                            [checked]="it.value === patient.gender">
-                            <img [src]="it.id" class="card-image">
+                            [aria-label]="it.title" 
+                            [checked]="group.value === it.value">
+                             <button md-fab class="md-fab"  [ngClass]="it.color" aria-label="Eat cake">
+                            <md-icon svgIcon="{{it.id}}"></md-icon>
+                                </button>
+                           
                         </md-radio-button>
-<!--                    </md-radio-group>-->
+                    </md-radio-group>
                 </div>
+
+                 <div class="dialog-demo-content" class="col-md-4 md-block">
+                    <md-dialog #alert>
+                      <md-dialog-title>Set birth date please</md-dialog-title>
+                      <datepicker [(ngModel)]="patient.birthdate" md-placeholder="Enter date"></datepicker>
+                      <md-dialog-actions ok="Got It"></md-dialog-actions>
+                    </md-dialog>
+                      <pre class="card card-block card-header">Selected date is: <em *ngIf="patient.birthdate">{{patient.birthdate}}</em></pre>
+                     <button md-raised-button class="md-primary" (click)="alert.show()" flex="auto">Set birth date</button>
+     
+                 </div>
+
             </div>  
             <div layout-gt-sm="row">
                 <div layout-gt-sm="column" class="col-md-4 md-block">
@@ -73,14 +89,6 @@
                <div layout-gt-sm="column" class="col-md-3 md-block">
                     <md-input placeholder="Address"  [(ngModel)]="patient.address" [value]="patient.address"></md-input>
                 </div>
-            </div>
-            <div layout-gt-sm="row">   
-                 <datepicker [(ngModel)]="patient.birthdate" md-placeholder="Enter date"></datepicker>
-<!--                 <md-input-container class="md-block" flex-gt-sm>
-                      <div style="display:inline-block; min-height:290px;">
-                        <datepicker [(ngModel)]="patient.birthdate" [showWeeks]="true"></datepicker>
-                      </div>
-                 </md-input-container>-->
             </div>
             <div layout-gt-sm="row">
                 <div layout-gt-sm="column" class="col-md-4 md-block">

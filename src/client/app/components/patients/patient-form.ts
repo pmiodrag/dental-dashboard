@@ -16,82 +16,81 @@ import {MdRadioDispatcher} from '@angular2-material/radio/radio_dispatcher';
 import {MdToolbar} from '@angular2-material/toolbar';
 import {MdProgressBar} from '@angular2-material/progress-bar';
 import {MdPatternValidator,
-  MdMinValueValidator,
-  MdNumberRequiredValidator,
-  MdMaxValueValidator, MATERIAL_DIRECTIVES} from "ng2-material/index";
+MdMinValueValidator,
+MdNumberRequiredValidator,
+MdMaxValueValidator, MATERIAL_DIRECTIVES} from "ng2-material/index";
 import {ICON_CLASS} from '../../shared/constants/app.constants';
-
-@Component({ 
-  selector: 'patient-form', 
-  templateUrl: 'app/components/patients/patient-form.html',
-  providers: [MdRadioDispatcher],
-  host: {'[hidden]': 'hidden'},
-  directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, DATEPICKER_DIRECTIVES, FORM_DIRECTIVES, MD_INPUT_DIRECTIVES,
-            MdRadioGroup, MdRadioButton, MdToolbar, ControlMessages, MATERIAL_DIRECTIVES, FILE_UPLOAD_DIRECTIVES, MdProgressBar],
-  pipes: [CapitalizePipe]
+import {OVERLAY_PROVIDERS} from '@angular2-material/core/overlay/overlay';
+import {MdIcon, MdIconRegistry} from '@angular2-material/icon/icon';
+@Component({
+    selector: 'patient-form',
+    templateUrl: 'app/components/patients/patient-form.html',
+    providers: [MdRadioDispatcher, MdIconRegistry, OVERLAY_PROVIDERS],
+    host: { '[hidden]': 'hidden' },
+    directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, DATEPICKER_DIRECTIVES, FORM_DIRECTIVES, MD_INPUT_DIRECTIVES,
+        MdRadioGroup, MdRadioButton, MdIcon, MdToolbar, ControlMessages, MATERIAL_DIRECTIVES, FILE_UPLOAD_DIRECTIVES, MdProgressBar],
+    pipes: [CapitalizePipe]
 })
 
 
 export class PatientFormComponent {
     iconClass: string = ICON_CLASS;
-    
-    public uploader:FileUploader = new FileUploader({url: '/patient/upload'});
+
+    public uploader: FileUploader = new FileUploader({ url: '/patient/upload' });
+
     patientForm: ControlGroup;
     @Input() patient: Patient;
-    @Input() hidden:boolean = true;
-    @Input () patientheader: any;
-    @Input () patientlist: any;
+    @Input() hidden: boolean = true;
+    @Input() patientheader: any;
+    @Input() patientlist: any;
     formTitle: string;
     submitAction: string;
     subscription: any;
     submitted = false;
-    
-    data: any = {
-        group1: 'Banana',
-        group2: '2',
-        group3: 'avatar-1'
-      };
+
     avatarData: any[] = [{
-        id: 'assets/images/m.png',
+        id: 'male',
         title: 'Male',
         value: 'M',
-        color:'md-primary'
+        color: 'md-primary'
     }, {
-        id: 'assets/images/f.png',
-        title: 'Female',
-        value: 'F',
-         color:'md-warn'
-    }];
-   
-  constructor(fb: FormBuilder, private patientStore: PatientStore, private uiStateStore: UiStateStore, private patientService: PatientBackendService, private notificationService: NotificationService ) {
-  
-    this.patientForm = fb.group({
-      'firstname': ['',  Validators.compose([
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(30)])],
-      'lastname': ['', Validators.compose([
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(30)
-      ])],
-      'email': ['', ValidationService.emailValidator]
-    });
-  
-  }
-  
-   
+            id: 'female',
+            title: 'Female',
+            value: 'F',
+            color: 'md-warn'
+        }];
+
+    constructor(fb: FormBuilder, mdIconRegistry: MdIconRegistry, private patientStore: PatientStore, private uiStateStore: UiStateStore, private patientService: PatientBackendService, private notificationService: NotificationService) {
+        //   console.log("uploader", this.uploader);
+        mdIconRegistry.addSvgIcon('female', 'assets/images/svg/human-female.svg');
+        mdIconRegistry.addSvgIcon('male', 'assets/images/svg/human-male.svg');
+        this.patientForm = fb.group({
+            'firstname': ['', Validators.compose([
+                Validators.required,
+                Validators.minLength(3),
+                Validators.maxLength(30)])],
+            'lastname': ['', Validators.compose([
+                Validators.required,
+                Validators.minLength(3),
+                Validators.maxLength(30)
+            ])],
+            'email': ['', ValidationService.emailValidator]
+        });
+
+    }
+
+
     ngOnInit() {
         this.patient = new Patient(0, '', '', '', 'M', '', '', new Date(), '', '', '');
         this.subscription = this.notificationService.getFormActionChangeEmitter()
-          .subscribe(patient => this.onFormActionChange(patient));           
+            .subscribe(patient => this.onFormActionChange(patient));
     }
     onFormActionChange(patient: Patient) {
         console.log("onFormActionChange patient", patient);
         this.patient = patient;
-        if (patient.id == -1) {          
-          this.formTitle = "Add Patient";
-          this.submitAction = 'add';
+        if (patient.id == -1) {
+            this.formTitle = "Add Patient";
+            this.submitAction = 'add';
         } else {
             this.formTitle = "Edit Patient";
             this.submitAction = 'edit';
@@ -100,40 +99,41 @@ export class PatientFormComponent {
     ngOnDestroy() {
         this.subscription.unsubscribe();
     }
-    
-    addPatient(patient) {       
+
+    addPatient(patient) {
         this.patientStore.addPatient(patient)
         this.goBack();
     }
-    
+
     updatePatient(patient) {
+        console.log("Update patient", patient, it.vaue);
         this.patientStore.updatePatient(patient)
             .subscribe(
-                res => {},
-                err => {
-                    this.uiStateStore.endBackendAction();
-                }
+            res => { },
+            err => {
+                this.uiStateStore.endBackendAction();
+            }
             );
-            this.goBack();
+        this.goBack();
     }
-      
-    goBack() {     
+
+    goBack() {
         this.hidden = true;
         this.patientheader.hidden = false;
         this.patientlist.hidden = false;
     }
-    
+
     onSubmit(patient) { 
-       // patient.birthdate.setHours(12);
-        if (this.submitAction == 'add') {             
-            this.addPatient (patient);
+        // patient.birthdate.setHours(12);
+        if (this.submitAction == 'add') {
+            this.addPatient(patient);
         } else {
             this.updatePatient(patient);
-        }             
-        this.submitted = true; 
+        }
+        this.submitted = true;
         this.goBack();
     }
- 
- 
-    
+
+
+
 }
