@@ -106,7 +106,6 @@ export class PatientFormComponent {
     }
 
     updatePatient(patient) {
-        console.log("Update patient", patient, it.vaue);
         this.patientStore.updatePatient(patient)
             .subscribe(
             res => { },
