@@ -18,36 +18,38 @@ USE `smiletime`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `treatment`
+-- Table structure for table `doctor`
 --
 
-DROP TABLE IF EXISTS `treatment`;
+DROP TABLE IF EXISTS `doctor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `treatment` (
+CREATE TABLE `doctor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `patientid` int(11) NOT NULL,
-  `doctorid` int(11) NOT NULL,
-  `treatmentdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `diagnose` varchar(500) NOT NULL,
-  `therapy` varchar(500) NOT NULL,
-  `price` int(11) DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `patientId_idx` (`patientId`),
-  CONSTRAINT `patientId` FOREIGN KEY (`patientid`) REFERENCES `patient` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  KEY `doctorId_idx` (`doctorId`),
-  CONSTRAINT `doctorId` FOREIGN KEY (`doctorid`) REFERENCES `doctor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `firstname` varchar(45) NOT NULL,
+  `lastname` varchar(45) NOT NULL,
+  `title` varchar(45) DEFAULT NULL,
+  `degreeyear` integer NOT NULL,
+  `degreeplace` varchar(45) NOT NULL,  
+  `place` varchar(45) NOT NULL,
+  `address` varchar(45) NOT NULL,
+  `phone` varchar(45) NOT NULL,
+  `mobilephone` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `gender` char(1) NOT NULL,
+  `birthdate` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `treatment`
+-- Dumping data for table `doctor`
 --
 
-LOCK TABLES `treatment` WRITE;
-/*!40000 ALTER TABLE `treatment` DISABLE KEYS */;
-INSERT INTO `treatment` VALUES (1,1,1,'2016-04-06T12:23:00.000Z','test','test2',231),(2,1,1,'2016-03-20 11:11:00','test11','teraphy2',232),(3,1,1,'2015-04-20 16:00:00','diagnose1','therapy1',0);
-/*!40000 ALTER TABLE `treatment` ENABLE KEYS */;
+LOCK TABLES `doctor` WRITE;
+/*!40000 ALTER TABLE `doctor` DISABLE KEYS */;
+INSERT INTO `doctor` VALUES (1,'Trgovcic','Velibor','Dr',2008,'Medicinski Fakultet Novi Sad','Kralja Petra 2','Novi Sad','0216748322','+38123979242','vel.trg@gmail.com','M','1982-10-15');
+/*!40000 ALTER TABLE `doctor` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

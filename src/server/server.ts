@@ -4,6 +4,7 @@ import path = require('path');
 import bodyParser = require('body-parser');
 
 import * as patients from "./api/patient/controller";
+import * as doctors from "./api/doctor/controller";
 import * as treatments from "./api/treatment/controller";
 import * as diagnoses from "./api/diagnose/controller";
 var port: number = process.env.PORT || 3000;
@@ -56,6 +57,25 @@ app.put('/patient/:id', patients.update);
 app.get('/patient/:id', patients.show);
 app.delete('/patient/:id', patients.destroy);
 app.get('/patient/:id/:firstname/:lastname/treatments', treatments.index);
+
+// Doctor
+app.get('/doctor', doctors.index);
+app.post('/doctor', doctors.create);
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, DIR)
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+var upload = multer({ storage: storage }).single('file');
+app.post('/doctor/upload', upload, doctors.uploadFile);
+
+app.put('/doctor/:id', doctors.update);
+app.get('/doctor/:id', doctors.show);
+app.delete('/doctor/:id', doctors.destroy);
+app.get('/doctor/:id/:firstname/:lastname/treatments', treatments.index);
 
 // Treatment
 //app.get('/patient/:id/treatments', treatments.index);

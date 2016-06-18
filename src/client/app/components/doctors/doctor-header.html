@@ -1,0 +1,24 @@
+ <div class="row voffset4">
+    <div class="col-md-10">
+        <div class="navbar">
+            <filter-textbox class="navbar-right" (changed)="filterChanged($event)"></filter-textbox>
+        </div>
+    </div>
+</div>
+<md-content layout="column" *ngIf="doctorStore.showCardView | async">
+    <md-toolbar class="md-primary"> 
+        <span md-button class="md-icon-button white" layout  layout-align="center center" >
+            <i class="material-icons">people</i>
+        </span>
+        <span >List of Doctors</span>     
+         <a  md-button class="md-icon-button white" (click)="addDoctor()" >
+            <i class="material-icons">person_add</i>                            
+        </a> 
+        <a  md-button class="md-icon-button white" (click)="showCardView(true)"  [class.active]="!listDisplayModeEnabled">
+                <i class="material-icons">apps</i>                        
+            </a>
+            <a  md-button class="md-icon-button white" (click)="showCardView(false)" [class.active]="listDisplayModeEnabled">
+                <i class="material-icons">format_list_numbered</i>                         
+            </a> 
+    </md-toolbar>
+</md-content>

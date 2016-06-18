@@ -1,0 +1,111 @@
+<style>
+      #file-input { display: none; }
+</style>
+<div layout="column" class="md-inline-form">
+    <md-toolbar class="md-primary">
+        <button md-button aria-label="Go Back" (click)="goBack()" >
+            Go Back
+        </button>
+       {{formTitle}}
+    </md-toolbar>
+    <md-content layout-padding> 
+        <form [ngFormModel]="doctorForm">
+            <div layout-gt-sm="row">
+                 <div layout-gt-sm="column" class="col-md-3 md-block">
+                    <md-input placeholder="First name" [(ngModel)]="doctor.firstname" [value]="doctor.firstname" ngControl="firstname" id="firstname"></md-input>                   
+                    <control-messages control="firstname"></control-messages>
+                  </div>                  
+                <div layout-gt-sm="column" class="col-md-3 md-block">
+                    <md-input  placeholder="Last name" [(ngModel)]="doctor.lastname" [value]="doctor.lastname" ngControl="lastname" id="lastname">  </md-input>
+                    <control-messages control="lastname"></control-messages>
+                </div>
+                <div layout-gt-sm="column" class="col-md-3 md-block">
+                     <md-input placeholder="Title" align="end"  [(ngModel)]="doctor.title" [value]="doctor.title" ></md-input>
+                </div>
+            </div>
+            <div layout-gt-sm="row">
+                <div class="col-md-3">
+                    <h3>Choose profile photo</h3>
+                      <button md-raised-button class="md-raised  md-primary">
+                        <label for="file-input">Select</label>  
+                    </button>
+                    <input id="file-input" type="file"  ng2FileSelect [uploader]="uploader" >
+<!--                    <input type="file"  ng2FileSelect [uploader]="uploader" />-->
+                        <div *ngFor="let item of uploader.queue">
+                            item {{item}}
+                            <a *ngIf="item.isSuccess" md-button class="md-icon-button md-primary">
+                                <i class="material-icons">done</i>
+                            </a>
+                            <a *ngIf="item.isError" md-button class="md-icon-button md-warn">
+                                <i class="material-icons">error</i>
+                            </a>
+                            <button md-raised-button class="md-raised  md-primary" 
+                                    (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                              <i class="material-icons">file_upload</i>
+                            </button>
+                           <button md-raised-button class="md-raised  md-warn" (click)="item.remove()">
+                                <i class="material-icons">delete</i>
+                            </button>
+                    </div>
+                </div>
+            </div>
+            <div layout-gt-sm="row" >
+                <div layout-gt-sm="column" class="col-md-3 md-block">
+<!--                    <md-radio-group layout="row"let group [(value)]="doctor.gender">-->
+                        <md-radio-button *ngFor="let it of avatarData"
+                            [value]="it.value"
+                            [ngClass]="it.color"
+                            [aria-label]="it.title"
+                            [checked]="it.value === doctor.gender">
+                            <img [src]="it.id" class="card-image">
+                        </md-radio-button>
+<!--                    </md-radio-group>-->
+                </div>
+            </div>  
+            <div layout-gt-sm="row">
+                <div layout-gt-sm="column" class="col-md-4 md-block">
+                    <md-input placeholder="Degree Year"  [(ngModel)]="doctor.degreeyear" [value]="doctor.degreeyear" required  ngControl="degreeyear" id="degreeyear"></md-input>
+                    <control-messages control="degreeyear"></control-messages>
+                </div>
+                <div layout-gt-sm="column" class="col-md-4 md-block">
+                    <md-input placeholder="Degree Place"  [(ngModel)]="doctor.degreeplace" [value]="doctor.degreeplace" required  ngControl="degreeplace" id="degreeplace"></md-input>
+                    <control-messages control="degreeplace"></control-messages>
+                </div>
+                <div layout-gt-sm="column" class="col-md-4 md-block">
+                    <md-input placeholder="Email"  [(ngModel)]="doctor.email" [value]="doctor.email" type="email" required  ngControl="email" id="email"></md-input>
+                    <control-messages control="email"></control-messages>
+                </div>
+               <div layout-gt-sm="column" class="col-md-4 md-block">
+                    <md-input placeholder="Place"  [(ngModel)]="doctor.place" [value]="doctor.place"></md-input>
+                </div>
+               <div layout-gt-sm="column" class="col-md-3 md-block">
+                    <md-input placeholder="Address"  [(ngModel)]="doctor.address" [value]="doctor.address"></md-input>
+                </div>
+            </div>
+            <div layout-gt-sm="row">   
+                 <datepicker [(ngModel)]="doctor.birthdate" md-placeholder="Enter date"></datepicker>
+<!--                 <md-input-container class="md-block" flex-gt-sm>
+                      <div style="display:inline-block; min-height:290px;">
+                        <datepicker [(ngModel)]="doctor.birthdate" [showWeeks]="true"></datepicker>
+                      </div>
+                 </md-input-container>-->
+            </div>
+            <div layout-gt-sm="row">
+                <div layout-gt-sm="column" class="col-md-4 md-block">
+                    <md-input placeholder="Phone number" [(ngModel)]="doctor.phone" [value]="doctor.phone"></md-input>
+                </div>
+                <div layout-gt-sm="column" class="col-md-4 md-block">
+                    <md-input placeholder="Mobile Phone number" [(ngModel)]="doctor.mobilephone" [value]="doctor.mobilephone" ></md-input>
+                </div>
+            </div>
+            <!-- Submit button -->
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-8">
+                    <button md-raised-button class="md-primary" type="submit" (click)="onSubmit(doctor)" [disabled]="!doctorForm.valid">{{formTitle | capitalize}}</button>
+                </div>
+            </div>
+
+        </form>
+
+</md-content>
+</div>

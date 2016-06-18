@@ -1,0 +1,122 @@
+<div flex>
+    
+    <div class="row">
+        <div class="row card-container" *ngIf="doctorStore.showCardView | async">
+            <div class="col-sm-6 col-md-4 col-lg-4" *ngFor="let doctor of doctorStore.doctors | async">
+                 <div  layout="column">
+                    <md-card>
+                        <md-card-header class="">
+                            <img md-card-avatar src="assets/images/{{doctor.gender | lowercase}}.png" class="card-image" />
+                            <md-card-title>{{ doctor.firstname | capitalize }} {{ doctor.lastname | capitalize }}</md-card-title>
+                            <md-card-subtitle>{{ doctor.place | capitalize }}</md-card-subtitle>
+                            <md-card-actions layout="row" layout-align="start center">
+                                <md-card-icon-actions>
+                                </md-card-icon-actions>
+                                <a  md-button class="md-icon-button"  [ngClass]="iconClass" [routerLink]="['/doctor', doctor.id, '/treatments']">
+                                     <i class="material-icons">assignment</i>
+                                </a>
+                                <a  md-button class="md-icon-button" [ngClass]="iconClass" (click)="editDoctor(doctor);"  aria-label="Edit doctor">
+                                    <i class="material-icons">mode_edit</i>
+                                </a>
+                                <a  md-button class="md-icon-button" [ngClass]="iconClass" (click)="deleteDoctor(doctor)"  aria-label="Remove doctor">
+                                     <i class="material-icons">delete</i>
+                                </a>
+                                <a    (click)="toggleSource(doctor.id)" class="md-icon-button active" md-button="" [ngClass]="iconClass">
+                                    <i *ngIf="!showSource" class="material-icons">expand_more</i>
+                                    <i *ngIf="showSource" class="material-icons">expand_less</i>
+                                </a>
+                            </md-card-actions>
+                        </md-card-header>
+                        <!--                           <img src="public/images/old-board.jpg" class="md-card-image" alt="Old Board">-->
+                        <md-card-title  *ngIf="showSource && toggleID == doctor.id">
+                            <md-card-title-text>
+                                <span class="md-headline">Doctor details</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-content  *ngIf="showSource  && toggleID == doctor.id">
+                            <md-list>
+                                <md-list-item class="md-1-line" *ngFor="let item of doctor | values">                                    
+                                              <div class="md-list-item-text">
+                                        <h6>{{ item }}</h6>                                      
+                                    </div>
+                                    <md-divider inset></md-divider>
+                                </md-list-item>
+                            </md-list>
+                        </md-card-content>
+                    </md-card>
+                </div>
+            </div>
+            <div [hidden]="doctorStore.doctors._subscribe.length != 0">
+                No Records Found 
+            </div>
+        </div>
+        <div class="row grid-container" *ngIf="!(doctorStore.showCardView | async)">
+            <div class="col-md-12">
+                <md-toolbar class="md-primary" *ngIf="!selection">
+                    <a md-button class="md-icon-button white" [routerLink]="['/doctors']">
+                        <i class="material-icons">people</i>
+                    </a>
+                    <span>List of Doctors</span>
+                    <a  md-button class="md-icon-button white" (click)="addDoctor()" >
+                        <i class="material-icons">person_add</i>                            
+                    </a> 
+                    <a  md-button class="md-icon-button white" (click)="showCardView(true)"  [class.active]="!listDisplayModeEnabled">
+                        <i class="material-icons">apps</i>                        
+                    </a>
+                    <a  md-button class="md-icon-button white" (click)="showCardView(false)" [class.active]="listDisplayModeEnabled">
+                        <i class="material-icons">format_list_numbered</i>                         
+                    </a> 
+                </md-toolbar>
+                <md-toolbar color="accent" *ngIf="selection">
+                    <span>{{count}} item{{count > 1 ? 's' : ''}} selected</span>
+                    <span flex hide show-gt-md></span>
+                    <span class="md-caption" hide show-gt-md>{{selection}}</span>
+                </md-toolbar>
+                <md-data-table [selectable]="true" (onSelectableChange)="change($event)">
+                    <thead>
+                        <tr  md-data-table-header-selectable-row>
+                            <th class="md-text-cell">First Name</th>                            
+                            <th class="md-text-cell">Last Name</th>
+                            <th class="md-text-cell">Title</th>
+                            <th class="md-text-cell">Address</th>
+                            <th class="md-text-cell">City</th>
+                            <th class="md-text-cell">Country</th>
+                            <th class="md-text-cell">Treatments</th>
+                            <th class="md-text-cell">Edit Doctor</th>
+                            <th class="md-text-cell">Delete Doctor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let doctor of doctorStore.doctors | async"  md-data-table-selectable-row [selectable-value]="doctor.id">                      
+                            <td class="md-text-cell"><h6 class="text-teal">{{ doctor.firstname | capitalize }}</h6></td>                            
+                            <td class="md-text-cell"><h6 class="text-teal">{{ doctor.lastname | capitalize }}</h6></td>
+                            <td class="md-text-cell"><h6 class="text-teal">{{ doctor.title | capitalize }}</h6></td>
+                            <td class="md-text-cell"><h6 class="text-teal">{{ doctor.address }}</h6></td>
+                            <td class="md-text-cell"><h6 class="text-teal">{{ doctor.place | trim }}</h6></td>
+                            <td class="md-text-cell"><h6 class="text-teal">{{ doctor.country | trim }}</h6></td>
+                            <td class="md-text-cell"> 
+                                <a  md-button class="md-icon-button" [ngClass]="iconClass"  [routerLink]="['/doctor', doctor.id, '/treatments']">
+                                   <i class="material-icons">assignment</i>
+                                </a>
+                            </td>
+                            <td class="md-text-cell">                                
+                                <a  md-button class="md-icon-button" [ngClass]="iconClass"  (click)="editDoctor(doctor);"  aria-label="Edit doctor">
+                                    <i class="material-icons">mode_edit</i>
+                                </a>
+                            </td>
+                            <td class="md-text-cell">                                
+                                <a  md-button class="md-icon-button" [ngClass]="iconClass" (click)="deleteDoctor(doctor)"  aria-label="Remove doctor">
+                                     <i class="material-icons">delete</i>
+                                </a>
+                            </td>                            
+                        </tr>
+                        <tr [hidden]="doctorStore.doctors._subscribe.length != 0">
+                            <td>&nbsp;</td>
+                            <td colspan="6">No Records Found</td>
+                        </tr>
+                    </tbody>
+                </md-data-table>
+            </div>
+        </div>
+    </div>
+</div>

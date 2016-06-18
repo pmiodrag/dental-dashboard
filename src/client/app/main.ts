@@ -13,6 +13,8 @@ import { NotificationService  } from './services/notificationService';
 //import { PatientService } from './services/patientService';
 import { PatientBackendService } from './services/PatientBackendService';
 import { PatientStore } from './components/state/PatientStore';
+import { DoctorBackendService } from './services/DoctorBackendService';
+import { DoctorStore } from './components/state/DoctorStore';
 import { TreatmentBackendService } from './services/TreatmentBackendService';
 import { DiagnoseBackendService } from './services/DiagnoseBackendService';
 import { TreatmentStore } from './components/state/TreatmentStore';
@@ -22,6 +24,7 @@ bootstrap(AppComponent, [
     ROUTER_PROVIDERS,
 //    ROUTER_BINDINGS,
     PatientStore,
+    DoctorStore,
     TreatmentStore,
     DiagnoseStore,
     UiStateStore,
@@ -32,6 +35,7 @@ bootstrap(AppComponent, [
     NotificationService,
 //    PatientService,
     PatientBackendService,
+    DoctorBackendService,
     TreatmentBackendService,
     DiagnoseBackendService,
     provide(AuthHttp, {
