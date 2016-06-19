@@ -1,12 +1,5 @@
-<md-content layout="column" class="scroll-shrink">
-    <md-toolbar class="md-primary">
-        <span md-button class="md-icon-button white">
-            <i class="material-icons">face</i>
-        </span>
-        <span>List of Doctors</span>
-        <span flex></span>
-         <a  md-button class="md-icon-button white" (click)="addDoctor()" >
-            <i class="material-icons">person_add</i>                            
-        </a> 
-    </md-toolbar>
-</md-content>
+<div>
+    <doctor-header #doctorheader [doctorform]="doctorform" [doctorlist]="doctorlist"></doctor-header>
+    <doctor-list #doctorlist [listDisplayModeEnabled]="listDisplayModeEnabled" [doctorform]="doctorform" [doctorheader] = "doctorheader" [doctors]="doctors" [(selected)]="selectedDoctor" ></doctor-list>
+    <doctor-form  #doctorform [doctorlist]="doctorlist" [doctorheader] = "doctorheader" [doctor]="selectedDoctor" ></doctor-form>
+</div>>
