@@ -10,6 +10,7 @@ import { SortByDirective } from '../../shared/directives/sortby.directive';
 import { CapitalizePipe } from '../../shared/pipes/capitalize.pipe';
 import { TrimPipe } from '../../shared/pipes/trim.pipe';
 import { ValuesPipe } from '../../shared/pipes/values.pipe';
+import { CustomSlice } from '../../shared/pipes/slice.pipe';
 import {MATERIAL_DIRECTIVES, ITableSelectionChange} from "ng2-material/index";
 import { PatientFormComponent } from './patient-form'
 import {TimerWrapper} from "@angular/common/src/facade/async";
@@ -25,7 +26,7 @@ import {ICON_CLASS} from '../../shared/constants/app.constants';
     templateUrl: 'app/components/patients/patient-list.html',
     host: { '[hidden]': 'hidden' },
     directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES, MdToolbar, FilterTextboxComponent, SortByDirective],
-    pipes: [CapitalizePipe, TrimPipe, ValuesPipe]
+    pipes: [CapitalizePipe, TrimPipe, ValuesPipe, CustomSlice]
 })
 
 

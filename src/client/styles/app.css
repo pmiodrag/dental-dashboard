@@ -50,6 +50,7 @@ control-messages div {
 .well {
   min-height: 250px !important;
 }
+md-pagination-range, md-pagination-controls {color: white !important; }
 /*
 section {
   background: #f7f7f7;

@@ -12,6 +12,8 @@ export class PatientStore {
 
     private _patients: BehaviorSubject<List<Patient>> = new BehaviorSubject(List([]));
     private _showCardView: BehaviorSubject<boolean> = new BehaviorSubject(true);
+    private _startIndex: BehaviorSubject<number> = new BehaviorSubject(0);
+    private _endIndex: BehaviorSubject<number> = new BehaviorSubject(3);
     // this method should be supported in RXJS 2
     //    public patients: Observable<List<Patient>> =  this._patients.asObservable();
 
@@ -23,12 +25,29 @@ export class PatientStore {
         return  asObservable(this._showCardView);
     }
     
+    get startIndex() {
+        return  asObservable(this._startIndex);
+    }
+    
+     get endIndex() {
+        return  asObservable(this._endIndex);
+    }
+    
+    setIndexes(start: number, end: number) {
+        this._startIndex.next(start);
+        this._endIndex.next(end);
+    }
+    
     changeView(show: boolean){
         console.log("changeView _showCardView", show);
         this._showCardView.next(show);
     }
     get patients() {
         return asObservable(this._patients);
+    }
+    
+    get patientsBehaviorSubject () {
+        return this._patients
     }
     set patients(patients: any) {
         this._patients.next(patients);

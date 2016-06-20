@@ -15,7 +15,14 @@ import { FilterTextboxComponent } from './filterTextbox.component';
     directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES, MdToolbar, FilterTextboxComponent],
 })
 export class PatientHeaderComponent {
-
+    pagination = {
+        currentPage: 1,
+        itemsPerPage: 5,
+        totalItems: 24
+    };
+    start: number = 0;
+    end: number = 3;
+    availableLength: Array<number> = [5, 10, 20];
     iconClass: string = ICON_CLASS;
     @Input() hidden: boolean = false;
     @Input() patientform: any;
@@ -23,7 +30,23 @@ export class PatientHeaderComponent {
     patient: Patient;
     listDisplayModeEnabled: boolean;
 
-    constructor(private notificationService: NotificationService, private patientStore: PatientStore) { }
+    constructor(private notificationService: NotificationService, private patientStore: PatientStore) { 
+        this.refreshMaterials();
+    }
+
+    refreshMaterials() {
+       this.start = (this.pagination.currentPage - 1) * this.pagination.itemsPerPage,
+         this.end = this.start + this.pagination.itemsPerPage;
+         this.patientStore.setIndexes(this.start, this.end);
+      // this.pagedMaterials = this.materials.slice(start, end);
+     }
+     detectChange(event) {
+       if (event !== undefined && event.name === 'pagination_changed' && event.pagination !== undefined) {
+         this.pagination = event.pagination;
+         this.refreshMaterials();
+       }
+     }
+
 
     addPatient() {
         this.hidden = true;

@@ -22,6 +22,7 @@ MdMaxValueValidator, MATERIAL_DIRECTIVES} from "ng2-material/index";
 import {ICON_CLASS} from '../../shared/constants/app.constants';
 import {OVERLAY_PROVIDERS} from '@angular2-material/core/overlay/overlay';
 import {MdIcon, MdIconRegistry} from '@angular2-material/icon/icon';
+//import * as moment from 'moment';
 @Component({
     selector: 'patient-form',
     templateUrl: 'app/components/patients/patient-form.html',
@@ -132,7 +133,6 @@ export class PatientFormComponent {
         this.submitted = true;
         this.goBack();
     }
-
 
 
 }

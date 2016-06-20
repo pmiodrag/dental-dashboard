@@ -72,7 +72,7 @@
                       <datepicker [(ngModel)]="patient.birthdate" md-placeholder="Enter date"></datepicker>
                       <md-dialog-actions ok="Got It"></md-dialog-actions>
                     </md-dialog>
-                      <pre class="card card-block card-header">Selected date is: <em *ngIf="patient.birthdate">{{patient.birthdate}}</em></pre>
+                      <pre>Selected date is: <span *ngIf="patient.birthdate">{{patient.birthdate}}</span></pre>
                      <button md-raised-button class="md-primary" (click)="alert.show()" flex="auto">Set birth date</button>
      
                  </div>
