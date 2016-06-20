@@ -44,6 +44,7 @@ We're hard at work on a new Angular 2 hands-on/instructor-led training course
 as well as a video course that will be released in 2016!
 
 To create and init database run following commands:
-mysql -u root < scripts/smiletime_patient.sql
-mysql -u root < scripts/smiletime_treatment.sql
-mysql -u root < scripts/smiletime_diagnose.sql
+mysql -u root -p < scripts/smiletime_patient.sql
+mysql -u root -p < scripts/smiletime_treatment.sql
+mysql -u root =p < scripts/smiletime_diagnose.sql
+mysql -u root -p < scripts/smiletime_doctor.sql
