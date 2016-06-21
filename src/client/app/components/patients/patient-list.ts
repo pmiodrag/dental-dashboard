@@ -31,6 +31,14 @@ import {ICON_CLASS} from '../../shared/constants/app.constants';
 
 
 export class PatientList {
+    pagination = {
+        currentPage: 1,
+        itemsPerPage: 5,
+        totalItems: 0
+    };
+    start: number = 0;
+    end: number = 3;
+    availableLength: Array<number> = [5, 10, 20];
     /**
     * True to show the source code for the example
     */
@@ -53,14 +61,30 @@ export class PatientList {
     selection: string;
     count: number;
     private _patients: Rx.BehaviorSubject<List<Patient>> = new Rx.BehaviorSubject(List([]));
-    constructor(private patientService: PatientBackendService, private notificationService: NotificationService, private patientStore: PatientStore) { }
+    constructor(private patientService: PatientBackendService, private notificationService: NotificationService, private patientStore: PatientStore) {
+        this.refreshPatients();
+    }
 
     ngOnInit() {
         this.title = 'Patients';
         this.filterText = 'Filter Patients:';
         this.listDisplayModeEnabled = false;
         this.sorter = new Sorter();
+        console.log(this.patientStore.patientsSize);
     }
+
+    refreshPatients() {
+        this.start = (this.pagination.currentPage - 1) * this.pagination.itemsPerPage;
+        this.end = this.start + this.pagination.itemsPerPage;
+        this.patientStore.setIndexes(this.start, this.end);
+    }
+    detectChange(event) {
+        if (event !== undefined && event.name === 'pagination_changed' && event.pagination !== undefined) {
+            this.pagination = event.pagination;
+            this.refreshPatients();
+        }
+    }
+
     hideElements() {
         this.hidden = true;
         this.patientheader.hidden = true;
@@ -83,7 +107,7 @@ export class PatientList {
         // console.log('formAction ' + action);
         this.notificationService.emitFormActionChangeEvent(patient);
     }
-    
+
     showCardView(show: boolean) {
         this.patientStore.changeView(show);
     }

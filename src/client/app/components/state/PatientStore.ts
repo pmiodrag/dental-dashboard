@@ -14,6 +14,7 @@ export class PatientStore {
     private _showCardView: BehaviorSubject<boolean> = new BehaviorSubject(true);
     private _startIndex: BehaviorSubject<number> = new BehaviorSubject(0);
     private _endIndex: BehaviorSubject<number> = new BehaviorSubject(3);
+    private _patientsSize: BehaviorSubject<number> = new BehaviorSubject(0);
     // this method should be supported in RXJS 2
     //    public patients: Observable<List<Patient>> =  this._patients.asObservable();
 
@@ -24,15 +25,13 @@ export class PatientStore {
     get showCardView() {
         return  asObservable(this._showCardView);
     }
-    
+    //Pagination properties getter and setter
     get startIndex() {
         return  asObservable(this._startIndex);
-    }
-    
-     get endIndex() {
+    }    
+    get endIndex() {
         return  asObservable(this._endIndex);
-    }
-    
+    }    
     setIndexes(start: number, end: number) {
         this._startIndex.next(start);
         this._endIndex.next(end);
@@ -45,10 +44,13 @@ export class PatientStore {
     get patients() {
         return asObservable(this._patients);
     }
-    
-    get patientsBehaviorSubject () {
-        return this._patients
+    get patientsSize(){
+        return asObservable(this._patientsSize);
     }
+
+//    setPatientSize () {        
+//        this._patientsSize.next(this._patients.getValue().size)
+//    }
     set patients(patients: any) {
         this._patients.next(patients);
     }
@@ -72,8 +74,8 @@ export class PatientStore {
                         patient.phone,
                         patient.mobilephone
                     )) //.filter((person) => person.firstname == "Miodrag")
-       
-
+                this._patientsSize.next(patients.length);
+                console.log("patients sizw", patients.length)
                 this._patients.next(List(patients));
             },
             err => console.log("Error retrieving Patients")

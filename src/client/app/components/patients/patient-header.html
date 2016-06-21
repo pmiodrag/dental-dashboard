@@ -20,7 +20,6 @@
             <a  md-button class="md-icon-button white" (click)="showCardView(false)" [class.active]="listDisplayModeEnabled">
                 <i class="material-icons">format_list_numbered</i>                         
             </a> 
-        <md-pagination [model]="pagination" (on-pagination-change)="detectChange($event)" [items-per-page-options]="availableLength"></md-pagination>
-      
+        <md-pagination [model]="pagination" (on-pagination-change)="detectChange($event)" [items-per-page-options]="availableLength"></md-pagination>      
     </md-toolbar>
 </md-content>

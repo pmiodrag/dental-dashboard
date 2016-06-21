@@ -30,22 +30,21 @@ export class PatientHeaderComponent {
     patient: Patient;
     listDisplayModeEnabled: boolean;
 
-    constructor(private notificationService: NotificationService, private patientStore: PatientStore) { 
-        this.refreshMaterials();
+    constructor(private notificationService: NotificationService, private patientStore: PatientStore) {
+        this.refreshPatients();
     }
 
-    refreshMaterials() {
-       this.start = (this.pagination.currentPage - 1) * this.pagination.itemsPerPage,
-         this.end = this.start + this.pagination.itemsPerPage;
-         this.patientStore.setIndexes(this.start, this.end);
-      // this.pagedMaterials = this.materials.slice(start, end);
-     }
-     detectChange(event) {
-       if (event !== undefined && event.name === 'pagination_changed' && event.pagination !== undefined) {
-         this.pagination = event.pagination;
-         this.refreshMaterials();
-       }
-     }
+    refreshPatients() {
+        this.start = (this.pagination.currentPage - 1) * this.pagination.itemsPerPage;
+        this.end = this.start + this.pagination.itemsPerPage;
+        this.patientStore.setIndexes(this.start, this.end);
+    }
+    detectChange(event) {
+        if (event !== undefined && event.name === 'pagination_changed' && event.pagination !== undefined) {
+            this.pagination = event.pagination;
+            this.refreshPatients();
+        }
+    }
 
 
     addPatient() {
