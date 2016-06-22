@@ -82,12 +82,11 @@ export class PatientFormComponent {
 
 
     ngOnInit() {
-        this.patient = new Patient(0, '', '', '', 'M', '', '', new Date(), '', '', '');
+        this.patient = new Patient(0, '', '', '', 'M', '', '', new Date(), '', '', '', '');
         this.subscription = this.notificationService.getFormActionChangeEmitter()
             .subscribe(patient => this.onFormActionChange(patient));
     }
     onFormActionChange(patient: Patient) {
-        console.log("onFormActionChange patient", patient);
         this.patient = patient;
         if (patient.id == -1) {
             this.formTitle = "Add Patient";
@@ -102,11 +101,26 @@ export class PatientFormComponent {
     }
 
     addPatient(patient) {
+        if(this.uploader.queue) {
+           console.log("Upload photo url", this.uploader.queue[0].file.name); 
+           patient.photo = this.uploader.queue[0].file.name;
+        } else {
+           patient.photo = patient.gender;
+        }
+        
+        
         this.patientStore.addPatient(patient)
         this.goBack();
     }
 
     updatePatient(patient) {
+        if(this.uploader.queue) {
+           console.log("Upload photo url", this.uploader.queue[0].file.name); 
+           patient.photo = this.uploader.queue[0].file.name;
+        } else {
+           patient.photo = patient.gender;
+        }
+        
         this.patientStore.updatePatient(patient)
             .subscribe(
             res => { },

@@ -1,12 +1,11 @@
-<div flex>
-    
+<div flex>    
     <div class="row">
         <div class="row card-container" *ngIf="patientStore.showCardView | async ">
             <div class="col-lg-6" *ngFor="let patient of patientStore.patients | async  | customslice: (patientStore.startIndex | async) : (patientStore.endIndex | async)">
                  <div  layout="column">
                     <md-card>
                         <md-card-header class="">
-                            <img md-card-avatar src="assets/images/{{patient.gender | lowercase}}.png" class="card-image" />
+                            <img md-card-avatar src="uploads/{{patient.photo}}" class="card-image" />
                             <md-card-title>{{ patient.firstname | capitalize }} {{ patient.lastname | capitalize }}</md-card-title>
                             <md-card-subtitle>{{ patient.place | capitalize }}</md-card-subtitle>
                             <md-card-actions layout="row" layout-align="start center">

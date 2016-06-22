@@ -95,7 +95,7 @@ export class PatientList {
     }
     addPatient() {
         this.hideElements();
-        this.patient = new Patient(-1, '', '', '', 'M', '', '', new Date(), '', '', '');
+        this.patient = new Patient(-1, '', '', '', 'M', '', '', new Date(), '', '', '', '');
         this.formAction(this.patient);
     }
     editPatient(patient: Patient) {

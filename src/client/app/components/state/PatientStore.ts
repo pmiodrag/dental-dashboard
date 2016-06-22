@@ -47,15 +47,11 @@ export class PatientStore {
     get patientsSize(){
         return asObservable(this._patientsSize);
     }
-
-//    setPatientSize () {        
-//        this._patientsSize.next(this._patients.getValue().size)
-//    }
+    
     set patients(patients: any) {
         this._patients.next(patients);
     }
-
-
+    
     loadInitialData() {
         this.patientBackendService.getAllPatients()
             .subscribe(
@@ -72,10 +68,10 @@ export class PatientStore {
                         patient.birthdate,
                         patient.email,
                         patient.phone,
-                        patient.mobilephone
+                        patient.mobilephone,
+                        patient.photo
                     )) //.filter((person) => person.firstname == "Miodrag")
                 this._patientsSize.next(patients.length);
-                console.log("patients sizw", patients.length)
                 this._patients.next(List(patients));
             },
             err => console.log("Error retrieving Patients")
@@ -98,7 +94,8 @@ export class PatientStore {
                         patient.birthdate,
                         patient.email,
                         patient.phone,
-                        patient.mobilephone
+                        patient.mobilephone,
+                        patient.photo
                     ))                    
                     .filter(item => {
                         let props = ['firstname', 'middlename', 'lastname', 'address', 'place'];
