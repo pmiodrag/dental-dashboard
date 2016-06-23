@@ -10,7 +10,7 @@ var minifyCSS = require('gulp-minify-css');
 var imagemin = require('gulp-imagemin');
 // SERVER
 gulp.task('clean', function(){
-    return del(['dist', '!dist/uploads'])
+    return del(['!dist', '!dist/uploads', 'dist/app',])
 });
 gulp.task('buildServer', function () {
 	var tsProject = ts.createProject(path.resolve('./src/server/tsconfig.json'));

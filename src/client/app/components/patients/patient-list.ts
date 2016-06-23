@@ -20,12 +20,13 @@ import {List} from 'immutable';
 import {asObservable} from "../state/asObservable";
 import * as Rx from "rxjs/Rx";
 import {ICON_CLASS} from '../../shared/constants/app.constants';
+import {MdIcon, MdIconRegistry} from '@angular2-material/icon/icon';
 @Component({
     selector: 'patient-list', 
-    // providers: [PatientService],
+    providers: [MdIconRegistry],
     templateUrl: 'app/components/patients/patient-list.html',
     host: { '[hidden]': 'hidden' },
-    directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES, MdToolbar, FilterTextboxComponent, SortByDirective],
+    directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES, MdIcon, MdToolbar, FilterTextboxComponent, SortByDirective],
     pipes: [CapitalizePipe, TrimPipe, ValuesPipe, CustomSlice]
 })
 
@@ -61,8 +62,10 @@ export class PatientList {
     selection: string;
     count: number;
     private _patients: Rx.BehaviorSubject<List<Patient>> = new Rx.BehaviorSubject(List([]));
-    constructor(private patientService: PatientBackendService, private notificationService: NotificationService, private patientStore: PatientStore) {
+    constructor(mdIconRegistry: MdIconRegistry, private patientService: PatientBackendService, private notificationService: NotificationService, private patientStore: PatientStore) {
         this.refreshPatients();
+        mdIconRegistry.addSvgIcon('M', 'assets/images/svg/human-male.svg');
+        mdIconRegistry.addSvgIcon('F', 'assets/images/svg/human-female.svg');
     }
 
     ngOnInit() {

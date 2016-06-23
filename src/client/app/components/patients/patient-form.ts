@@ -50,21 +50,21 @@ export class PatientFormComponent {
     submitted = false;
 
     avatarData: any[] = [{
-        id: 'male',
-        title: 'Male',
+        id: 'M',
+        title: 'M',
         value: 'M',
         color: 'md-primary'
     }, {
-            id: 'female',
-            title: 'Female',
+            id: 'F',
+            title: 'F',
             value: 'F',
             color: 'md-warn'
         }];
 
     constructor(fb: FormBuilder, mdIconRegistry: MdIconRegistry, private patientStore: PatientStore, private uiStateStore: UiStateStore, private patientService: PatientBackendService, private notificationService: NotificationService) {
         //   console.log("uploader", this.uploader);
-        mdIconRegistry.addSvgIcon('female', 'assets/images/svg/human-female.svg');
-        mdIconRegistry.addSvgIcon('male', 'assets/images/svg/human-male.svg');
+        mdIconRegistry.addSvgIcon('F', 'assets/images/svg/human-female.svg');
+        mdIconRegistry.addSvgIcon('M', 'assets/images/svg/human-male.svg');
         this.patientForm = fb.group({
             'firstname': ['', Validators.compose([
                 Validators.required,
@@ -101,11 +101,11 @@ export class PatientFormComponent {
     }
 
     addPatient(patient) {
-        if(this.uploader.queue) {
+        if(this.uploader.queue && this.uploader.queue.length > 0) {
            console.log("Upload photo url", this.uploader.queue[0].file.name); 
            patient.photo = this.uploader.queue[0].file.name;
         } else {
-           patient.photo = patient.gender;
+           patient.photo = "";
         }
         
         
@@ -114,11 +114,11 @@ export class PatientFormComponent {
     }
 
     updatePatient(patient) {
-        if(this.uploader.queue) {
+        if(this.uploader.queue && this.uploader.queue.length > 0) {
            console.log("Upload photo url", this.uploader.queue[0].file.name); 
            patient.photo = this.uploader.queue[0].file.name;
         } else {
-           patient.photo = patient.gender;
+           patient.photo = "";
         }
         
         this.patientStore.updatePatient(patient)
