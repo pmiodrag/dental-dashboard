@@ -57,11 +57,11 @@ export class TreatmentFormComponent {
                 Validators.required,
                 Validators.minLength(3),
                 Validators.maxLength(300)])],
-            'diagnose': ['', Validators.compose([
-                Validators.required,
-                Validators.minLength(3),
-                Validators.maxLength(300)
-            ])],
+//            'diagnose': ['', Validators.compose([
+//                Validators.required,
+//                Validators.minLength(3),
+//                Validators.maxLength(300)
+//            ])],
             'price': ['', Validators.compose([
                 Validators.required,
                 Validators.minLength(3),
@@ -96,6 +96,7 @@ export class TreatmentFormComponent {
             this.formTitle = "Add Treatment";
             this.submitAction = 'add';
         } else {
+            this.selected = treatment.diagnose;
             this.formTitle = "Edit Treatment";
             this.submitAction = 'edit';
         }
@@ -116,7 +117,7 @@ export class TreatmentFormComponent {
         //        console.log("Submit treatment date() ", this.date );
         //        console.log("Submit treatment time() ", this.time, "this.time.getMinutes()", this.time.getMinutes() )   
         console.log("Submit treatment", treatment);
-
+        treatment.diagnose = this.selected;
         if (this.submitAction == 'add') {
             this.addTreatment(treatment);
         } else {
@@ -154,6 +155,7 @@ export class TreatmentFormComponent {
 
     public typeaheadOnSelect(e: any): void {
         console.log(`Selected value: ${e.item}`);
+        this.selected = e.item;
     }
 
 }

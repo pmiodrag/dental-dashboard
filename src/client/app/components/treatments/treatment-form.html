@@ -31,21 +31,23 @@
                 </div>
             </div>
             <div layout-gt-sm="row">
-                <div layout-gt-sm="column" class="col-md-4 md-block">
+<!--                <div layout-gt-sm="column" class="col-md-4 md-block">
                     <md-input placeholder="Treatment diagnose" [(ngModel)]="treatment.diagnose" [value]="treatment.diagnose"  ngControl="diagnose" > </md-input>
                     <control-messages control="diagnose"></control-messages>
-                </div>
+                </div>-->
+                <div layout-gt-sm="column" class="col-md-4 md-block">
+                    <md-input [(ngModel)]="selected"
+                       [typeahead]="diagnoseStore.diagnoses | async | listtodict"
+                       (typeaheadOnSelect)="typeaheadOnSelect($event)"
+                       [typeaheadOptionField]="'name'" >
+                    </md-input>
+                   
+                 </div>
                 <div layout-gt-sm="column" class="col-md-4 md-block">
                     <md-input placeholder="Treatment price" [(ngModel)]="treatment.price" [value]="treatment.price" ngControl="price" id="price"></md-input>
                     <control-messages control="price"></control-messages>
                 </div>
-                 <div layout-gt-sm="column" class="col-md-4 md-block">
-                 <md-input [(ngModel)]="selected"
-                    [typeahead]="diagnoseStore.diagnoses | async | listtodict"
-                    (typeaheadOnSelect)="typeaheadOnSelect($event)"
-                    [typeaheadOptionField]="'name'">
-                 </md-input>
-                 </div>
+                 
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-8">
