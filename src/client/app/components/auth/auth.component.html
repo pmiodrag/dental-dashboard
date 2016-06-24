@@ -20,10 +20,10 @@
         </a>
     <span flex></span>
     <div class="user"> 
-        <a href="javascript:void(0)" *ngIf="loggedIn()" class="item" data-toggle="dropdown">             
-            <img [src]="picture"/>
+        <a href="javascript:void(0)" *ngIf="authService.loggedIn()" class="item" data-toggle="dropdown">             
+            <img [src]="authService.getPicture()"/>
         </a>
     </div>
-    <button md-raised-button class="md-raised text-primary" *ngIf="!loggedIn()" (click)="login()" aria-label="Login">Login</button>
-    <button md-raised-button class="md-raised text-primary" *ngIf="loggedIn()" (click)="logout()" aria-label="Logout">Logout</button> 
+    <button md-raised-button class="md-raised text-primary" *ngIf="!authService.loggedIn()" (click)="authService.login()" aria-label="Login">Login</button>
+    <button md-raised-button class="md-raised text-primary" *ngIf="authService.loggedIn()" (click)="authService.logout()" aria-label="Logout">Logout</button> 
 </md-toolbar>

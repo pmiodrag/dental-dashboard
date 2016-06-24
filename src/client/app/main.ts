@@ -10,7 +10,7 @@ import {AuthHttp, AuthConfig} from 'angular2-jwt/angular2-jwt';
 import { AppComponent } from './app';
 import {MATERIAL_PROVIDERS} from "ng2-material/index";
 import { NotificationService  } from './services/notificationService';
-//import { PatientService } from './services/patientService';
+import { AuthService } from './services/AuthService';
 import { PatientBackendService } from './services/PatientBackendService';
 import { PatientStore } from './components/state/PatientStore';
 import { DoctorBackendService } from './services/DoctorBackendService';
@@ -22,7 +22,6 @@ import { DiagnoseStore } from './components/state/DiagnoseStore';
 import { UiStateStore } from './components/state/UiStateStore';
 bootstrap(AppComponent, [
     ROUTER_PROVIDERS,
-//    ROUTER_BINDINGS,
     PatientStore,
     DoctorStore,
     TreatmentStore,
@@ -32,8 +31,8 @@ bootstrap(AppComponent, [
     HTTP_PROVIDERS,
     ELEMENT_PROBE_PROVIDERS,
     MATERIAL_PROVIDERS,
+    AuthService,
     NotificationService,
-//    PatientService,
     PatientBackendService,
     DoctorBackendService,
     TreatmentBackendService,
