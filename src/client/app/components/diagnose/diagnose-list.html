@@ -13,7 +13,7 @@
             <div layout-gt-sm="column" class="col-md-3 md-block">
                  <md-input id="description" placeholder="Diagnose description?" [(ngModel)]="description"></md-input>
            </div> 
-           <div layout-gt-sm="column" class="col-md-3 md-block">
+           <div *ngIf="authService.isAdmin()"  layout-gt-sm="column" class="col-md-3 md-block">
                <a  md-button class="md-icon-button" [ngClass]="iconClass" (click)="addDiagnose()" >
                  <i class="material-icons">thumb_up</i>
               </a>

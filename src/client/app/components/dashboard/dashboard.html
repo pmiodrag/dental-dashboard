@@ -1,6 +1,6 @@
 
 <div layout="row" layout-padding layout-wrap  ng-cloak>
-    <md-whiteframe class="md-whiteframe-10dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25"  layout  layout-align="center center">
+    <md-whiteframe *ngIf="authService.loggedIn()" class="md-whiteframe-10dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25"  layout  layout-align="center center">
         <div class="title">{{patientStore.patientSize | async }}</div>
         <div class="comment"> Patients 
             <a md-button class="md-icon-button" [ngClass]="iconClass" [routerLink]="['/patients']">
@@ -16,7 +16,7 @@
             </a>
         </div>  
     </md-whiteframe>
-    <md-whiteframe *ngIf="authService.isAdmin()" class="md-whiteframe-10dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25"  layout layout-align="center center">
+    <md-whiteframe *ngIf="authService.loggedIn()" class="md-whiteframe-10dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25"  layout layout-align="center center">
         <div class="title">80</div>
         <div class="comment"> Diagnoses 
             <a md-button class="md-icon-button" [ngClass]="iconClass" [routerLink]="['/diagnoses']">
@@ -32,7 +32,7 @@
             </a>
         </div>  
     </md-whiteframe>
-    <md-whiteframe *ngIf="authService.isAdmin()"  class="md-whiteframe-10dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout layout-align="center center">
+    <md-whiteframe *ngIf="authService.loggedIn()"  class="md-whiteframe-10dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout layout-align="center center">
         <div class="comment"> Agenda 
             <a md-button class="md-icon-button" [ngClass]="iconClass" [routerLink]="['/agenda']">
                 <i class="material-icons">view_agenda</i>

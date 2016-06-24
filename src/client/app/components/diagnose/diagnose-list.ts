@@ -14,6 +14,7 @@ import {List} from 'immutable';
 import {asObservable} from "../state/asObservable";
 import {MD_INPUT_DIRECTIVES} from '@angular2-material/input';
 import {ICON_CLASS} from '../../shared/constants/app.constants';
+import { AuthService } from '../../services/AuthService';
 @Component({ 
   selector: 'diagnose-list',
   providers: [DiagnoseBackendService],
@@ -31,7 +32,7 @@ export class DiagnoseListComponent {
     count: number;
     iconClass: string = ICON_CLASS;
     private _diagnoses: Rx.BehaviorSubject<List<Diagnose>> = new Rx.BehaviorSubject(List([]));
-    constructor(private notificationService: NotificationService, private diagnoseService: DiagnoseBackendService, private diagnoseStore: DiagnoseStore) {}   
+    constructor(public authService: AuthService, private notificationService: NotificationService, private diagnoseService: DiagnoseBackendService, private diagnoseStore: DiagnoseStore) {}   
     
     ngOnInit() {
        console.log("DiagnoseListComponent ngOnInit");
