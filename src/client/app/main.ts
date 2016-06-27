@@ -1,5 +1,3 @@
-/// <reference path="../../../node_modules/angular2/typings/browser.d.ts" />
-
 import {bootstrap}    from '@angular/platform-browser-dynamic';
 import { bind, provide } from '@angular/core';
 import { FORM_PROVIDERS, APP_BASE_HREF, LocationStrategy, HashLocationStrategy, PathLocationStrategy } from "@angular/common";
