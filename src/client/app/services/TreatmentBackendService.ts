@@ -4,7 +4,8 @@ import {List} from 'immutable';
 import {Observable} from "rxjs/Observable";
 export interface ITreatment {
     id: number; 
-    patientid : number; 
+    patientid : number;
+    doctorid: number; 
     treatmentdate: Date;
     therapy: string;
     diagnose: string;
@@ -12,7 +13,7 @@ export interface ITreatment {
 }
 
 export class Treatment implements ITreatment {
-    constructor (public id: number, public patientid : number, public treatmentdate: Date, public therapy: string, 
+    constructor (public id: number, public patientid : number, public doctorid: number, public treatmentdate: Date, public therapy: string, 
         public diagnose: string, public price: string) {
     }
 }
