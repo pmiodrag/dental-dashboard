@@ -135,6 +135,12 @@
                 <div layout-gt-sm="column" class="col-md-4 md-block">
                     <md-input placeholder="Mobile Phone number" [(ngModel)]="patient.mobilephone" [value]="patient.mobilephone" ></md-input>
                 </div>
+                <div layout-gt-sm="column" class="col-md-4 md-block">
+                    <md-input placeholder="Allergies" [(ngModel)]="patient.allergies" [value]="patient.allergies" ></md-input>
+                </div>
+                <div layout-gt-sm="column" class="col-md-4 md-block">
+                    <textarea md-input placeholder="Notes"  [(ngModel)]="patient.notes" columns="1" md-maxlength="150" rows="5"></textarea>                    
+                </div>
             </div>
             <!-- Submit button -->
             <div class="form-group">
