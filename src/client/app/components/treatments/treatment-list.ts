@@ -9,6 +9,8 @@ import { SortByDirective } from '../../shared/directives/sortby.directive';
 import {MdToolbar} from '@angular2-material/toolbar';
 import {MATERIAL_DIRECTIVES, ITableSelectionChange} from "ng2-material/index";
 import {ICON_CLASS} from '../../shared/constants/app.constants';
+import {DOCTOR_OWNER} from '../../shared/constants/app.constants';
+import {PATIENT_OWNER} from '../../shared/constants/app.constants';
 import * as Rx from "rxjs/Rx";
 import {List} from 'immutable';
 import {asObservable} from "../state/asObservable";
@@ -28,15 +30,29 @@ export class TreatmentListComponent {
     filteredTreatments: Treatment[] = [];
     selection: string ;
     count: number;
+    owner: string;
+    doctorID: number;
+    patientID: number;
     @Input() hidden:boolean = false;
     @Input () treatmentform: any;  
-    @Input () patientID: number;
+    @Input () userID: number;
+    //@Input () doctorID: number;
     private _treatments: Rx.BehaviorSubject<List<Treatment>> = new Rx.BehaviorSubject(List([]));
-    constructor(private notificationService: NotificationService, private treatmentService: TreatmentBackendService, private treatmentStore: TreatmentStore) {}   
+    constructor(private notificationService: NotificationService, private treatmentService: TreatmentBackendService, private treatmentStore: TreatmentStore, routeSegment: RouteSegment) {
+        this.owner = routeSegment.getParam('owner');
+        console.log("TreatmentsLIST OWNER", this.owner);
+    }   
     
     ngOnInit() {
-       console.log("TreatmentListComponent ngOnInit patientID", this.patientID);
-       this.treatmentStore.loadInitialData(this.patientID);
+       console.log("TreatmentListComponent ngOnInit patientID", this.userID);
+       
+       if (this.owner == DOCTOR_OWNER){
+            this.doctorID = this.userID;
+            this.treatmentStore.loadTreatmentsByDoctorId(this.userID);      
+       } else {
+            this.patientID = this.userID;
+            this.treatmentStore.loadInitialData(this.userID);
+       }
     }
     
    change(data: ITableSelectionChange) {
@@ -56,7 +72,7 @@ export class TreatmentListComponent {
     addTreatment () {
         this.hidden = true;
         this.treatmentform.hidden = false;
-        this.treatment = new Treatment(-1, this.patientID, new Date(), '', '', '')
+        this.treatment = new Treatment(-1, this.patientID,  this.doctorID, new Date(), '', '', '')
         this.formAction(this.treatment);
     }
     

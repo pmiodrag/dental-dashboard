@@ -28,6 +28,7 @@ export class TreatmentStore {
                     new Treatment(
                         treatment.id,
                         treatment.patientid,
+                        treatment.doctorid,
                         treatment.treatmentdate,
                         treatment.therapy,
                         treatment.diagnose,
@@ -39,6 +40,28 @@ export class TreatmentStore {
             );
 
     }
+    
+    loadTreatmentsByDoctorId(doctorId) {
+        this.treatmentBackendService.getAllTreatments()
+            .subscribe(
+            res => {
+                let treatments = (<Treatment[]>res.json()).map((treatment: any) =>
+                    new Treatment(
+                        treatment.id,
+                        treatment.patientid,
+                        treatment.doctorid,
+                        treatment.treatmentdate,
+                        treatment.therapy,
+                        treatment.diagnose,
+                        treatment.price
+                    )).filter(treatment => treatment.doctorid == doctorId)
+                this._treatments.next(List(treatments));
+            },
+            err => console.log("Error retrieving Treatments")
+            );
+
+    }
+    
     filterData(data) {
         this.treatmentBackendService.getAllTreatments()
             .subscribe(
@@ -47,6 +70,7 @@ export class TreatmentStore {
                     new Treatment(
                         treatment.id,
                         treatment.patientid,
+                        treatment.doctorid,
                         treatment.treatmentdate,
                         treatment.therapy,
                         treatment.diagnose,

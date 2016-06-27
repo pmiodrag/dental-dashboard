@@ -19,6 +19,7 @@ import {List} from 'immutable';
 import {asObservable} from "../state/asObservable";
 import * as Rx from "rxjs/Rx";
 import {ICON_CLASS} from '../../shared/constants/app.constants';
+import {DOCTOR_OWNER} from '../../shared/constants/app.constants';
 @Component({
     selector: 'doctor-list', 
     // providers: [DoctorService],
@@ -36,6 +37,7 @@ export class DoctorList {
     public showSource: boolean = false;
     private showTabs: boolean = false;
     iconClass: string = ICON_CLASS;
+    owner: string = DOCTOR_OWNER;
     title: string;
     toggleID: number;
     filterText: string;
@@ -128,5 +130,4 @@ export class DoctorList {
         this.selection = doctorsSelected.join(', ');
         this.count = doctorsSelected.length;
     }
-
 }

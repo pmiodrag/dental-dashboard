@@ -20,6 +20,7 @@ import {List} from 'immutable';
 import {asObservable} from "../state/asObservable";
 import * as Rx from "rxjs/Rx";
 import {ICON_CLASS} from '../../shared/constants/app.constants';
+import {PATIENT_OWNER} from '../../shared/constants/app.constants';
 import {MdIcon, MdIconRegistry} from '@angular2-material/icon/icon';
 @Component({
     selector: 'patient-list', 
@@ -46,6 +47,7 @@ export class PatientList {
     public showSource: boolean = false;
     private showTabs: boolean = false;
     iconClass: string = ICON_CLASS;
+    owner: string = PATIENT_OWNER;
     title: string;
     toggleID: number;
     filterText: string;
@@ -86,6 +88,12 @@ export class PatientList {
             this.pagination = event.pagination;
             this.refreshPatients();
         }
+    }
+    
+        
+    listPatientTreatments(patient: Patient){
+        console.log("listPatientTreatments"+patient.id);
+        this.notificationService.emitFormActionChangeEvent(patient);
     }
 
     hideElements() {

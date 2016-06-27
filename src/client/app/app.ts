@@ -19,7 +19,8 @@ import {MD_SIDENAV_DIRECTIVES} from '@angular2-material/sidenav';
 
 @Routes([
     { path: '/patients',  component: PatientsComponent },
-    { path: '/patient/:id/treatments', component: TreatmentsComponent },
+    { path: '/patient/:owner/:id/treatments', component: TreatmentsComponent },
+    { path: '/doctor/:owner/:id/treatments', component: TreatmentsComponent },
     { path: '/diagnoses',  component: DiagnoseComponent },
     { path: '/doctors',  component: DoctorsComponent },
     { path: '/documents',  component: DocumentsComponent },

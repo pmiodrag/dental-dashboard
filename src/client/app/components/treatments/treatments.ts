@@ -23,6 +23,8 @@ export class TreatmentsComponent {
     
     constructor(routeSegment: RouteSegment) {
         this.id = routeSegment.getParam('id');
+        var owner = routeSegment.getParam('owner');
+        console.log("TreatmentsComponent OWNER", owner);
 //        this.firstname = routeSegment.getParam('firstname');
 //        this.lastname = routeSegment.getParam('lastname');
         console.log("TreatmentsComponent routerOnActivate id", this.id);
