@@ -1,0 +1,15 @@
+<div>
+    <md-toolbar class="md-primary">  
+        <span md-button class="md-icon-button white">
+            <i class="material-icons">view_carousel</i>
+        </span>
+        <span>Gallery</span>
+        <a  md-button class="md-icon-button white" [routerLink]="['preview']" [class.active]="!listDisplayModeEnabled">
+            <i class="material-icons">view_carousel</i>                   
+        </a>
+        <a  md-button class="md-icon-button white"  [routerLink]="['upload']" [class.active]="!listDisplayModeEnabled">
+            <i class="material-icons">file_upload</i>                   
+        </a>
+    </md-toolbar>
+    <router-outlet></router-outlet>   
+</div>

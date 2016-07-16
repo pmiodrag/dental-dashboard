@@ -1,0 +1,82 @@
+<style>
+    #file-input { display: none; }
+</style>
+ <div layout-gt-sm="row">       
+        <div flex="80" flex-xs="100" layout="column">
+            <md-card>
+                <md-card-title class="card-media md-media-xl">
+                    <md-card-title-text>
+                        <span class="md-subhead">Upload patient photos</span>
+
+                        <!--            <p>Queue length: {{ uploader?.queue?.length }}</p>-->
+                    </md-card-title-text>
+                    <md-card-title-media class="">
+                        <h5 class="text-teal"> Queue length: {{ uploader?.queue?.length }} </h5>
+                    </md-card-title-media>
+                </md-card-title>
+                <md-card-actions  class="voffset5" layout="row" layout-align="start center">
+                    <md-data-table>
+                        <thead>
+                            <tr>
+                                <th class="md-text-cell">Name</th>
+                                <th>Size</th>
+                                <th>Progress</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of uploader.queue">
+                                <td class="md-text-cell"><h6 class="text-teal">{{ item?.file?.name }}</h6></td>
+                                <td nowrap><h6 class="text-teal">{{ item?.file?.size/1024/1024 | number:'.2' }} MB</h6></td>
+                                <td>
+                                    <div class="progress" style="margin-bottom: 0;">
+                                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <a *ngIf="item.isSuccess" md-button class="md-icon-button md-primary">
+                                        <i class="material-icons">done</i>
+                                    </a>
+                                    <a *ngIf="item.isError" md-button class="md-icon-button md-warn">
+                                        <i class="material-icons">error</i>
+                                    </a>
+                                </td>
+                                <td nowrap>
+
+                                    <input id="file-input" type="file"  ng2FileSelect [uploader]="uploader" multiple  >
+                                           <button md-raised-button class="md-raised  md-primary" (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                                           <i class="material-icons">file_upload</i>
+                                    </button>
+                                    <button md-raised-button class="md-raised  md-warn" (click)="item.remove()">
+                                        <i class="material-icons">delete</i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </md-data-table>
+                </md-card-actions>
+                <md-card-content>
+                    <div>
+                        <div>
+                            <h5 class="text-teal">  Queue progress: </h5>
+                            <div class="progress" style="">
+                                <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                            </div>
+                        </div>
+                        <button md-raised-button class="md-raised  md-primary">
+                            <label for="file-input">Select</label>  
+                        </button>
+                          <input id="file-input" type="file"  ng2FileSelect [uploader]="uploader" multiple >
+                        <button md-raised-button class="md-raised  md-primary"  (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                            <i class="material-icons">file_upload</i> Upload all
+                        </button>
+                        <button md-raised-button class="md-raised  md-warn"  (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length || uploader.queue.length == 0">
+                            <i class="material-icons">delete</i> Remove all
+                        </button>
+                    </div>
+                </md-card-content>
+            </md-card>
+        </div>
+    </div>
+

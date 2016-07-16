@@ -4,7 +4,7 @@ import path = require('path');
 import * as db from "../connection/db";
 var bodyParser = require('body-parser');
 var  multer = require("multer");
-
+export var imageDir = 'uploads'
 export function index (req: express.Request, res: express.Response)  {
    console.log("getPatients")
    db.db_connection.ready(function(){ 
@@ -76,4 +76,23 @@ export function update (req: express.Request, res: express.Response)  {
     
      console.log("Patient param: "+req.param); 
   res.status(204).end("Profile image uploaded");
+}
+
+ export function uploadGallery (req: express.Request, res: express.Response) {
+  // We are able to access req.files.file thanks to
+  // the multiparty middleware
+  //upload.single(req.file);
+    
+   var patientId = req.params.id;
+     console.log("patientId : " + patientId);
+    var filename = imageDir + '/' + req.file.filename;
+    var newImage = {patientid: patientId, source : filename};
+    db.db_connection.ready(function () {
+        var galleryTable = db.db_connection.table("gallery");
+        galleryTable.save(newImage).then(function (result) {
+            console.log("New image added: " + result.id);
+            res.send(JSON.stringify(result));
+        });
+    });
+//    res.status(204).end("Profile image uploaded");
 }

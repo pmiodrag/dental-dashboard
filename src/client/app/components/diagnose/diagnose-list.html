@@ -6,14 +6,14 @@
         <span>Diagnoses</span>
     </md-toolbar>
     <md-list>
-        <md-list-item>
+        <md-list-item  *ngIf="authService.isAdmin()">
             <div layout-gt-sm="column" class="col-md-3 md-block">
                <md-input id="name" placeholder="Diagnose name?" [(ngModel)]="name"></md-input>
              </div>
-            <div layout-gt-sm="column" class="col-md-3 md-block">
+<!--            <div layout-gt-sm="column" class="col-md-3 md-block">
                  <md-input id="description" placeholder="Diagnose description?" [(ngModel)]="description"></md-input>
-           </div> 
-           <div *ngIf="authService.isAdmin()"  layout-gt-sm="column" class="col-md-3 md-block">
+           </div> -->
+           <div  layout-gt-sm="column" class="col-md-3 md-block">
                <a  md-button class="md-icon-button" [ngClass]="iconClass" (click)="addDiagnose()" >
                  <i class="material-icons">thumb_up</i>
               </a>

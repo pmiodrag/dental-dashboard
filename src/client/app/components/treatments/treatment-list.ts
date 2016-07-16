@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
-import { ROUTER_DIRECTIVES, RouteSegment } from '@angular/router';
+import { ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
 import { Treatment, TreatmentBackendService } from '../../services/TreatmentBackendService';
 import { TreatmentStore } from '../state/TreatmentStore';
 import { NotificationService  } from '../../services/notificationService';
@@ -38,21 +38,24 @@ export class TreatmentListComponent {
     @Input () userID: number;
     //@Input () doctorID: number;
     private _treatments: Rx.BehaviorSubject<List<Treatment>> = new Rx.BehaviorSubject(List([]));
-    constructor(private notificationService: NotificationService, private treatmentService: TreatmentBackendService, private treatmentStore: TreatmentStore, routeSegment: RouteSegment) {
-        this.owner = routeSegment.getParam('owner');
-        console.log("TreatmentsLIST OWNER", this.owner);
+    constructor(private notificationService: NotificationService, private route: ActivatedRoute, private treatmentService: TreatmentBackendService, private treatmentStore: TreatmentStore) {
+       
     }   
     
     ngOnInit() {
        console.log("TreatmentListComponent ngOnInit patientID", this.userID);
-       
-       if (this.owner == DOCTOR_OWNER){
-            this.doctorID = this.userID;
-            this.treatmentStore.loadTreatmentsByDoctorId(this.userID);      
-       } else {
-            this.patientID = this.userID;
-            this.treatmentStore.loadInitialData(this.userID);
-       }
+        this.route.params.subscribe(params => {
+            this.owner = params['owner']; // (+) converts string 'id' to a number
+            console.log("ngOnInit GalleryComponent patientID", this.owner );
+            if (this.owner == DOCTOR_OWNER){
+                this.doctorID = this.userID;
+                this.treatmentStore.loadTreatmentsByDoctorId(this.userID);      
+           } else {
+                this.patientID = this.userID;
+                this.treatmentStore.loadInitialData(this.userID);
+           }
+        });
+      
     }
     
    change(data: ITableSelectionChange) {

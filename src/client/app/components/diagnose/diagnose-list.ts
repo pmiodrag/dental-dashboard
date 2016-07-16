@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
-import { ROUTER_DIRECTIVES, RouteSegment } from '@angular/router';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 import { Diagnose, DiagnoseBackendService } from '../../services/DiagnoseBackendService';
 import { DiagnoseStore } from '../state/DiagnoseStore';
 import { NotificationService  } from '../../services/notificationService';

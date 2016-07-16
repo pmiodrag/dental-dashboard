@@ -24,6 +24,8 @@
     <link rel="stylesheet" type="text/css" href="styles/app.css">
     <link rel="stylesheet" href="styles/ng2-material/ng2-material.css">
     <link rel="stylesheet" href="styles/ng2-material/font/font.css">
+    <link rel="stylesheet" type="text/css" href="styles/primeui/themes/omega/theme.css" />
+<link rel="stylesheet" type="text/css" href="styles/primeui/primeui-ng-all.min.css" />
    
 </head>
 <body>
@@ -80,7 +82,9 @@
     'ng2-material':               'n:ng2-material',
     'moment':                     'n:moment/moment.js',  
      'immutable':                     'n:immutable/dist/immutable.js',
-     '@angular2-material': 'n:@angular2-material'
+     '@angular2-material': 'n:@angular2-material',
+     'primeng': 'n:primeng',
+      'symbol-observable': 'n:symbol-observable'
        // 'lodash': 'n:lodash'
     };
 
@@ -101,7 +105,13 @@
         },
         'ng2-material': { 
             defaultExtension: 'js' 
-        }
+        },
+        'primeng': { 
+            defaultExtension: 'js' 
+        },
+         'symbol-observable': {
+             defaultExtension: 'js',
+             main: 'index.js'}
     };
 
     var packageNames = [
@@ -109,6 +119,7 @@
         '@angular/compiler',
         '@angular/core',
         '@angular/http',
+        '@angular/forms',
         '@angular/platform-browser',
         '@angular/platform-browser-dynamic',
         '@angular/router',

@@ -51,6 +51,10 @@ control-messages div {
   min-height: 250px !important;
 }
 md-pagination-range, md-pagination-controls {color: white !important; }
+.dropdown-menu {
+    width: 33.33333333%;
+}
+
 /*
 section {
   background: #f7f7f7;
@@ -64,3 +68,8 @@ section {
     margin-bottom: 16px;
   }
 }*/
+p-lightbox a img {
+    width: 100px !important;
+    height:100px !important;
+}
+.ui-galleria-panel img{width: 500px!important; height:313px!important}

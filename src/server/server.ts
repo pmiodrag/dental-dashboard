@@ -7,13 +7,15 @@ import * as patients from "./api/patient/controller";
 import * as doctors from "./api/doctor/controller";
 import * as treatments from "./api/treatment/controller";
 import * as diagnoses from "./api/diagnose/controller";
+import * as gallery from "./api/gallery/controller";
 var port: number = process.env.PORT || 3000;
 var app = express();
 //var router = express.Router();
 var  multer = require("multer");
 var mkdirp = require('mkdirp');
 // upload destination directory
-var DIR = __dirname + '/uploads';
+
+var DIR = __dirname + '/' + patients.imageDir;
 
 /* GET users listing. */
 //router.get('/', function(req, res, next) {
@@ -53,9 +55,10 @@ var storage = multer.diskStorage({
     cb(null, file.originalname)
   }
 })
+
 var upload = multer({ storage: storage }).single('file');
 app.post('/patient/upload', upload, patients.uploadFile);
-
+app.post('/patient/:id/upload/gallery', upload, patients.uploadGallery);
 app.put('/patient/:id', patients.update);
 app.get('/patient/:id', patients.show);
 app.delete('/patient/:id', patients.destroy);
@@ -72,6 +75,9 @@ app.post('/doctor', doctors.create);
 //    cb(null, file.originalname)
 //  }
 //})
+
+// Gallery
+app.get('/gallery', gallery.index);
 var upload = multer({ storage: storage }).single('file');
 app.post('/doctor/upload', upload, doctors.uploadFile);
 

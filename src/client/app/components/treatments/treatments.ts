@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CORE_DIRECTIVES } from '@angular/common';
-import {ROUTER_DIRECTIVES, RouteSegment} from '@angular/router';
+import {ROUTER_DIRECTIVES, ActivatedRoute} from '@angular/router';
 //import { RouterLink, RouteParams } from 'angular2/router';
 //import { TreatmentService, Treatment } from '../../services/treatmentService';
 //import { PatientService } from '../../services/patientService';
@@ -17,20 +17,16 @@ import {TreatmentFormComponent} from "./treatment-form"
 })
 export class TreatmentsComponent {
   id:string;
-  firstname:string;
-  lastname:string;
    
     
-    constructor(routeSegment: RouteSegment) {
-        this.id = routeSegment.getParam('id');
-        var owner = routeSegment.getParam('owner');
-        console.log("TreatmentsComponent OWNER", owner);
-//        this.firstname = routeSegment.getParam('firstname');
-//        this.lastname = routeSegment.getParam('lastname');
-        console.log("TreatmentsComponent routerOnActivate id", this.id);
+    constructor(private route: ActivatedRoute) {
     }   
     
     ngOnInit() {
+        this.route.params.subscribe(params => {
+            this.id = params['id']; // (+) converts string 'id' to a number
+            var owner = params['owner']            
+        });
         console.log("ngOnInit TreatmentsComponent");
      
     }
