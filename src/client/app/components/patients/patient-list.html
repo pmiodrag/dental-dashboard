@@ -2,6 +2,7 @@
     <div class="row">
         <div class="row card-container" *ngIf="patientStore.showCardView | async ">
             <div class="col-lg-6" *ngFor="let patient of patientStore.patients | async  | customslice: (patientStore.startIndex | async) : (patientStore.endIndex | async)">
+                
                  <div  layout="column">
                     <md-card>
                         <md-card-header>                            
@@ -22,20 +23,37 @@
                                 <a  md-button class="md-icon-button"  [ngClass]="iconClass" [routerLink]="['/patient', owner, '/', patient.id, '/treatments']">
                                      <i class="material-icons">assignment</i>
                                 </a>
+                                <a  md-button class="md-icon-button"  [ngClass]="iconClass" [routerLink]="['patient/gallery', patient.id]">
+                                     <i class="material-icons">view_carousel</i>
+                                </a>
+                                 <md-dialog #alert>
+                                    <md-dialog-title>Set birth date please</md-dialog-title>
+                                     <md-list>
+                                        <md-list-item class="md-1-line" *ngFor="let item of patient | values">                                    
+                                              <div class="md-list-item-text"  *ngIf="toggleID == patient.id">
+                                                <h6>{{ item }}</h6>                                      
+                                            </div>
+                                            <md-divider inset></md-divider>
+                                        </md-list-item>
+                                    </md-list>
+                                    <md-dialog-actions ok="Got It"></md-dialog-actions>
+                            </md-dialog>
+                                <a    (click)="alert.show(); toggleSource(patient.id)" flex="auto" class="md-icon-button active" md-button="" [ngClass]="iconClass">
+                                    <i class="material-icons">details</i>
+<!--                                    <i *ngIf="!showSource" class="material-icons">expand_more</i>
+                                    <i *ngIf="showSource" class="material-icons">expand_less</i>-->
+                                </a>
                                 <a  md-button class="md-icon-button" [ngClass]="iconClass" (click)="editPatient(patient);"  aria-label="Edit patient">
                                     <i class="material-icons">mode_edit</i>
                                 </a>
                                 <a  md-button class="md-icon-button" [ngClass]="iconClass" (click)="deletePatient(patient)"  aria-label="Remove patient">
                                      <i class="material-icons">delete</i>
                                 </a>
-                                <a    (click)="toggleSource(patient.id)" class="md-icon-button active" md-button="" [ngClass]="iconClass">
-                                    <i *ngIf="!showSource" class="material-icons">expand_more</i>
-                                    <i *ngIf="showSource" class="material-icons">expand_less</i>
-                                </a>
+                                
                             </md-card-actions>
                         </md-card-header>
                         <!--                           <img src="public/images/old-board.jpg" class="md-card-image" alt="Old Board">-->
-                        <md-card-title  *ngIf="showSource && toggleID == patient.id">
+<!--                        <md-card-title  *ngIf="showSource && toggleID == patient.id">
                             <md-card-title-text>
                                 <span class="md-headline">Patient details</span>
                             </md-card-title-text>
@@ -49,7 +67,7 @@
                                     <md-divider inset></md-divider>
                                 </md-list-item>
                             </md-list>
-                        </md-card-content>
+                        </md-card-content>-->
                     </md-card>
                 </div>
             </div>

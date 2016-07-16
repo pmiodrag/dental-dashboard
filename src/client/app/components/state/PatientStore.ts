@@ -69,7 +69,9 @@ export class PatientStore {
                         patient.email,
                         patient.phone,
                         patient.mobilephone,
-                        patient.photo
+                        patient.photo,
+                        patient.allergies,
+                        patient.notes
                     )) //.filter((person) => person.firstname == "Miodrag")
                 this._patientsSize.next(patients.length);
                 this._patients.next(List(patients));
@@ -95,7 +97,9 @@ export class PatientStore {
                         patient.email,
                         patient.phone,
                         patient.mobilephone,
-                        patient.photo
+                        patient.photo,
+                        patient.allergies,
+                        patient.notes
                     ))                    
                     .filter(item => {
                         let props = ['firstname', 'middlename', 'lastname', 'address', 'place'];

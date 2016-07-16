@@ -15,13 +15,15 @@ export interface IPatient {
     phone: string;
     mobilephone: string;
     photo: string;
+    allergies: string;
+    notes: string;
 }
 
 export class Patient implements IPatient {
 //    
     constructor (public id: number, public firstname: string, public lastname: string, public middlename: string,
                 public gender: string, public address: string, public place: string,  public birthdate: Date, public email : string,
-                public phone: string,  public mobilephone: string, public photo : string) {
+                public phone: string,  public mobilephone: string, public photo : string, public allergies: string, public notes: string) {
     }
 }
 @Injectable()
