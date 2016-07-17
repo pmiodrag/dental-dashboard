@@ -52,7 +52,8 @@ var jsNPMDependencies = [
     'angular2-jwt/angular2-jwt.js',
      'angular2-jwt/angular2-jwt.js.map',
     //'angular2/bundles/angular2.min.js', 
-    'symbol-observable/index.js',
+    'symbol-observable/**',
+    'primeng/**',
             'ng2-material/index.js',
              'ng2-material/index.js.map',
               'moment/moment.js',
@@ -74,6 +75,8 @@ gulp.task('build:styles', function() {
         .pipe(gulp.dest('dist/styles/ng2-material/font'));
     var copyFontAwesome= gulp.src('src/client/styles/font-awesome/**')     
      .pipe(gulp.dest('dist/styles/font-awesome'));
+     var copyPrimeUI= gulp.src('node_modules/primeui/**')     
+        .pipe(gulp.dest('dist/styles/primeui'));
 //    var copyMaterialize= gulp.src('src/client/styles/materialize/**')     
 //     .pipe(gulp.dest('dist/styles/materialize'));
  var copySCSS= gulp.src('src/client/styles/*.scss')
@@ -81,7 +84,7 @@ gulp.task('build:styles', function() {
     var copyStyles= gulp.src('src/client/styles/*.css')
      .pipe(minifyCSS())
             .pipe(gulp.dest('dist/styles'))
-        return[copyStyles,copySCSS, copyNgCoreStyles, copyFontAwesome, copyNgStyles];
+        return[copyStyles,copySCSS, copyNgCoreStyles, copyFontAwesome, copyNgStyles, copyPrimeUI];
         //.pipe(less())
        // .on('error', console.log)
         
