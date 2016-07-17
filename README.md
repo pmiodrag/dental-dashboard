@@ -48,3 +48,4 @@ mysql -u root -p < scripts/smiletime_patient.sql
 mysql -u root -p < scripts/smiletime_treatment.sql
 mysql -u root -p < scripts/smiletime_diagnose.sql
 mysql -u root -p < scripts/smiletime_doctor.sql
+mysql -u root -p < scripts/smiletime_gallery.sql
