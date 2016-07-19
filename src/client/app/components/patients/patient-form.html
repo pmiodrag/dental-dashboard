@@ -90,11 +90,11 @@
                          <!--<md-card-title-media class="">Selected date is: <span *ngIf="patient.birthdate">{{patient.birthdate}}</span></md-card-title-media>-->
                     </md-card-title>
                    <md-card-actions  class="voffset5" layout="row" layout-align="end center">
-                    <md-dialog #alert>
-                        <md-dialog-title>Set birth date please</md-dialog-title>
+<!--                    <md-dialog #alert>-->
+                         <span class="md-subhead">Set birth date please</span>
                         <datepicker [(ngModel)]="patient.birthdate" md-placeholder="Enter date"></datepicker>
-                        <md-dialog-actions ok="Got It"></md-dialog-actions>
-                    </md-dialog>
+<!--                        <md-dialog-actions ok="Got It"></md-dialog-actions>
+                    </md-dialog>-->
                     <pre>Selected date is: <span *ngIf="patient.birthdate">{{patient.birthdate}}</span></pre>
                     <button md-raised-button class="md-primary" (click)="alert.show()" flex="auto">Set birth date</button>
                    </md-card-actions>

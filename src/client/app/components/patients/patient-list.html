@@ -26,7 +26,7 @@
                                 <a  md-button class="md-icon-button"  [ngClass]="iconClass" [routerLink]="['patient/gallery', patient.id]">
                                      <i class="material-icons">view_carousel</i>
                                 </a>
-                                 <md-dialog #alert>
+<!--                                 <md-dialog #alert>
                                     <md-dialog-title>Set birth date please</md-dialog-title>
                                      <md-list>
                                         <md-list-item class="md-1-line" *ngFor="let item of patient | values">                                    
@@ -37,11 +37,11 @@
                                         </md-list-item>
                                     </md-list>
                                     <md-dialog-actions ok="Got It"></md-dialog-actions>
-                            </md-dialog>
-                                <a    (click)="alert.show(); toggleSource(patient.id)" flex="auto" class="md-icon-button active" md-button="" [ngClass]="iconClass">
+                            </md-dialog>-->
+                                <a    (click)="toggleSource(patient.id)" flex="auto" class="md-icon-button active" md-button="" [ngClass]="iconClass">
                                     <i class="material-icons">details</i>
-<!--                                    <i *ngIf="!showSource" class="material-icons">expand_more</i>
-                                    <i *ngIf="showSource" class="material-icons">expand_less</i>-->
+                                    <i *ngIf="!showSource" class="material-icons">expand_more</i>
+                                    <i *ngIf="showSource" class="material-icons">expand_less</i>
                                 </a>
                                 <a  md-button class="md-icon-button" [ngClass]="iconClass" (click)="editPatient(patient);"  aria-label="Edit patient">
                                     <i class="material-icons">mode_edit</i>

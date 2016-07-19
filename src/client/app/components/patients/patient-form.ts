@@ -20,13 +20,13 @@ MdMinValueValidator,
 MdNumberRequiredValidator,
 MdMaxValueValidator, MATERIAL_DIRECTIVES} from "ng2-material/index";
 import {ICON_CLASS} from '../../shared/constants/app.constants';
-import {OVERLAY_PROVIDERS} from '@angular2-material/core/overlay/overlay';
+//import {OVERLAY_PROVIDERS} from '@angular2-material/core/overlay/overlay';
 import {MdIcon, MdIconRegistry} from '@angular2-material/icon/icon';
 //import * as moment from 'moment';
 @Component({
     selector: 'patient-form',
     templateUrl: 'app/components/patients/patient-form.html',
-    providers: [MdRadioDispatcher, MdIconRegistry, OVERLAY_PROVIDERS],
+    providers: [MdRadioDispatcher, MdIconRegistry],
     host: { '[hidden]': 'hidden' },
     directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, DATEPICKER_DIRECTIVES, FORM_DIRECTIVES, MD_INPUT_DIRECTIVES,
         MdRadioGroup, MdRadioButton, MdIcon, MdToolbar, ControlMessages, MATERIAL_DIRECTIVES, FILE_UPLOAD_DIRECTIVES, MdProgressBar],
