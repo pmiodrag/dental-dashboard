@@ -39,6 +39,7 @@ var jsNPMDependencies = [
     'angular2-jwt/angular2-jwt.js.map',
     'symbol-observable/**',
     'primeng/**',
+    'fullcalendar/**',
     'ng2-material/index.js',
     'ng2-material/index.js.map',
     'moment/moment.js',

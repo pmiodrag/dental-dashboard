@@ -8,6 +8,7 @@ import * as doctors from "./api/doctor/controller";
 import * as treatments from "./api/treatment/controller";
 import * as diagnoses from "./api/diagnose/controller";
 import * as gallery from "./api/gallery/controller";
+import * as agenda from "./api/agenda/controller";
 var port: number = process.env.PORT || 3000;
 var app = express();
 //var router = express.Router();
@@ -99,6 +100,14 @@ app.get('/diagnose', diagnoses.index);
 app.post('/diagnose', diagnoses.create);
 app.put('/diagnose/:id', diagnoses.update);
 app.delete('/diagnose/:id', diagnoses.destroy);
+
+// Agenda
+app.get('/events', agenda.index);
+app.post('/events', agenda.create);
+app.put('/events/:id', agenda.update);
+//app.get('/events/:id', agenda.show);
+app.delete('/events/:id', agenda.destroy);
+
 var renderIndex = (req: express.Request, res: express.Response) => {
     console.log("renderIndex __dirname", __dirname)
     res.sendFile(path.resolve(__dirname, 'index.html'));

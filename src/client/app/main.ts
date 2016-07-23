@@ -17,9 +17,11 @@ import { DoctorStore } from './components/state/DoctorStore';
 import { GalleryStore } from './components/state/GalleryStore';
 import { GalleryBackendService } from './services/GalleryBackendService';
 import { TreatmentBackendService } from './services/TreatmentBackendService';
+import { AgendaBackendService } from './services/AgendaBackendService';
 import { DiagnoseBackendService } from './services/DiagnoseBackendService';
 import { TreatmentStore } from './components/state/TreatmentStore';
 import { DiagnoseStore } from './components/state/DiagnoseStore';
+import { AgendaStore } from './components/state/AgendaStore';
 import { UiStateStore } from './components/state/UiStateStore';
 bootstrap(AppComponent, [
     //ROUTER_PROVIDERS,
@@ -29,6 +31,7 @@ bootstrap(AppComponent, [
     TreatmentStore,
     DiagnoseStore,
     GalleryStore,
+    AgendaStore,
     UiStateStore,
     FORM_PROVIDERS,
     HTTP_PROVIDERS,
@@ -41,6 +44,7 @@ bootstrap(AppComponent, [
     DoctorBackendService,
     TreatmentBackendService,
     DiagnoseBackendService,
+    AgendaBackendService,
     provide(AuthHttp, {
       useFactory: (http) => {
         return new AuthHttp(new AuthConfig(), http);
