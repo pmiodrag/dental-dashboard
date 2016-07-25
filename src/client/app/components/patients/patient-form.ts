@@ -8,7 +8,7 @@ import {ValidationService} from '../../shared/services/validation.service';
 import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {FILE_UPLOAD_DIRECTIVES, FileUploader} from 'ng2-file-upload/ng2-file-upload';
 import { CapitalizePipe } from '../../shared/pipes/capitalize.pipe';
-import { PatientStore } from '../state/PatientStore';
+import { PatientFormPage, PatientStore } from '../state/PatientStore';
 import { UiStateStore } from '../state/UiStateStore';
 import {MD_INPUT_DIRECTIVES} from '@angular2-material/input';
 import {MdRadioGroup, MdRadioButton} from '@angular2-material/radio';
@@ -23,6 +23,7 @@ import {ICON_CLASS} from '../../shared/constants/app.constants';
 //import {OVERLAY_PROVIDERS} from '@angular2-material/core/overlay/overlay';
 import {MdIcon, MdIconRegistry} from '@angular2-material/icon/icon';
 //import * as moment from 'moment';
+
 @Component({
     selector: 'patient-form',
     templateUrl: 'app/components/patients/patient-form.html',
@@ -36,7 +37,7 @@ import {MdIcon, MdIconRegistry} from '@angular2-material/icon/icon';
 
 export class PatientFormComponent {
     iconClass: string = ICON_CLASS;
-
+    public patientFormPage = PatientFormPage;     
     public uploader: FileUploader = new FileUploader({ url: '/patient/upload' });
 
     patientForm: ControlGroup;
@@ -65,6 +66,7 @@ export class PatientFormComponent {
         //   console.log("uploader", this.uploader);
         mdIconRegistry.addSvgIcon('F', 'assets/images/svg/human-female.svg');
         mdIconRegistry.addSvgIcon('M', 'assets/images/svg/human-male.svg');
+        mdIconRegistry.addSvgIcon('identification-card', 'assets/images/svg/account-card-details.svg');
         this.patientForm = fb.group({
             'firstname': ['', Validators.compose([
                 Validators.required,
@@ -106,8 +108,7 @@ export class PatientFormComponent {
            patient.photo = this.uploader.queue[0].file.name;
         } else {
            patient.photo = "";
-        }
-        
+        }        
         
         this.patientStore.addPatient(patient)
         this.goBack();
@@ -138,7 +139,7 @@ export class PatientFormComponent {
     }
 
     onSubmit(patient) { 
-        // patient.birthdate.setHours(12);
+        patient.birthdate.setHours(12);
         if (this.submitAction == 'add') {
             this.addPatient(patient);
         } else {
@@ -146,6 +147,10 @@ export class PatientFormComponent {
         }
         this.submitted = true;
         this.goBack();
+    }
+    
+    setPatientFormPage(page: PatientFormPage) {
+        this.patientStore.setPatientFormPage(page);
     }
 
 

@@ -73,11 +73,7 @@ export class AgendaComponent {
     saveEvent() {
         //update
         if(this.event.id) {
-            this.agendaStore.updateEvent(this.event);
-//            let index: number = this.findEventIndexById(this.event.id).id;
-//            if(index >= 0) {
-//                this.events[index] = this.event;
-//            }
+            this.agendaStore.updateEvent(this.event);//            }
         }
         //new
         else {

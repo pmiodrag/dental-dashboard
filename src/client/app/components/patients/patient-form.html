@@ -10,100 +10,99 @@
             Go Back
         </button>
         {{formTitle}}
+        <a  md-button class="md-icon-button white" (click)="setPatientFormPage(patientFormPage.Details)">
+           <md-icon svgIcon="identification-card"></md-icon>                 
+        </a>
+        <a  md-button class="md-icon-button white" (click)="setPatientFormPage(patientFormPage.Photo)">
+            <i class="material-icons">add_a_photo</i>              
+        </a>
+        <a  md-button class="md-icon-button white" (click)="setPatientFormPage(patientFormPage.Contact)">
+            <i class="material-icons">contact_mail</i>             
+        </a>
     </md-toolbar>
     <md-content layout-padding> 
         <form [ngFormModel]="patientForm">
-            <div layout-gt-sm="row">
-                 <div flex="30" flex-xs="100" layout="column">
-                <md-card>
-                    <md-card-title class="card-media md-media-xl">
-                      <md-card-title-text>
-                        <span class="md-subhead">Upload profile photo</span>
-                      </md-card-title-text>
-<!--                      <span flex></span>-->
-                      <md-card-title-media class="">
-                           <button *ngIf="uploader.queue && uploader.queue.length == 0 && patient.gender == 'M'" md-fab class="md-primary" aria-label="Use Android">
-                                <md-icon svgIcon="{{patient.gender}}" color=""></md-icon>
-                                </button> 
-                              <button *ngIf="uploader.queue && uploader.queue.length == 0 && patient.gender == 'F'" md-fab class="md-warn" aria-label="Use Android">
-                                <md-icon svgIcon="{{patient.gender}}" color=""></md-icon>
+                <div flex="100" flex-xs="100" layout="column" *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.Photo">
+                    <md-card>
+                        <md-card-title class="card-media md-media-xl">
+                          <md-card-title-text>
+                            <span class="md-subhead">Upload profile photo</span>
+                          </md-card-title-text>
+                          <md-card-title-media class="">
+                               <button *ngIf="uploader.queue && uploader.queue.length == 0 && patient.gender == 'M'" md-fab class="md-primary" aria-label="Use Android">
+                                    <md-icon svgIcon="{{patient.gender}}" color=""></md-icon>
+                                    </button> 
+                                  <button *ngIf="uploader.queue && uploader.queue.length == 0 && patient.gender == 'F'" md-fab class="md-warn" aria-label="Use Android">
+                                    <md-icon svgIcon="{{patient.gender}}" color=""></md-icon>
+                                    </button>
+                                 <md-card-avatar *ngIf="uploader.queue && uploader.queue.length >0">
+                                       <img  src="uploads/{{patient.photo}}" class="card-image" />
+                                  </md-card-avatar>
+                          </md-card-title-media>
+                        </md-card-title>
+                        <span flex></span>
+                        <md-card-actions  class="voffset5" layout="row" layout-align="start center">
+                            <button md-raised-button class="md-raised  md-primary">
+                                <label for="file-input">Select</label>  
+                            </button>
+                            <input id="file-input" type="file"  ng2FileSelect [uploader]="uploader" >
+                            <div *ngFor="let item of uploader.queue">
+                                <a *ngIf="item.isSuccess" md-button class="md-icon-button md-primary">
+                                    <i class="material-icons">done</i>
+                                </a>
+                                <a *ngIf="item.isError" md-button class="md-icon-button md-warn">
+                                    <i class="material-icons">error</i>
+                                </a>
+                                <button md-raised-button class="md-raised  md-primary" 
+                                        (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                                  <i class="material-icons">file_upload</i>
                                 </button>
-                             <md-card-avatar *ngIf="uploader.queue && uploader.queue.length >0">
-                                   <img  src="uploads/{{patient.photo}}" class="card-image" />
-                              </md-card-avatar>
-                      </md-card-title-media>
-                    </md-card-title>
-                    <span flex></span>
-                    <md-card-actions  class="voffset5" layout="row" layout-align="start center">
-                         
-                        <button md-raised-button class="md-raised  md-primary">
-                            <label for="file-input">Select</label>  
-                        </button>
-                        <input id="file-input" type="file"  ng2FileSelect [uploader]="uploader" >
-                        <div *ngFor="let item of uploader.queue">
-                            <a *ngIf="item.isSuccess" md-button class="md-icon-button md-primary">
-                                <i class="material-icons">done</i>
-                            </a>
-                            <a *ngIf="item.isError" md-button class="md-icon-button md-warn">
-                                <i class="material-icons">error</i>
-                            </a>
-                            <button md-raised-button class="md-raised  md-primary" 
-                                    (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
-                              <i class="material-icons">file_upload</i>
-                            </button>
-                           <button md-raised-button class="md-raised  md-warn" (click)="item.remove()">
-                                <i class="material-icons">delete</i>
-                            </button>
+                               <button md-raised-button class="md-raised  md-warn" (click)="item.remove()">
+                                    <i class="material-icons">delete</i>
+                                </button>
 
-                        </div>
-                    </md-card-actions>
-                </md-card>
-                 </div>              
-                      <div flex="20" flex-xs="100" layout="column">
-                <md-card>
-                    <md-card-title class="card-media md-media-xl">
-                         <md-card-title-text>
-                        <span class="md-subhead">Gender</span>
-                      </md-card-title-text>                    
-                    </md-card-title>
-                   <md-card-actions  class="voffset5" layout="row" layout-align="end center">
-                    <md-radio-group #group [(ngModel)]="patient.gender">
-                        <md-radio-button *ngFor="let it of avatarData"
-                            [value]="it.value"
-                            [ngClass]="it.color"
-                            [aria-label]="it.title" 
-                            [checked]="group.value === it.value">
-                            <button md-fab class="md-fab"  [ngClass]="it.color" aria-label="Eat cake">
-                                <md-icon svgIcon="{{it.id}}"></md-icon>
-                            </button>
-                        </md-radio-button>
-                    </md-radio-group>
-                   </md-card-actions>
-                </md-card>
-                </div>
-                <div flex="50" flex-xs="100" layout="column">
-                <md-card>
-                    <md-card-title class="card-media md-media-xl">
-                      <md-card-title-text>
-                        <span class="md-subhead">Birthdate</span>
-                      </md-card-title-text>
-                         <!--<md-card-title-media class="">Selected date is: <span *ngIf="patient.birthdate">{{patient.birthdate}}</span></md-card-title-media>-->
-                    </md-card-title>
-                   <md-card-actions  class="voffset5" layout="row" layout-align="end center">
-<!--                    <md-dialog #alert>-->
-                         <span class="md-subhead">Set birth date please</span>
-                        <datepicker [(ngModel)]="patient.birthdate" md-placeholder="Enter date"></datepicker>
-<!--                        <md-dialog-actions ok="Got It"></md-dialog-actions>
-                    </md-dialog>-->
-                    <pre>Selected date is: <span *ngIf="patient.birthdate">{{patient.birthdate}}</span></pre>
-                    <button md-raised-button class="md-primary" (click)="alert.show()" flex="auto">Set birth date</button>
-                   </md-card-actions>
-                </md-card>
-                </div>
-                </div>
-           
-            
-            <div layout-gt-sm="row">
+                            </div>
+                        </md-card-actions>
+                    </md-card>
+                 </div>   
+                <div layout-gt-sm="row">
+                    <div flex="30" flex-xs="30" layout="column" *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.Details">
+                        <md-card>
+                            <md-card-title class="card-media md-media-xl">
+                                 <md-card-title-text>
+                                <span class="md-subhead">Gender</span>
+                              </md-card-title-text>                    
+                            </md-card-title>
+                           <md-card-actions  class="voffset5" layout="row" layout-align="end center">
+                            <md-radio-group #group [(ngModel)]="patient.gender">
+                                <md-radio-button *ngFor="let it of avatarData"
+                                    [value]="it.value"
+                                    [ngClass]="it.color"
+                                    [aria-label]="it.title" 
+                                    [checked]="group.value === it.value">
+                                    <button md-fab class="md-fab"  [ngClass]="it.color" aria-label="Eat cake">
+                                        <md-icon svgIcon="{{it.id}}"></md-icon>
+                                    </button>
+                                </md-radio-button>
+                            </md-radio-group>
+                           </md-card-actions>
+                        </md-card>
+                    </div> 
+                    <div flex="70" flex-xs="70" layout="column" *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.Details">
+                        <md-card>
+                            <md-card-title class="card-media md-media-xl">
+                              <md-card-title-text>
+                                <span class="md-subhead">Birthdate</span>
+                              </md-card-title-text>
+                            </md-card-title>
+                           <md-card-actions  class="voffset5" layout="row" layout-align="end center">
+                                <datepicker [(ngModel)]="patient.birthdate" md-placeholder="Enter date"></datepicker>
+                                <pre>Selected date is: <span *ngIf="patient.birthdate">{{patient.birthdate}}</span></pre>
+                           </md-card-actions>
+                        </md-card>
+                    </div>                                   
+            </div>   
+            <div layout-gt-sm="row" *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.Details">
                 <div layout-gt-sm="column" class="col-md-4 md-block">
                     <md-input placeholder="First name" [(ngModel)]="patient.firstname" [value]="patient.firstname" ngControl="firstname" id="firstname"></md-input>                   
                     <control-messages control="firstname"></control-messages>
@@ -116,11 +115,7 @@
                     <control-messages control="lastname"></control-messages>
                 </div>
             </div>
-            <div layout-gt-sm="row">
-                <div layout-gt-sm="column" class="col-md-4 md-block">
-                    <md-input placeholder="Email"  [(ngModel)]="patient.email" [value]="patient.email" type="email"  ngControl="email" id="email"></md-input>
-                    <control-messages control="email"></control-messages>
-                </div>
+            <div layout-gt-sm="row"*ngIf="(patientStore.patientFormPage | async ) == patientFormPage.Details">               
                 <div layout-gt-sm="column" class="col-md-4 md-block">
                     <md-input placeholder="Place"  [(ngModel)]="patient.place" [value]="patient.place"></md-input>
                 </div>
@@ -128,18 +123,24 @@
                     <md-input placeholder="Address"  [(ngModel)]="patient.address" [value]="patient.address"></md-input>
                 </div>
             </div>
-            <div layout-gt-sm="row">
+            <div layout-gt-sm="row" *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.Details">                
+                <div layout-gt-sm="column" class="col-md-6 md-block">
+                    <md-input placeholder="Allergies" [(ngModel)]="patient.allergies" [value]="patient.allergies" ></md-input>
+                </div>
+                <div layout-gt-sm="column" class="col-md-6 md-block">
+                    <textarea md-input placeholder="Notes"  [(ngModel)]="patient.notes" columns="1" md-maxlength="150" rows="5"></textarea>                    
+                </div>
+            </div>
+            <div layout-gt-sm="row" *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.Contact">
+                <div layout-gt-sm="column" class="col-md-4 md-block">
+                    <md-input placeholder="Email"  [(ngModel)]="patient.email" [value]="patient.email" type="email"  ngControl="email" id="email"></md-input>
+                    <control-messages control="email"></control-messages>
+                </div>
                 <div layout-gt-sm="column" class="col-md-4 md-block">
                     <md-input placeholder="Phone number" [(ngModel)]="patient.phone" [value]="patient.phone"></md-input>
                 </div>
                 <div layout-gt-sm="column" class="col-md-4 md-block">
                     <md-input placeholder="Mobile Phone number" [(ngModel)]="patient.mobilephone" [value]="patient.mobilephone" ></md-input>
-                </div>
-                <div layout-gt-sm="column" class="col-md-4 md-block">
-                    <md-input placeholder="Allergies" [(ngModel)]="patient.allergies" [value]="patient.allergies" ></md-input>
-                </div>
-                <div layout-gt-sm="column" class="col-md-4 md-block">
-                    <textarea md-input placeholder="Notes"  [(ngModel)]="patient.notes" columns="1" md-maxlength="150" rows="5"></textarea>                    
                 </div>
             </div>
             <!-- Submit button -->
@@ -148,8 +149,6 @@
                     <button md-raised-button class="md-primary" type="submit" (click)="onSubmit(patient)" [disabled]="!patientForm.valid">{{formTitle | capitalize}}</button>
                 </div>
             </div>
-
         </form>
-
     </md-content>
 </div>

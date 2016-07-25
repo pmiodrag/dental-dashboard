@@ -7,10 +7,13 @@ import {List} from 'immutable';
 import {asObservable} from "./asObservable";
 import {BehaviorSubject} from "rxjs/Rx";
 
+
+export enum PatientFormPage { Details, Photo, Contact}
 @Injectable()
 export class PatientStore {
 
     private _patients: BehaviorSubject<List<Patient>> = new BehaviorSubject(List([]));
+    private _patientFormPage: BehaviorSubject<any> = new BehaviorSubject(PatientFormPage.Details);
     private _showCardView: BehaviorSubject<boolean> = new BehaviorSubject(true);
     private _startIndex: BehaviorSubject<number> = new BehaviorSubject(0);
     private _endIndex: BehaviorSubject<number> = new BehaviorSubject(3);
@@ -25,6 +28,9 @@ export class PatientStore {
     get showCardView() {
         return  asObservable(this._showCardView);
     }
+    get patientFormPage() {
+        return  asObservable(this._patientFormPage);
+    }
     //Pagination properties getter and setter
     get startIndex() {
         return  asObservable(this._startIndex);
@@ -38,8 +44,10 @@ export class PatientStore {
     }
     
     changeView(show: boolean){
-        console.log("changeView _showCardView", show);
         this._showCardView.next(show);
+    }
+    setPatientFormPage(page: PatientFormPage){
+        this._patientFormPage.next(page);
     }
     get patients() {
         return asObservable(this._patients);
