@@ -154,8 +154,8 @@ export class TreatmentFormComponent {
     }
 
     public typeaheadOnSelect(e: any): void {
-        console.log(`Selected value: ${e.item}`);
-        this.selected = e.item;
+        console.log(`Selected value: ${e.item.name}`);
+        this.selected = e.item.name;
     }
 
 }
