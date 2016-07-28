@@ -1,5 +1,6 @@
 <html>
     <head>
+        
         <base href="/">
         <title>Smiletime Dashboard</title>
 
@@ -12,14 +13,12 @@
         -->
         <script>document.write('<script src="http://' + ('localhost').split(':')[0] + ':35729/livereload.js"></' + 'script>')</script>
         <link href='//fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css'>
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" >
+<!--        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" >-->
         <link href="styles/styles.css" rel="stylesheet" >
-        <link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="styles/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="styles/font-awesome/css/font-awesome.min.css">
         <!--Import Google Icon Font-->
         <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
-        <!--    Import materialize.css
-            <link type="text/css" rel="stylesheet" href="styles/materialize/css/materialize.min.css"  media="screen,projection"/>-->
         <link rel="stylesheet" type="text/css" href="styles/rdash.css">
         <link rel="stylesheet" type="text/css" href="styles/app.css">
         <link rel="stylesheet" href="styles/ng2-material/ng2-material.css">
@@ -27,11 +26,54 @@
         <link rel="stylesheet" type="text/css" href="styles/primeui/themes/omega/theme.css" />
         <link rel="stylesheet" type="text/css" href="styles/primeui/primeui-ng-all.min.css" />
         <link rel="stylesheet" type="text/css" href="libs/fullcalendar/dist/fullcalendar.min.css" />
+          <style type="text/css">
+              .al-footer {
+    height: 34px;
+    padding: 0 18px 0 200px;
+    width: 100%;
+    position: absolute;
+    display: block;
+    bottom: 0;
+    font-size: 13px;
+    color: #fff;
+    transition: padding-left 0.5s ease;
+}
+              #wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
+}
+                body > .container {
+                padding: 60px 15px 0;
+              }
+              .container .text-muted {
+                margin: 20px 0;
+              }
+
+              .footer > .container {
+                padding-right: 15px;
+                padding-left: 15px;
+              }
+
+                .footer {
+                    position: fixed ;
+                    bottom: 0px;
+                    width: 100%;
+                    height: 60px;
+                    background-color: #f5f5f5;
+                }
+                </style>
     </head>
     <body>
-        <app-container></app-container>
+        <app-container id="wrap"></app-container>
         <div id="pre-bootstrap-container">
             <style type="text/css">
+  
+                
                 #pre-bootstrap {
                     background-color: #262626 ;
                     bottom: 0px ;
@@ -80,8 +122,27 @@
                 </div>
             </div>  
         </div>
-        <footer>
+<!--          <footer>
             <div class="navbar navbar-fixed-bottom">
+                <div class="navbar-inner footer">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                Created by <a href="http://twitter.com/DanWahlin" target="_blank">Twinsoft</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>-->
+        <footer class="footer">
+            <div class="container">
+              <p class="text-muted"> Created by <a href="http://twitter.com/DanWahlin" target="_blank">Twinsoft</a></p>
+            </div>     
+         </footer>
+                       
+<!--        <footer class="voffset5">-->
+<!--            <div class="navbar navbar-fixed-bottom">
                 <div class="navbar-inner footer">
                     <div class="container">
                         <footer>
@@ -93,8 +154,8 @@
                         </footer>
                     </div>
                 </div>
-            </div>
-        </footer>
+            </div>-->
+        <!--</footer>-->
         <!-- 1. Load libraries -->
         <!-- Polyfill(s) for older browsers -->
         <script src="libs/es6-shim/es6-shim.min.js"></script>
@@ -133,6 +194,7 @@
                     'reflect-metadata': 'n:reflect-metadata',
                     'angular2-jwt': 'n:angular2-jwt',
                     'ng2-material': 'n:ng2-material',
+                    'mydatepicker': 'n:mydatepicker',
                     'moment': 'n:moment/moment.js',
                     'immutable': 'n:immutable/dist/immutable.js',
                     '@angular2-material': 'n:@angular2-material',

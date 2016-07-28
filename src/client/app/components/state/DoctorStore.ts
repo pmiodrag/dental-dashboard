@@ -7,10 +7,13 @@ import {List} from 'immutable';
 import {asObservable} from "./asObservable";
 import {BehaviorSubject} from "rxjs/Rx";
 
+export enum DoctorFormPage { Details, Photo, Contact, Education, Summary}
+
 @Injectable()
 export class DoctorStore {
 
     private _doctors: BehaviorSubject<List<Doctor>> = new BehaviorSubject(List([]));
+    private _doctorFormPage: BehaviorSubject<any> = new BehaviorSubject(DoctorFormPage.Details);
     private _showCardView: BehaviorSubject<boolean> = new BehaviorSubject(true);
     // this method should be supported in RXJS 2
     //    public doctors: Observable<List<Doctor>> =  this._doctors.asObservable();
@@ -21,6 +24,14 @@ export class DoctorStore {
     
     get showCardView() {
         return  asObservable(this._showCardView);
+    }
+    
+    get doctorFormPage() {
+        return  asObservable(this._doctorFormPage);
+    }
+    
+    setDoctorFormPage(page: DoctorFormPage){
+        this._doctorFormPage.next(page);
     }
     
     changeView(show: boolean){

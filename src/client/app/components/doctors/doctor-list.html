@@ -2,11 +2,19 @@
     
     <div class="row">
         <div class="row card-container" *ngIf="doctorStore.showCardView | async">
-            <div class="col-sm-6 col-md-4 col-lg-4" *ngFor="let doctor of doctorStore.doctors | async">
+            <div class="col-sm-6 col-md-6 col-lg-6" *ngFor="let doctor of doctorStore.doctors | async">
                  <div  layout="column">
                     <md-card>
                         <md-card-header class="">
-                            <img md-card-avatar src="assets/images/{{doctor.gender | lowercase}}.png" class="card-image" />
+                            <md-card-avatar *ngIf="doctor.photo">
+                                <img  class="avatar-circle" src="uploads/{{doctor.photo}}"  />
+                            </md-card-avatar>
+                            <button *ngIf="!doctor.photo && doctor.gender == 'M'" md-fab class="md-primary" aria-label="Use Android">
+                                <md-icon svgIcon="{{doctor.gender}}" color=""></md-icon>
+                            </button>
+                            <button *ngIf="!doctor.photo && doctor.gender == 'F'" md-fab class="md-warn" aria-label="Use Android">
+                                <md-icon svgIcon="{{doctor.gender}}" color=""></md-icon>
+                            </button>
                             <md-card-title>{{ doctor.firstname | capitalize }} {{ doctor.lastname | capitalize }}</md-card-title>
                             <md-card-subtitle>{{ doctor.place | capitalize }}</md-card-subtitle>
                             <md-card-actions layout="row" layout-align="start center">

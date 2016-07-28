@@ -1,4 +1,4 @@
-html {
+/*html {
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -10,7 +10,7 @@ body {
 main {
     position: relative;
     padding-top: 60px;
-}
+}*/
 
 .white {
     color: white;
@@ -20,7 +20,7 @@ main {
     color: white;
 }
 
-th {
+/*th {
   cursor: pointer;
 }
 
@@ -62,7 +62,7 @@ th {
     margin-left:5px;
 }
 
-.card-container {
+*/.card-container {
     width:85%;
 }
 
@@ -108,124 +108,24 @@ th {
 .card-image {
     height:50px;width:50px;margin-top:10px;
 }
-
-.grid-container  div {
-    padding-left: 0px;
+.avatar-circle {
+  width: 55.99px;
+  height: 55.99px;
+  background-color: buttonhighlight;
+  text-align: center;
+  border-radius: 50%;
+  border-color: greenyellow;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
 }
-
-.grid-container td {
-    vertical-align: middle;
-}
-
-.navbar-brand {
-    float:none;
-}
-
-a.navbar-brand {
-    color: #fff;
-}
-
-.navbar-inner {
-    padding-left: 0px;
-    -webkit-border-radius: 0px;
-    border-radius: 0px;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    background-color: #027FF4;
-    background-image: none;
-}
-
-.navbar-inner.toolbar {
-    background-color: #fafafa;
-}
-
-footer {
-    margin-top: 10px;
-}
-
-.navbar-inner.footer {
-    background-color: #fafafa;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    height:50px;
-}
-
-.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
-    background-color: #efefef;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    color: #808080;
-}
-
-.navbar .nav li.toolbaritem a:hover, .navbar .nav li a:hover {
-    color: #E03930;
-}
-
-.navbar .nav > li  {
-    cursor:pointer;
-}
-
-.navbar .nav > li > a {
-    color: white;
-    font-weight:bold;
-    -webkit-text-shadow: none;
-    text-shadow: none;
-    height:30px;
-    padding-top: 6px;
-    padding-bottom: 0px;
-}
-
-.navbar .nav > li.toolbaritem > a {
-    color: black;
-    font-weight:bold;
-    -webkit-text-shadow: none;
-    text-shadow: none;
-}
-
-
-.navbar-fixed-top .navbar-inner,
-.navbar-static-top .navbar-inner {
-  -webkit-box-shadow: 0 1px 00px rgba(0, 0, 0, 0);
-     -moz-box-shadow: 0 1px 00px rgba(0, 0, 0, 0);
-          box-shadow: 0 1px 00px rgba(0, 0, 0, 0);
-}
-
-.nav.navBarPadding {
-    margin-left:25px;
-    margin-top: 10px;
-}
-
-.navbarText {
-    font-weight:bold;
-}
-
-.navbar .brand {
-    margin-top: 2px;
-    color: #fff;
-    -webkit-text-shadow: none;
-    text-shadow: none;
-}
-
-.navbar-toggle {
-  border: 1px solid white;
-}
-
-.navbar-toggle .icon-bar {
-  background-color: white;
-}
-
-footer {
-    margin-top: 15px;
-}
-
-.navbar-inner.footer {
-    background-color: #fafafa;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    height:50px;
+.initials {
+  position: relative;
+  top: 25px; /* 25% of parent */
+  font-size: 50px; /* 50% of parent */
+  line-height: 50px; /* 50% of parent */
+  color: #fff;
+  font-family: "Courier New", monospace;
+  font-weight: bold;
 }
 
 filter-textbox {

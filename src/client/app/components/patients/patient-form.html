@@ -2,7 +2,6 @@
     #file-input { display: none; }
     .md-radio-outer { display: none !important; }
     .md-radio-inner { display: none !important; }
-
 </style>
 <div layout="column" class="md-inline-form">
     <md-toolbar class="md-primary">
@@ -19,10 +18,16 @@
         <a  md-button class="md-icon-button white" (click)="setPatientFormPage(patientFormPage.Contact)">
             <i class="material-icons">contact_mail</i>             
         </a>
+        <a  md-button class="md-icon-button white" (click)="setPatientFormPage(patientFormPage.HealthInfo)">
+            <i class="material-icons">description</i>           
+        </a>
+        <a  md-button class="md-icon-button white" (click)="setPatientFormPage(patientFormPage.Summary)">
+           <i class="material-icons">note</i>                  
+        </a>
     </md-toolbar>
     <md-content layout-padding> 
         <form [ngFormModel]="patientForm">
-                <div flex="100" flex-xs="100" layout="column" *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.Photo">
+                <div flex="50" flex-xs="50" layout="column" *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.Photo">
                     <md-card>
                         <md-card-title class="card-media md-media-xl">
                           <md-card-title-text>
@@ -88,7 +93,7 @@
                            </md-card-actions>
                         </md-card>
                     </div> 
-                    <div flex="70" flex-xs="70" layout="column" *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.Details">
+<!--                    <div flex="70" flex-xs="70" layout="column" *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.Details">
                         <md-card>
                             <md-card-title class="card-media md-media-xl">
                               <md-card-title-text>
@@ -96,34 +101,41 @@
                               </md-card-title-text>
                             </md-card-title>
                            <md-card-actions  class="voffset5" layout="row" layout-align="end center">
+                               <pre class="card card-block card-header">Selected date is: <em *ngIf="dt">{{ getDate() | date:'fullDate'}}</em></pre>
+                    <h4>Inline</h4>
+                   <my-date-picker [options]="myDatePickerOptions"
+               (dateChanged)="onDateChanged($event)"
+               [selDate]="selectedDate"></my-date-picker>
                                 <datepicker [(ngModel)]="patient.birthdate" md-placeholder="Enter date"></datepicker>
                                 <pre>Selected date is: <span *ngIf="patient.birthdate">{{patient.birthdate}}</span></pre>
                            </md-card-actions>
                         </md-card>
-                    </div>                                   
+                    </div>                                   -->
             </div>   
-            <div layout-gt-sm="row" *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.Details">
-                <div layout-gt-sm="column" class="col-md-4 md-block">
-                    <md-input placeholder="First name" [(ngModel)]="patient.firstname" [value]="patient.firstname" ngControl="firstname" id="firstname"></md-input>                   
-                    <control-messages control="firstname"></control-messages>
-                </div>
-                <div layout-gt-sm="column" class="col-md-4 md-block">
-                    <md-input placeholder="Midlename" align="end"  [(ngModel)]="patient.middlename" [value]="patient.middlename" ></md-input>
-                </div> 
-                <div layout-gt-sm="column" class="col-md-4 md-block">
-                    <md-input  placeholder="Last name" [(ngModel)]="patient.lastname" [value]="patient.lastname" ngControl="lastname" id="lastname">  </md-input>
-                    <control-messages control="lastname"></control-messages>
+            <div layout-gt-sm="column" *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.Details">
+                <div layout="row">
+                    <div layout-gt-sm="column" class="col-md-4 md-block">
+                        <md-input placeholder="First name" [(ngModel)]="patient.firstname" [value]="patient.firstname" ngControl="firstname" id="firstname"></md-input>                   
+                        <control-messages control="firstname"></control-messages>
+                    </div>
+                    <div layout-gt-sm="column" class="col-md-4 md-block">
+                        <md-input placeholder="Midlename" align="end"  [(ngModel)]="patient.middlename" [value]="patient.middlename" ></md-input>
+                    </div> 
+                    <div layout-gt-sm="column" class="col-md-4 md-block">
+                        <md-input  placeholder="Last name" [(ngModel)]="patient.lastname" [value]="patient.lastname" ngControl="lastname" id="lastname">  </md-input>
+                        <control-messages control="lastname"></control-messages>
+                    </div>
+                </div>           
+                <div layout-gt-sm="row">               
+                    <div layout-gt-sm="column" class="col-md-6 md-block">
+                        <md-input placeholder="Place"  [(ngModel)]="patient.place" [value]="patient.place"></md-input>
+                    </div>
+                    <div layout-gt-sm="column" class="col-md-6 md-block">
+                        <md-input placeholder="Address"  [(ngModel)]="patient.address" [value]="patient.address"></md-input>
+                    </div>
                 </div>
             </div>
-            <div layout-gt-sm="row"*ngIf="(patientStore.patientFormPage | async ) == patientFormPage.Details">               
-                <div layout-gt-sm="column" class="col-md-4 md-block">
-                    <md-input placeholder="Place"  [(ngModel)]="patient.place" [value]="patient.place"></md-input>
-                </div>
-                <div layout-gt-sm="column" class="col-md-4 md-block">
-                    <md-input placeholder="Address"  [(ngModel)]="patient.address" [value]="patient.address"></md-input>
-                </div>
-            </div>
-            <div layout-gt-sm="row" *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.Details">                
+            <div layout-gt-sm="column" *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.HealthInfo">                
                 <div layout-gt-sm="column" class="col-md-6 md-block">
                     <md-input placeholder="Allergies" [(ngModel)]="patient.allergies" [value]="patient.allergies" ></md-input>
                 </div>
@@ -131,23 +143,49 @@
                     <textarea md-input placeholder="Notes"  [(ngModel)]="patient.notes" columns="1" md-maxlength="150" rows="5"></textarea>                    
                 </div>
             </div>
-            <div layout-gt-sm="row" *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.Contact">
-                <div layout-gt-sm="column" class="col-md-4 md-block">
+            <div layout-gt-sm="column" *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.Contact">
+                <div layout-gt-sm="column" class="col-md-3 md-block">
                     <md-input placeholder="Email"  [(ngModel)]="patient.email" [value]="patient.email" type="email"  ngControl="email" id="email"></md-input>
                     <control-messages control="email"></control-messages>
                 </div>
-                <div layout-gt-sm="column" class="col-md-4 md-block">
-                    <md-input placeholder="Phone number" [(ngModel)]="patient.phone" [value]="patient.phone"></md-input>
-                </div>
-                <div layout-gt-sm="column" class="col-md-4 md-block">
-                    <md-input placeholder="Mobile Phone number" [(ngModel)]="patient.mobilephone" [value]="patient.mobilephone" ></md-input>
+                <div layout="row">
+                    <div layout-gt-sm="column" class="col-md-3 md-block">
+                        <md-input placeholder="Phone number" [(ngModel)]="patient.phone" [value]="patient.phone"></md-input>
+                    </div>
+                    <div layout-gt-sm="column" class="col-md-3 md-block">
+                        <md-input placeholder="Mobile Phone number" [(ngModel)]="patient.mobilephone" [value]="patient.mobilephone" ></md-input>
+                    </div>
                 </div>
             </div>
             <!-- Submit button -->
-            <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-8">
+            <div class="form-group" *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.Summary">
+                <md-card>
+                    <md-card-header>                            
+                        <md-card-avatar *ngIf="patient.photo">
+                               <img  src="uploads/{{patient.photo}}" class="card-image" />
+                        </md-card-avatar>                        
+                        <md-card-title>{{ patient.firstname | capitalize }} {{ patient.lastname | capitalize }}</md-card-title>
+                        <md-card-subtitle>{{ patient.place | capitalize }}</md-card-subtitle>
+                        <div class="col-sm-offset-3 col-sm-8">
                     <button md-raised-button class="md-primary" type="submit" (click)="onSubmit(patient)" [disabled]="!patientForm.valid">{{formTitle | capitalize}}</button>
                 </div>
+                    </md-card-header>
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">Patient details</span>
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-content>
+                        <md-list>
+                            <md-list-item class="md-1-line" *ngFor="let item of patient | values">                                    
+                                <div class="md-list-item-text">
+                                    <h6>{{ item }}</h6>                                      
+                                </div>
+                                <md-divider inset></md-divider>
+                            </md-list-item>
+                        </md-list>
+                    </md-card-content>
+                </md-card>                
             </div>
         </form>
     </md-content>

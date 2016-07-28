@@ -15,6 +15,7 @@ import { DoctorFormComponent } from './doctor-form'
 import {TimerWrapper} from "@angular/common/src/facade/async";
 import { DoctorStore } from '../state/DoctorStore';
 import {MdToolbar} from '@angular2-material/toolbar';
+import {MdIcon, MdIconRegistry} from '@angular2-material/icon/icon';
 import {List} from 'immutable';
 import {asObservable} from "../state/asObservable";
 import * as Rx from "rxjs/Rx";
@@ -25,7 +26,8 @@ import {DOCTOR_OWNER} from '../../shared/constants/app.constants';
     // providers: [DoctorService],
     templateUrl: 'app/components/doctors/doctor-list.html',
     host: { '[hidden]': 'hidden' },
-    directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES, MdToolbar, FilterTextboxComponent, SortByDirective],
+    providers: [MdIconRegistry],
+    directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES, MdToolbar, FilterTextboxComponent, SortByDirective, MdIcon],
     pipes: [CapitalizePipe, TrimPipe, ValuesPipe]
 })
 
@@ -54,7 +56,10 @@ export class DoctorList {
     selection: string;
     count: number;
     private _doctors: Rx.BehaviorSubject<List<Doctor>> = new Rx.BehaviorSubject(List([]));
-    constructor(private doctorService: DoctorBackendService, private notificationService: NotificationService, private doctorStore: DoctorStore) { }
+    constructor(private doctorService: DoctorBackendService, mdIconRegistry: MdIconRegistry, private notificationService: NotificationService, private doctorStore: DoctorStore) {
+        mdIconRegistry.addSvgIcon('F', 'assets/images/svg/human-female.svg');
+        mdIconRegistry.addSvgIcon('M', 'assets/images/svg/human-male.svg');
+    }
 
     ngOnInit() {
         this.title = 'Doctors';

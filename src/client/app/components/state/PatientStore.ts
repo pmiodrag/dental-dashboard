@@ -8,7 +8,8 @@ import {asObservable} from "./asObservable";
 import {BehaviorSubject} from "rxjs/Rx";
 
 
-export enum PatientFormPage { Details, Photo, Contact}
+export enum PatientFormPage { Details, Photo, Contact, HealthInfo, Summary}
+
 @Injectable()
 export class PatientStore {
 
@@ -31,6 +32,9 @@ export class PatientStore {
     get patientFormPage() {
         return  asObservable(this._patientFormPage);
     }
+    setPatientFormPage(page: PatientFormPage){
+        this._patientFormPage.next(page);
+    }
     //Pagination properties getter and setter
     get startIndex() {
         return  asObservable(this._startIndex);
@@ -46,9 +50,7 @@ export class PatientStore {
     changeView(show: boolean){
         this._showCardView.next(show);
     }
-    setPatientFormPage(page: PatientFormPage){
-        this._patientFormPage.next(page);
-    }
+   
     get patients() {
         return asObservable(this._patients);
     }

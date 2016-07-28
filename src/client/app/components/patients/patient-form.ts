@@ -6,7 +6,9 @@ import { NotificationService  } from '../../services/notificationService';
 import {ControlMessages} from '../handlers/control-messages';
 import {ValidationService} from '../../shared/services/validation.service';
 import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
+//import {MyDatePicker} from 'mydatepicker/src/index';
 import {FILE_UPLOAD_DIRECTIVES, FileUploader} from 'ng2-file-upload/ng2-file-upload';
+import { ValuesPipe } from '../../shared/pipes/values.pipe';
 import { CapitalizePipe } from '../../shared/pipes/capitalize.pipe';
 import { PatientFormPage, PatientStore } from '../state/PatientStore';
 import { UiStateStore } from '../state/UiStateStore';
@@ -31,7 +33,7 @@ import {MdIcon, MdIconRegistry} from '@angular2-material/icon/icon';
     host: { '[hidden]': 'hidden' },
     directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES, DATEPICKER_DIRECTIVES, FORM_DIRECTIVES, MD_INPUT_DIRECTIVES,
         MdRadioGroup, MdRadioButton, MdIcon, MdToolbar, ControlMessages, MATERIAL_DIRECTIVES, FILE_UPLOAD_DIRECTIVES, MdProgressBar],
-    pipes: [CapitalizePipe]
+    pipes: [CapitalizePipe, ValuesPipe]
 })
 
 
@@ -39,7 +41,6 @@ export class PatientFormComponent {
     iconClass: string = ICON_CLASS;
     public patientFormPage = PatientFormPage;     
     public uploader: FileUploader = new FileUploader({ url: '/patient/upload' });
-
     patientForm: ControlGroup;
     @Input() patient: Patient;
     @Input() hidden: boolean = true;
@@ -63,7 +64,7 @@ export class PatientFormComponent {
         }];
 
     constructor(fb: FormBuilder, mdIconRegistry: MdIconRegistry, private patientStore: PatientStore, private uiStateStore: UiStateStore, private patientService: PatientBackendService, private notificationService: NotificationService) {
-        //   console.log("uploader", this.uploader);
+        
         mdIconRegistry.addSvgIcon('F', 'assets/images/svg/human-female.svg');
         mdIconRegistry.addSvgIcon('M', 'assets/images/svg/human-male.svg');
         mdIconRegistry.addSvgIcon('identification-card', 'assets/images/svg/account-card-details.svg');
