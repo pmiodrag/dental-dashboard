@@ -7,8 +7,10 @@
                     <md-card>
                         <md-card-header class="">
                             <md-card-avatar *ngIf="doctor.photo">
-                                <img  class="avatar-circle" src="uploads/{{doctor.photo}}"  />
-                            </md-card-avatar>
+                                <a (click)="toggleSource(doctor.id)"  class="profile-spot no-border">
+                                    <img  src="uploads/{{doctor.photo}}" class="img" />-->
+                                </a>
+                            </md-card-avatar>                            
                             <button *ngIf="!doctor.photo && doctor.gender == 'M'" md-fab class="md-primary" aria-label="Use Android">
                                 <md-icon svgIcon="{{doctor.gender}}" color=""></md-icon>
                             </button>
@@ -29,7 +31,7 @@
                                 <a  md-button class="md-icon-button" [ngClass]="iconClass" (click)="deleteDoctor(doctor)"  aria-label="Remove doctor">
                                      <i class="material-icons">delete</i>
                                 </a>
-                                <a    (click)="toggleSource(doctor.id)" class="md-icon-button active" md-button="" [ngClass]="iconClass">
+                                <a (click)="toggleSource(doctor.id)" class="md-icon-button active" md-button="" [ngClass]="iconClass">
                                     <i *ngIf="!showSource" class="material-icons">expand_more</i>
                                     <i *ngIf="showSource" class="material-icons">expand_less</i>
                                 </a>

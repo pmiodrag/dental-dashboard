@@ -7,8 +7,10 @@
                     <md-card>
                         <md-card-header>
                             <md-card-avatar *ngIf="patient.photo">
-                                    <img  class="avatar-circle" src="uploads/{{patient.photo}}"  />
-<!--                                   <img  src="uploads/{{patient.photo}}" class="card-image" />-->
+                                <a (click)="toggleSource(patient.id)" class="profile-spot no-border">
+                                    <img  src="uploads/{{patient.photo}}" class="img" />-->
+                                </a>
+<!--                                    <img  class="avatar-circle" src="uploads/{{patient.photo}}"  />-->
                             </md-card-avatar>
                             <button *ngIf="!patient.photo && patient.gender == 'M'" md-fab class="md-primary" aria-label="Use Android">
                                 <md-icon svgIcon="{{patient.gender}}" color=""></md-icon>
