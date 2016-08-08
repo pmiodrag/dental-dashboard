@@ -43,6 +43,7 @@ var jsNPMDependencies = [
     'fullcalendar/**',
     'ng2-material/index.js',
     'ng2-material/index.js.map',
+    'ng2-typeahead/**',
     'moment/moment.js',
     'immutable/dist/immutable.js',
     'mydatepicker/**',

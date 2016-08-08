@@ -26,137 +26,7 @@
         <link rel="stylesheet" type="text/css" href="styles/primeui/themes/omega/theme.css" />
         <link rel="stylesheet" type="text/css" href="styles/primeui/primeui-ng-all.min.css" />
         <link rel="stylesheet" type="text/css" href="libs/fullcalendar/dist/fullcalendar.min.css" />
-          <style type="text/css">
-              .al-footer {
-    height: 34px;
-    padding: 0 18px 0 200px;
-    width: 100%;
-    position: absolute;
-    display: block;
-    bottom: 0;
-    font-size: 13px;
-    color: #fff;
-    transition: padding-left 0.5s ease;
-}
-              #wrap {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  /* Negative indent footer by its height */
-  margin: 0 auto -60px;
-  /* Pad bottom by footer height */
-  padding: 0 0 60px;
-}
-                body > .container {
-                padding: 60px 15px 0;
-              }
-              .container .text-muted {
-                margin: 20px 0;
-              }
-
-              .footer > .container {
-                padding-right: 15px;
-                padding-left: 15px;
-              }
-
-                .footer {
-                    position: fixed ;
-                    bottom: 0px;
-                    width: 100%;
-                    height: 60px;
-                    background-color: #f5f5f5;
-                }
-                </style>
-    </head>
-    <body>
-        <app-container id="wrap"></app-container>
-        <div id="pre-bootstrap-container">
-            <style type="text/css">
-  
-                
-                #pre-bootstrap {
-                    background-color: #262626 ;
-                    bottom: 0px ;
-                    left: 0px ;
-                    opacity: 1.0 ;
-                    position: fixed ;
-                    right: 0px ;
-                    top: 0px ;
-                    transition: all linear 300ms ;
-                        -webkit-transition: all linear 300ms ;
-                    z-index: 999999 ;
-                }
-                #pre-bootstrap.loaded {
-                    opacity: 0.0 ;
-                }
-                #pre-bootstrap div.messaging {
-                    color: #FFFFFF ;
-                    font-family: monospace ;
-                    left: 0px ;
-                    margin-top: -37px ;
-                    position: absolute ;
-                    right: 0px ;
-                    text-align: center ;
-                    top: 50% ;
-                }
-                #pre-bootstrap h1 {
-                    font-size: 26px ;
-                    line-height: 35px ;
-                    margin: 0px 0px 20px 0px ;
-                }
-                #pre-bootstrap p {
-                    font-size: 18px ;
-                    line-height: 14px ;
-                    margin: 0px 0px 0px 0px ;
-                }
-            </style>
-            <div id="pre-bootstrap">
-                <div class="messaging">
-                    <h1>
-                        Smiletime Dashboard application is Loading.. 
-                    </h1>
-                    <p>
-                        Please stand by for your ticket to awesome-town!
-                    </p>
-
-                </div>
-            </div>  
-        </div>
-<!--          <footer>
-            <div class="navbar navbar-fixed-bottom">
-                <div class="navbar-inner footer">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                Created by <a href="http://twitter.com/DanWahlin" target="_blank">Twinsoft</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>-->
-        <footer class="footer">
-            <div class="container">
-              <p class="text-muted"> Created by <a href="http://twitter.com/DanWahlin" target="_blank">Twinsoft</a></p>
-            </div>     
-         </footer>
-                       
-<!--        <footer class="voffset5">-->
-<!--            <div class="navbar navbar-fixed-bottom">
-                <div class="navbar-inner footer">
-                    <div class="container">
-                        <footer>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    Created by <a href="http://twitter.com/DanWahlin" target="_blank">Twinsoft</a>
-                                </div>
-                            </div>
-                        </footer>
-                    </div>
-                </div>
-            </div>-->
-        <!--</footer>-->
-        <!-- 1. Load libraries -->
+         <!-- 1. Load libraries -->
         <!-- Polyfill(s) for older browsers -->
         <script src="libs/es6-shim/es6-shim.min.js"></script>
 
@@ -176,8 +46,181 @@
         <script src='http://fullcalendar.io/js/fullcalendar-2.1.1/lib/moment.min.js'></script>
         <script src="http://fullcalendar.io/js/fullcalendar-2.1.1/lib/jquery-ui.custom.min.js"></script>
         <script src='libs/fullcalendar/dist/fullcalendar.min.js'></script>
-        <!--     <script src="script.js"></script>-->
+<!--        <script src="./system.config.js"></script>-->
         <script>
+            (function (global) {
+                // wildcard paths
+                var paths = {
+                    'n:*': 'libs/*'
+                };
+
+                // map tells the System loader where to look for things
+                var map = {
+                    // 'app': 'dist',
+                    'test': 'test',
+                    'rxjs': 'n:rxjs',
+                    'zone.js': 'n:zone.js',
+                    '@angular': 'n:@angular',
+                    'reflect-metadata': 'n:reflect-metadata',
+                    'angular2-jwt': 'n:angular2-jwt',
+                    'ng2-material': 'n:ng2-material',
+                    'ng2-typeahead': 'n:ng2-typeahead',
+                    'mydatepicker': 'n:mydatepicker',
+                    'moment': 'n:moment/moment.js',
+                    'immutable': 'n:immutable/dist/immutable.js',
+                    '@angular2-material': 'n:@angular2-material',
+                    'primeng': 'n:primeng',
+                    'fullcalendar': 'n:fullcalendar',                    
+                    'symbol-observable': 'n:symbol-observable'
+                            // 'lodash': 'n:lodash'
+                };
+
+                // packages tells the System loader how to load when no filename and/or no extension
+                var packages = {
+                    'app': {
+                        format: 'register',
+                        defaultExtension: 'js'
+                    },
+                    'test': {
+                        defaultExtension: 'js'
+                    },
+                    'rxjs': {
+                        defaultExtension: 'js'
+                    },
+                    'angular2-jwt': {
+                        defaultExtension: 'js'
+                    },
+                    'ng2-material': {
+                        defaultExtension: 'js'
+                    },
+                    'ng2-typeahead': {
+                        defaultExtension: 'js'
+                    },
+                    'primeng': {
+                        defaultExtension: 'js'
+                    },
+                    'fullcalendar': {
+                        defaultExtension: 'js'
+                    },
+                    'symbol-observable': {
+                        defaultExtension: 'js',
+                        main: 'index.js'}
+                };
+
+                var packageNames = [
+                    '@angular/common',
+                    '@angular/compiler',
+                    '@angular/core',
+                    '@angular/http',
+                    '@angular/forms',
+                    '@angular/platform-browser',
+                    '@angular/platform-browser-dynamic',
+                    '@angular/router',
+                    '@angular/router-deprecated',
+                ];
+                // Angular Material 2 Packages to load.
+                var _materialPackages = [
+                    'core', 'toolbar', 'button', 'card', 'checkbox', 'icon', 'input', 'list', 'progress-bar',
+                    'progress-circle', 'radio', 'sidenav'
+                ];
+
+                _materialPackages.forEach(function (item) {
+                    // All Material 2 components are prefixed with  @angular2-material and use
+                    // the components name as entry point.
+                    packages['@angular2-material/' + item] = {main: item};
+                });
+                // add package entries for angular packages in the form '@angular/common': { main: 'index.js', defaultExtension: 'js' }
+                packageNames.forEach(function (pkgName) {
+                    packages[pkgName] = {main: 'index.js', defaultExtension: 'js'};
+                });
+
+                var config = {
+                    map: map,
+                    packages: packages,
+                    paths: paths
+                };
+
+                // filterSystemConfig - index.html's chance to modify config before we register it.
+                if (global.filterSystemConfig) {
+                    global.filterSystemConfig(config);
+                }
+
+                System.config(config);
+                // Load "./app/main.ts" (gets full path from package configuration above).
+                // --
+                // NOTE: We are attaching the resultant promise to the global scope so that other
+                // scripts may listen for the successful loading of the application.
+                global.bootstrapping = System.import( "app/main.js" )
+                    .then(
+                        function handleResolve() {
+//                            var preBootstrapContainer = document.getElementById( "pre-bootstrap-container" );
+//                            var preBootstrap = document.getElementById( "pre-bootstrap" );
+//                            // Add the class-name to initiate the transitions.
+//                            preBootstrap.className = "loaded";
+//                            // Remove the bootstrap container after the transition has
+//                            // completed (based on the known transition time).
+//                            setTimeout(
+//                                function removeLoadingScreen() {
+//                                    preBootstrapContainer
+//                                        .parentNode
+//                                            .removeChild( preBootstrapContainer )
+//                                    ;
+//                                },
+//                                300
+//                            );
+                            console.info( "System.js successfully bootstrapped app." );
+                        },
+                        function handleReject( error ) {
+                            console.warn( "System.js could not bootstrap the app." );
+                            console.error( error );
+                            return( Promise.reject( error ) );
+                        }
+                    );
+            })(window );
+        </script>
+          <style type="text/css">
+              .al-footer {
+                    height: 34px;
+                    padding: 0 18px 0 200px;
+                    width: 100%;
+                    position: absolute;
+                    display: block;
+                    bottom: 0;
+                    font-size: 13px;
+                    color: #fff;
+                    transition: padding-left 0.5s ease;
+                }
+                #wrap {
+                  min-height: 100%;
+                  height: auto !important;
+                  height: 100%;
+                  /* Negative indent footer by its height */
+                  margin: 0 auto -60px;
+                  /* Pad bottom by footer height */
+                  padding: 0 0 60px;
+                }
+                body > .container {
+                    padding: 60px 15px 0;
+                }
+                .container .text-muted {
+                  margin: 20px 0;
+                }
+                .footer > .container {
+                    padding-right: 15px;
+                    padding-left: 15px;
+                }
+                .footer {
+                    position: fixed ;
+                    bottom: 0px;
+                    width: 100%;
+                    height: 60px;
+                    background-color: #f5f5f5;
+                }
+                </style>
+    </head>
+    <body>
+        <app-container id="wrap" class="blue-gradient-background"></app-container>
+<!--          <script>
             (function (global) {
                 // wildcard paths
                 var paths = {
@@ -279,21 +322,21 @@
                 global.bootstrapping = System.import( "app/main.js" )
                     .then(
                         function handleResolve() {
-                            var preBootstrapContainer = document.getElementById( "pre-bootstrap-container" );
-                            var preBootstrap = document.getElementById( "pre-bootstrap" );
-                            // Add the class-name to initiate the transitions.
-                            preBootstrap.className = "loaded";
-                            // Remove the bootstrap container after the transition has
-                            // completed (based on the known transition time).
-                            setTimeout(
-                                function removeLoadingScreen() {
-                                    preBootstrapContainer
-                                        .parentNode
-                                            .removeChild( preBootstrapContainer )
-                                    ;
-                                },
-                                300
-                            );
+//                            var preBootstrapContainer = document.getElementById( "pre-bootstrap-container" );
+//                            var preBootstrap = document.getElementById( "pre-bootstrap" );
+//                            // Add the class-name to initiate the transitions.
+//                            preBootstrap.className = "loaded";
+//                            // Remove the bootstrap container after the transition has
+//                            // completed (based on the known transition time).
+//                            setTimeout(
+//                                function removeLoadingScreen() {
+//                                    preBootstrapContainer
+//                                        .parentNode
+//                                            .removeChild( preBootstrapContainer )
+//                                    ;
+//                                },
+//                                300
+//                            );
                             console.info( "System.js successfully bootstrapped app." );
                         },
                         function handleReject( error ) {
@@ -302,7 +345,108 @@
                             return( Promise.reject( error ) );
                         }
                     );
-            })(this );
+            })(window );
+        </script>-->
+        <div id="pre-bootstrap-container">
+             <script type="text/javascript">
+            // CAUTION: "bootstrapping" promise exposed by our System.js logic.
+            window.bootstrapping.then(
+                function handleResolve() {
+                    var preBootstrapContainer = document.getElementById( "pre-bootstrap-container" );
+                    var preBootstrap = document.getElementById( "pre-bootstrap" );
+                    // Add the class-name to initiate the transitions.
+                    preBootstrap.className = "loaded";
+                    // Remove the bootstrap container after the transition has
+                    // completed (based on the known transition time).
+                    setTimeout(
+                        function removeLoadingScreen() {
+                            preBootstrapContainer
+                                .parentNode
+                                    .removeChild( preBootstrapContainer )
+                            ;
+                        },
+                        300
+                    );
+                }
+            );
         </script>
+            <style type="text/css">
+               
+                #pre-bootstrap {
+                    background: rgb(49,134,240); /* Old browsers */
+                    background: -moz-linear-gradient(top,  rgba(49,134,240,1) 0%, rgba(49,138,240,1) 6%, rgba(49,137,243,1) 7%, rgba(46,137,242,1) 9%, rgba(48,139,244,1) 9%, rgba(46,139,242,1) 15%, rgba(46,149,241,1) 28%, rgba(47,150,242,1) 30%, rgba(49,152,244,1) 30%, rgba(48,152,241,1) 33%, rgba(49,155,243,1) 33%, rgba(51,155,242,1) 38%, rgba(52,158,242,1) 39%, rgba(50,161,240,1) 39%, rgba(55,162,244,1) 40%, rgba(52,161,243,1) 41%, rgba(54,163,245,1) 41%, rgba(53,163,242,1) 42%, rgba(54,164,241,1) 42%, rgba(57,164,242,1) 42%, rgba(58,166,241,1) 45%, rgba(60,168,243,1) 45%, rgba(62,168,242,1) 50%, rgba(62,173,242,1) 52%, rgba(62,173,242,1) 54%, rgba(65,174,241,1) 54%, rgba(67,176,243,1) 55%, rgba(65,177,241,1) 55%, rgba(68,177,242,1) 58%, rgba(70,179,244,1) 58%, rgba(67,179,242,1) 58%, rgba(70,180,243,1) 59%, rgba(70,180,241,1) 60%, rgba(73,181,243,1) 62%, rgba(70,185,240,1) 65%, rgba(72,187,242,1) 66%, rgba(74,192,242,1) 67%, rgba(77,193,242,1) 71%, rgba(83,200,243,1) 75%, rgba(85,203,243,1) 75%, rgba(88,204,241,1) 79%, rgba(90,209,243,1) 80%, rgba(93,211,241,1) 82%, rgba(97,212,243,1) 82%, rgba(99,212,242,1) 84%, rgba(102,213,241,1) 84%, rgba(102,216,242,1) 86%, rgba(105,216,243,1) 86%, rgba(102,216,242,1) 86%, rgba(106,216,241,1) 87%, rgba(106,216,241,1) 87%, rgba(109,219,244,1) 88%, rgba(109,218,241,1) 89%, rgba(112,218,242,1) 89%, rgba(113,219,241,1) 90%, rgba(117,219,242,1) 90%, rgba(115,220,242,1) 91%, rgba(118,223,244,1) 92%, rgba(120,220,243,1) 92%, rgba(119,222,241,1) 92%, rgba(125,225,241,1) 95%, rgba(127,227,243,1) 95%, rgba(128,225,241,1) 95%, rgba(131,226,244,1) 96%, rgba(134,227,244,1) 97%, rgba(132,228,242,1) 97%, rgba(137,229,244,1) 98%, rgba(136,228,241,1) 98%, rgba(144,230,243,1) 100%); /* FF3.6-15 */
+                    background: -webkit-linear-gradient(top,  rgba(49,134,240,1) 0%,rgba(49,138,240,1) 6%,rgba(49,137,243,1) 7%,rgba(46,137,242,1) 9%,rgba(48,139,244,1) 9%,rgba(46,139,242,1) 15%,rgba(46,149,241,1) 28%,rgba(47,150,242,1) 30%,rgba(49,152,244,1) 30%,rgba(48,152,241,1) 33%,rgba(49,155,243,1) 33%,rgba(51,155,242,1) 38%,rgba(52,158,242,1) 39%,rgba(50,161,240,1) 39%,rgba(55,162,244,1) 40%,rgba(52,161,243,1) 41%,rgba(54,163,245,1) 41%,rgba(53,163,242,1) 42%,rgba(54,164,241,1) 42%,rgba(57,164,242,1) 42%,rgba(58,166,241,1) 45%,rgba(60,168,243,1) 45%,rgba(62,168,242,1) 50%,rgba(62,173,242,1) 52%,rgba(62,173,242,1) 54%,rgba(65,174,241,1) 54%,rgba(67,176,243,1) 55%,rgba(65,177,241,1) 55%,rgba(68,177,242,1) 58%,rgba(70,179,244,1) 58%,rgba(67,179,242,1) 58%,rgba(70,180,243,1) 59%,rgba(70,180,241,1) 60%,rgba(73,181,243,1) 62%,rgba(70,185,240,1) 65%,rgba(72,187,242,1) 66%,rgba(74,192,242,1) 67%,rgba(77,193,242,1) 71%,rgba(83,200,243,1) 75%,rgba(85,203,243,1) 75%,rgba(88,204,241,1) 79%,rgba(90,209,243,1) 80%,rgba(93,211,241,1) 82%,rgba(97,212,243,1) 82%,rgba(99,212,242,1) 84%,rgba(102,213,241,1) 84%,rgba(102,216,242,1) 86%,rgba(105,216,243,1) 86%,rgba(102,216,242,1) 86%,rgba(106,216,241,1) 87%,rgba(106,216,241,1) 87%,rgba(109,219,244,1) 88%,rgba(109,218,241,1) 89%,rgba(112,218,242,1) 89%,rgba(113,219,241,1) 90%,rgba(117,219,242,1) 90%,rgba(115,220,242,1) 91%,rgba(118,223,244,1) 92%,rgba(120,220,243,1) 92%,rgba(119,222,241,1) 92%,rgba(125,225,241,1) 95%,rgba(127,227,243,1) 95%,rgba(128,225,241,1) 95%,rgba(131,226,244,1) 96%,rgba(134,227,244,1) 97%,rgba(132,228,242,1) 97%,rgba(137,229,244,1) 98%,rgba(136,228,241,1) 98%,rgba(144,230,243,1) 100%); /* Chrome10-25,Safari5.1-6 */
+                    background: linear-gradient(to bottom,  rgba(49,134,240,1) 0%,rgba(49,138,240,1) 6%,rgba(49,137,243,1) 7%,rgba(46,137,242,1) 9%,rgba(48,139,244,1) 9%,rgba(46,139,242,1) 15%,rgba(46,149,241,1) 28%,rgba(47,150,242,1) 30%,rgba(49,152,244,1) 30%,rgba(48,152,241,1) 33%,rgba(49,155,243,1) 33%,rgba(51,155,242,1) 38%,rgba(52,158,242,1) 39%,rgba(50,161,240,1) 39%,rgba(55,162,244,1) 40%,rgba(52,161,243,1) 41%,rgba(54,163,245,1) 41%,rgba(53,163,242,1) 42%,rgba(54,164,241,1) 42%,rgba(57,164,242,1) 42%,rgba(58,166,241,1) 45%,rgba(60,168,243,1) 45%,rgba(62,168,242,1) 50%,rgba(62,173,242,1) 52%,rgba(62,173,242,1) 54%,rgba(65,174,241,1) 54%,rgba(67,176,243,1) 55%,rgba(65,177,241,1) 55%,rgba(68,177,242,1) 58%,rgba(70,179,244,1) 58%,rgba(67,179,242,1) 58%,rgba(70,180,243,1) 59%,rgba(70,180,241,1) 60%,rgba(73,181,243,1) 62%,rgba(70,185,240,1) 65%,rgba(72,187,242,1) 66%,rgba(74,192,242,1) 67%,rgba(77,193,242,1) 71%,rgba(83,200,243,1) 75%,rgba(85,203,243,1) 75%,rgba(88,204,241,1) 79%,rgba(90,209,243,1) 80%,rgba(93,211,241,1) 82%,rgba(97,212,243,1) 82%,rgba(99,212,242,1) 84%,rgba(102,213,241,1) 84%,rgba(102,216,242,1) 86%,rgba(105,216,243,1) 86%,rgba(102,216,242,1) 86%,rgba(106,216,241,1) 87%,rgba(106,216,241,1) 87%,rgba(109,219,244,1) 88%,rgba(109,218,241,1) 89%,rgba(112,218,242,1) 89%,rgba(113,219,241,1) 90%,rgba(117,219,242,1) 90%,rgba(115,220,242,1) 91%,rgba(118,223,244,1) 92%,rgba(120,220,243,1) 92%,rgba(119,222,241,1) 92%,rgba(125,225,241,1) 95%,rgba(127,227,243,1) 95%,rgba(128,225,241,1) 95%,rgba(131,226,244,1) 96%,rgba(134,227,244,1) 97%,rgba(132,228,242,1) 97%,rgba(137,229,244,1) 98%,rgba(136,228,241,1) 98%,rgba(144,230,243,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3186f0', endColorstr='#90e6f3',GradientType=0 ); /* IE6-9 */
+                    background-position: center;
+                    -webkit-background-size: cover;
+                    -moz-background-size: cover;
+                    background-size: cover;
+                    -o-background-size: cover;
+                    bottom: 0px ;
+                    left: 0px ;
+                    opacity: 1.0 ;
+                    position: fixed ;
+                    right: 0px ;
+                    top: 0px ;
+                    transition: all linear 300ms ;
+                        -webkit-transition: all linear 3000ms ;
+                    z-index: 999999 ;
+                }
+                #pre-bootstrap.loaded {
+                    opacity: 0.0 ;
+                }
+                #pre-bootstrap div.messaging {
+                    color: #FFFFFF ;
+                   // font-family: monospace ;
+                    left: 0px ;
+                    margin-top: 0px ;
+                    position: absolute ;
+                    right: 0px ;
+                    text-align: center ;
+                    top: 20% ;
+                }
+                #pre-bootstrap h1 {
+                    font-size: 26px ;
+                    line-height: 35px ;
+                    margin: 0px 0px 20px 0px ;
+                }
+                #pre-bootstrap p {
+                    font-size: 18px ;
+                    line-height: 14px ;
+                    margin: 0px 0px 0px 0px ;
+                }
+            </style>
+            
+            <div id="pre-bootstrap"  >
+                <div class="messaging">
+                    <h1 class="splash-title">
+                        Smiletime Dashboard
+                    </h1>
+<!--                    <p>
+                        Please stand by for your ticket to awesome-town!
+                    </p>-->
+                    <div class="sk-fading-circle">
+                        <div class="sk-circle1 sk-circle"></div>
+                        <div class="sk-circle2 sk-circle"></div>
+                        <div class="sk-circle3 sk-circle"></div>
+                        <div class="sk-circle4 sk-circle"></div>
+                        <div class="sk-circle5 sk-circle"></div>
+                        <div class="sk-circle6 sk-circle"></div>
+                        <div class="sk-circle7 sk-circle"></div>
+                        <div class="sk-circle8 sk-circle"></div>
+                        <div class="sk-circle9 sk-circle"></div>
+                        <div class="sk-circle10 sk-circle"></div>
+                        <div class="sk-circle11 sk-circle"></div>
+                        <div class="sk-circle12 sk-circle"></div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+        <footer class="footer">
+            <div class="container">
+              <p class="text-muted"> Created by <a href="http://twitter.com/DanWahlin" target="_blank">Twinsoft</a></p>
+            </div>     
+         </footer>       
     </body>
 </html>

@@ -76,6 +76,7 @@
     "mysql": "^2.10.2",
     "ng2-file-upload": "^1.0.3",
     "ng2-material": "^0.5.0",
+    "ng2-typeahead": "^0.5.17",
     "ng2-uploader": "^0.5.1",
     "node-mysql-wrapper": "^2.9.3",
     "retyped-multer-tsd-ambient": "0.0.0-0",

@@ -1,13 +1,13 @@
-<div>
-    <md-toolbar class="md-primary">  
-        <span md-button class="md-icon-button white">
+<div class="col-md-12">
+    <md-toolbar>  
+        <a md-button class="md-icon-button" [ngClass]="iconClass">
             <i class="material-icons">view_carousel</i>
-        </span>
-        <span>Gallery</span>
-        <a  md-button class="md-icon-button white" [routerLink]="['preview']" [class.active]="!listDisplayModeEnabled">
+        </a>
+        <span class="text-primary">Gallery</span>
+        <a md-button  class="md-icon-button" [ngClass]="iconClass" [routerLink]="['preview']">
             <i class="material-icons">view_carousel</i>                   
         </a>
-        <a  md-button class="md-icon-button white"  [routerLink]="['upload']" [class.active]="!listDisplayModeEnabled">
+        <a md-button class="md-icon-button" [ngClass]="iconClass" [routerLink]="['upload']">
             <i class="material-icons">file_upload</i>                   
         </a>
     </md-toolbar>

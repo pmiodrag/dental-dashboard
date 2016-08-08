@@ -2,12 +2,12 @@
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.1/jquery-ui-timepicker-addon.min.js"></script>
-<md-content layout="column" class="scroll-shrink">
-    <md-toolbar class="md-primary">    
-        <span md-button class="md-icon-button white">
+<div class="col-md-12">
+    <md-toolbar>    
+        <a md-button class="md-icon-button" [ngClass]="iconClass" >
             <i class="material-icons">view_agenda</i>
-        </span>
-        <span>Appointments Agenda</span> 
+        </a>
+        <span class="text-primary">Appointments Agenda</span> 
     </md-toolbar>
     
     <div  layout="column" layout-padding>
@@ -40,4 +40,4 @@
             </footer>
         </p-dialog>
     </div>
-</md-content>
+</div>

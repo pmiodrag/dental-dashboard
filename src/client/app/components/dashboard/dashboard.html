@@ -1,39 +1,39 @@
 
 <div layout="row" layout-padding layout-wrap  ng-cloak>
     <md-whiteframe *ngIf="authService.loggedIn()" class="md-whiteframe-10dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25"  layout  layout-align="center center">
-        <div class="title">{{patientStore.patientSize | async }}</div>
-        <div class="comment"> Patients 
+        <div class="title text-primary">{{patientStore.patientSize | async }}</div>
+        <div class="comment text-primary"> Patients 
             <a md-button class="md-icon-button" [ngClass]="iconClass" [routerLink]="['/patients']">
                 <i class="material-icons">people</i>
             </a>
         </div>  
     </md-whiteframe>
     <md-whiteframe *ngIf="authService.isAdmin()" class="md-whiteframe-10dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25"  layout layout-align="center center">
-        <div class="title">3</div>
-        <div class="comment"> Doctors
+        <div class="title text-primary">3</div>
+        <div class="comment text-primary"> Doctors
             <a md-button class="md-icon-button" [ngClass]="iconClass" [routerLink]="['/doctors']">
                 <i class="material-icons">face</i>
             </a>
         </div>  
     </md-whiteframe>
     <md-whiteframe *ngIf="authService.loggedIn()" class="md-whiteframe-10dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25"  layout layout-align="center center">
-        <div class="title">80</div>
-        <div class="comment"> Diagnoses 
+        <div class="title text-primary">80</div>
+        <div class="comment text-primary"> Diagnoses 
             <a md-button class="md-icon-button" [ngClass]="iconClass" [routerLink]="['/diagnoses']">
                 <i class="material-icons">note</i>
             </a>
         </div>  
     </md-whiteframe>    
     <md-whiteframe *ngIf="authService.isAdmin()"  class="md-whiteframe-10dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25"  layout layout-align="center center">
-        <div class="title">{{diagnosesSize}}</div>
-        <div class="comment"> Documents 
+        <div class="title text-primary">{{diagnosesSize}}</div>
+        <div class="comment text-primary"> Documents 
             <a md-button class="md-icon-button" [ngClass]="iconClass"  [routerLink]="['/documents']">
                 <i class="material-icons">library_books</i>
             </a>
         </div>  
     </md-whiteframe>
     <md-whiteframe *ngIf="authService.loggedIn()"  class="md-whiteframe-10dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout layout-align="center center">
-        <div class="comment"> Agenda 
+        <div class="comment text-primary"> Agenda 
             <a md-button class="md-icon-button" [ngClass]="iconClass" [routerLink]="['/agenda']">
                 <i class="material-icons">view_agenda</i>
             </a>

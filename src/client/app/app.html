@@ -1,69 +1,55 @@
 
-<div id="row" class="page-wrapper" [ngClass]="{'open': toggle}" ng-cloak md-theme="dark">
+<div id="row" class="page-wrapper blue-gradient-background1"  ng-cloak md-theme="dark">
 
-<!--   Sidebar -->
-<!--  <div id="sidebar-wrapper">
-    <ul class="sidebar">
-      <li class="sidebar-main">
-        <a (click)="toggleSidebar()">
-          Dashboard
-          <span class="menu-icon glyphicon glyphicon-transfer"></span>
-        </a>
-      </li>
-      <li class="sidebar-title"><span>NAVIGATION</span></li>
-      <li class="sidebar-list">
-        <a [routerLink]="['/dashboard']">Dashboard <span class="menu-icon fa fa-tachometer"></span></a>
-      </li>
-    </ul>
-    <div class="sidebar-footer">
-      <div class="col-xs-4">
-        <a href="https://github.com/ziyasal/rdash-angular2" target="_blank">
-          Github
-        </a>
-      </div>
-      <div class="col-xs-4">
-        <a href="https://github.com/ziyasal/rdash-angular2/README.md" target="_blank">
-          About
-        </a>
-      </div>
-      <div class="col-xs-4">
-        <a href="javascript:void(0)">
-          Support
-        </a>
-      </div>
-    </div>
-  </div>-->
 
-<!--<div layout="column" style="height:500px;">
-  <md-sidenav-layout>
-    <md-sidenav #left (open)="mybutton.focus()" [opened]="true" mode="side" layout-padding>
-      <h2>Left Sidenav.</h2>
-      <br>
-      <button md-raised-button class="md-raised md-primary" #mybutton (click)="left.close()">Close</button>
-    </md-sidenav>
-   
-    <md-content layout-padding>
-      <p style="height:350px;">My regular content. This will be moved into the proper DOM at runtime.</p>
-      <md-divider></md-divider>
-      <button md-raised-button class="md-raised md-primary" (click)="left.toggle()">Toggle Left Sidenav</button>
-      <button md-raised-button class="md-raised md-primary" (click)="right.toggle()">Toggle Right Sidenav</button>
-    </md-content>
-  </md-sidenav-layout>
-</div>-->
-  <!-- End Sidebar   --> 
+     <div id="content-wrapper">
+        <div class="page-content" layout-fill>
+            <div  layout-fill  *ngIf="!authService.loggedIn()">
+<!--                 <div  class="transparent_bg" flex-sm="45" flex-gt-sm="35" flex-gt-md="50"  >
+                    <h1 class="white light splash-title">
+                        Smiletime Dashboard Application
+                    </h1>
 
-  <div id="content-wrapper">
-    <div class="page-content">
+                    <p class="white light splash-subtitle">
+                      Please log in to enter dashboard.
+                    </p>
+                   <div id="search-form">
+                      <button class="bright-blue-hover btn-white" (click)="authService.login()">Login</button>
+                   </div>
+                </div>-->
+<!-- <div class="messaging" layout layout-align="center center">-->
+                   
+                <div class="intro-splash splash messaging" layout layout-align="center center"   *ngIf="!authService.loggedIn()">
+                <div class="container center-all-container" >
+                 
+                    <h1 class="white light splash-title">
+                     Smiletime Dashboard Application
+                  </h1>
 
-<!--       Header Bar -->
-      <div class="row header">
-          <auth-component></auth-component>       
-      </div>
-<!--      <dashboard></dashboard>-->
-<!--       End Header Bar 
-      &lt;!&ndash; Main Content &ndash;&gt;-->
-      <router-outlet></router-outlet>
-    </div> <!-- End Page Content --> 
-  </div><!--  End Content Wrapper  --> 
+                  <p class="white light splash-subtitle">
+                     Please log in to enter dashboard.
+                  </p>
+                  
+                
+                  
+                  <div id="login-form">
+                      <button class="bright-blue-hover btn-white" (click)="authService.login()">Login</button>
+                  </div>
+                </div>
+              </div>
+ <!--</div>-->
+               
+            </div>
+           
+
+            <!--       Header Bar 
+-->               <div class="row header"  *ngIf="authService.loggedIn()">
+                      <auth-component></auth-component>       
+                  </div>
+<!--                   End Header Bar -->
+<!--                  &lt;!&ndash; Main Content &ndash;&gt;-->
+                  <router-outlet></router-outlet><!--
+            -->    </div>  <!-- End Page Content  -->  
+    </div>  <!-- End Content Wrapper    --> 
 </div> <!-- End Page Wrapper  --> 
- 
+

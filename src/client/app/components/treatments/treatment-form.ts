@@ -17,14 +17,15 @@ MdMaxValueValidator, MATERIAL_DIRECTIVES} from "ng2-material/index";
 import {TimepickerComponent, DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {MdToolbar} from '@angular2-material/toolbar';
 import {MD_INPUT_DIRECTIVES} from '@angular2-material/input';
-import {TYPEAHEAD_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
+import {Typeahead} from 'ng2-typeahead/ng2-typeahead'
+//import {TYPEAHEAD_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 @Component({
     selector: 'treatment-form',
     templateUrl: 'app/components/treatments/treatment-form.html',
     providers: [TreatmentService],
     host: { '[hidden]': 'hidden' },
     pipes: [ListToDict],
-    directives: [TimepickerComponent, TYPEAHEAD_DIRECTIVES, DATEPICKER_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES, MATERIAL_DIRECTIVES, MdToolbar, MD_INPUT_DIRECTIVES, RouterLink, ControlMessages]
+    directives: [TimepickerComponent, Typeahead, CORE_DIRECTIVES, FORM_DIRECTIVES, MATERIAL_DIRECTIVES, MdToolbar, MD_INPUT_DIRECTIVES, RouterLink, ControlMessages]
 })
 
 
@@ -50,6 +51,7 @@ export class TreatmentFormComponent {
     public selected: string = '';
     public typeaheadLoading: boolean = false;
     public typeaheadNoResults: boolean = false;
+    
     constructor(fb: FormBuilder, private treatmentStore: TreatmentStore, private diagnoseStore: DiagnoseStore, private treatmentService: TreatmentService, private notificationService: NotificationService, private uiStateStore: UiStateStore) {
 
         this.treatmentForm = fb.group({
@@ -154,8 +156,11 @@ export class TreatmentFormComponent {
     }
 
     public typeaheadOnSelect(e: any): void {
-        console.log(`Selected value: ${e.item.name}`);
-        this.selected = e.item.name;
+        if (e != null) {
+            console.log(`Selected value: ${e.name}`);
+            this.selected = e.name;
+        }
+        
     }
 
 }

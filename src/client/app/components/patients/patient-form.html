@@ -3,29 +3,29 @@
     .md-radio-outer { display: none !important; }
     .md-radio-inner { display: none !important; }
 </style>
-<div layout="column" class="md-inline-form">
-    <md-toolbar class="md-primary">
-        <button md-button aria-label="Go Back" (click)="goBack()" >
+<div class="col-md-12 md-inline-form">
+    <md-toolbar>
+        <button  md-raised-button class="md-raised text-primary" aria-label="Go Back" (click)="goBack()" >
             Go Back
         </button>
-        {{formTitle}}
-        <a  md-button class="md-icon-button white" (click)="setPatientFormPage(patientFormPage.Details)">
+        <span class="mdl-layout-title text-primary">{{formTitle}}</span>
+        <a  md-button class="md-icon-button" [ngClass]="iconClass" (click)="setPatientFormPage(patientFormPage.Details)">
            <md-icon svgIcon="identification-card"></md-icon>                 
         </a>
-        <a  md-button class="md-icon-button white" (click)="setPatientFormPage(patientFormPage.Photo)">
+        <a  md-button class="md-icon-button" [ngClass]="iconClass" (click)="setPatientFormPage(patientFormPage.Photo)">
             <i class="material-icons">add_a_photo</i>              
         </a>
-        <a  md-button class="md-icon-button white" (click)="setPatientFormPage(patientFormPage.Contact)">
+        <a  md-button class="md-icon-button" [ngClass]="iconClass" (click)="setPatientFormPage(patientFormPage.Contact)">
             <i class="material-icons">contact_mail</i>             
         </a>
-        <a  md-button class="md-icon-button white" (click)="setPatientFormPage(patientFormPage.HealthInfo)">
+        <a  md-button class="md-icon-button" [ngClass]="iconClass" (click)="setPatientFormPage(patientFormPage.HealthInfo)">
             <i class="material-icons">description</i>           
         </a>
-        <a  md-button class="md-icon-button white" (click)="setPatientFormPage(patientFormPage.Summary)">
+        <a  md-button class="md-icon-button" [ngClass]="iconClass" (click)="setPatientFormPage(patientFormPage.Summary)">
            <i class="material-icons">note</i>                  
         </a>
     </md-toolbar>
-    <md-content layout-padding> 
+    <div layout-padding> 
         <form [ngFormModel]="patientForm">
                 <div flex="50" flex-xs="50" layout="column" *ngIf="(patientStore.patientFormPage | async ) == patientFormPage.Photo">
                     <md-card>
@@ -188,5 +188,5 @@
                 </md-card>                
             </div>
         </form>
-    </md-content>
+    <div>
 </div>

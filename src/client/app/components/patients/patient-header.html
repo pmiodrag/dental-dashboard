@@ -5,21 +5,21 @@
         </div>
     </div>
 </div>
-<md-content layout="column" *ngIf="patientStore.showCardView | async">
-    <md-toolbar class="md-primary"> 
-        <span md-button class="md-icon-button white" layout  layout-align="center center" >
+<div class="col-md-12" *ngIf="patientStore.showCardView | async">
+    <md-toolbar> 
+        <a md-button class="md-icon-button" [ngClass]="iconClass"  layout-align="center center" >
             <i class="material-icons">people</i>
-        </span>
-        <span >List of Patients</span>     
-         <a  md-button class="md-icon-button white" (click)="addPatient()" >
+        </a>
+        <span class="mdl-layout-title text-primary">Patients</span>     
+         <a  md-button class="md-icon-button" [ngClass]="iconClass" (click)="addPatient()" >
             <i class="material-icons">person_add</i>                            
         </a> 
-        <a  md-button class="md-icon-button white" (click)="showCardView(true)"  [class.active]="!listDisplayModeEnabled">
-                <i class="material-icons">apps</i>                        
-            </a>
-            <a  md-button class="md-icon-button white" (click)="showCardView(false)" [class.active]="listDisplayModeEnabled">
-                <i class="material-icons">format_list_numbered</i>                         
-            </a> 
+        <a  md-button class="md-icon-button" [ngClass]="iconClass" (click)="showCardView(true)"  [class.active]="!listDisplayModeEnabled">
+            <i class="material-icons">apps</i>                        
+        </a>
+        <a  md-button class="md-icon-button" [ngClass]="iconClass" (click)="showCardView(false)" [class.active]="listDisplayModeEnabled">
+            <i class="material-icons">format_list_numbered</i>                         
+        </a> 
         <md-pagination [model]="pagination" (on-pagination-change)="detectChange($event)" [items-per-page-options]="availableLength"></md-pagination>      
     </md-toolbar>
-</md-content>
+</div>

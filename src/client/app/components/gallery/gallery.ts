@@ -8,6 +8,7 @@ import {Galleria, Lightbox} from 'primeng/primeng';
 import {GalleryStore} from '../state/GalleryStore';
 import {Gallery} from "../../services/GalleryBackendService";
 import {FILE_UPLOAD_DIRECTIVES, FileUploader} from 'ng2-file-upload/ng2-file-upload';
+import {ICON_CLASS} from '../../shared/constants/app.constants';
 @Component({ 
     selector: 'gallery',
     templateUrl: 'app/components/gallery/gallery.html',
@@ -16,6 +17,7 @@ import {FILE_UPLOAD_DIRECTIVES, FileUploader} from 'ng2-file-upload/ng2-file-upl
 })
 export class GalleryComponent {
     images : any = [];
+    iconClass: string = ICON_CLASS;
     patientID: string;
     sub: any;
     public uploader: FileUploader;

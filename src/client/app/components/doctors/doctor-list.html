@@ -1,7 +1,6 @@
-<div flex>
-    
-    <div class="row">
-        <div class="row card-container" *ngIf="doctorStore.showCardView | async">
+<!--<div flex>    
+    <div class="row">-->
+        <div class="row" *ngIf="doctorStore.showCardView | async">
             <div class="col-sm-6 col-md-6 col-lg-6" *ngFor="let doctor of doctorStore.doctors | async">
                  <div  layout="column">
                     <md-card>
@@ -59,20 +58,20 @@
                 No Records Found 
             </div>
         </div>
-        <div class="row grid-container" *ngIf="!(doctorStore.showCardView | async)">
+        <div class="row" *ngIf="!(doctorStore.showCardView | async)">
             <div class="col-md-12">
-                <md-toolbar class="md-primary" *ngIf="!selection">
-                    <a md-button class="md-icon-button white" [routerLink]="['/doctors']">
-                        <i class="material-icons">people</i>
+                <md-toolbar  *ngIf="!selection">
+                    <a md-button class="md-icon-button"  [ngClass]="iconClass"  layout  layout-align="center center" >
+                        <i class="material-icons">face</i>
                     </a>
-                    <span>List of Doctors</span>
-                    <a  md-button class="md-icon-button white" (click)="addDoctor()" >
+                    <span  class="mdl-layout-title text-primary" >Doctors</span>     
+                     <a  md-button class="md-icon-button"  [ngClass]="iconClass"  (click)="addDoctor()" >
                         <i class="material-icons">person_add</i>                            
                     </a> 
-                    <a  md-button class="md-icon-button white" (click)="showCardView(true)"  [class.active]="!listDisplayModeEnabled">
+                    <a  md-button class="md-icon-button"  [ngClass]="iconClass"  (click)="showCardView(true)"  [class.active]="!listDisplayModeEnabled">
                         <i class="material-icons">apps</i>                        
                     </a>
-                    <a  md-button class="md-icon-button white" (click)="showCardView(false)" [class.active]="listDisplayModeEnabled">
+                    <a  md-button class="md-icon-button"  [ngClass]="iconClass" (click)="showCardView(false)" [class.active]="listDisplayModeEnabled">
                         <i class="material-icons">format_list_numbered</i>                         
                     </a> 
                 </md-toolbar>
@@ -97,24 +96,24 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let doctor of doctorStore.doctors | async"  md-data-table-selectable-row [selectable-value]="doctor.id">                      
-                            <td class="md-text-cell"><h6 class="text-teal">{{ doctor.firstname | capitalize }}</h6></td>                            
-                            <td class="md-text-cell"><h6 class="text-teal">{{ doctor.lastname | capitalize }}</h6></td>
-                            <td class="md-text-cell"><h6 class="text-teal">{{ doctor.title | capitalize }}</h6></td>
-                            <td class="md-text-cell"><h6 class="text-teal">{{ doctor.address }}</h6></td>
-                            <td class="md-text-cell"><h6 class="text-teal">{{ doctor.place | trim }}</h6></td>
-                            <td class="md-text-cell"><h6 class="text-teal">{{ doctor.country | trim }}</h6></td>
+                            <td class="md-text-cell"><h6>{{ doctor.firstname | capitalize }}</h6></td>                            
+                            <td class="md-text-cell"><h6>{{ doctor.lastname | capitalize }}</h6></td>
+                            <td class="md-text-cell"><h6>{{ doctor.title | capitalize }}</h6></td>
+                            <td class="md-text-cell"><h6>{{ doctor.address }}</h6></td>
+                            <td class="md-text-cell"><h6>{{ doctor.place | trim }}</h6></td>
+                            <td class="md-text-cell"><h6>{{ doctor.country | trim }}</h6></td>
                             <td class="md-text-cell"> 
-                                <a  md-button class="md-icon-button" [ngClass]="iconClass"  [routerLink]="['/doctor', doctor.id, '/treatments']">
+                                <a  md-button class="md-icon-button white" [routerLink]="['/doctor', doctor.id, '/treatments']">
                                    <i class="material-icons">assignment</i>
                                 </a>
                             </td>
                             <td class="md-text-cell">                                
-                                <a  md-button class="md-icon-button" [ngClass]="iconClass"  (click)="editDoctor(doctor);"  aria-label="Edit doctor">
+                                <a  md-button class="md-icon-button"  (click)="editDoctor(doctor);"  aria-label="Edit doctor">
                                     <i class="material-icons">mode_edit</i>
                                 </a>
                             </td>
                             <td class="md-text-cell">                                
-                                <a  md-button class="md-icon-button" [ngClass]="iconClass" (click)="deleteDoctor(doctor)"  aria-label="Remove doctor">
+                                <a  md-button class="md-icon-button" (click)="deleteDoctor(doctor)"  aria-label="Remove doctor">
                                      <i class="material-icons">delete</i>
                                 </a>
                             </td>                            
@@ -127,5 +126,5 @@
                 </md-data-table>
             </div>
         </div>
-    </div>
-</div>
+<!--    </div>
+</div>-->
